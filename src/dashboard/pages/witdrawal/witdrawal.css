@@ -1,0 +1,98 @@
+.witdrawal-form{
+    flex: 8;
+}
+
+.witdrawal-form h1 {
+    font-weight: 700;
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #0D9068;
+}
+
+.witdrawal-form .card {
+    width: 250px;
+    background: rgba(13, 144, 104, 0.25);
+    border-radius: 12px;
+    margin: auto 8px;
+    padding: 5px;
+}
+
+.witdrawal-form input,
+.witdrawal-form input:hover,
+.witdrawal-form input:focus {
+
+    width: auto;
+    border: none;
+    outline: none;
+    font-weight: 600;
+    font-size: 25px;
+    color: #E98923;
+    background-color: transparent;
+}
+
+.witdrawal-form .card p {
+    font-size: 20px;
+    text-align: center;
+
+    color: #444444;
+}
+
+.witdrawal-form .card input::placeholder {
+    font-weight: 600;
+    font-size: 25px;
+    text-align: center;
+    color: #E98923
+}
+
+.witdrawal-form .card input::-webkit-outer-spin-button,
+.witdrawal-form .card input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.witdrawal-form .eye-icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 50px;
+}
+
+.witdrawal-form .card p:last-child {
+    font-weight: 400;
+    font-size: 14px;
+    text-align: right;
+    color: #444444;
+}
+
+.witdrawal-form p .note{
+    font-weight: 400;
+font-size: 13px;
+color: #444444;
+
+}
+
+.witdrawal-input-form input, .witdrawal-input-form select, .witdrawal-input-form input:hover{
+    height: 60px;
+width: 365px;
+border: 1px solid #909090;
+border-radius: 6px;
+margin: 15px auto;
+padding: 10px;
+}
+.witdrawal-input-form input::placeholder, .witdrawal-input-form select option{
+    font-size: 14px;
+color: #444444;
+}
+.witdrawal-input-form input::-webkit-outer-spin-button,
+.witdrawal-input-form input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.witdrawal-form .next-btn{
+    width: 180px;
+height: 45px;
+background: #FB9129;
+border-radius: 4px;
+font-size: 20px;
+color: #FFFFFF;
+}

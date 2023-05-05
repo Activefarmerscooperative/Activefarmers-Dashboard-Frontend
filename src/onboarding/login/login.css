@@ -1,0 +1,93 @@
+.login-page {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('/src/assets/bg.png');
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+}
+
+a {
+    text-decoration: none;
+}
+
+.login-page a:nth-child(1) {
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    color: #0D9068;
+}
+
+.login-page button {
+    width: 160px;
+    height: 45px;
+    background-color: transparent;
+    border: 1.3px solid #FFFFFF;
+    border-radius: 55px;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #FFFFFF;
+}
+
+.login-page .text {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #FFFFFF;
+}
+
+.login-page .form {
+    width: 500px;
+    margin: 0 auto;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 55px #000000;
+    border-radius: 15px;
+}
+
+.login-page h1 {
+    font-weight: 600;
+    font-size: 40px;
+    color: #000000;
+}
+
+.login-page p {
+    font-weight: 400;
+    font-size: 16px;
+    color: #444444;
+}
+
+.login-page input {
+    width: 400px;
+    border: 1px solid #444444;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 15px 2px;
+}
+
+.login-page input:hover,
+input:focus {
+    outline: 1px solid #FB9129;
+    border: 1px solid #FB9129;
+}
+.login-page input[type=checkbox]:hover{
+    border: none;
+    outline: none;
+}
+.login-page input[type=checkbox] {
+    width: 18px;
+    height: 18px;
+    accent-color: #FB9129;
+    color: #fff;
+    
+}
+.login-page input[type=checkbox]::after{
+    content: "";
+    color: #FFFFFF;
+}
+
+.form .login-btn {
+    background: #0D9068;
+    color: #FFFFFF;
+}

@@ -1,0 +1,151 @@
+.guarantor-account {
+    flex: 8;
+}
+
+.guarantor-account h1 {
+    font-weight: 700;
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #0D9068;
+}
+
+.guarantor-account-form {
+    width: auto;
+    height: auto;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.09);
+    border-radius: 12px;
+    border: none;
+}
+.guarantor-account-form p{
+    font-weight: 700;
+font-size: 22px;
+color: #444444;
+margin: 10px 15px;
+}
+.guarantor-account-form .form-group label {
+    font-weight: 500;
+    font-size: 14px;
+    color: #000000;
+    margin: 10px 0;
+}
+
+.guarantor-account-form .form-group input, .guarantor-account-form select {
+    height: 40px;
+    width: 270px;
+    background: rgba(217, 217, 217, 0.3);
+    border: 0.3px solid #909090;
+    border-radius: 4px;
+    font-weight: 400;
+    font-size: 14px;
+    color: #444444;
+    opacity: 0.7;
+    padding: 10px;
+    
+}
+.guarantor-account-form select{
+    appearance: none;
+    background-image: url('../outline-arrow.png');
+    background-repeat: no-repeat;
+    background-position: right 1em top 50%, 0 0;
+    background-size: 1em auto, 100%;
+    
+   
+  }
+.guarantor-account-form .form-group input:focus, .guarantor-account-form select:focus{
+   outline: none;
+   /* border: none; */
+}
+.guarantor-account-form input::-webkit-outer-spin-button,
+.guarantor-account-form input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.guarantor-account-form .btn{
+    width: 180px;
+height: 50px;
+background: #FB9129;
+border-radius: 4px;
+    font-weight: 500;
+font-size: 20px;
+color: #FFFFFF;
+
+}
+
+.guarantor-account-form .btn.profile-saved{
+    width: 425px;
+/* height: 45px; */
+background: #444444;
+border-radius: 4px;
+color: #FFFFFF;
+}
+.btn.profile-saved .btn-icon{
+    background-color:#0d9068;
+    color: #FFFFFF;
+    font-size: 28px;
+    /* width: 25px;
+    height: 25px; */
+    /* padding: 2px; */
+    font-weight: bolder;
+    border-radius: 50px;
+}
+.guarantor-account-form .btn.profile-saved p{
+    font-weight: 500;
+font-size: 16px;
+color: #FFFFFF;
+margin: 0 10px;
+}
+
+.guarantor-account .modal {
+    z-index: 999;
+}
+
+.guarantor-account .modal-base {
+    top: 15%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fefefe;
+    margin: auto;
+    width: 800px;
+    height: 400px;
+    border-radius: 22px;
+    opacity: 0;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    transform: scale(0.8);
+}
+
+
+
+.guarantor-account .modal-base_after-open {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.guarantor-account .modal-base_before-close {
+    transform: scale(.2);
+    opacity: 0;
+}
+
+.guarantor-account .overlay-base {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(19, 18, 18, 0.75);
+    opacity: 0;
+    transition: all 0.3s ease-out;
+}
+
+.guarantor-account .overlay-base_after-open {
+    opacity: 1;
+}
+
+.guarantor-account .overlay-base_before-close {
+    opacity: 0;
+}
+

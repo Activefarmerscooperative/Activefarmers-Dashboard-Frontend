@@ -1,0 +1,68 @@
+.help .contact .help-icons{
+    width: 25px;
+    height: auto;
+    color: #0D9068;
+}
+
+.help .contact p{
+    font-weight: 400;
+font-size: 18px;
+margin: 0 10px;
+color: #000000;
+
+
+}
+
+.contact .phone p span{
+    font-size: 12px;
+}
+
+.help .contact a{
+    text-decoration: none;
+    font-weight: 600;
+font-size: 24px;
+text-align: justify;
+
+color: #0D9068;
+}
+
+.help .contact-form p{
+    font-weight: 400;
+font-size: 18px;
+
+color: #000000;
+}
+
+.help .contact-form input{
+    width: 400px;
+height: 50px;
+border: 0.4px solid #797979;
+border-radius: 4px;
+padding: 10px;
+margin: 20px 0;
+}
+.help .contact-form textarea{
+    width: 400px;
+height: 150px;
+border: 0.4px solid #797979;
+border-radius: 4px;
+padding: 10px;
+}
+.help .contact-form input::placeholder, .help .contact-form textarea::placeholder{
+    font-weight: 400;
+font-size: 14px;
+text-align: justify;
+
+color: #000000;
+}
+
+.help .contact-form .btn{
+    width: 180px;
+    padding: 10px;
+    float: right;
+background: #FB9129;
+border-radius: 4px;
+font-weight: 500;
+font-size: 20px;
+color: #FFFFFF;
+}

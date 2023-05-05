@@ -1,0 +1,29 @@
+.faq .accordion-header{
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    /* border-bottom: 1px solid #000; */
+}
+
+.faq .faq-list .accordion-header p{
+    font-weight: 500;
+font-size: 16px;
+margin-bottom: 0;
+
+color: #000000;
+}
+
+.faq .accordion-header .faq-icons{
+    width: 25px;
+    height: auto;
+    margin: 0 100px;
+    color: #FB9129;;
+}
+.faq .accordion-content p{
+    width: 800px;
+    font-size: 14px;
+    text-align: justify;
+    margin: 5px 0;
+    color: #444444;
+
+}

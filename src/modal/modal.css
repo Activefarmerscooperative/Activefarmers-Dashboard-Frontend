@@ -1,0 +1,200 @@
+.success-modal,
+.otp-modal,
+.add-savings-modal, .transaction-success-modal, .loan-summary-modal, .loan-success-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    /* height: 350px; */
+    background-color: #fefefe;
+    margin: 0 auto;
+    border-radius: 22px;
+
+}
+
+.success-modal h1 {
+    font-size: 24px;
+    font-weight: 800;
+    text-align: center;
+    color: #3B3A3A;
+    margin: 20px auto 5px auto;
+}
+
+.success-modal p,
+.otp-modal p,
+.add-savings-modal p {
+    font-size: 16px;
+    text-align: center;
+    color: #3B3A3A;
+}
+
+/* .add-savings-modal a{
+        font-weight: 500;
+        font-size: 16px;
+        text-align: center;
+        color: #0D9068;
+        text-decoration: none;
+} */
+.icon {
+    width: 75px;
+    height: 75px;
+    color: #2F9909;
+}
+
+.success-modal .btn,
+.otp-modal .btn {
+    width: 300px;
+    height: 60px;
+    background: #FB9129;
+    border-radius: 55px;
+    font-weight: 600;
+    font-size: 24px;
+    color: #FFFFFF;
+}
+
+.add-savings-modal .btn {
+    width: 180px;
+    height: 45px;
+    background: #FB9129;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 20px;
+    color: #FFFFFF;
+}
+
+.add-savings-modal .add-savings-div, .loan-summary-modal .loan-summary-div {
+    width: 750px;
+}
+
+.add-savings-modal a, .loan-summary-modal a {
+    font-weight: 500;
+    font-size: 16px;
+    float: left;
+    color: #0D9068;
+    text-decoration: none;
+}
+
+.add-savings-modal .add-icon, .loan-summary-modal .add-icon {
+    background: #0D9068;
+    color: #ffffff;
+    font-size: 20px;
+    margin: 0 5px;
+    border-radius: 50px;
+}
+
+.add-savings-modal p,
+.transaction-success-modal p, .loan-success-modal p {
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    color: #000000;
+}
+
+.add-savings-modal input,
+.add-savings-modal select {
+    height: 50px;
+    width: 300px;
+
+    border: 1px solid #909090;
+    border-radius: 6px;
+    font-size: 15px;
+    padding: 10px;
+
+    color: #444444;
+    margin: 10px 0;
+}
+
+.add-savings-modal input::placeholder,
+.add-savings-modal select option {
+    font-size: 14px;
+    color: #444444;
+}
+
+.add-savings-modal input::-webkit-outer-spin-button,
+.add-savings-modal input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.pay-option {
+    width: 315px;
+    background: #FFFFFF;
+    border: 0.4px solid #C9C9C9;
+    border-radius: 8px;
+    margin: 15px 0;
+    padding: 10px 0;
+    color: #0D9068;
+    /* padding: 1px; */
+}
+
+.pay-option:hover {
+    background: #0D9068;
+    color: #ffffff;
+}
+
+.pay-option .payment-icon {
+    /* color: #0D9068; */
+    margin: 0 5px;
+
+    font-size: 25px;
+}
+
+.pay-option p:hover {
+    color: #FFFFFF;
+}
+
+.pay-option p {
+    font-size: 14px;
+    font-weight: 500;
+    text-align: justify;
+    color: #000000;
+    margin-bottom: 0;
+}
+
+.pay-option p span {
+    font-weight: 300;
+    font-size: 11px;
+}
+.transaction-success-modal .icon, .loan-success-modal .icon{
+    width: 60px;
+    height: 60px;
+    /* background-color: #0D9068; */
+    color: #0D9068;
+    border-radius: 50px;
+}
+.transaction-success-modal span {
+    font-weight: 600;
+    font-size: 14px;
+    color: #0D9068;
+}
+.transaction-success-modal .btn, .loan-summary-modal .btn, .loan-success-modal .btn{
+    width: 200px;
+height: 50px;
+background: #FB9129;
+border-radius: 4px;
+font-weight: 500;
+font-size: 16px;
+color: #FFFFFF;
+}
+.loan-summary-modal p{
+    font-weight: 400;
+font-size: 14px;
+color: #303030;
+margin-bottom: 0;
+
+}
+.loan-summary-modal hr{
+    width: 100px;
+border: 1px solid #0D9068;
+margin: 0 8px;
+}
+.loan-summary-modal span{
+    font-weight: 500;
+font-size: 16px;
+color: #000000;
+}
+.loan-summary-modal a:nth-child(1) .btn{
+    background-color: #FFFFFF;
+    color: #FB9129;
+    border: 2px solid #FB9129;
+}
