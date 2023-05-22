@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import Modal from 'react-modal';
+import { useQuery } from 'react-query'
+import { RotatingLines } from "react-loader-spinner";
+
 // import { DataGrid } from '@mui/x-data-grid';
 import {
   Table,
@@ -12,30 +15,58 @@ import {
 import { Icon } from '@iconify/react';
 import './home.css';
 import AddSavings from '../../../modal/AddSavings';
+import { GetWallet } from '../../../utils/api/member';
+
+const fetchData = async (key) => {
+
+  try {
+    const wallet = await GetWallet();
+    // const bankList = await BankList()
+    const res = await Promise.all([wallet]);
+    return res
+
+  } catch (error) {
+    console.log(error)
+    // toast.error(error.error);
+  }
+};
 
 export default function DashboardHome() {
 
   const [loanInputType, setLoanInputType] = useState("false");
-  const [savingsInputType, setSavingsInputType] = useState("false");
+  const [savingsInputType, setSavingsInputType] = useState(false);
   const [pikinInputType, setPikinInputType] = useState("false");
   const [loanIcon, setLoanIcon] = useState("mdi:eye-off");
   const [savingsIcon, setSavingsIcon] = useState("mdi:eye-off");
   const [pikinIcon, setPikinIcon] = useState("mdi:eye-off");
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [wallet, setWallet] = useState([])
+  const [toggleWalletVisibility, setToggleWalletVisibility] = useState("")
+
+  // React query fecth data
+  const { data, status } = useQuery(['fetchData'], fetchData)
+
+  useEffect(() => {
+    console.log(status)
+    if (!data) return
+    setWallet(data[0].savingsWallet?.categories)
+  }, [data])
+
 
 
   const toggleLoanVisiblity = () => {
     setLoanInputType(loanInputType ? false : true);
     setLoanIcon(!loanIcon);
   };
-  const toggleSavingsVisiblity = () => {
-    setSavingsInputType(savingsInputType ? false : true);
+  const toggleSavingsVisiblity = (wallet) => {
+    setToggleWalletVisibility(wallet)
+    setSavingsInputType(!savingsInputType);
     setSavingsIcon(!savingsIcon);
   };
-  const togglePikinVisiblity = () => {
-    setPikinInputType(pikinInputType ? false : true);
-    setPikinIcon(!pikinIcon);
-  };
+  // const togglePikinVisiblity = () => {
+  //   setPikinInputType(pikinInputType ? false : true);
+  //   setPikinIcon(!pikinIcon);
+  // };
 
 
   function openModal() {
@@ -45,13 +76,7 @@ export default function DashboardHome() {
     setIsOpen(false);
   }
 
-  function createData(
-    id: "",
-    action: string,
-    date: number,
-    amount: number,
-    status: number,
-  ) {
+  function createData(id, action, date, amount, status) {
     return { id, action, date, amount, status };
   }
 
@@ -118,28 +143,40 @@ export default function DashboardHome() {
                 <p >Repayment starts : -/--/--</p>
               </div>
             </div>
-            <div className="px-3 card my-savings">
 
-              <p className='text-start savings-title'>My Savings</p>
-
-              <form action="" >
-                <div className="form-group d-flex align-items-center">
-                  <input
-                    type={savingsInputType ? "text" : "password"}
-                    name="savings"
-                    id="savings"
-                    value={"90,000 NGN"}
-                    placeholder='' />
-                  <div onClick={toggleSavingsVisiblity}>
-                    <Icon icon={savingsIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
-                  </div>
-
-                </div>
-              </form>
-              <div className="">
-                <p >Add Savings</p>
+            {
+              status === "loading" && <div className="px-3 card pikin">
+                <center className=""><RotatingLines width="100" height="100" strokeColor="#1B7B44" strokeWidth="3" /></center>
               </div>
-            </div>
+            }
+
+            {
+              wallet?.map(item => <div className="px-3 card my-savings">
+
+                <p className='text-start savings-title'>{item.category.name}</p>
+
+                <form action="" >
+                  <div className="form-group d-flex align-items-center">
+                    <input
+                      type={
+                        (item._id===toggleWalletVisibility && savingsInputType) ?  "text" : "password"
+                      }
+                      name="savings"
+                      id="savings"
+                      value={`${item.amount} NGN`}
+                      placeholder='' />
+                    <div onClick={()=>toggleSavingsVisiblity(item._id)}>
+                      <Icon icon={savingsIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
+                    </div>
+
+                  </div>
+                </form>
+                <div className="">
+                  <p >Add Savings</p>
+                </div>
+              </div>)
+            }
+            {/* 
             <div className="px-3 card pikin">
               <p className='text-start savings-title'>My Pikin</p>
               <form action="" >
@@ -159,7 +196,7 @@ export default function DashboardHome() {
               <div className="">
                 <p >Add Savings</p>
               </div>
-            </div>
+            </div> */}
 
             <button className='d-flex align-items-center justify-content-around btn addsaving-btn' onClick={openModal} >
               <Icon icon="material-symbols:add-circle-outline-rounded" className='add-icon' />
