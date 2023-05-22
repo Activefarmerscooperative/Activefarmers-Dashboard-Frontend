@@ -28,7 +28,6 @@ import Help from "../dashboard/pages/support/help/Help";
 import AccountGuarantor from "../dashboard/pages/dashboardguarantor/AccountGuarantor";
 
 
-
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
@@ -47,7 +46,7 @@ const router = createBrowserRouter(
         <Route path="/dashboard/loan" element={<LoanForm />} />
         <Route path="/dashboard/profile" element={<ProfileUpdate />} />
         <Route path="/dashboard/support" element={<Support />} >
-        <Route path="/dashboard/support" element={<Help />} />
+          <Route path="/dashboard/support" element={<Help />} />
           <Route path="/dashboard/support/help" element={<Help />} />
           <Route path="/dashboard/support/faq" element={<Faq />} />
         </Route>
@@ -60,6 +59,7 @@ const router = createBrowserRouter(
 function RoutingPage() {
   return (
     <div>
+
       <RouterProvider router={router} />
     </div>
   )
