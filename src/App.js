@@ -1,4 +1,5 @@
 import './App.css';
+import RoutingPage from './routes/RoutingPage'
 
 
 function App() {
