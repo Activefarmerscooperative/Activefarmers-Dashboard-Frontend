@@ -10,7 +10,7 @@ import "./modal.css";
 
 import React from 'react'
 
-export default function OtpModal() {
+export default function OtpModal({message}) {
     const [modalIsOpen, setIsOpen] = useState(false);
 
     function openModal() {
@@ -29,7 +29,7 @@ export default function OtpModal() {
             <div className="d-flex flex-column align-items-center">
                 <Icon icon="ph:password-light" className="icon" />
                 <p>
-                    You will receive a congratulatory email shortly, proceed to dashboard and explore better ways to new opportunities
+                    {message}
                 </p>
                 {/* <OtpInput
                     className="otp-input my-5 py-3"

@@ -4,27 +4,27 @@ import { NavLink } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import './sidebar.css'
 import profile from '../../assets/profile.jpg'
+import { useNavigate } from "react-router-dom";
 
-
-function Sidebar() {
-
+function Sidebar({user}) {
+    const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
 
-
-    
-
-
+    function logOut() {
+        localStorage.clear()
+        navigate("/", { replace: true })
+    }
         return (
             <div className='sidebar'>
                 <div className='my-2 d-flex flex-column'>
                     <div className='d-flex flex-column align-items-start px-4 mb-3 profile-info  '>
-                        <img src={profile} alt="" className="profile-img mb-2" />
-                        <p>Kadwama Lazarus</p>
-                        <p>ID: 3290339300</p>
+                        <img src={user.image || profile} alt="" className="profile-img mb-2" />
+                        <p>{user?.surname} {user?.firstname}</p>
+                        <p>ID: {user.reference}</p>
                     </div>
 
                     <ul className="menu p-0 mt-4">
@@ -90,10 +90,10 @@ function Sidebar() {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink className="link px-4" to="/">
+                            <p className="link px-4" onClick={logOut} style={{cursor:"pointer"}}>
                                 <Icon icon="bx:log-out-circle" className='sidebar-icon' />
                                 Log Out
-                            </NavLink>
+                            </p>
                         </li>
                     </ul>
 
