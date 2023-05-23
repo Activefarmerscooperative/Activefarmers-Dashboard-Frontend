@@ -65,24 +65,6 @@ export default function DashboardHome() {
   ];
 
 
-  // const columns = [
-  //   { field: 'id', headerName: 'ID', width: 50 },
-  //   { field: 'action', headerName: 'Action', width: 200 },
-  //   { field: 'date', headerName: 'Date', width: 130 },
-  //   { field: 'amount', headerName: 'Amount(NGN)', width: 130 },
-  //   { field: 'status', headerName: 'Status', width: 130 },
-  //   { field: 'view', headerName: 'View', width: 130, }
-  // ];
-
-  // const rows = [
-  //   { id: 1, action: 'Savings witdrawal', date: '12 Jun, 2023', amount: 120000,  },
-  //   { id: 2, action: 'Loan request', date: '18 June, 2023', amount: 750000,  },
-  //   { id: 3, action: 'Savings witdrawal', date: '09 Aug, 2023', amount: 78000,  },
-  //   { id: 4, action: 'Loan request', date: '11 Nov, 2023', amount: 230000,  },
-  //   { id: 5, action: 'Savings witdrawal', date: '23 Nov, 2023', amount: 200000,  },
-  //   { id: 6, action: 'Savings witdrawal', date: '1 Dec, 2023', amount: 150000,  },
-  // ];
-
   return (
     <div className='my-5 px-5 home'>
       <div className=''>
@@ -95,73 +77,105 @@ export default function DashboardHome() {
 
         <div className="savings my-4">
           <div className="d-flex align-items-center">
-            <div className="px-3 card loan">
-              <div className="d-flex align-items-center justify-content-between">
-                <p className='savings-title'>My Loan</p>
-                <p>(0) </p>
-              </div>
-              <form action="" >
-                <div className="form-group d-flex align-items-center">
-                  <input
-                    type={loanInputType ? "text" : "password"}
-                    name="loan"
-                    id="loan"
-                    value={"0.00 NGN"}
-                    placeholder='' />
-                  <div onClick={toggleLoanVisiblity}>
-                    <Icon icon={loanIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
+            <div className="mx-2 loan-category-scrollable">
+              <div className="d-flex my-3 ">
+                <div className="px-3 card loan">
+                  <div className="d-flex align-items-center justify-content-between">
+                    <p className='savings-title'>My Loan</p>
+                    <p>(0) </p>
                   </div>
+                  <form action="" >
+                    <div className="form-group d-flex align-items-center">
+                      <input
+                        type={loanInputType ? "text" : "password"}
+                        name="loan"
+                        id="loan"
+                        value={"0.00 NGN"}
+                        placeholder='' />
+                      <div onClick={toggleLoanVisiblity}>
+                        <Icon icon={loanIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
+                      </div>
 
+                    </div>
+                  </form>
+                  <div className="">
+                    <p >Repayment starts : -/--/--</p>
+                  </div>
                 </div>
-              </form>
-              <div className="">
-                <p >Repayment starts : -/--/--</p>
+                <div className="px-3 card my-savings">
+
+                  <p className='text-start savings-title'>My Savings</p>
+
+                  <form action="" >
+                    <div className="form-group d-flex align-items-center">
+                      <input
+                        type={savingsInputType ? "text" : "password"}
+                        name="savings"
+                        id="savings"
+                        value={"90,000 NGN"}
+                        placeholder='' />
+                      <div onClick={toggleSavingsVisiblity}>
+                        <Icon icon={savingsIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
+                      </div>
+
+                    </div>
+                  </form>
+                  <div className="">
+                    <p >Add Savings</p>
+                  </div>
+                </div>
+                <div className="px-3 card pikin">
+                  <p className='text-start savings-title'>My Pikin</p>
+                  <form action="" >
+                    <div className="form-group d-flex align-items-center">
+                      <input
+                        type={pikinInputType ? "text" : "password"}
+                        name="pikin"
+                        id="pikin"
+                        value={"12,000 NGN"}
+                        placeholder='' />
+                      <div onClick={togglePikinVisiblity}>
+                        <Icon icon={pikinIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
+                      </div>
+
+                    </div>
+                  </form>
+                  <div className="">
+                    <p >Add Savings</p>
+                  </div>
+                </div>
+              </div>
+              <div className="d-flex my-3">
+                <div className="px-3 card loan">
+                  <div className="d-flex align-items-center justify-content-between">
+                    <p className='savings-title'>My Loan</p>
+                    <p>(0) </p>
+                  </div>
+                  <form action="" >
+                    <div className="form-group d-flex align-items-center">
+                      <input
+                        type={loanInputType ? "text" : "password"}
+                        name="loan"
+                        id="loan"
+                        value={"0.00 NGN"}
+                        placeholder='' />
+                      <div onClick={toggleLoanVisiblity}>
+                        <Icon icon={loanIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
+                      </div>
+
+                    </div>
+                  </form>
+                  <div className="">
+                    <p >Repayment starts : -/--/--</p>
+                  </div>
+                </div>
+               
               </div>
             </div>
-            <div className="px-3 card my-savings">
 
-              <p className='text-start savings-title'>My Savings</p>
 
-              <form action="" >
-                <div className="form-group d-flex align-items-center">
-                  <input
-                    type={savingsInputType ? "text" : "password"}
-                    name="savings"
-                    id="savings"
-                    value={"90,000 NGN"}
-                    placeholder='' />
-                  <div onClick={toggleSavingsVisiblity}>
-                    <Icon icon={savingsIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
-                  </div>
 
-                </div>
-              </form>
-              <div className="">
-                <p >Add Savings</p>
-              </div>
-            </div>
-            <div className="px-3 card pikin">
-              <p className='text-start savings-title'>My Pikin</p>
-              <form action="" >
-                <div className="form-group d-flex align-items-center">
-                  <input
-                    type={pikinInputType ? "text" : "password"}
-                    name="pikin"
-                    id="pikin"
-                    value={"12,000 NGN"}
-                    placeholder='' />
-                  <div onClick={togglePikinVisiblity}>
-                    <Icon icon={pikinIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
-                  </div>
-
-                </div>
-              </form>
-              <div className="">
-                <p >Add Savings</p>
-              </div>
-            </div>
-
-            <button className='d-flex align-items-center justify-content-around btn addsaving-btn' onClick={openModal} >
+            <button className='mx-2 d-flex align-items-center justify-content-around btn addsaving-btn' onClick={openModal} >
               <Icon icon="material-symbols:add-circle-outline-rounded" className='add-icon' />
               Add Savings
             </button>

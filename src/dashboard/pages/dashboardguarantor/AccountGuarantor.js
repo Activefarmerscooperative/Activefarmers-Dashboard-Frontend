@@ -126,13 +126,17 @@ const AccountGuarantor = () => {
               !editAccount &&
               <button onClick={() => setEditAccount(true)} style={acoountButtonStyle} className="btn mx-4 my-5">
                 Edit
+                {/* {accountButtonText} */}
               </button>
             }
 
             {editAccount && (
               <div>
                 <>
-                  {isLoading && <button className="btn mx-4 my-5"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></button>}
+                  {isLoading && 
+                  <button className="btn mx-4 my-5"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" />
+                  </button>
+                  }
                   {!isLoading &&
                     <>
                       {!isLoading && <button onClick={() => setEditAccount(false)} disabled={isLoading} className="btn mx-4 my-5">Discard Changes</button>}
@@ -145,6 +149,8 @@ const AccountGuarantor = () => {
             )}
           </div>
         </div>
+
+
         <div className="mt-5">
           <form action="" className="d-flex flex-column align-items-center">
             <p>Guarantor's Details</p>

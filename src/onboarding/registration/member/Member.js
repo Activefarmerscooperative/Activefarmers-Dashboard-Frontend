@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 import OtpModal from "../../../modal/OTP";
 import "./member.css";
 import { fetchAllStates } from "../../../utils/api/general"
-import { RegisterMember } from "../../../utils/api/member"
+import { RegisterMember} from "../../../utils/api/member"
 import { RotatingLines } from "react-loader-spinner";
 import { toast } from "react-toastify";
 

@@ -31,12 +31,16 @@ h4 {
     color: #FFFFFF;
 }
 
+.loan-category-scrollable{
+    height: 150px;
+}
+
 .home .card {
     width: 250px;
     background: rgba(13, 144, 104, 0.25);
     border-radius: 12px;
     margin: auto 8px;
-    padding: 5px;
+    /* padding: 5px; */
 }
 
 .home input,
@@ -87,8 +91,8 @@ h4 {
 }
 
 .btn.addsaving-btn {
-    width: 150px;
-    height: 50px;
+    width: 130px;
+    /* height: 50px; */
     padding: 10px 10px;
     background: #0D9068;
     border-radius: 6px;
