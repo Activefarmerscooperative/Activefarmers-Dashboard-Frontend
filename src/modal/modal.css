@@ -28,13 +28,7 @@
     color: #3B3A3A;
 }
 
-/* .add-savings-modal a{
-        font-weight: 500;
-        font-size: 16px;
-        text-align: center;
-        color: #0D9068;
-        text-decoration: none;
-} */
+
 .icon {
     width: 75px;
     height: 75px;
@@ -52,6 +46,22 @@
     color: #FFFFFF;
 }
 
+.otp-input input{
+    width: 45px;
+height: 45px;
+background: rgba(13, 144, 104, 0.31);
+border: 0.5px solid #ADADAD;
+border-radius: 4px;
+font-size: 18px;
+text-align: center;
+line-height: normal;
+margin: 1rem
+}
+.otp-input input::-webkit-outer-spin-button,
+.otp-input input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 .add-savings-modal .btn {
     width: 180px;
     height: 45px;

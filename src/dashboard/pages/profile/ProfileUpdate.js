@@ -28,8 +28,6 @@ export default class ProfileUpdate extends Component {
         this.setState({ inputDisabled: false });
         this.setState({ isClicked: true });
         this.setState({ showButton: !this.state.showButton });
-
-        // this.setState({ buttonText: 'Discard Changes' });
     }
     changeButton = () => {
         this.setState({ showButton1: false });
@@ -57,7 +55,7 @@ export default class ProfileUpdate extends Component {
                 <div className="px-4 py-2 card profile-form">
                     <form action="" className='d-flex flex-column align-items-center' >
 
-                        <div>
+                        <div className='personal-info-section'>
                             <p>Personal Details</p>
                             <div className='d-flex'>
                                 <div className="form-group d-flex flex-column mx-3">
@@ -107,9 +105,28 @@ export default class ProfileUpdate extends Component {
                                     </select>
                                 </div>
                             </div>
+                            <div className='d-flex'>
+                        <button onClick={this.enableInputs} style={buttonStyle} className='btn mx-4 my-5'>{buttonText}</button>
+
+                        {this.state.showButton && (
+                            <div>
+                                {this.state.showButton1 ? (
+                                    <button className='btn mx-4 my-5' onClick={this.changeButton}>Save Changes</button>
+                                ) : (
+                                    <button className=' d-flex align-items-center btn mx-4 my-5 profile-saved' >
+                                        <Icon icon="material-symbols:check-small-rounded"  className='btn-icon' />
+                                        <p>
+                                        Profile changes saved successfully
+                                        </p>
+                                    </button>
+                                )}
+                            </div>
+
+                        )}
+                    </div>
                         </div>
 
-                        <div className='mt-5'>
+                        <div className='mt-5 occupation-info-section'>
                             <p>Occupation Details</p>
                             <div className='d-flex'>
                                 <div className="form-group d-flex flex-column mx-3">
@@ -140,9 +157,29 @@ export default class ProfileUpdate extends Component {
                                     <input type="email" name="email" id="" disabled={this.state.inputDisabled} placeholder='kadwamalazarus@gmail.com' />
                                 </div>
                             </div>
+
+                            <div className='d-flex'>
+                        <button onClick={this.enableInputs} style={buttonStyle} className='btn mx-4 my-5'>{buttonText}</button>
+
+                        {this.state.showButton && (
+                            <div>
+                                {this.state.showButton1 ? (
+                                    <button className='btn mx-4 my-5' onClick={this.changeButton}>Save Changes</button>
+                                ) : (
+                                    <button className=' d-flex align-items-center btn mx-4 my-5 profile-saved' >
+                                        <Icon icon="material-symbols:check-small-rounded"  className='btn-icon' />
+                                        <p>
+                                        Profile changes saved successfully
+                                        </p>
+                                    </button>
+                                )}
+                            </div>
+
+                        )}
+                    </div>
                         </div>
 
-                        <div className='mt-5'>
+                        <div className='mt-5 nok-info-section'>
                             <p>Next Kin</p>
                             <div className='d-flex'>
                                 <div className="form-group d-flex flex-column mx-3">
@@ -171,9 +208,8 @@ export default class ProfileUpdate extends Component {
                                     <input type="email" name="email" id="" disabled={this.state.inputDisabled} placeholder='kadwamalazarus@gmail.com' />
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                    <div className='d-flex'>
+
+                            <div className='d-flex'>
                         <button onClick={this.enableInputs} style={buttonStyle} className='btn mx-4 my-5'>{buttonText}</button>
 
                         {this.state.showButton && (
@@ -192,6 +228,10 @@ export default class ProfileUpdate extends Component {
 
                         )}
                     </div>
+                            
+                        </div>
+                    </form>
+                    
 
                 </div>
             </div>

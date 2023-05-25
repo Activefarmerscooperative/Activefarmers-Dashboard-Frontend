@@ -1,10 +1,7 @@
 .sidebar {
-    flex: 2;
-    background: #0D9068;
-    /* height: auto;
-    position: sticky; */
-  /* top: 0; */
-  height: auto;
+  flex: 2;
+  background: #0D9068;
+  height: fit-content;
 }
 
 .profile-img {
@@ -26,41 +23,47 @@
 .menu a {
     text-decoration: none;
 }
-.link, .link-title {
-    width: 300px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    font-weight: 400;
-    font-size: 14px;
-    color: #FFFFFF;
-    white-space: nowrap;
-    padding: 5px 0;
-    /* margin: 3px auto; */
+.menu li{
+  margin: 15px 0;
+  
+}
+
+.link, .dropdown-title, .logout {
+  width: 300px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  font-size: 14px;
+  color: #FFFFFF;
+  white-space: nowrap;
+  padding: 5px 0;
+  /* margin: 3px auto; */
 }
 
 .sidebar ul .link.active {
-    background: rgba(20, 20, 20, 0.3);
-    font-weight: 600;
-    font-size: 16px;
-    border-left: 5px solid #FB9129;;
+  background: rgba(20, 20, 20, 0.3);
+  font-weight: 600;
+  font-size: 16px;
+  border-left: 5px solid #FB9129;
+  ;
 }
 
-.link:hover {
-    background: rgba(20, 20, 20, 0.5);
-    color: #FFFFFF;
-    
+.link:hover, .dropdown-title:hover, .logout:hover {
+  background: rgba(20, 20, 20, 0.5);
+  color: #FFFFFF;
+  cursor: pointer;
+
 }
 
-.link .sidebar-icon, .link-title .sidebar-icon {
-    font-size: 22px;
-    margin-right: 20px;
+.link .sidebar-icon, .dropdown-title .sidebar-icon, .logout .sidebar-icon{
+  font-size: 25px;
+  margin-right: 20px;
 }
 
 .arrow-icon {
-    font-size: 25px;
+  font-size: 25px;
 }
-
 
 .dropbtn {
     background-color: #3498DB;
@@ -75,10 +78,10 @@
     background-color: #2980B9;
   }
   
-  .dropdown {
+  /* .dropdown {
     position: relative;
     display: inline-block;
-  }
+  } */
   
   .dropdown-content {
     display: none;
@@ -97,6 +100,5 @@
     display: block;
   }
   
-  .dropdown a:hover {background-color: #ddd;}
-  
+ 
   .show {display: block;}

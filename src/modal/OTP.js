@@ -1,80 +1,93 @@
-// import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-// import OtpInput from 'react-otp-input';
+import React, { useState } from "react";
 import Modal from 'react-modal';
 import Verify from "./Verified";
 import { Icon } from '@iconify/react';
 import "./modal.css";
 
+function OtpInputModal() {
 
+    const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+    const handleChange = (e, index) => {
+        const value = e.target.value;
+        setOtp([...otp.slice(0, index), value, ...otp.slice(index + 1)]);
+        if (e.target.nextSibling) {
+            e.target.nextSibling.focus();
+        }
+    };
+    const handlePaste = (e) => {
+        e.preventDefault();
+        const value = e.clipboardData.getData("Text");
+        const otpArray = value.split("").slice(0, 6);
+        setOtp([...otpArray, ...otp.slice(otpArray.length)]);
+    };
+}
 
-import React from 'react'
-
-export default function OtpModal({message}) {
+export default function OtpModal({ message }) {
     const [modalIsOpen, setIsOpen] = useState(false);
-
+    const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+    const handleChange = (e, index) => {
+        const value = e.target.value;
+        setOtp([...otp.slice(0, index), value, ...otp.slice(index + 1)]);
+        if (e.target.nextSibling) {
+            e.target.nextSibling.focus();
+        }
+    };
+    const handlePaste = (e) => {
+        e.preventDefault();
+        const value = e.clipboardData.getData("Text");
+        const otpArray = value.split("").slice(0, 6);
+        setOtp([...otpArray, ...otp.slice(otpArray.length)]);
+    };
+  
     function openModal() {
         setIsOpen(true);
     }
     function closeModal() {
         setIsOpen(false);
     }
-    // const navigate = useNavigate();
-    // const [code, setCode] = useState("");
-
-    // const handleChange = (code) => setCode(code);
-    
-    return(
+    return (
         <div className='otp-modal p-4 my-5'>
             <div className="d-flex flex-column align-items-center">
                 <Icon icon="ph:password-light" className="icon" />
                 <p>
                     {message}
                 </p>
-                {/* <OtpInput
-                    className="otp-input my-5 py-3"
-                    value={code}
-                    onChange={handleChange}
-                    numInputs={6}
-                    separator={<span style={{ width: "8px" }}></span>}
-                    isInputNum={true}
-                    shouldAutoFocus={true}
-                    inputStyle={{
-                        border: "1px solid #BBC2D9",
-                        borderRadius: "10px",
-                        width: "60px",
-                        height: "60px",
-                        fontSize: "18px",
-                        caretColor: "#141414",
-                        margin: "0 30px"
-                    }}
-                    focusStyle={{
-                        border: "1px solid #141414",
-                        outline: "none"
-                    }}
-                /> */}
+                <div className="otp-input">
+                    {otp.map((digit, index) => (
+                        <input
+                            type="number"
+                            key={index}
+                            value={digit}
+                            onChange={(e) => handleChange(e, index)}
+                            onPaste={handlePaste}
+                            maxLength={1}
+                        />
+                    ))}
+                </div>
+
+
+
                 <button onClick={openModal} className="btn btn-modal mt-5">Submit</button>
             </div>
             <Modal
-                    isOpen={modalIsOpen}
-                    // onAfterOpen={afterOpenModal}
-                    onRequestClose={closeModal}
-                    contentLabel="Example Modal"
-                    className={{
-                        base: 'modal-base',
-                        afterOpen: 'modal-base_after-open',
-                        beforeClose: 'modal-base_before-close'
-                    }}
-                    overlayClassName={{
-                        base: 'overlay-base',
-                        afterOpen: 'overlay-base_after-open',
-                        beforeClose: 'overlay-base_before-close'
-                    }}
-                    shouldCloseOnOverlayClick={true}
-                    closeTimeoutMS={2000}
-                >
-                   <Verify />
-                </Modal>
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                contentLabel="Example Modal"
+                className={{
+                    base: 'modal-base',
+                    afterOpen: 'modal-base_after-open',
+                    beforeClose: 'modal-base_before-close'
+                }}
+                overlayClassName={{
+                    base: 'overlay-base',
+                    afterOpen: 'overlay-base_after-open',
+                    beforeClose: 'overlay-base_before-close'
+                }}
+                shouldCloseOnOverlayClick={true}
+                closeTimeoutMS={2000}
+            >
+                <Verify />
+            </Modal>
         </div>
     )
 }

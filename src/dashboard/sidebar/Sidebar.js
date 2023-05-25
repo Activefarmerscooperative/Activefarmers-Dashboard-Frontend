@@ -6,7 +6,7 @@ import './sidebar.css'
 import profile from '../../assets/profile.jpg'
 import { useNavigate } from "react-router-dom";
 
-function Sidebar({user}) {
+function Sidebar({ user }) {
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
 
@@ -14,19 +14,30 @@ function Sidebar({user}) {
         setIsOpen(!isOpen);
     };
 
+    const [activeIndex, setActiveIndex] = useState(null);
+
+    const toggleAccordion = (index) => {
+        if (index === activeIndex) {
+            setActiveIndex(null);
+        } else {
+            setActiveIndex(index);
+        }
+    };
+
     function logOut() {
         localStorage.clear()
         navigate("/", { replace: true })
     }
-        return (
-            <div className='sidebar'>
-                <div className='my-2 d-flex flex-column'>
-                    <div className='d-flex flex-column align-items-start px-4 mb-3 profile-info  '>
-                        <img src={user.image || profile} alt="" className="profile-img mb-2" />
-                        <p>{user?.surname} {user?.firstname}</p>
-                        <p>ID: {user.reference}</p>
-                    </div>
+    return (
+        <div className='sidebar'>
+            <div className='my-3 d-flex flex-column'>
+                <div className='d-flex flex-column align-items-start px-4 mt-4 profile-info  '>
+                    <img src={user.image || profile} alt="" className="profile-img mb-2" />
+                    <p>{user?.surname} {user?.firstname}</p>
+                    <p>ID: {user.reference}</p>
+                </div>
 
+                <div>
                     <ul className="menu p-0 mt-4">
                         <li>
                             <NavLink className="link active-link px-4" to="/dashboard/home">
@@ -36,8 +47,8 @@ function Sidebar({user}) {
                         </li>
 
                         <li>
-                            
-                            <div className='link-title px-4 mt-2'>
+
+                            {/* <div className='link-title px-4 mt-2'>
                                 <Icon icon="ph:git-pull-request-fill" className='sidebar-icon' />
                                 Request Forms
                                 <Icon icon="material-symbols:keyboard-arrow-down-rounded" className='arrow-icon' />
@@ -52,11 +63,32 @@ function Sidebar({user}) {
                                     <Icon icon="material-symbols:arrow-forward-ios-rounded" />
                                     Loan Request
                                 </NavLink>
-                            </div> 
+                            </div> */}
+                            <div
+                                className={`px-4 dropdown-title  ${activeIndex === 0 ? 'active' : ''}`}
+                                onClick={() => toggleAccordion(0)}
+                            >
+                                <Icon icon="ph:git-pull-request-fill" className='sidebar-icon' />
+                                Request Forms
+                                <Icon icon="material-symbols:keyboard-arrow-down-rounded" className='arrow-icon' />
+
+                            </div>
+                            {activeIndex === 0 && (
+                                <div>
+                                    <NavLink className="link px-5" to="/dashboard/witdrawal">
+                                        <Icon icon="material-symbols:arrow-forward-ios-rounded" />
+                                        Saving Withdrawal
+                                    </NavLink>
+                                    <NavLink className="link px-5" to="/dashboard/loan">
+                                        <Icon icon="material-symbols:arrow-forward-ios-rounded" />
+                                        Loan Request
+                                    </NavLink>
+                                </div>
+                            )}
                         </li>
 
                         <li>
-                            <div className='link-title px-4 mt-2'>
+                            {/* <div className='link-title px-4 mt-2'>
                                 <Icon icon="mdi:user" className='sidebar-icon' />
                                 Account Settings
                                 <Icon icon="material-symbols:keyboard-arrow-down-rounded" className='arrow-icon' />
@@ -71,12 +103,31 @@ function Sidebar({user}) {
                                     <Icon icon="material-symbols:arrow-forward-ios-rounded" />
                                     Account & Guarantor
                                 </NavLink>
+                            </div> */}
+
+                            <div
+                                className={` px-4 dropdown-title  ${activeIndex === 1 ? 'active' : ''}`}
+                                onClick={() => toggleAccordion(1)}
+                            >
+                                <Icon icon="mdi:user" className='sidebar-icon' />
+                                Account Settings
+                                <Icon icon="material-symbols:keyboard-arrow-down-rounded" className='arrow-icon' />
+
                             </div>
+                            {activeIndex === 1 && (
+                                <div className="">
+                                    <NavLink className="link px-5" to="/dashboard/profile">
+                                        <Icon icon="material-symbols:arrow-forward-ios-rounded" />
+                                        Profile Update
+                                    </NavLink>
+                                    <NavLink className="link px-5" to="/dashboard/guarantor">
+                                        <Icon icon="material-symbols:arrow-forward-ios-rounded" />
+                                        Account & Guarantor
+                                    </NavLink>
+                                </div>
+                            )}
 
                         </li>
-                    </ul>
-
-                    <ul className='p-0 mt-0'>
                         <li>
                             <NavLink className="link px-4" to="/dashboard/support">
                                 <Icon icon="material-symbols:help" className='sidebar-icon' />
@@ -90,16 +141,39 @@ function Sidebar({user}) {
                             </NavLink>
                         </li>
                         <li>
-                            <p className="link px-4" onClick={logOut} style={{cursor:"pointer"}}>
+                            <NavLink className="logout px-4" onClick={logOut}>
+                                <Icon icon="bx:log-out-circle" className='sidebar-icon' />
+                                Log Out
+                            </NavLink>
+                        </li>
+                    </ul>
+
+                    {/* <ul className='p-0 mt-0'>
+                        <li>
+                            <NavLink className="link px-4" to="/dashboard/support">
+                                <Icon icon="material-symbols:help" className='sidebar-icon' />
+                                Help & Support
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink className="link px-4 " to="/dashboard/terms">
+                                <Icon icon="bi:info-circle" className='sidebar-icon' />
+                                Terms & Conditions
+                            </NavLink>
+                        </li>
+                        <li>
+                            <p className="link px-4" onClick={logOut} style={{ cursor: "pointer" }}>
                                 <Icon icon="bx:log-out-circle" className='sidebar-icon' />
                                 Log Out
                             </p>
                         </li>
-                    </ul>
-
+                    </ul> */}
                 </div>
+
+
             </div>
-        )
-    }
+        </div>
+    )
+}
 
 export default Sidebar;
