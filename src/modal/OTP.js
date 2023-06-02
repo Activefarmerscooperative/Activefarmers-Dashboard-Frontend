@@ -32,7 +32,7 @@ export default function OtpInputModal() {
         setIsOpen(false);
     }
     return (
-        <div className='otp-modal p-4 my-5'>
+        <div className='otp-modal p-4 my-4'>
             <div className="d-flex flex-column align-items-center">
                 <Icon icon="ph:password-light" className="icon" />
                 <p>
