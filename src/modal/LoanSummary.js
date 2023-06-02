@@ -51,7 +51,7 @@ function LoanSummary({ closeModal, loanData }) {
       console.log(error)
       if (error.status === "success") {
         toast.error(error?.message)
-        navigate("/dashboard/guarantor", { replace: true })
+        handleOpen()
       }
       toast.error(error)
       toast.error(error?.error)
