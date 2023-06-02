@@ -18,10 +18,11 @@ function AddSavings() {
   function closeModal() {
     setIsOpen(false);
   }
+  
   return (
-    <div className='add-savings-modal p-4 my-4'>
+    <div className='add-savings-modal p-4 my-4' id='AddSavings'>
       <div className="d-flex flex-column add-savings-div">
-        <a href="/dashboard/loan" className="d-flex align-items-center mx-5" >
+        <a href="/dashboard" className="d-flex align-items-center mx-5" >
           <Icon icon="material-symbols:arrow-back-rounded" className="add-icon" />
           Add Savings
         </a>

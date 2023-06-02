@@ -8,6 +8,7 @@ import "./modal.css"
 
 import React from 'react'
 import LoanSuccessful from './LoanSuccessful';
+import AddCardRequest from './AddCardRequest';
 
 function LoanSummary() {
   const navigate = useNavigate();
@@ -21,14 +22,14 @@ function LoanSummary() {
   }
 
   return (
-    <div className='loan-summary-modal p-4 my-5'>
+    <div className='loan-summary-modal p-4 my-4'>
       <div className="d-flex flex-column loan-summary-div">
-        <a href="/dashboard" className="d-flex align-items-center mx-5" >
+        <a href="/dashboard/loan" className="back-to d-flex  align-items-center mx-5" >
           <Icon icon="material-symbols:arrow-back-rounded" className="add-icon" />
-          Add Savings
+          Loan Request Summary
         </a>
-        <div className="d-flex flex-column align-items-center mt-3">
-          <ul className="loan-info my-2">
+        <div className="d-flex flex-column align-items-center mb-2">
+          <ul className="loan-info my-3">
             <li className='d-flex align-items-center my-3'>
               <p>Loan Amount:</p>
               <hr />
@@ -39,7 +40,7 @@ function LoanSummary() {
                 Interest Rate :</p>
               <hr />
               <span>
-                6%</span>
+                15%</span>
             </li>
             <li className='d-flex align-items-center my-3'>
               <p>
@@ -53,14 +54,21 @@ function LoanSummary() {
                 Amount payable :</p>
               <hr />
               <span>
-                212,000 NGN</span>
+                230,000 NGN</span>
+            </li>
+            <li className='d-flex align-items-center my-3'>
+              <p>
+                Repayment per month :</p>
+              <hr />
+              <span>
+                57,000 NGN</span>
             </li>
             <li className='d-flex align-items-center my-3'>
               <p>
                 Repayment Start Date :</p>
               <hr />
               <span>
-                5th June 2023</span>
+                5th June - 5th November 2023</span>
             </li>
             <li className='d-flex align-items-center my-3'>
               <p>
@@ -72,12 +80,16 @@ function LoanSummary() {
           </ul>
 
 
-          <div>
+          <div className='d-flex align-items-start justify-content-around'>
             <a href="">
-              <button onClick={() => { navigate("/dashboard/loan"); }} className="btn btn-modal my-2 mx-3">Edit Loan</button>
+              <button onClick={() => { navigate("/dashboard/loan"); }} className="btn btn-modal mt-4 mx-5">Edit Loan</button>
             </a>
 
-            <button onClick={openModal} className="btn btn-modal my-2 mx-3">Submit</button>
+            <div className='d-flex flex-column align-items-center mt-4 mx-5'>
+              <button onClick={openModal} className="btn btn-modal ">Submit</button>
+              <p className='agree text-center mt-2 '>By clicking submit, you have read our {<br />} <a href="">terms and conditions</a>  and agree to it</p>
+            </div>
+
 
           </div>
 
@@ -103,7 +115,7 @@ function LoanSummary() {
         shouldCloseOnOverlayClick={true}
         closeTimeoutMS={2000}
       >
-        <LoanSuccessful />
+        <AddCardRequest />
       </Modal>
 
     </div>

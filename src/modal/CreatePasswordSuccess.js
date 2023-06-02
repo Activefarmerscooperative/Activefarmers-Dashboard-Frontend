@@ -9,7 +9,7 @@ import React from 'react'
 function CreatePasswordSuccess() {
     const navigate = useNavigate();
     return (
-        <div className='password-changed-modal py-5 my-4'>
+        <div className='password-changed-modal p-4 my-4'>
             <div className="d-flex flex-column align-items-center">
                 <Icon icon="ep:success-filled" color="#0d9068" className="icon my-5" />
 

@@ -9,7 +9,7 @@ import React from 'react'
 function Verify() {
     const navigate = useNavigate();
     return (
-        <div className='success-modal p-4 my-5'>
+        <div className='success-modal p-4 my-4'>
             <div className="d-flex flex-column align-items-center">
                 <Icon icon="material-symbols:check-circle-outline-rounded" className="icon" />
 

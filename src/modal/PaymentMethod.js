@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Modal from 'react-modal';
 import { Icon } from '@iconify/react';
 import TransactionSuccessful from './TransactionSuccessful';
-import "./modal.css"
+import "./modal.css";
 
 
 
@@ -22,7 +22,7 @@ function PaymentMethod() {
       <div className="d-flex flex-column add-savings-div">
         <a href="/dashboard" className="d-flex align-items-center mx-5" >
           <Icon icon="material-symbols:arrow-back-rounded" className="add-icon" />
-          Add Savings
+          Savings Payment Method
         </a>
         <div className="d-flex flex-column align-items-center mt-4">
           <p>
