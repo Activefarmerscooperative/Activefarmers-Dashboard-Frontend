@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
+
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import './login.css';
-import { Icon } from '@iconify/react';
-import { LoginMember } from "../../utils/api/member"
-import { RotatingLines } from "react-loader-spinner";
+import '../login.css';
+import { LoginMember } from "../../../utils/api/member";
 import { toast } from "react-toastify";
+import { RotatingLines } from "react-loader-spinner";
+
+
+
+
 
 export default function Login() {
     const navigate = useNavigate();
@@ -87,43 +91,31 @@ export default function Login() {
         }
 
     }
-
     return (
         <div className="login-page pt-3 px-5">
-            <div className=''>
-                <div className="d-flex align-items-center justify-content-between">
-                    <a href="/" className="d-flex align-items-center mx-5" >
-                        <Icon icon="material-symbols:arrow-back-rounded" style={{ fontSize: "20px", margin: "0 5px" }} />
-                        Back to Homepage
-                    </a>
-
-                    <div className='text '>
-                        Don't have an account yet?
-                        <button className='mx-3' onClick={() => { navigate("/register"); }}>Register</button>
-                    </div>
-                </div>
-
-                <div className="form mt-5 px-5 py-3">
+            <div>
+                <div className="form mt-3 px-5 py-3">
                     <h1>Log In to Dashboard</h1>
                     Log in to your existing account
                     <form className='d-flex flex-column my-4 '>
                         <input type="tel" name="phone" placeholder='Enter phone number e.g: 08012345678' required value={user.phone} onChange={handleChange} />
 
-                        <input type="password" name="password" placeholder='password' required value={user.password} onChange={handleChange} />
+                        <input type="password" name="password" placeholder='password' required value={user.password} onChange={handleChange} className="my-2" />
 
-                        <div className='d-flex align-items-center'>
+                        <div className='d-flex align-items-center mt-2'>
                             <input type="checkbox" name="" id="" className='mx-2' />
                             Remember Me
                         </div>
-                        {isLoading && <button className='login-btn mt-3'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
-                        {!isLoading && <button className='login-btn mt-3' onClick={handleSubmit}>Log In</button>}
+                        {isLoading && <button className='login-btn mt-5'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
+                        {!isLoading && <button className='login-btn mt-5' onClick={handleSubmit}>Log In</button>}
 
 
 
                     </form>
-                    <p>Forgottrn Password? <a href="" style={{ color: "#FB9129", fontWeight: "600" }}> Reset Here </a></p>
+                    <p>Forgotten Password? <a href="/login/forgotpassword" style={{ color: "#FB9129", fontWeight: "600" }}> Reset Here </a></p>
                 </div>
             </div>
+
         </div>
     )
 }

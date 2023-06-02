@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 // import { useState } from "react";
 import Modal from 'react-modal';
+import OnboardingInputField from '../../../widgets/reusablecodes/OnboardingInputField';
+import OnboardingSelectField from '../../../widgets/reusablecodes/OnboardingSelectField';
 import OtpModal from "../../../modal/OTP";
 import "./member.css";
 import { fetchAllStates } from "../../../utils/api/general"
 import { RegisterMember } from "../../../utils/api/member"
 import { RotatingLines } from "react-loader-spinner";
 import { toast } from "react-toastify";
-
 export default function Member() {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [message, setMessage] = useState("")
@@ -155,12 +156,31 @@ export default function Member() {
 
             // return data;
         } catch (error) {
-        
+
             setIsLoading(false);
             toast.error(error);
         }
 
     }
+
+    const genderoptions = [
+        { value: "", label: "Gender" },
+        { value: "male", label: "Male" },
+        { value: "female", label: "Female" },
+    ];
+    const membershipoptions = [
+        { value: "", label: "Membership catgory" },
+        { value: "farmer", label: "Farmer" },
+        { value: "nonfarmer", label: "Non-farmer" },
+    ];
+
+
+
+
+
+
+
+
 
     return (
         <div className="member px-5 py-2">
@@ -173,6 +193,14 @@ export default function Member() {
                         <div>
                             <input type="text" name="surname" required value={member.surname} onChange={handleChange} placeholder="Surname" />
                             <input type="email" name="email" required value={member.email} onChange={handleChange} placeholder="Email Address" />
+
+
+                            {/* <OnboardingInputField type="text" name="surname" required value={member.surname} onChange={handleChange} placeholder="Surname" />
+                            <OnboardingInputField type="email" name="email" required value={member.email} onChange={handleChange} placeholder="Email Address" /> */}
+
+
+
+
                             <select name="gender" value={member.gender} required onChange={handleChange}>
                                 <option value="">Gender</option>
                                 <option value="Male">Male</option>
@@ -184,17 +212,53 @@ export default function Member() {
                                 <option value="Non-Farmer">Non-Farmer</option>
                             </select>
                             <input required type="password" name="password" onChange={handleChange} value={member.password} placeholder="Password" />
+
+
+                            {/* <OnboardingSelectField
+                                name="gender"
+                                options={genderoptions}
+                                value={member.gender}
+                                onChange={handleChange}
+                                required
+                            />
+                            <OnboardingSelectField
+                                name="membershipType"
+                                options={membershipoptions}
+                                value={member.membershipType}
+                                onChange={handleChange}
+                                required
+                            />
+                            <OnboardingInputField required type="password" name="password" onChange={handleChange} value={member.password} placeholder="Password" /> */}
+
+
+
+
+
+
+
+
                         </div>
                         <div>
                             <input required type="text" name="firstname" onChange={handleChange} value={member.firstname} placeholder="Firstname" />
                             <input required type="tel" name="phone" value={member.phone} onChange={handleChange} placeholder="Phone Number e.g:+2348123456789" />
-                            <select required name="location" value={member.location} onChange={handleChange}>
-                                <option value="">Location</option>
-                                {
-                                    location.map(item => <option key={item._id} value={item._id}>{item.name}</option>)
-                                }
+                            
+                            {/* <OnboardingInputField required type="text" name="firstname" onChange={handleChange} value={member.firstname} placeholder="Firstname" />
+                            <OnboardingInputField required type="tel" name="phone" value={member.phone} onChange={handleChange} placeholder="Phone Number e.g:+2348123456789" /> */}
 
-                            </select>
+                            <div className="onboarding-form-input">
+                                <select required name="location" value={member.location} onChange={handleChange} className="">
+                                    <option value="">Location</option>
+                                    {
+                                        location.map(item => <option key={item._id} value={item._id}>{item.name}</option>)
+                                    }
+
+                                </select>
+                            </div>
+
+
+                            {/* <OnboardingInputField required type="text" name="address" onChange={handleChange} value={member.address} placeholder="Home Address" />
+                            <OnboardingInputField required type="password" name="confirmpass" value={confirmPass} onChange={(e) => setConfirmPass(e.target.value)} placeholder="Confirm Password" /> */}
+
                             <input required type="text" name="address" onChange={handleChange} value={member.address} placeholder="Home Address" />
                             <input required type="password" name="confirmpass" value={confirmPass} onChange={(e) => setConfirmPass(e.target.value)} placeholder="Confirm Password" />
                         </div>
@@ -224,6 +288,7 @@ export default function Member() {
                 >
                     <OtpModal
                         message={message} />
+                        {/* <OtpInputModal message={message} /> */}
                 </Modal>
             </div>
         </div>
