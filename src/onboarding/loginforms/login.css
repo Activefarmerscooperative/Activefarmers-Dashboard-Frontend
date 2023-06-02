@@ -1,23 +1,24 @@
-.login-page {
+.login-form-page {
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('/src/assets/bg.png');
     background-repeat: no-repeat;
     height: 100vh;
     background-position: center;
     background-size: cover;
+    /* margin: 0 0 20px 0; */
 }
 
 a {
     text-decoration: none;
 }
 
-.login-page a:nth-child(1) {
+.login-form-page a:nth-child(1) {
     font-weight: 500;
     font-size: 16px;
     text-align: center;
     color: #0D9068;
 }
 
-.login-page button {
+.login-form-page button {
     width: 160px;
     height: 45px;
     background-color: transparent;
@@ -44,6 +45,7 @@ a {
     background: #FFFFFF;
     box-shadow: 0px 4px 55px #000000;
     border-radius: 15px;
+    padding: 20px 0;
 }
 
 .login-page h1 {
@@ -54,8 +56,9 @@ a {
 
 .login-page p {
     font-weight: 400;
-    font-size: 16px;
+    font-size: 15px;
     color: #444444;
+    white-space: nowrap;
 }
 
 .login-page input {
@@ -63,7 +66,7 @@ a {
     border: 1px solid #444444;
     border-radius: 8px;
     padding: 10px;
-    margin: 15px 2px;
+    margin: 3px 2px;
 }
 
 .login-page input:hover,
@@ -90,4 +93,45 @@ input:focus {
 .form .login-btn {
     background: #0D9068;
     color: #FFFFFF;
+}
+
+.login-page .otp-input input{
+    width: 50px;
+    height: 50px;
+    background: #EFEFEF;
+    border: 1px solid #A19E9E;
+    border-radius: 10px;
+border: 0.5px solid #ADADAD;
+border-radius: 4px;
+font-size: 18px;
+text-align: center;
+line-height: normal;
+margin: 0.5rem
+}
+.login-page .otp-input input::-webkit-outer-spin-button,
+.login-page .otp-input input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+p.create{
+    font-style: normal;
+font-weight: 400;
+font-size: 12px;
+color: #000000;
+}
+
+.login-page .btn.profile-saved{
+    width: 400px;
+/* height: 45px; */
+background: #444444;
+border-radius: 4px;
+color: #FFFFFF;
+}
+
+.login-page .btn.profile-saved p{
+    font-weight: 500;
+font-size: 16px;
+color: #FFFFFF;
+margin: 0 10px;
 }

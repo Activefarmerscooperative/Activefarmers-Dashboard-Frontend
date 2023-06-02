@@ -44,10 +44,7 @@
 }
 
 .member select{
-  appearance: none;
-  /* background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat 98.5% !important;  */
-  /* background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat calc(100% - 10px) !important;  */
-  background-image: url('../filled-arrow.png');
+  appearance: none; background-image: url('../../../assets/outline-arrow.png');
   background-repeat: no-repeat, repeat;
   background-position: right 1em top 50%, 0 0;
   background-size: 1em auto, 100%;

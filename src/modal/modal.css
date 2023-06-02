@@ -1,11 +1,25 @@
 .success-modal,
 .otp-modal,
-.add-savings-modal, .transaction-success-modal, .loan-summary-modal, .loan-success-modal {
+.add-savings-modal,
+.transaction-success-modal,
+.loan-summary-modal,
+.loan-success-modal {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 800px;
     /* height: 350px; */
+    background-color: #fefefe;
+    margin: 0 auto;
+    border-radius: 22px;
+
+}
+.password-changed-modal {
+    width: 587px;
+height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #fefefe;
     margin: 0 auto;
     border-radius: 22px;
@@ -45,23 +59,33 @@
     font-size: 24px;
     color: #FFFFFF;
 }
-
-.otp-input input{
-    width: 45px;
-height: 45px;
-background: rgba(13, 144, 104, 0.31);
-border: 0.5px solid #ADADAD;
-border-radius: 4px;
-font-size: 18px;
-text-align: center;
-line-height: normal;
-margin: 1rem
+.password-changed-modal .btn {
+    width: 210px;
+    height: 60px;
+    background: #0D9068;
+    border-radius: 55px;
+    font-weight: 600;
+    font-size: 24px;
+    color: #FFFFFF;
 }
+.otp-input input {
+    width: 45px;
+    height: 45px;
+    background: rgba(13, 144, 104, 0.31);
+    border: 0.5px solid #ADADAD;
+    border-radius: 4px;
+    font-size: 18px;
+    text-align: center;
+    line-height: normal;
+    margin: 1rem
+}
+
 .otp-input input::-webkit-outer-spin-button,
 .otp-input input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
 .add-savings-modal .btn {
     width: 180px;
     height: 45px;
@@ -72,11 +96,13 @@ margin: 1rem
     color: #FFFFFF;
 }
 
-.add-savings-modal .add-savings-div, .loan-summary-modal .loan-summary-div {
+.add-savings-modal .add-savings-div,
+.loan-summary-modal .loan-summary-div {
     width: 750px;
 }
 
-.add-savings-modal a, .loan-summary-modal a {
+.add-savings-modal a,
+.loan-summary-modal a {
     font-weight: 500;
     font-size: 16px;
     float: left;
@@ -84,7 +110,8 @@ margin: 1rem
     text-decoration: none;
 }
 
-.add-savings-modal .add-icon, .loan-summary-modal .add-icon {
+.add-savings-modal .add-icon,
+.loan-summary-modal .add-icon {
     background: #0D9068;
     color: #ffffff;
     font-size: 20px;
@@ -93,7 +120,8 @@ margin: 1rem
 }
 
 .add-savings-modal p,
-.transaction-success-modal p, .loan-success-modal p {
+.transaction-success-modal p,
+.loan-success-modal p {
     font-weight: 500;
     font-size: 16px;
     text-align: center;
@@ -165,45 +193,56 @@ margin: 1rem
     font-weight: 300;
     font-size: 11px;
 }
-.transaction-success-modal .icon, .loan-success-modal .icon{
+
+.transaction-success-modal .icon,
+.loan-success-modal .icon {
     width: 60px;
     height: 60px;
     /* background-color: #0D9068; */
     color: #0D9068;
     border-radius: 50px;
 }
+
 .transaction-success-modal span {
     font-weight: 600;
     font-size: 14px;
     color: #0D9068;
 }
-.transaction-success-modal .btn, .loan-summary-modal .btn, .loan-success-modal .btn{
+
+.transaction-success-modal .btn,
+.loan-summary-modal .btn,
+.loan-success-modal .btn {
     width: 200px;
-height: 50px;
-background: #FB9129;
-border-radius: 4px;
-font-weight: 500;
-font-size: 16px;
-color: #FFFFFF;
+    height: 50px;
+    background: #FB9129;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #FFFFFF;
 }
-.loan-summary-modal p{
+
+
+.loan-summary-modal p {
     font-weight: 400;
-font-size: 14px;
-color: #303030;
-margin-bottom: 0;
+    font-size: 14px;
+    color: #303030;
+    margin-bottom: 0;
 
 }
-.loan-summary-modal hr{
+
+.loan-summary-modal hr {
     width: 100px;
-border: 1px solid #0D9068;
-margin: 0 8px;
+    border: 1px solid #0D9068;
+    margin: 0 8px;
 }
-.loan-summary-modal span{
+
+.loan-summary-modal span {
     font-weight: 500;
-font-size: 16px;
-color: #000000;
+    font-size: 16px;
+    color: #000000;
 }
-.loan-summary-modal a:nth-child(1) .btn{
+
+.loan-summary-modal a:nth-child(1) .btn {
     background-color: #FFFFFF;
     color: #FB9129;
     border: 2px solid #FB9129;
