@@ -1,21 +1,23 @@
-import React, { useState } from 'react'
-import { Icon } from '@iconify/react';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Modal from 'react-modal';
 import './loan.css';
 import LoanSummary from '../../../modal/LoanSummary';
+import { toast } from "react-toastify";
+import SavingsWallet from '../../../component/SavingsWallet';
+
 
 export default function LoanForm() {
-
-    const [savingsInputType, setSavingsInputType] = useState("false");
-    const [savingsIcon, setSavingsIcon] = useState("mdi:eye-off");
     const [modalIsOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
+    const [loanData, setLoanData] = useState({})
 
-    const toggleSavingsVisiblity = () => {
-        setSavingsInputType(savingsInputType ? false : true);
-        setSavingsIcon(!savingsIcon);
+
+    const handleChange = (e) => {
+
+        const { name, value } = e.target;
+        setLoanData({ ...loanData, [name]: value });
     };
-
-
 
     function openModal() {
         setIsOpen(true);
@@ -24,48 +26,37 @@ export default function LoanForm() {
         setIsOpen(false);
     }
 
+    function nextPage() {
+        if (!loanData.amount || !loanData.repaymentMethod || !loanData.repaymentPeriod) return toast.error("All values are required.")
+        openModal()
+    }
+
 
     return (
         <div className="my-5 px-5 loan-form">
             <h1>Loan Request Form</h1>
 
-            <div className="px-3 card savings-bal">
-
-                <p className='text-start savings-title'>Savings Balance</p>
-
-                <form action="" >
-                    <div className="form-group d-flex align-items-center">
-                        <input
-                            type={savingsInputType ? "text" : "password"}
-                            name="savings"
-                            id="savings"
-                            value={"90,000 NGN"}
-                            placeholder='' />
-                        <div onClick={toggleSavingsVisiblity}>
-                            <Icon icon={savingsIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
-                        </div>
-
-                    </div>
-                </form>
-            </div>
+            <p className='text-start savings-title'>Savings Balance</p>
+            <SavingsWallet />
             <p className="note my-4">Please note that Loan request can not exceed two times of your savings </p>
             <div className="loan-input-form mt-5">
-                <form action="">
+                <form>
                     <div className="d-flex">
                         <div>
-                            <input type="number" name="loan" placeholder='Loan Amount' id="" />
-                            <select name="repaymethod" id="">
+                            <input type="number" name="amount" value={loanData?.amount} onChange={handleChange} placeholder='Loan Amount' />
+                            <select name="repaymentMethod" value={loanData?.repaymentMethod} onChange={handleChange}>
                                 <option value="">Repayment Method</option>
-                                <option value="">Instant (my account)</option>
+                                <option value="Savings">From Savings</option>
+                                <option value="">From Bank account (mandate form)</option>
+                                <option value="Card">From account (Saved Debit Card)</option>
                             </select>
                         </div>
                         <div>
-                            <select name="repaymethod" id="">
-                                <option value="">Purpose</option>
-                                <option value="Personal">Personal</option>
-                                <option value="Family">Family</option>
+                            <select name="paymentMethod">
+                                <option value="">Payment Method</option>
+                                <option value="">Instant (my account)</option>
                             </select>
-                            <select name="repaymethod" id="">
+                            <select name="repaymentPeriod" value={loanData?.repaymentPeriod} onChange={handleChange}>
                                 <option value="">Repayment Period (in months) </option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -87,7 +78,7 @@ export default function LoanForm() {
                     This loan is granted at the rate of 6% and subject to ability to repay within 12 months. The loan is granted at the rate of 6 percent per annum This loan is granted at the rate of 6% and subject to ability to repay within 12 months. The loan is granted at the rate of 6 percent per annum
                 </p>
 
-                <button onClick={openModal} className='btn next-btn mt-5'>
+                <button onClick={nextPage} className='btn next-btn mt-5'>
                     Next
                 </button>
             </div>
@@ -109,7 +100,10 @@ export default function LoanForm() {
                 }}
                 shouldCloseOnOverlayClick={true}
                 closeTimeoutMS={2000}>
-                <LoanSummary />
+                <LoanSummary
+                    closeModal={closeModal}
+                    loanData={loanData}
+                />
             </Modal>
 
 

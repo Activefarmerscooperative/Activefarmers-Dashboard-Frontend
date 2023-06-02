@@ -14,9 +14,18 @@ export const RegisterMember = async (user) => {
   }
 };
 
+export const VerifyOTP = async (token) => {
+  try {
+    const { data } = await api.put(`/api/users`, token);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
 export const confirmTokenIsValid = async (signal) => {
   try {
-    const { data } = await api.get(`/api/users/token`,signal);
+    const { data } = await api.get(`/api/users/token`, signal);
     return data;
   } catch (error) {
     throw error.response.data;
@@ -57,7 +66,7 @@ export const LoginMember = async (user) => {
 
 export const MemberDetails = async (signal) => {
   try {
-    const { data } = await api.get(`/api/users/me`,signal);
+    const { data } = await api.get(`/api/users/me`, signal);
     return data;
   } catch (error) {
     throw error.response.data;
@@ -65,7 +74,7 @@ export const MemberDetails = async (signal) => {
 };
 export const BankList = async (signal) => {
   try {
-    const { data } = await api.get(`/api/users/bank_list`,signal);
+    const { data } = await api.get(`/api/users/bank_list`, signal);
     return data;
   } catch (error) {
     throw error.response.data;
@@ -73,7 +82,15 @@ export const BankList = async (signal) => {
 };
 export const BankDetails = async (signal) => {
   try {
-    const { data } = await api.get(`/api/users/bank-details`,signal);
+    const { data } = await api.get(`/api/users/bank-details`, signal);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+export const UpdateUserDetails = async (item) => {
+  try {
+    const { data } = await api.put(`/api/users/personal_details`, item);
     return data;
   } catch (error) {
     throw error.response.data;
@@ -82,7 +99,7 @@ export const BankDetails = async (signal) => {
 
 export const UpdateBankDetails = async (item) => {
   try {
-    const { data } = await api.put(`/api/users/bank-details`,item);
+    const { data } = await api.put(`/api/users/bank-details`, item);
     return data;
   } catch (error) {
     throw error.response.data;
@@ -90,7 +107,7 @@ export const UpdateBankDetails = async (item) => {
 };
 export const GuarantorDetails = async (signal) => {
   try {
-    const { data } = await api.get(`/api/users/guarantor-details`,signal);
+    const { data } = await api.get(`/api/users/guarantor-details`, signal);
     return data;
   } catch (error) {
     throw error.response.data;
@@ -99,7 +116,25 @@ export const GuarantorDetails = async (signal) => {
 
 export const UpdateGuarantorDetails = async (item) => {
   try {
-    const { data } = await api.put(`/api/users/guarantor_details`,item);
+    const { data } = await api.put(`/api/users/guarantor_details`, item);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const UpdateOccupationDetails = async (item) => {
+  try {
+    const { data } = await api.put(`/api/users/occupation_details`, item);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const UpdateNextOfKinDetails = async (item) => {
+  try {
+    const { data } = await api.put(`/api/users/nextOfKin_details`, item);
     return data;
   } catch (error) {
     throw error.response.data;
@@ -108,7 +143,52 @@ export const UpdateGuarantorDetails = async (item) => {
 
 export const GetWallet = async (signal) => {
   try {
-    const { data } = await api.get(`/api/users/savings-wallet`,signal);
+    const { data } = await api.get(`/api/users/savings-wallet`, signal);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const GetTransactions = async (signal) => {
+  try {
+    const { data } = await api.get(`/api/users/transactions`, signal);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+
+export const AddSaving = async (savings) => {
+  try {
+    const { data } = await api.post(`/api/users/savings`, savings);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+export const ValidatePayment = async (reference) => {
+  try {
+    const { data } = await api.post(`/api/users/savings/validate`, reference);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const WithdrawalRequest = async (withdrawal) => {
+  try {
+    const { data } = await api.post(`/api/users/savings/withdrawal`, withdrawal);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const LoanRequest = async (loan) => {
+  try {
+    const { data } = await api.post(`/api/users/loan`, loan);
     return data;
   } catch (error) {
     throw error.response.data;

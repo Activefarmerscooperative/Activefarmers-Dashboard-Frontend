@@ -1,57 +1,64 @@
-import React, { useState } from 'react'
-import { Icon } from '@iconify/react';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import './witdrawal.css';
+import { RotatingLines } from "react-loader-spinner";
+import { toast } from "react-toastify";
+import SavingsWallet from '../../../component/SavingsWallet';
+import SelectSavingscat from "../../../component/SelectSavingscat";
+import { WithdrawalRequest } from "../../../utils/api/member"
 
 export default function WitdrawalForm() {
+    const navigate = useNavigate();
+    const [withdrawalData, setWithdrawalData] = useState({})
+    const [isLoading, setIsLoading] = useState(false)
 
-    const [savingsInputType, setSavingsInputType] = useState("false");
-    const [savingsIcon, setSavingsIcon] = useState("mdi:eye-off");
+    const handleChange = (e) => {
 
-    const toggleSavingsVisiblity = () => {
-        setSavingsInputType(savingsInputType ? false : true);
-        setSavingsIcon(!savingsIcon);
+        const { name, value } = e.target;
+        setWithdrawalData({ ...withdrawalData, [name]: value });
     };
 
+    async function handleSubmit() {
+        if (!withdrawalData.amount || !withdrawalData.category) return toast.error("Please enter all values.")
+        setIsLoading(true)
+        try {
+            const { message } = await WithdrawalRequest(withdrawalData);
+            toast.success(`${message}`)
+            navigate("/dashboard/home", { replace: true })
+        } catch (error) {
+            if (error) {
+                console.log(error)
+
+                toast.error(error?.message)
+                toast.error(error?.error)
+
+            }
+        } finally {
+            setIsLoading(false)
+        }
+    }
 
     return (
         <div className="my-5 px-5 witdrawal-form">
             <h1>Savings Witdrawal Form</h1>
+            <p className='text-start savings-title'>Savings Balance</p>
+            <SavingsWallet />
 
-            <div className="px-3 card savings-bal">
-
-                <p className='text-start savings-title'>Savings Balance</p>
-
-                <form action="" >
-                    <div className="form-group d-flex align-items-center">
-                        <input
-                            type={savingsInputType ? "text" : "password"}
-                            name="savings"
-                            id="savings"
-                            value={"90,000 NGN"}
-                            placeholder='' />
-                        <div onClick={toggleSavingsVisiblity}>
-                            <Icon icon={savingsIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
-                        </div>
-
-                    </div>
-                </form>
-            </div>
-            <p className="note my-4">Please note that Loan request can not exceed two times of your savings </p>
+            <p className="note my-4">Withdrawal amount can not be more than savings balance. </p>
             <div className="witdrawal-input-form mt-5">
                 <form action="">
                     <div className="d-flex flex-column ">
                         <div className='d-flex '>
-                            <input type="number" name="loan" placeholder='Withdrawal Amount' id="" />
+                            <input type="number" value={withdrawalData?.amount} onChange={handleChange} name="amount" placeholder='Withdrawal Amount' min="0" required />
 
-                            <select name="repaymethod" id="">
-                                <option value="">Purpose</option>
-                                <option value="Personal">Personal</option>
-                                <option value="Family">Family</option>
-                            </select>
+                            <SelectSavingscat
+                                value={withdrawalData?.category}
+                                handleChange={handleChange}
+                            />
                         </div>
                         <div className='mx-5'>
                             <select name="repaymethod" id="" className='mx-1'>
-                                <option value="">Repayment Method</option>
+                                <option value="">Payment Method</option>
                                 <option value="">Instant (my account)</option>
                             </select>
                             <select name="" id="" className='d-none'></select>
@@ -65,9 +72,9 @@ export default function WitdrawalForm() {
                 Lorem ipsum dolor sit amet consectetur. Turpis posuere donec ipsum lectus cursus. Pellentesque tellus ornare id neque. Rutrum fringilla molestie lao
             </p>
 
-            <button className='btn next-btn mt-5'>
-                Submit
-            </button>
+            {isLoading && <center className="btn next-btn mt-5"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+            {!isLoading && <button onClick={handleSubmit} className="btn next-btn mt-5">Submit</button>}
+
         </div>
     )
 }

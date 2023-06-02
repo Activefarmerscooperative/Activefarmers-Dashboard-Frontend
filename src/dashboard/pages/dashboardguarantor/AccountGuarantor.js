@@ -32,8 +32,8 @@ const AccountGuarantor = () => {
 
   useEffect(() => {
     if (!data) return
-    setBankDetails(data[0].bank_details || {})
-    setGuarantorDetails(data[1]?.guarantor_details.guarantor)
+    setBankDetails(data[0]?.bank_details || {})
+    setGuarantorDetails(data[1]?.guarantor_details?.guarantor)
     setBanks(data[2]?.banks)
   }, [data])
 
@@ -181,25 +181,25 @@ return (
             </div>
             <div className="form-group d-flex flex-column mx-3">
               <label htmlFor="">Guarantor's Phone Number</label>
-              <input type="tel" name="phone" value={guarantorDetails.phone} onChange={handleGuarantorChange} disabled={!editGuarantor} placeholder="+2348123456789" />
+              <input type="tel" name="phone" value={guarantorDetails?.phone} onChange={handleGuarantorChange} disabled={!editGuarantor} placeholder="+2348123456789" />
             </div>
             <div className="form-group d-flex flex-column mx-3">
               <label htmlFor="">Guarantor's Email Address</label>
-              <input type="email" name="email" value={guarantorDetails.email} onChange={handleGuarantorChange} disabled={!editGuarantor} placeholder="joe@yahoo.com" />
+              <input type="email" name="email" value={guarantorDetails?.email} onChange={handleGuarantorChange} disabled={!editGuarantor} placeholder="joe@yahoo.com" />
             </div>
           </div>
           <div className="d-flex mt-4">
             <div className="form-group d-flex flex-column mx-3">
               <label htmlFor="">Guarantor's Residential Address</label>
-              <input type="text" name="address" value={guarantorDetails.address} onChange={handleGuarantorChange} disabled={!editGuarantor} placeholder="Airforce Base, Jimeta-Yola Adamawa" />
+              <input type="text" name="address" value={guarantorDetails?.address} onChange={handleGuarantorChange} disabled={!editGuarantor} placeholder="Airforce Base, Jimeta-Yola Adamawa" />
             </div>
             <div className="form-group d-flex flex-column mx-3">
               <label htmlFor="">Guarantor's Occupation</label>
-              <input type="text" name="occupation" onChange={handleGuarantorChange} value={guarantorDetails.occupation} disabled={!editGuarantor} placeholder="FullStack Developer" />
+              <input type="text" name="occupation" onChange={handleGuarantorChange} value={guarantorDetails?.occupation} disabled={!editGuarantor} placeholder="FullStack Developer" />
             </div>
             <div className="form-group d-flex flex-column mx-3">
               <label htmlFor="">Gender</label>
-              <select name="gender" value={guarantorDetails.gender} onChange={handleGuarantorChange} disabled={!editGuarantor}>
+              <select name="gender" value={guarantorDetails?.gender} onChange={handleGuarantorChange} disabled={!editGuarantor}>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
               </select>

@@ -119,7 +119,7 @@ export default function Member() {
 
     async function handleSubmit(e) {
         e.preventDefault()
-
+      
         // Validate the form inputs
         const errors = validateForm();
 
@@ -133,7 +133,9 @@ export default function Member() {
         setIsLoading(true)
         try {
             const data = await RegisterMember(member);
+            console.log(data)
             localStorage.setItem("AFCS-token", data.afcsToken)
+            localStorage.setItem("termii_pinId", data.pinId)
             setMessage(data.message)
             openModal()
             setMember({
@@ -205,7 +207,7 @@ export default function Member() {
                 <Modal
                     isOpen={modalIsOpen}
                     // onAfterOpen={afterOpenModal}
-                    onRequestClose={closeModal}
+                    // onRequestClose={closeModal}
                     contentLabel="Enter OTP"
                     className={{
                         base: 'modal-base',
@@ -217,7 +219,7 @@ export default function Member() {
                         afterOpen: 'overlay-base_after-open',
                         beforeClose: 'overlay-base_before-close'
                     }}
-                    shouldCloseOnOverlayClick={true}
+                    shouldCloseOnOverlayClick={false}
                     closeTimeoutMS={2000}
                 >
                     <OtpModal
