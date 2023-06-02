@@ -81,7 +81,7 @@ const ProfileUpdate = () => {
 
     async function updateUser(e) {
         e.preventDefault()
-        if (!userData?.surname || !userData.firstname || !userData?.phone ||
+        if (!userData?.surname || !userData?.firstname || !userData?.phone ||
             !userData.email || !userData.location || !userData.gender || !userData.address
         ) return toast.error("All inputs are required.")
         if (!window.confirm("Are you sure you want to update your details?")) return
