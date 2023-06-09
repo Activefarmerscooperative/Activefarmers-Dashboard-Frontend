@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { GetTransactions } from '../utils/api/member';
+import { GetTransactions } from '../../utils/api/member';
 import { useQuery } from 'react-query'
 import {
     Table,
     TableCell,
     TableBody,
     TableRow,
-    TableHead, TableContainer, Paper
+    TableHead, TableContainer, Paper, Box, TablePagination
 } from "@mui/material";
 
 import { Icon } from '@iconify/react';
-import { useNavigate } from "react-router-dom";
 
 const fetchTransactions = async (key) => {
 
     try {
-        const res = await GetTransactions();
+        const res = await GetTransactions("All");
         return res
 
     } catch (error) {
@@ -24,15 +23,7 @@ const fetchTransactions = async (key) => {
     }
 };
 
-function RecentTransaction() {
-
-    const navigate = useNavigate();
-
-    const [isOpen, setIsOpen] = useState(false);
-
-    const handleToggle = () => {
-        setIsOpen(!isOpen);
-    };
+function TransactionHistory({closeModal}) {
 
     const [transactions, setTransactions] = useState([])
 
@@ -51,11 +42,30 @@ function RecentTransaction() {
         }
         setTransactions(data.filter(item => item.type === sortParams))
     }
+
+
+
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
+
+    const goBack = () => {
+        window.history.go(-1);
+      };
+
     return (
-        <>
-            <div className="d-flex align-items-center justify-content-between top-nav">
-                <p>Recent Transaction</p>
-                <div className="d-flex top-nav-btn">
+        <div className="transaction-history mt-5 px-4">
+            <div className=" top-nav">
+                <h1 >< Icon icon="material-symbols:arrow-back-rounded" onClick={goBack} className="add-icon" /> Transactions History</h1>
+                <div className="d-flex mt-5 top-nav-btn">
                     <div className='d-flex align-items-center justify-content-between sort px-2 mx-2'>
 
 
@@ -97,18 +107,14 @@ function RecentTransaction() {
                     <div className="d-flex align-items-center justify-content-center download-icon mx-3">
                         <Icon icon="material-symbols:download-rounded" className='icon' />
                     </div>
-
-                    <button onClick={() => { navigate("/dashboard/transactions"); }} className='btn view-all-btn'>
-                        View All
-                    </button>
                 </div>
             </div>
             <div className="d-flex justify-content-center table mt-3">
 
-                <TableContainer component={Paper}>
+                <TableContainer component={Paper} >
                     <Table aria-label="simple table">
                         <TableHead>
-                            <TableRow>
+                            <TableRow >
                                 <TableCell></TableCell>
                                 <TableCell>Action</TableCell>
                                 <TableCell >Date</TableCell>
@@ -118,7 +124,10 @@ function RecentTransaction() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {transactions?.map((row) => {
+                            {(rowsPerPage > 0
+                                ? transactions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                : transactions
+                            ).map((row) => {
                                 let color = (row.item?.status === "Pending") ? "#FB9129" : "#0D9068"
                                 return (
                                     <TableRow
@@ -135,7 +144,8 @@ function RecentTransaction() {
                                         <TableCell >{row.amount}</TableCell>
                                         <TableCell >
                                             <div className="d-flex align-items-center">
-                                                <Icon icon="material-symbols:circle-outline" style={{ width: "20px", height: "20px", color: `${color}`, fontWeight: "900" }} />
+                                            {(row.item?.status === "Pending") ? <Icon icon="solar:record-broken" rotate={1} style={{ width: "25px", height: "25px", fontWeight: "900", color: `${color}`}} /> : <Icon icon="material-symbols:circle-outline" style={{ width: "25px", height: "25px", color: `${color}`, fontWeight: "900" }} />}
+                                                {/* <Icon icon="material-symbols:circle-outline" style={{ width: "20px", height: "20px", color: `${color}`, fontWeight: "900" }} /> */}
                                                 <p className='my-0 mx-2' style={{ color: `${color}` }}>{row.item?.status}</p>
                                             </div>
                                         </TableCell>
@@ -146,12 +156,30 @@ function RecentTransaction() {
                                 )
                             })}
                         </TableBody>
+
+
+
                     </Table>
+
+
                 </TableContainer>
+
             </div>
-        </>
+            <Box display="flex" alignItems="center" justifyContent="flex-end" py={1}>
+                <TablePagination
+
+                    rowsPerPageOptions={[5, 10, 25]}
+                    component="div"
+                    count={transactions.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+            </Box>
+        </div>
 
     )
 }
 
-export default RecentTransaction
+export default TransactionHistory

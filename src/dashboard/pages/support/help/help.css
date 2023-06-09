@@ -36,15 +36,16 @@ color: #000000;
 .help .contact-form input{
     width: 400px;
 height: 50px;
-border: 0.4px solid #797979;
+border: 1px solid #797979;
 border-radius: 4px;
 padding: 10px;
 margin: 20px 0;
+
 }
 .help .contact-form textarea{
     width: 400px;
 height: 150px;
-border: 0.4px solid #797979;
+border: 1px solid #797979;
 border-radius: 4px;
 padding: 10px;
 }
@@ -55,7 +56,11 @@ text-align: justify;
 
 color: #000000;
 }
+.help .contact-form input:focus, .help .contact-form textarea:focus{
+    outline: none;
+    /* border: none; */
 
+}
 .help .contact-form .btn{
     width: 180px;
     padding: 10px;

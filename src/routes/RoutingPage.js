@@ -28,6 +28,7 @@ import LoginForm from "../onboarding/loginforms/LoginForms";
 import ForgottenPassword from "../onboarding/loginforms/forgotpassword/ForgottenPassword";
 import LoginOtpVerify from "../onboarding/loginforms/otpverify/LoginOtpVerify";
 import CreateNewPassword from "../onboarding/loginforms/createpassword/NewPassword";
+import TransactionHistory from "../dashboard/pages/TransactionHistory";
 
 
 const router = createBrowserRouter(
@@ -54,6 +55,7 @@ const router = createBrowserRouter(
         <Route path="/dashboard/profile" element={<ProfileUpdate />} />
         <Route path="/dashboard/support" element={<Support />} />
         <Route path="/dashboard/guarantor" element={<AccountGuarantor />} />
+        <Route path="/dashboard/transactions" element={<TransactionHistory />} />
       </Route>
     </Route>
   )

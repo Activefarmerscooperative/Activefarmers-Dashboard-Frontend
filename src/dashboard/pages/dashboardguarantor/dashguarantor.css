@@ -90,6 +90,23 @@ color: #FFFFFF;
     font-weight: bolder;
     border-radius: 50px;
 }
+
+.guarantor-account-form .btn.edit{
+    width: 180px;
+    height: 50px;
+    background-color:  #FB9129;
+    color:#fff;
+    font-size: 20px;
+    border: 2px solid #FB9129;
+}
+.guarantor-account-form .btn.discard {
+    width: 180px;
+    height: 50px;
+    background-color:#FFFFFF;
+        color:#FB9129;
+    font-size: 20px;
+    border: 2px solid #FB9129;
+}
 .guarantor-account-form .btn.profile-saved p{
     font-weight: 500;
 font-size: 16px;

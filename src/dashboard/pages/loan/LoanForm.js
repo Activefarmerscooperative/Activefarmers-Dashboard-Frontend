@@ -35,10 +35,8 @@ export default function LoanForm() {
     return (
         <div className="my-5 px-5 loan-form">
             <h1>Loan Request Form</h1>
-
-            <p className='text-start savings-title'>Savings Balance</p>
             <SavingsWallet />
-            <p className="note my-4">Please note that Loan request can not exceed two times of your savings </p>
+            <p className="note my-4">Please note that Loan request can not exceed five times (5X)  your savings, you’re eligible for a maximum loan of up to 450,000 NGN </p>
             <div className="loan-input-form mt-5">
                 <form>
                     <div className="d-flex">
@@ -75,7 +73,7 @@ export default function LoanForm() {
                     </div>
                 </form>
                 <p className="note mt-5 ">
-                    This loan is granted at the rate of 6% and subject to ability to repay within 12 months. The loan is granted at the rate of 6 percent per annum This loan is granted at the rate of 6% and subject to ability to repay within 12 months. The loan is granted at the rate of 6 percent per annum
+                NB: This loan is granted at the rate of 15% and subject to ability to repay within maximum of 12 months. Loan deduction will commence a month after loan approval
                 </p>
 
                 <button onClick={nextPage} className='btn next-btn mt-5'>

@@ -34,22 +34,39 @@
   padding: 8px;
   border: 1px solid #444444;
   border-radius: 4px;
+  color: #444444;
+  font-size: 15px;
+}
+
+.member select {
+  color: #727070;
 }
 
 .member input::placeholder,
 .member select option {
-  font-weight: 500;
-  font-size: 16px;
-  color: #444444;
+  font-weight: 400;
+  font-size: 14px;
 }
 
-.member select{
-  appearance: none; background-image: url('../../../assets/outline-arrow.png');
+.member select {
+  appearance: none;
+  background-image: url('../../../assets/outline-arrow.png');
   background-repeat: no-repeat, repeat;
   background-position: right 1em top 50%, 0 0;
-  background-size: 1em auto, 100%;
-  
- 
+  background-size: 0.9em auto, 100%;
+
+
+}
+
+.member input:focus,
+.member select:focus {
+  outline: none;
+}
+
+.member input::-webkit-outer-spin-button,
+.member input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 
@@ -116,6 +133,17 @@
   right: 0;
   bottom: 0;
   background: rgba(19, 18, 18, 0.75);
+  opacity: 0;
+  transition: all 0.3s ease-out;
+}
+
+.profile-overlay-base{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(19, 18, 18);
   opacity: 0;
   transition: all 0.3s ease-out;
 }

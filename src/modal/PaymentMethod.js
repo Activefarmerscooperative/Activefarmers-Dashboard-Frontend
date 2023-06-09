@@ -17,13 +17,17 @@ function PaymentMethod() {
   function closeModal() {
     setIsOpen(false);
   }
+
+  const goBack = () => {
+    window.history.go(-1);
+  };
   return (
     <div className='add-savings-modal p-4 my-4'>
       <div className="d-flex flex-column add-savings-div">
-        <a href="/dashboard" className="d-flex align-items-center mx-5" >
+        <div onClick={goBack}className="d-flex align-items-center mx-5" >
           <Icon icon="material-symbols:arrow-back-rounded" className="add-icon" />
           Savings Payment Method
-        </a>
+        </div>
         <div className="d-flex flex-column align-items-center mt-4">
           <p>
             Select Payment Method to add savings

@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Icon } from '@iconify/react';
 import './profile.css';
-import { useQuery } from 'react-query'
+import { useQuery } from 'react-query';
 import { MemberDetails, UpdateUserDetails, UpdateOccupationDetails, UpdateNextOfKinDetails } from '../../../utils/api/member';
 import { fetchAllStates } from '../../../utils/api/general';
 import { toast } from "react-toastify";
 import { RotatingLines } from "react-loader-spinner";
+import Modal from 'react-modal';
+import ProfileUpdateModal from "../../../modal/ProfileUpdateModal";
 
 const fetchData = async (key) => {
+
+
+
+
+
 
     try {
         const user = await MemberDetails();
@@ -22,10 +28,6 @@ const fetchData = async (key) => {
 };
 
 const ProfileUpdate = () => {
-    const [inputDisabled, setInputDisabled] = useState(true);
-    const [isClicked, setIsClicked] = useState(false);
-    const [showButton, setShowButton] = useState(false);
-    const [showButton1, setShowButton1] = useState(true);
     const [editUser, setEditUser] = useState(false)
     const [editOccupation, setEditOccupation] = useState(false)
     const [editNextKin, setEditNextKin] = useState(false)
@@ -34,6 +36,19 @@ const ProfileUpdate = () => {
     const [nextKinData, setNextKinData] = useState({})
     const [isLoading, setIsLoading] = useState(false)
     const [location, setLocation] = useState([])
+    const [modalIsOpen, setIsOpen] = useState(false);
+
+
+
+    function openModal() {
+        setIsOpen(true);
+        setEditUser(false);
+        setEditOccupation(false);
+        setEditNextKin(false);
+    }
+    function closeModal() {
+        setIsOpen(false);
+    }
 
     // React query fecth data
     const { data, status } = useQuery(['fetchData'], fetchData)
@@ -50,34 +65,7 @@ const ProfileUpdate = () => {
         console.log(userData)
     }, [userData])
 
-    const enableInputs = () => {
-        setInputDisabled(false);
-        setIsClicked(true);
-        setShowButton(!showButton);
-    };
 
-    const changeButton = () => {
-        setShowButton1(false);
-    };
-
-    const buttonStyle = {
-        width: '180px',
-        height: '50px',
-        backgroundColor: isClicked ? '#FFFFFF' : '#FB9129',
-        color: isClicked ? '#FB9129' : '#fff',
-        fontSize: '20px',
-        border: '2px solid #FB9129',
-    };
-    // Please move all styles to the style sheet
-    const acoountButtonStyle = {
-        width: '180px',
-        height: '50px',
-        backgroundColor: editUser ? '#FFFFFF' : '#FB9129',
-        color: editUser ? '#FB9129' : '#fff',
-        fontSize: '20px',
-        border: '2px solid #FB9129',
-    };
-    const buttonText = isClicked ? 'Discard Changes' : 'Edit Profile';
 
     async function updateUser(e) {
         e.preventDefault()
@@ -185,32 +173,32 @@ const ProfileUpdate = () => {
                         <div className="d-flex">
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">First Name</label>
-                                <input type="text" name="firstname" onChange={handleUserChange} value={userData.firstname} disabled={!editUser} placeholder="Kadwama" />
+                                <input type="text" name="firstname" onChange={handleUserChange} value={userData.firstname} disabled={!editUser} placeholder="Kadwama" className={editUser ? "editable-input" : ""} />
                             </div>
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Last Name</label>
-                                <input type="text" name="surname" onChange={handleUserChange} value={userData.surname} disabled={!editUser} placeholder="Lazarus" />
+                                <input type="text" name="surname" onChange={handleUserChange} value={userData.surname} disabled={!editUser} placeholder="Lazarus" className={editUser ? "editable-input" : ""} />
                             </div>
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Email Address</label>
-                                <input type="email" name="email" onChange={handleUserChange} value={userData.email} disabled={!editUser} placeholder="kadwamalazarus@gmail.com" />
+                                <input type="email" name="email" onChange={handleUserChange} value={userData.email} disabled={!editUser} placeholder="kadwamalazarus@gmail.com" className={editUser ? "editable-input" : ""} />
                             </div>
                         </div>
                         <div className="d-flex mt-4">
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Gender</label>
-                                <select name="gender" disabled={!editUser} onChange={handleUserChange} value={userData.gender} >
+                                <select name="gender" disabled={!editUser} onChange={handleUserChange} value={userData.gender} className={editUser ? "editable-input" : ""} >
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                 </select>
                             </div>
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Date of birth</label>
-                                <input type="date" name="DOB" disabled={!editUser} onChange={handleUserChange} value={userData.DOB} placeholder="22 July 1985" />
+                                <input type="date" name="DOB" disabled={!editUser} onChange={handleUserChange} value={userData.DOB} placeholder="22 July 1985" className={editUser ? "editable-input" : ""} />
                             </div>
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Phone Number</label>
-                                <input type="tel" name="phone" disabled placeholder="08104046671" value={userData.phone} />
+                                <input type="tel" name="phone" disabled placeholder="08104046671" value={userData.phone} className={editUser ? "editable-input" : ""} />
                             </div>
                         </div>
                         <div className="d-flex mt-4 me-auto">
@@ -223,11 +211,12 @@ const ProfileUpdate = () => {
                                     value={userData.address}
                                     placeholder="Jimeta-Yola, barracks road, Yola Adamawa"
                                     onChange={handleUserChange}
+                                    className={editUser ? "editable-input" : ""}
                                 />
                             </div>
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="location">Location</label>
-                                <select required name="location" onChange={handleUserChange} disabled={!editUser} value={userData?.location?._id}>
+                                <select required name="location" onChange={handleUserChange} disabled={!editUser} value={userData?.location?._id} className={editUser ? "editable-input" : ""}>
                                     <option value={userData?.location?._id}>{userData?.location?.name}</option>
                                     {
                                         location?.map(item => <option key={item._id} value={JSON.stringify(item)}>{item.name}</option>)
@@ -239,7 +228,7 @@ const ProfileUpdate = () => {
                         <div className="d-flex">
                             {
                                 !editUser &&
-                                <button onClick={() => setEditUser(true)} style={acoountButtonStyle} className="btn mx-4 my-5">
+                                <button onClick={() => setEditUser(true)} className="btn edit mx-4 my-5" >
                                     Edit
                                 </button>
                             }
@@ -250,7 +239,10 @@ const ProfileUpdate = () => {
                                         {isLoading && <button className="btn mx-4 my-5"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></button>}
                                         {!isLoading &&
                                             <>
-                                                {!isLoading && <button onClick={() => setEditUser(false)} disabled={isLoading} className="btn mx-4 my-5">Discard Changes</button>}
+                                                {!isLoading && <button onClick={
+                                                    // () => setEditUser(false)
+                                                    openModal
+                                                } disabled={isLoading} className="btn discard mx-4 my-5">Discard Changes</button>}
                                                 <button onClick={updateUser} disabled={isLoading} className="btn mx-4 my-5">Save</button>
                                             </>}
 
@@ -266,21 +258,21 @@ const ProfileUpdate = () => {
                         <div className="d-flex">
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Occupation</label>
-                                <input type="text" name="occupation" value={occupationData?.occupation} onChange={handleOccupationChange} disabled={!editOccupation} placeholder="UI/UX Designer" />
+                                <input type="text" name="occupation" value={occupationData?.occupation} onChange={handleOccupationChange} disabled={!editOccupation} placeholder="UI/UX Designer" className={editUser ? "editable-input" : ""} />
                             </div>
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor=""> Salary(Monthly)</label>
-                                <input type="number" name="salary" value={occupationData?.salary} onChange={handleOccupationChange} disabled={!editOccupation} placeholder="1,200,000" />
+                                <input type="number" name="salary" value={occupationData?.salary} onChange={handleOccupationChange} disabled={!editOccupation} placeholder="1,200,000" className={editUser ? "editable-input" : ""} />
                             </div>
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Work Level/Grade</label>
-                                <input type="text" name="workLevel" value={occupationData?.workLevel} onChange={handleOccupationChange} disabled={!editOccupation} placeholder="Grade 7" />
+                                <input type="text" name="workLevel" value={occupationData?.workLevel} onChange={handleOccupationChange} disabled={!editOccupation} placeholder="Grade 7" className={editUser ? "editable-input" : ""} />
                             </div>
                         </div>
                         <div className="d-flex mt-4">
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Ministry (Company Name)</label>
-                                <input type="text" name="companyName" value={occupationData?.companyName} onChange={handleOccupationChange} disabled={!editOccupation} placeholder="Discovery Hub Labondo" />
+                                <input type="text" name="companyName" value={occupationData?.companyName} onChange={handleOccupationChange} disabled={!editOccupation} placeholder="Discovery Hub Labondo" className={editUser ? "editable-input" : ""} />
                             </div>
                             {/* <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Last Name</label>
@@ -295,7 +287,7 @@ const ProfileUpdate = () => {
                         <div className="d-flex">
                             {
                                 !editOccupation &&
-                                <button onClick={() => setEditOccupation(true)} style={acoountButtonStyle} className="btn mx-4 my-5">
+                                <button onClick={() => setEditOccupation(true)} className="btn edit mx-4 my-5">
                                     Edit
                                 </button>
                             }
@@ -306,7 +298,10 @@ const ProfileUpdate = () => {
                                         {isLoading && <button className="btn mx-4 my-5"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></button>}
                                         {!isLoading &&
                                             <>
-                                                {!isLoading && <button onClick={() => setEditOccupation(false)} disabled={isLoading} className="btn mx-4 my-5">Discard Changes</button>}
+                                                {!isLoading && <button onClick={
+                                                    // () => setEditOccupation(false)
+                                                    openModal
+                                                } disabled={isLoading} className="btn discard mx-4 my-5">Discard Changes</button>}
                                                 <button onClick={updateUserOccupation} disabled={isLoading} className="btn mx-4 my-5">Save</button>
                                             </>}
 
@@ -322,26 +317,26 @@ const ProfileUpdate = () => {
                         <div className="d-flex">
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Name of Next of Kin</label>
-                                <input type="text" name="full_name" value={nextKinData?.full_name} onChange={handleNextKinChange} disabled={!editNextKin} placeholder="Fred Lazarus" />
+                                <input type="text" name="full_name" value={nextKinData?.full_name} onChange={handleNextKinChange} disabled={!editNextKin} placeholder="Fred Lazarus" className={editUser ? "editable-input" : ""} />
                             </div>
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Relationship</label>
-                                <input type="text" name="relationship" value={nextKinData?.relationship} onChange={handleNextKinChange} disabled={!editNextKin} placeholder="Sibling" />
+                                <input type="text" name="relationship" value={nextKinData?.relationship} onChange={handleNextKinChange} disabled={!editNextKin} placeholder="Sibling" className={editUser ? "editable-input" : ""} />
                             </div>
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Home Address</label>
-                                <input type="text" name="address" value={nextKinData?.address} onChange={handleNextKinChange} disabled={!editNextKin} placeholder="Jimeta-Yola, barracks road, Yola Adamawa" />
+                                <input type="text" name="address" value={nextKinData?.address} onChange={handleNextKinChange} disabled={!editNextKin} placeholder="Jimeta-Yola, barracks road, Yola Adamawa" className={editUser ? "editable-input" : ""} />
                             </div>
                         </div>
                         <div className="d-flex mt-4 me-auto">
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Phone Number</label>
-                                <input type="tel" name="phone" value={nextKinData?.phone} onChange={handleNextKinChange} disabled={!editNextKin} placeholder="08104046671" />
+                                <input type="tel" name="phone" value={nextKinData?.phone} onChange={handleNextKinChange} disabled={!editNextKin} placeholder="08104046671" className={editUser ? "editable-input" : ""} />
                             </div>
 
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Email Address</label>
-                                <input type="email" name="email" value={nextKinData?.email} onChange={handleNextKinChange} disabled={!editNextKin} placeholder="kadwamalazarus@gmail.com" />
+                                <input type="email" name="email" value={nextKinData?.email} onChange={handleNextKinChange} disabled={!editNextKin} placeholder="kadwamalazarus@gmail.com" className={editUser ? "editable-input" : ""} />
                             </div>
                         </div>
 
@@ -350,7 +345,7 @@ const ProfileUpdate = () => {
                                 !editNextKin &&
                                 <button onClick={() =>
                                     setEditNextKin(true)
-                                } style={acoountButtonStyle} className="btn mx-4 my-5">
+                                } className="btn edit mx-4 my-5">
                                     Edit
                                 </button>
                             }
@@ -361,7 +356,10 @@ const ProfileUpdate = () => {
                                         {isLoading && <button className="btn mx-4 my-5"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></button>}
                                         {!isLoading &&
                                             <>
-                                                {!isLoading && <button onClick={() => setEditNextKin(false)} disabled={isLoading} className="btn mx-4 my-5">Discard Changes</button>}
+                                                {!isLoading && <button onClick={
+                                                    // () => setEditNextKin(false)
+                                                    openModal
+                                                } disabled={isLoading} className="btn discard mx-4 my-5">Discard Changes</button>}
                                                 <button onClick={updateNextOfKin} disabled={isLoading} className="btn mx-4 my-5">Save</button>
                                             </>}
 
@@ -373,6 +371,30 @@ const ProfileUpdate = () => {
                     </div>
                 </form>
             </div>
+            <Modal
+                isOpen={modalIsOpen}
+                // onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+
+                contentLabel="Example Modal"
+                className={{
+                    base: 'modal-base',
+                    afterOpen: 'modal-base_after-open',
+                    beforeClose: 'modal-base_before-close'
+                }}
+                overlayClassName={{
+                    base: 'profile-overlay-base',
+                    afterOpen: 'overlay-base_after-open',
+                    beforeClose: 'overlay-base_before-close'
+                }}
+                shouldCloseOnOverlayClick={false}
+            >
+                <ProfileUpdateModal
+                    closeModal={closeModal}
+                    closeModaltwo={closeModal}
+                // loanData={loanData}
+                />
+            </Modal>
         </div>
     );
 };

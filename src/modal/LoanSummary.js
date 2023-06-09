@@ -60,14 +60,17 @@ function LoanSummary({ closeModal, loanData }) {
     }
   }
 
-
+  const goBack = () => {
+    window.history.go(-1);
+  };
+  
   return (
     <div className='loan-summary-modal p-4 my-4'>
       <div className="d-flex flex-column loan-summary-div">
-        <a href="/dashboard/loan" className="back-to d-flex  align-items-center mx-5" >
+        <div onClick={goBack} className="back-to d-flex  align-items-center mx-5" >
           <Icon icon="material-symbols:arrow-back-rounded" className="add-icon" />
           Loan Request Summary
-        </a>
+        </div>
         <div className="d-flex flex-column align-items-center mb-2">
           <ul className="loan-info my-3">
             <li className='d-flex align-items-center my-3'>
@@ -102,7 +105,7 @@ function LoanSummary({ closeModal, loanData }) {
                 Repayment per month :</p>
               <hr />
               <span>
-                57,000 NGN</span>
+                {Math.ceil(((Number(loanData.amount) * 0.15) + Number(loanData.amount)) / (loanData.repaymentPeriod)).toLocaleString({ style: 'currency' })} NGN</span>
             </li>
             <li className='d-flex align-items-center my-3'>
               <p>
@@ -126,9 +129,12 @@ function LoanSummary({ closeModal, loanData }) {
 
             <button onClick={closeModal} className="btn btn-modal my-2 mx-3">Edit Loan</button>
 
-            {isLoading && <center className="btn btn-modal my-2 mx-3"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
-            {!isLoading && <button onClick={handleSubmit} className="btn btn-modal my-2 mx-3">Submit</button>}
-            <p className='agree text-center mt-2 '>By clicking submit, you have read our {<br />} <a href="">terms and conditions</a>  and agree to it</p>
+            <div>
+              {isLoading && <center className="btn btn-modal my-2 mx-3"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+              {!isLoading && <button onClick={handleSubmit} className="btn btn-modal my-2 mx-3">Submit</button>}
+              <p className='agree text-center '>By clicking submit, you have read our {<br />} <a href="">terms and conditions</a>  and agree to it</p>
+            </div>
+
           </div>
 
         </div>

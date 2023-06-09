@@ -72,7 +72,14 @@ export default function Guarantor() {
 
         if (!guarantor.phone) {
             errors.phone = 'Phone Number is required';
+        } else if (!isValidPhoneNumber(guarantor.phone)) {
+            const firstCharacter = guarantor.phone.charAt(0);
+            if (firstCharacter === "0") {
+                guarantor.phone = "+234" + guarantor.phone.substring(1);
+            }
+            // errors.phone = 'Invalid phone number format';
         }
+        
         if (!guarantor.gender) {
             errors.phone = 'Gender is required';
         }
@@ -81,6 +88,13 @@ export default function Guarantor() {
         }
 
         return errors;
+    };
+
+    const isValidPhoneNumber = (phone) => {
+        // Regular expression for phone number validation
+        const phoneRegex = /^\+\d+$/;
+        
+        return phoneRegex.test(phone);
     };
 
     async function handleSubmit(e) {

@@ -17,9 +17,9 @@
     padding: 5px;
 }
 
-.loan-form input,
-.loan-form input:hover,
-.loan-form input:focus {
+.category-form-group input,
+.category-form-group input:hover,
+.category-form-group input:focus {
 
     width: auto;
     border: none;
@@ -63,7 +63,8 @@
     color: #444444;
 }
 
-.loan-form p .note {
+.loan-form p.note {
+    width: 90%;
     font-weight: 400;
     font-size: 13px;
     color: #444444;
@@ -77,8 +78,11 @@
     width: 365px;
     border: 1px solid #909090;
     border-radius: 6px;
-    margin: 15px auto;
+    margin: 15px;
     padding: 10px;
+    color: #444444;
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .loan-input-form input::placeholder,
@@ -86,13 +90,25 @@
     font-size: 14px;
     color: #444444;
 }
+.loan-input-form input:focus,
+.loan-input-form select:focus{
+    outline: none;
 
+}
 .loan-input-form input::-webkit-outer-spin-button,
 .loan-input-form input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+.loan-input-form select {
+    appearance: none;
+    background-image: url('../../../assets/filled-arrow.png');
+    background-repeat: no-repeat, repeat;
+    background-position: right 1em top 50%, 0 0;
+    background-size: 1em auto, 100%;
 
+
+}
 .loan-form .next-btn {
     width: 180px;
     height: 45px;

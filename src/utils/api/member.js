@@ -150,9 +150,9 @@ export const GetWallet = async (signal) => {
   }
 };
 
-export const GetTransactions = async (signal) => {
+export const GetTransactions = async (type) => {
   try {
-    const { data } = await api.get(`/api/users/transactions`, signal);
+    const { data } = await api.get(`/api/users/transactions?type=${type}`);
     return data;
   } catch (error) {
     throw error.response.data;

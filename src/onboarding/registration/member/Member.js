@@ -85,7 +85,11 @@ export default function Member() {
         if (!member.phone) {
             errors.phone = 'Phone Number is required';
         } else if (!isValidPhoneNumber(member.phone)) {
-            errors.phone = 'Invalid phone number format';
+            const firstCharacter = member.phone.charAt(0);
+            if (firstCharacter === "0") {
+                member.phone = "+234" + member.phone.substring(1);
+            }
+            // errors.phone = 'Invalid phone number format';
         }
 
         if (!member.location) {
@@ -115,6 +119,7 @@ export default function Member() {
     const isValidPhoneNumber = (phone) => {
         // Regular expression for phone number validation
         const phoneRegex = /^\+\d+$/;
+        
         return phoneRegex.test(phone);
     };
 
@@ -191,8 +196,8 @@ export default function Member() {
                     <p>Please complete this form to the best of your ability providing all relevant details. Please note that your application will go through confirmation prior to processing. </p>
                     <form className=" d-flex align-items-center justify-content-center mb-4">
                         <div>
-                            <input type="text" name="surname" required value={member.surname} onChange={handleChange} placeholder="Surname" />
-                            <input type="email" name="email" required value={member.email} onChange={handleChange} placeholder="Email Address" />
+                            <input autocomplete="off" type="text" name="surname" required value={member.surname} onChange={handleChange} placeholder="Surname" />
+                            <input autocomplete="off" type="email" name="email" required value={member.email} onChange={handleChange} placeholder="Email Address" />
 
 
                             {/* <OnboardingInputField type="text" name="surname" required value={member.surname} onChange={handleChange} placeholder="Surname" />
@@ -207,11 +212,11 @@ export default function Member() {
                                 <option value="Female">Female</option>
                             </select>
                             <select required name="membershipType" value={member.membershipType} onChange={handleChange}>
-                                <option value="">Membership catgory</option>
+                                <option value="">Membership category</option>
                                 <option value="Farmer">Farmer</option>
                                 <option value="Non-Farmer">Non-Farmer</option>
                             </select>
-                            <input required type="password" name="password" onChange={handleChange} value={member.password} placeholder="Password" />
+                            <input autocomplete="off" required type="password" name="password" onChange={handleChange} value={member.password} placeholder="Password"/>
 
 
                             {/* <OnboardingSelectField
@@ -239,13 +244,13 @@ export default function Member() {
 
                         </div>
                         <div>
-                            <input required type="text" name="firstname" onChange={handleChange} value={member.firstname} placeholder="Firstname" />
-                            <input required type="tel" name="phone" value={member.phone} onChange={handleChange} placeholder="Phone Number e.g:+2348123456789" />
+                            <input autocomplete="off" required type="text" name="firstname" onChange={handleChange} value={member.firstname} placeholder="Firstname" />
+                            <input autocomplete="off" required type="tel" name="phone" value={member.phone} onChange={handleChange} placeholder="Phone Number e.g:+2348123456789" />
                             
                             {/* <OnboardingInputField required type="text" name="firstname" onChange={handleChange} value={member.firstname} placeholder="Firstname" />
                             <OnboardingInputField required type="tel" name="phone" value={member.phone} onChange={handleChange} placeholder="Phone Number e.g:+2348123456789" /> */}
 
-                            <div className="onboarding-form-input">
+                            {/* <div className="onboarding-form-input"> */}
                                 <select required name="location" value={member.location} onChange={handleChange} className="">
                                     <option value="">Location</option>
                                     {
@@ -253,14 +258,14 @@ export default function Member() {
                                     }
 
                                 </select>
-                            </div>
+                            {/* </div> */}
 
 
                             {/* <OnboardingInputField required type="text" name="address" onChange={handleChange} value={member.address} placeholder="Home Address" />
                             <OnboardingInputField required type="password" name="confirmpass" value={confirmPass} onChange={(e) => setConfirmPass(e.target.value)} placeholder="Confirm Password" /> */}
 
-                            <input required type="text" name="address" onChange={handleChange} value={member.address} placeholder="Home Address" />
-                            <input required type="password" name="confirmpass" value={confirmPass} onChange={(e) => setConfirmPass(e.target.value)} placeholder="Confirm Password" />
+                            <input autocomplete="off" required type="text" name="address" onChange={handleChange} value={member.address} placeholder="Home Address" />
+                            <input autocomplete="off" required type="password" name="confirmpass" value={confirmPass} onChange={(e) => setConfirmPass(e.target.value)} placeholder="Confirm Password" />
                         </div>
                     </form>
                     {isLoading && <center className="btn member-btn"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}

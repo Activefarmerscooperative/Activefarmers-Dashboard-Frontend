@@ -20,6 +20,7 @@
   color: #000000;
 }
 
+
 .guarantor input,
 .guarantor select {
   width: 350px;
@@ -28,7 +29,43 @@
   padding: 8px;
   border: 1px solid #444444;
   border-radius: 4px;
+  color: #444444;
+  font-size: 15px;
 }
+
+.guarantor select {
+  color: #727070;
+}
+
+.guarantor input::placeholder,
+.guarantor select option {
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.guarantor select {
+  appearance: none;
+  background-image: url('../../../assets/outline-arrow.png');
+  background-repeat: no-repeat, repeat;
+  background-position: right 1em top 50%, 0 0;
+  background-size: 0.9em auto, 100%;
+
+
+}
+
+.guarantor input:focus,
+.guarantor select:focus {
+  outline: none;
+}
+
+.guarantor input::-webkit-outer-spin-button,
+.guarantor input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+
 
 .guarantor form div {
   width: min-content;

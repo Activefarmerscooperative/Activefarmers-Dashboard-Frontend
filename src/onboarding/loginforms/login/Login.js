@@ -87,7 +87,7 @@ export default function Login() {
         } catch (error) {
             setIsLoading(false);
             toast.error(error)
-            toast.error(error.error);
+            toast.error(error?.error);
         }
 
     }
@@ -99,6 +99,7 @@ export default function Login() {
                     Log in to your existing account
                     <form className='d-flex flex-column my-4 '>
                         <input type="tel" name="phone" placeholder='Enter phone number e.g: 08012345678' required value={user.phone} onChange={handleChange} />
+                        
 
                         <input type="password" name="password" placeholder='password' required value={user.password} onChange={handleChange} className="my-2" />
 

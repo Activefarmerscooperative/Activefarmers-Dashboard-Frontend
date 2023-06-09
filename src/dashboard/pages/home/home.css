@@ -3,6 +3,14 @@
 
 }
 
+.rotatinglines {
+
+    width: 10%;
+    /* height: 50px; */
+    stroke: #1B7B44;
+    stroke-width: 2
+}
+
 .home h1 {
     font-weight: 700;
     font-size: 36px;
@@ -31,7 +39,7 @@ h4 {
     color: #FFFFFF;
 }
 
-.loan-category-scrollable{
+.loan-category-scrollable {
     height: 150px;
 }
 
@@ -43,17 +51,19 @@ h4 {
     /* padding: 5px; */
 }
 
-.home input,
-.home input:hover,
-.home input:focus {
-
-    width: auto;
-    border: none;
-    outline: none;
+.savings-value {
     font-weight: 600;
     font-size: 25px;
     color: #E98923;
-    background-color: transparent;
+    line-height: normal;
+}
+.hidden-input{
+   
+    font-weight: 600;
+    font-size: 30px;
+    color: #E98923;
+    line-height: normal;
+  
 }
 
 .home .card p {
@@ -106,17 +116,27 @@ h4 {
     width: 22px;
     height: 22px;
 }
-
-.top-nav p{
+.transaction-history  h1{
+    font-weight: 700;
+    font-size: 32px;
+    
+    color: #0D9068;
+}
+.transaction-history  .add-icon {
+    background: #0D9068;
+    color: #ffffff;
+    margin: 0 5px;
+    border-radius: 50px;
+}
+.top-nav p {
     font-weight: 600;
-font-size: 20px;
-text-align: center;
+    font-size: 20px;
+    text-align: center;
 
-color: #444444;
+    color: #444444;
 }
 
 .sort {
-    width: 150px;
     background: #FFFFFF;
     border: 1.5px solid #E1E1E1;
     border-radius: 8px;
@@ -124,28 +144,103 @@ color: #444444;
 }
 
 .sort select {
-    width: 100px;
+    /* width: 100px; */
+    width: 140px;
+height: 40px;
     border: none;
     outline: none;
     background-color: transparent;
     font-weight: 500;
     font-size: 14px;
     color: #313A4E;
-    -moz-appearance: none;
-    -webkit-appearance: none;
+    appearance: none;
+    background-image: url('../../../assets/outline-arrow.png');
+    background-repeat: no-repeat, repeat;
+    background-position: right 1em top 50%, 0 0;
+    background-size: 1em auto, 100%;
 }
 
 .sort hr {
-    height: 40px;
-    margin: 0 !important;
-    border: 1px solid #282828;
-    /* transform: rotate(90deg); */
+    height: 23px;
+    transform: rotate(180deg);
+    margin: 0 0.6rem;
+    border: 1px solid #E1E1E1;
 }
 
 .sort .arrow-icon {
     width: 40px;
     height: 40px;
 }
+
+
+.dropdown-container {
+    height: fit-content;
+    padding: 0 10px;
+    background: #FFFFFF;
+    border: 1.5px solid #E1E1E1;
+    border-radius: 8px;
+}
+
+.dropdown-header {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-header span {
+    margin-right: 5px;
+}
+
+.dropdown-header span {
+    font-weight: 400;
+    font-size: 14px;
+    color: #313A4E;
+}
+
+.arrow {
+    display: contents;
+    font-size: 25px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-content {
+    position: absolute;
+    min-width: 65px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    padding: 0 10px;
+    display: none;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.12);
+    border-radius: 5px;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.dropdown-content span {
+    display: block;
+    margin: 10px 0;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: normal;
+    color: #000000;
+}
+
+.dropdown-content span:hover {
+    cursor: pointer;
+}
+
+.dropdown-content hr {
+    margin: 5px 0;
+    border: none;
+    border-top: 1px solid #ccc;
+}
+
+
+
+
 
 .download-icon {
     width: 42px;
@@ -171,6 +266,8 @@ color: #444444;
     color: #FFFFFF;
 }
 
+
+
 /* .table {
     width: 900px;
     
@@ -187,16 +284,21 @@ input[type=checkbox]:focus {
     color: #fff;
 
 }
+.table {
+    margin-bottom: 0;
+}
 .css-1ygcj2i-MuiTableCell-root {
     font-weight: 500;
-font-size: 18px !important;
-color: #6B6F7B !important;
+    font-size: 18px !important;
+    color: #6B6F7B !important;
 }
+
 .css-1ex1afd-MuiTableCell-root {
     font-weight: 400;
-font-size: 16px !important;
-color: #444444;
+    font-size: 16px !important;
+    color: #444444;
 }
+
 .css-11xur9t-MuiPaper-root-MuiTableContainer-root {
     display: flex;
     justify-content: center;
@@ -205,6 +307,13 @@ color: #444444;
     /* color: rgba(0, 0, 0, 0.87); */
     border-radius: 20px 20px 0px 0px !important;
     box-shadow: none !important;
+}
+
+p.MuiTablePagination-selectLabel, p.MuiTablePagination-displayedRows{
+    margin: 0;
+}
+.MuiBox-root{
+    background-color: #F6F9FF
 }
 
 .home .modal {
@@ -258,4 +367,3 @@ color: #444444;
 .home .overlay-base_before-close {
     opacity: 0;
 }
-

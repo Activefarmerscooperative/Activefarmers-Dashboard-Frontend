@@ -39,13 +39,12 @@ export default function WitdrawalForm() {
     }
 
     return (
-        <div className="my-5 px-5 witdrawal-form">
-            <h1>Savings Witdrawal Form</h1>
-            <p className='text-start savings-title'>Savings Balance</p>
+        <div className="my-5 px-5 withdrawal-form">
+            <h1>Savings Withdrawal Form</h1>
             <SavingsWallet />
 
             <p className="note my-4">Withdrawal amount can not be more than savings balance. </p>
-            <div className="witdrawal-input-form mt-5">
+            <div className="withdrawal-input-form mt-5">
                 <form action="">
                     <div className="d-flex flex-column ">
                         <div className='d-flex '>
@@ -56,12 +55,12 @@ export default function WitdrawalForm() {
                                 handleChange={handleChange}
                             />
                         </div>
-                        <div className='mx-5'>
-                            <select name="repaymethod" id="" className='mx-1'>
+                        <div className=''>
+                            <select name="repaymethod" id="" className=''>
                                 <option value="">Payment Method</option>
                                 <option value="">Instant (my account)</option>
                             </select>
-                            <select name="" id="" className='d-none'></select>
+                            <div name="" id="" className='d-none'></div>
                         </div>
 
                     </div>
@@ -72,7 +71,7 @@ export default function WitdrawalForm() {
                 Lorem ipsum dolor sit amet consectetur. Turpis posuere donec ipsum lectus cursus. Pellentesque tellus ornare id neque. Rutrum fringilla molestie lao
             </p>
 
-            {isLoading && <center className="btn next-btn mt-5"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+            {isLoading && <center className="btn next-btn mt-5"><RotatingLines width="20px" strokeColor="#1B7B44" strokeWidth="3" /></center>}
             {!isLoading && <button onClick={handleSubmit} className="btn next-btn mt-5">Submit</button>}
 
         </div>
