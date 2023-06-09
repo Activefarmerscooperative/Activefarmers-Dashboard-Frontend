@@ -5,15 +5,15 @@ import { RotatingLines } from "react-loader-spinner";
 import { Icon } from '@iconify/react';
 import './home.css';
 import AddSavings from '../../../modal/AddSavings';
-import { GetWallet } from '../../../utils/api/member';
+import { GetWallet, MyLoan } from '../../../utils/api/member';
 import RecentTransaction from "../../../component/RecentTransaction";
 
 const fetchData = async (key) => {
 
   try {
     const wallet = await GetWallet();
-    // const bankList = await BankList()
-    const res = await Promise.all([wallet]);
+    const loan = await MyLoan()
+    const res = await Promise.all([wallet, loan]);
     return res
 
   } catch (error) {
@@ -26,7 +26,7 @@ export default function DashboardHome() {
 
   const [loanInputType, setLoanInputType] = useState("false");
   const [savingsInputType, setSavingsInputType] = useState(false);
-  const [pikinInputType, setPikinInputType] = useState("false");
+  const [myLoan, setMyLoan] = useState({});
   const [loanIcon, setLoanIcon] = useState("mdi:eye-off");
   const [savingsIcon, setSavingsIcon] = useState("mdi:eye-off");
   const [pikinIcon, setPikinIcon] = useState("mdi:eye-off");
@@ -39,7 +39,7 @@ export default function DashboardHome() {
 
   useEffect(() => {
     if (!data) return
-    console.log(data)
+    setMyLoan(data[1].myLoan)
     setWallet(data[0]?.savingsWallet?.categories)
   }, [data])
 
@@ -71,15 +71,6 @@ export default function DashboardHome() {
     return { id, action, date, amount, status };
   }
 
-  const rows = [
-    createData(1, 'Savings witdrawal', '12 Jun, 2023', 120000,),
-    createData(2, 'Loan request', '18 June, 2023', 750000,),
-    createData(3, 'Savings witdrawal', '09 Aug, 2023', 78000,),
-    createData(4, 'Loan request', '11 Nov, 2023', 230000,),
-    createData(5, 'Savings witdrawal', '23 Nov, 2023', 200000,),
-    createData(6, 'Savings witdrawal', '1 Dec, 2023', 150000,),
-  ];
-
 
   return (
     <div className='my-5 px-5 home'>
@@ -104,7 +95,7 @@ export default function DashboardHome() {
                     type={loanInputType ? "text" : "password"}
                     name="loan"
                     id="loan"
-                    value={"0.00 NGN"}
+                    value={`${myLoan?.amount || 0} NGN`}
                     placeholder='' />
                   <div onClick={toggleLoanVisiblity}>
                     <Icon icon={loanIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
@@ -113,7 +104,7 @@ export default function DashboardHome() {
                 </div>
               </form>
               <div className="">
-                <p >Repayment starts : -/--/--</p>
+                <p >View loan</p>
               </div>
             </div>
 

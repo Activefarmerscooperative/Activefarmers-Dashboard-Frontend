@@ -31,7 +31,6 @@ function RecentTransaction() {
 
     useEffect(() => {
         if (!data) return
-        console.log(data)
         setTransactions(data)
     }, [data])
 
@@ -41,6 +40,7 @@ function RecentTransaction() {
         }
         setTransactions(data.filter(item => item.type === sortParams))
     }
+
     return (
         <>
             <div className="d-flex align-items-center justify-content-between top-nav">
@@ -50,7 +50,7 @@ function RecentTransaction() {
 
 
                         <label htmlFor="contained-button-file" className='d-flex align-items-center'>
-                            <select name="" onChange={(e)=>handleSort(e.target.value)}
+                            <select name="" onChange={(e) => handleSort(e.target.value)}
                                 id="contained-button-file">
                                 <option value="All">sort by</option>
                                 <option value="savings">Savings</option>

@@ -29,7 +29,6 @@ function SavingsWallet() {
 
     useEffect(() => {
         if (!data) return
-        console.log(data)
         setWallet(data.savingsWallet?.categories)
     }, [data])
 
