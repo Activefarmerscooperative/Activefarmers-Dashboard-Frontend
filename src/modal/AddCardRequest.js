@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import Modal from 'react-modal';
 import { Icon } from '@iconify/react';
 import "./modal.css"
-
-
-
-import React from 'react'
 import LoanSuccessful from './LoanSuccessful';
+import { CancelLoan, ValidateCard, ValidateSavedCard } from "../utils/api/member"
+import { RotatingLines } from "react-loader-spinner";
+import { toast } from "react-toastify";
 
-function AddCardRequest() {
+function AddCardRequest({ message }) {
     const [modalIsOpen, setIsOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false)
+
 
     function openModal() {
         setIsOpen(true);
@@ -18,30 +19,103 @@ function AddCardRequest() {
         setIsOpen(false);
     }
 
+    async function handleValidateCard() {
+        try {
+            setIsLoading(true)
+            const { data, message } = await ValidateCard()
+            toast.success(`${message} Opening payment window, do not close the page.`)
+            window.location.replace(data.authorization_url);
+        } catch (error) {
+            setIsLoading(false)
+            console.log(error)
+            toast.error(error)
+            toast.error(error?.error)
+        }
+    }
+
+    async function handleValidateSavedCard() {
+        try {
+            setIsLoading(true)
+            const { data, message } = await ValidateSavedCard()
+            openModal()
+
+        } catch (error) {
+            setIsLoading(false)
+            console.log(error)
+            toast.error(error)
+            toast.error(error?.error)
+        }
+    }
+
+    async function handleCancelLoan() {
+        try {
+            setIsLoading(true)
+            const { message } = await CancelLoan()
+            toast.success(message)
+        } catch (error) {
+            console.log(error)
+            toast.error(error)
+            toast.error(error?.error)
+        }
+    }
+
     return (
         <div className='loan-success-modal p-4 my-4'>
             <div className="d-flex flex-column align-items-center add-savings-div">
                 <Icon icon="material-symbols:credit-card" color="#0d9068" className="icon" />
+
                 <div className="d-flex flex-column align-items-center mt-4">
-                    <p>
-                        Add Card to request for a loan
-                    </p>
-                    <p style={{ fontSize: "13px", width: "400px", fontWeight: "400" }}>
-                        To send a loan request, you need to add details of your valid debit card, your card needs to meet this criteria:
-                    </p>
+                    {
+                        !message &&
+                        <>
+                            <p>
+                                Add Card to request for a loan
+                            </p>
+                            <p style={{ fontSize: "13px", width: "400px", fontWeight: "400" }}>
+                                To send a loan request, you need to add details of your valid debit card, your card needs to meet this criteria:
+                            </p>
 
-                    <ul className='addcard-info'>
-                        <li>Ensure your card's expiry date is not within the next 12 months (1year)</li>
-                        <li>Ensure you are adding either your salary card or an active card with previous transaction history to qualify for a loan</li>
-                        <li>We will deduct 50 naira to confirm your card's validity and credit back to your savings account with us</li>
-                    </ul>
+                            <ul className='addcard-info'>
+                                <li>Ensure your card's expiry date is not within the next 12 months (1year)</li>
+                                <li>Ensure you are adding either your salary card or an active card with previous transaction history to qualify for a loan</li>
+                                <li>We will deduct 50 naira to confirm your card's validity and credit back to your savings account with us</li>
+                            </ul>
 
+                            <div className='d-flex align-items-start justify-content-around'>
+                                <button className="btn btn-modal mt-4" onClick={handleCancelLoan}>Cancel Loan</button>
 
-                    {/* <a href="/dashboard"> */}
-                        <button className="btn btn-modal mt-4" onClick={openModal}>Next</button>
-                    {/* </a> */}
+                                {isLoading && <center className="btn btn-modal mt-4"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+                                {!isLoading && <button className="btn btn-modal mt-4" onClick={handleValidateCard}>Continue</button>}
+                            </div>
+                        </>
+
+                    }
+
+                    {/* The user have a saved card */}
+                    {
+                        message &&
+                        <>
+                            <p>{message}</p>
+
+                            <p style={{ fontSize: "13px", width: "400px", fontWeight: "400" }}>
+                                Please note: We will deduct 50 naira to confirm your card's validity and credit back to your savings account with us
+                            </p>
+
+                            <div className='d-flex align-items-start justify-content-around'>
+                                <button className="btn btn-modal mt-4" onClick={handleCancelLoan} disabled={isLoading}>Cancel Loan</button>
+
+                                {isLoading && <center className="btn btn-modal mt-4 ml-2"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+                                {!isLoading && <button className="btn btn-modal mt-4 ml-2" onClick={handleValidateSavedCard}>Continue</button>}
+                                <button className="btn btn-modal mt-4 ml-2" onClick={handleValidateCard} disabled={isLoading}>Add another Card</button>
+                            </div>
+                        </>
+
+                    }
+
 
                 </div>
+
+
 
             </div>
 

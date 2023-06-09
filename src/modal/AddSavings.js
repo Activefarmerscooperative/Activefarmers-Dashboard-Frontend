@@ -57,7 +57,7 @@ function AddSavings() {
     setIsLoading(true)
     try {
       const {data, message} = await AddSaving(savingsData);
-      toast.success(`${message} Opening payment window`)
+      toast.success(`${message} Opening payment window, do not close the page.`)
       window.location.replace(data.authorization_url);
     } catch (error) {
       if (error) {

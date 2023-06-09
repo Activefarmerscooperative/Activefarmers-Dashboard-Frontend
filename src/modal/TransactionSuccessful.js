@@ -25,6 +25,7 @@ function TransactionSuccessful({ reference }) {
                         loading: false,
                         success: true
                     })
+                    setMessage(data.message)
                 }
                 console.log(data)
             } catch (error) {
@@ -64,9 +65,9 @@ function TransactionSuccessful({ reference }) {
                             <p>
                                 Transaction Successful!
                             </p>
-                            <p style={{ fontSize: "13px" }}>Your added savings will reflect on your dashboard</p>
+                            {/* <p style={{ fontSize: "13px" }}>Your added savings will reflect on your dashboard</p> */}
 
-                            <p><span>NGN 50,000 - Regular Savings</span></p>
+                            <p><span>{message}</span></p>
 
                             <a href="/dashboard">
                                 <button className="btn btn-modal mt-5">Back to Dashboard</button>

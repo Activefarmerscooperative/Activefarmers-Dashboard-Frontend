@@ -11,6 +11,7 @@ import AddCardRequest from './AddCardRequest';
 
 function LoanSummary({ closeModal, loanData }) {
   const [isLoading, setIsLoading] = useState(false)
+  const [message, setMessage] = useState()
   const navigate = useNavigate();
   const [modalIsOpen, setIsOpen] = useState(false);
   const [rePaymentStart, setPaymentStart] = useState("")
@@ -44,13 +45,16 @@ function LoanSummary({ closeModal, loanData }) {
     if (!loanData.amount || !loanData.repaymentPeriod || !loanData.repaymentMethod) return toast.error("Please enter all values.")
     setIsLoading(true)
     try {
-      await LoanRequest(loanData);
-      // toast.success(`${message}`)
-      handleOpen()
+      const { message } = await LoanRequest(loanData);
+      toast.success(`${message}`)
+      navigate("/dashboard", { replace: true })
     } catch (error) {
-      console.log(error)
       if (error.status === "success") {
         toast.error(error?.message)
+        handleOpen()
+      }else if(error.status === "validate_card"){
+        // toast.error(error?.message)
+        setMessage(error?.message)
         handleOpen()
       }
       toast.error(error)
@@ -157,7 +161,9 @@ function LoanSummary({ closeModal, loanData }) {
           // shouldCloseOnOverlayClick={true}
           closeTimeoutMS={2000}
         >
-          <AddCardRequest />
+          <AddCardRequest 
+          message = {message}
+          />
         </Modal>
 
       </div>

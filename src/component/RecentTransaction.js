@@ -41,7 +41,6 @@ function RecentTransaction() {
 
     useEffect(() => {
         if (!data) return
-        console.log(data)
         setTransactions(data)
     }, [data])
 
@@ -51,6 +50,7 @@ function RecentTransaction() {
         }
         setTransactions(data.filter(item => item.type === sortParams))
     }
+
     return (
         <>
             <div className="d-flex align-items-center justify-content-between top-nav">

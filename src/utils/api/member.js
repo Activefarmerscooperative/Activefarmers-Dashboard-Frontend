@@ -150,6 +150,16 @@ export const GetWallet = async (signal) => {
   }
 };
 
+
+export const MyLoan = async (signal) => {
+  try {
+    const { data } = await api.get(`/api/users/myLoan`, signal);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
 export const GetTransactions = async (type) => {
   try {
     const { data } = await api.get(`/api/users/transactions?type=${type}`);
@@ -189,6 +199,33 @@ export const WithdrawalRequest = async (withdrawal) => {
 export const LoanRequest = async (loan) => {
   try {
     const { data } = await api.post(`/api/users/loan`, loan);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const ValidateCard = async () => {
+  try {
+    const { data } = await api.post(`/api/users/loan/card`);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const ValidateSavedCard = async () => {
+  try {
+    const { data } = await api.put(`/api/users/loan/card`);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const CancelLoan = async () => {
+  try {
+    const { data } = await api.put(`/api/users/loan`);
     return data;
   } catch (error) {
     throw error.response.data;
