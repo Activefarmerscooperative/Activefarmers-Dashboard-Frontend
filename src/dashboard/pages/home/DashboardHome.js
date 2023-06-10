@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
-import Modal from 'react-modal';
 import { useQuery } from 'react-query'
-import { RotatingLines } from "react-loader-spinner";
 import { Icon } from '@iconify/react';
 import './home.css';
 import AddSavings from '../../../modal/AddSavings';
 import { GetWallet, MyLoan } from '../../../utils/api/member';
 import RecentTransaction from "../../../component/RecentTransaction";
+import SavingsWallet from "../../../component/SavingsWallet";
 
 const fetchData = async (key) => {
 
   try {
-    const wallet = await GetWallet();
-    const loan = await MyLoan()
-    const res = await Promise.all([wallet, loan]);
+
+    const res = await MyLoan()
     return res
 
   } catch (error) {
@@ -23,12 +21,10 @@ const fetchData = async (key) => {
 };
 
 export default function DashboardHome() {
-
+  const [modalIsOpen, setIsOpen] = useState(false);
   const [loanInputType, setLoanInputType] = useState("false");
-  const [savingsInputType, setSavingsInputType] = useState(false);
   const [myLoan, setMyLoan] = useState({});
   const [loanIcon, setLoanIcon] = useState("mdi:eye-off");
-  const [modalIsOpen, setIsOpen] = useState(false);
   const [wallet, setWallet] = useState([])
   const [savingsVisibility, setSavingsVisibility] = useState({});
 
@@ -37,8 +33,7 @@ export default function DashboardHome() {
 
   useEffect(() => {
     if (!data) return
-    setMyLoan(data[1].myLoan)
-    setWallet(data[0]?.savingsWallet?.categories)
+    setMyLoan(data.myLoan)
   }, [data])
 
 
@@ -47,32 +42,8 @@ export default function DashboardHome() {
     setLoanInputType(loanInputType ? false : true);
     setLoanIcon(!loanIcon);
   };
-  // const toggleSavingsVisibility = (wallet) => {
-  //   setToggleWalletVisibility(wallet);
-  //   setSavingsInputType((prevState) => ({
-  //     ...prevState,
-  //     [wallet]: !prevState[wallet]
-  //   }));
-  //   setSavingsIcon((prevState) => ({
-  //     ...prevState,
-  //     [wallet]: !prevState[wallet]
-  //   }));
-  //   // setSavingsInputType(!savingsInputType);
-  //   // setSavingsIcon(!savingsIcon);
-  // };
-  const toggleSavingsVisibility = (wallet) => {
-    setSavingsVisibility((prevState) => ({
-      ...prevState,
-      [wallet]: !prevState[wallet]
-    }));
-  };
 
-  function openModal() {
-    setIsOpen(true);
-  }
-  function closeModal() {
-    setIsOpen(false);
-  }
+
 
   function createData(id, action, date, amount, status) {
     return { id, action, date, amount, status };
@@ -96,8 +67,8 @@ export default function DashboardHome() {
                 <p className='savings-title'>My Loan</p>
                 <p>(0) </p>
               </div>
-                <div className="form-group d-flex align-items-center justify-content-between">
-                  {/* <input
+              <div className="form-group d-flex align-items-center justify-content-between">
+                {/* <input
                     type={loanInputType ? "text" : "password"}
                     name="loan"
                     id="loan"
@@ -106,70 +77,31 @@ export default function DashboardHome() {
                   <div onClick={toggleLoanVisibility}>
                     <Icon icon={loanIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
                   </div> */}
-                  {loanInputType ? (
-                    <span className="savings-value">0.00 NGN</span>
-                  ) : (
-                    <span className="hidden-input">*********</span>
-                  )}
-                  <div onClick={toggleLoanVisibility}>
-                    <Icon
-                      icon={loanIcon ? "mdi:eye" : "mdi:eye-off"}
-                      className="eye-icon"
-                    />
-                  </div>
-
+                {loanInputType ? (
+                  <span className="savings-value">0.00 NGN</span>
+                ) : (
+                  <span className="hidden-input">*********</span>
+                )}
+                <div onClick={toggleLoanVisibility}>
+                  <Icon
+                    icon={loanIcon ? "mdi:eye" : "mdi:eye-off"}
+                    className="eye-icon"
+                  />
                 </div>
+
+              </div>
               <div className="">
                 <p >View loan</p>
               </div>
             </div>
 
-            {
-              status === "loading" && <div className="px-3 card pikin">
-                <center style={{ height: '100', overflow: 'hidden' }} className=""><RotatingLines width="20" /></center>
-              </div>
-            }
-
-            {
-              wallet?.map(item => <div className="px-3 card my-savings" key={item._id}>
-
-                <p className='text-start savings-title'>{item.category.name}</p>
-
-                  <div className="form-group d-flex align-items-center justify-content-between">
-
-                    {savingsVisibility[item._id] ? (
-                      // <input
-                      //   type="text"
-                      //   name="savings"
-                      //   id="savings"
-                      //   value={`${item.amount} NGN`}
-                      //   placeholder=""
-                      //   readOnly
-                      // />
-                      <span className="savings-value">{`${item.amount} NGN`}</span>
-                    ) : (
-                      <span className="hidden-input">********</span>
-                    )}
+            <SavingsWallet
+              openSavingsModal={modalIsOpen}
+              setOpenSavingsModal={setIsOpen}
+            />
 
 
-                    <div onClick={() => toggleSavingsVisibility(item._id)}>
-                      <Icon
-                        icon={savingsVisibility[item._id] ? "mdi:eye" : "mdi:eye-off"}
-                        className="eye-icon"
-                      />
-                      {/* <Icon icon={savingsIcon[item._id] ? "mdi:eye-off" : "mdi:eye"} className='eye-icon' /> */}
-                    </div>
-
-                  </div>
-                <div className="">
-                <p onClick={() => openModal(item.category.name)}>Add Savings</p>
-                </div>
-                
-              </div>)
-            }
-
-
-            <button className='d-flex align-items-center justify-content-around btn addsaving-btn' onClick={openModal} >
+            <button className='d-flex align-items-center justify-content-around btn addsaving-btn' onClick={() => setIsOpen(true)} >
               <Icon icon="material-symbols:add-circle-outline-rounded" className='add-icon' />
               Add Savings
             </button>
@@ -182,26 +114,7 @@ export default function DashboardHome() {
         </div>
 
       </div>
-      <Modal
-        isOpen={modalIsOpen}
-        // onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        contentLabel="Example Modal"
-        className={{
-          base: 'modal-base',
-          afterOpen: 'modal-base_after-open',
-          beforeClose: 'modal-base_before-close'
-        }}
-        overlayClassName={{
-          base: 'overlay-base',
-          afterOpen: 'overlay-base_after-open',
-          beforeClose: 'overlay-base_before-close'
-        }}
-        shouldCloseOnOverlayClick={true}
-        closeTimeoutMS={2000}
-      >
-        <AddSavings />
-      </Modal>
+
     </div>
   )
 }
