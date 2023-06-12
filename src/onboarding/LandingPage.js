@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Icon } from '@iconify/react';
-
+import React from "react";
 import TransactionSuccessful from "../modal/TransactionSuccessful";
-import { useState } from 'react';
+
 
 export default function LandingPage() {
     const navigate = useNavigate();

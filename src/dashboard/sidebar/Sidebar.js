@@ -5,16 +5,30 @@ import { Icon } from '@iconify/react';
 import './sidebar.css'
 import profile from '../../assets/profile.jpg'
 import { useNavigate } from "react-router-dom";
-
-function Sidebar({ user }) {
+import { UpdateProfilePhoto } from "../../utils/api/member"
+import { toast } from 'react-toastify';
+function Sidebar({ user, setToken }) {
 
     const [image, setImage] = useState(user.image || null);
 
-    const handleImageChange = (event) => {
+    const handleImageChange = async (event) => {
         const selectedImage = event.target.files[0];
         if (selectedImage) {
             const imageUrl = URL.createObjectURL(selectedImage);
             setImage(imageUrl);
+            const data = new FormData();
+            data.append("uploaded_file", selectedImage);
+            try {
+                const result = await UpdateProfilePhoto(data)
+                localStorage.setItem("AFCS-token", result.token)
+                setToken(result.token)
+                toast.success(result?.message)
+            } catch (error) {
+                console.log(error)
+                toast.error(error)
+            }
+
+
         }
     };
 
@@ -40,6 +54,8 @@ function Sidebar({ user }) {
         localStorage.clear()
         navigate("/", { replace: true })
     }
+
+
     return (
         <div className='sidebar'>
             <div className='my-3 d-flex flex-column'>

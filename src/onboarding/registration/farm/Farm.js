@@ -80,9 +80,9 @@ export default function Farm() {
         setIsLoading(true)
         try {
             const data = await AddFarm(farm);
-        
+
             toast.success(data.message)
-            // localStorage.setItem("AFCS-token", data.afcsToken)
+            localStorage.setItem("AFCS-token", data.token)
 
             setIsLoading(false);
             navigate("/register/guarantor", { replace: true })

@@ -7,7 +7,7 @@ import { BankDetails, BankList, GuarantorDetails, UpdateBankDetails, UpdateGuara
 import { RotatingLines } from "react-loader-spinner";
 import Modal from 'react-modal';
 import ProfileUpdateModal from "../../../modal/ProfileUpdateModal";
-
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const fetchData = async (key) => {
 
@@ -22,7 +22,7 @@ const fetchData = async (key) => {
     toast.error(error.error);
   }
 };
-const AccountGuarantor = () => {
+const AccountGuarantor = ({ setToken }) => {
   const [editAccount, setEditAccount] = useState(false)
   const [editGuarantor, setEditGuarantor] = useState(false)
   const [bankDetails, setBankDetails] = useState({})
@@ -31,8 +31,10 @@ const AccountGuarantor = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [guarantorLoading, setGuarantorLoading] = useState(false)
   const [modalIsOpen, setIsOpen] = useState(false);
-  
-  
+  const location = useLocation();
+  const state = location?.state;
+  const navigate = useNavigate();
+
   function openModal() {
     setIsOpen(true);
     setEditAccount(false);
@@ -41,6 +43,7 @@ const AccountGuarantor = () => {
   function closeModal() {
     setIsOpen(false);
   }
+
 
 
   // React query fetch data
@@ -53,9 +56,30 @@ const AccountGuarantor = () => {
     setBanks(data[2]?.banks)
   }, [data])
 
-  const handleAccountChange = (e) => {
+  useEffect(() => {
+    //If the request comes from withdrawal or Loan page
+    //If the user has bank account already updated, redirect to profile pg.
+    if (!data) return
+    if (state) {
+      if (data[0]?.bank_details) {
+        // console.log(data[0]?.bank_details)
+        navigate("/dashboard/profile", { replace: true })
+      }
+    }
 
+  }, [data, location.state])
+
+  const handleAccountChange = (e) => {
+    const numberPattern = /^[0-9]*$/;
     const { name, value } = e.target;
+    if (name === "accountNumber") {
+      if (numberPattern.test(value)) {
+        return setBankDetails({ ...bankDetails, [name]: value });
+
+      } else {
+        toast.error("Only numbers are allowed")
+      }
+    }
     setBankDetails({ ...bankDetails, [name]: value });
   };
 
@@ -67,7 +91,7 @@ const AccountGuarantor = () => {
 
   async function updateAccount() {
 
-    if (!bankDetails?.bankName || !bankDetails?.accountNumber || !bankDetails?.accountName) return toast.error("All inputs are required.")
+    if (!bankDetails?.bankName || !bankDetails?.accountNumber) return toast.error("All inputs are required.")
     if (!window.confirm("Are you sure you want to update your bank details?")) return
     setIsLoading(true)
 
@@ -75,8 +99,11 @@ const AccountGuarantor = () => {
       const data = await UpdateBankDetails({ ...bankDetails, accountNumber: `${bankDetails.accountNumber}` })
       toast.success(data.message)
       setEditAccount(false)
+      localStorage.setItem("AFCS-token", data.token)
+      setToken(data.token)
     } catch (error) {
       toast.error(error)
+      toast.error(error?.error)
     } finally {
       setIsLoading(false)
     }
@@ -142,7 +169,7 @@ const AccountGuarantor = () => {
               </div>
               <div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Account Number</label>
-                <input type="number" name="accountNumber" value={bankDetails?.accountNumber} onChange={handleAccountChange} disabled={!editAccount} placeholder="0123456" />
+                <input type="text" name="accountNumber" value={bankDetails?.accountNumber} onChange={handleAccountChange} disabled={!editAccount} placeholder="0123456" />
               </div>
             </div>
           </form>
@@ -163,7 +190,7 @@ const AccountGuarantor = () => {
                       {!isLoading && <button onClick={
                         // () => setEditAccount(false)
                         openModal
-                        } disabled={isLoading} className="btn discard mx-4 my-5">Discard Changes</button>}
+                      } disabled={isLoading} className="btn discard mx-4 my-5">Discard Changes</button>}
                       <button onClick={updateAccount} disabled={isLoading} className="btn mx-4 my-5">Save</button>
                     </>}
 
@@ -225,7 +252,7 @@ const AccountGuarantor = () => {
                       {!isLoading && <button onClick={
                         // () => setEditGuarantor(false)
                         openModal
-                        } disabled={isLoading} className="btn mx-4 discard my-5">Discard Changes</button>}
+                      } disabled={isLoading} className="btn mx-4 discard my-5">Discard Changes</button>}
                       <button onClick={updateGuarantor} disabled={isLoading} className="btn mx-4 my-5">Save</button>
                     </>}
 

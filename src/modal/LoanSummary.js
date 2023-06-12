@@ -50,7 +50,7 @@ function LoanSummary({ closeModal, loanData }) {
       navigate("/dashboard", { replace: true })
     } catch (error) {
       if (error.status === "success") {
-        toast.error(error?.message)
+        // toast.error(error?.message)
         handleOpen()
       }else if(error.status === "validate_card"){
         // toast.error(error?.message)

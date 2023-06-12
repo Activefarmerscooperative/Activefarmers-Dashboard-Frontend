@@ -6,11 +6,21 @@ import { toast } from "react-toastify";
 import SavingsWallet from '../../../component/SavingsWallet';
 import SelectSavingscat from "../../../component/SelectSavingscat";
 import { WithdrawalRequest } from "../../../utils/api/member"
+import PaymentAccount from "../../../component/PaymentAccount";
 
-export default function WitdrawalForm() {
+export default function WitdrawalForm({ user }) {
     const navigate = useNavigate();
     const [withdrawalData, setWithdrawalData] = useState({})
+    const [savingsCategory, setSavingsCategory] = useState([])
     const [isLoading, setIsLoading] = useState(false)
+
+    useEffect(() => {
+        if (user.regCompletePercent < 100) {
+            toast.info(`Your profile is ${user.regCompletePercent}% completed. Please complete your profile to be eligible for Withdrawal.`)
+            navigate("/dashboard/guarantor", { state: { requestTab: true }, replace: true })
+        }
+    }, [user])
+
 
     const handleChange = (e) => {
 
@@ -19,7 +29,9 @@ export default function WitdrawalForm() {
     };
 
     async function handleSubmit() {
-        if (!withdrawalData.amount || !withdrawalData.category) return toast.error("Please enter all values.")
+   
+        if (!withdrawalData.amount || !withdrawalData.category || !withdrawalData.paymentMethod || withdrawalData.paymentMethod === "") return toast.error("Please enter all values.")
+        if(!window.confirm("Are yousure you want to submit withdrawal request?")) return
         setIsLoading(true)
         try {
             const { message } = await WithdrawalRequest(withdrawalData);
@@ -28,7 +40,7 @@ export default function WitdrawalForm() {
         } catch (error) {
             if (error) {
                 console.log(error)
-
+                toast.error(error)
                 toast.error(error?.message)
                 toast.error(error?.error)
 
@@ -41,7 +53,9 @@ export default function WitdrawalForm() {
     return (
         <div className="my-5 px-5 withdrawal-form">
             <h1>Savings Withdrawal Form</h1>
-            <SavingsWallet />
+            <SavingsWallet
+                setSavingsCategory={setSavingsCategory}
+            />
 
             <p className="note my-4">Withdrawal amount can not be more than savings balance. </p>
             <div className="withdrawal-input-form mt-5">
@@ -53,14 +67,14 @@ export default function WitdrawalForm() {
                             <SelectSavingscat
                                 value={withdrawalData?.category}
                                 handleChange={handleChange}
+                                savingsCategory={savingsCategory}
                             />
                         </div>
                         <div className=''>
-                            <select name="repaymethod" id="" className=''>
-                                <option value="">Payment Method</option>
-                                <option value="">Instant (my account)</option>
-                            </select>
-                            <div name="" id="" className='d-none'></div>
+                            <PaymentAccount
+                                withdrawalData={withdrawalData}
+                                setWithdrawalData={setWithdrawalData}
+                            />
                         </div>
 
                     </div>

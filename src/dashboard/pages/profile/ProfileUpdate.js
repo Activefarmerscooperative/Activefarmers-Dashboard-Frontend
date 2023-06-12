@@ -10,11 +10,6 @@ import ProfileUpdateModal from "../../../modal/ProfileUpdateModal";
 
 const fetchData = async (key) => {
 
-
-
-
-
-
     try {
         const user = await MemberDetails();
         const states = await fetchAllStates();
@@ -27,7 +22,8 @@ const fetchData = async (key) => {
     }
 };
 
-const ProfileUpdate = () => {
+const ProfileUpdate = ({ setToken }) => {
+    //settoken comes from Dashboard page
     const [editUser, setEditUser] = useState(false)
     const [editOccupation, setEditOccupation] = useState(false)
     const [editNextKin, setEditNextKin] = useState(false)
@@ -61,11 +57,6 @@ const ProfileUpdate = () => {
         setNextKinData(data[0]?.nextOfKin)
         setLocation(data[1]?.states)
     }, [data])
-    useEffect(() => {
-        console.log(userData)
-    }, [userData])
-
-
 
     async function updateUser(e) {
         e.preventDefault()
@@ -135,6 +126,8 @@ const ProfileUpdate = () => {
             const data = await UpdateOccupationDetails(occupationData)
             toast.success(data.message)
             setEditOccupation(false)
+            localStorage.setItem("AFCS-token", data.token)
+            setToken(data.token)
         } catch (error) {
             toast.error(error)
         } finally {
@@ -155,6 +148,8 @@ const ProfileUpdate = () => {
             const data = await UpdateNextOfKinDetails(nextKinData)
             toast.success(data.message)
             setEditNextKin(false)
+            localStorage.setItem("AFCS-token", data.token)
+            setToken(data.token)
         } catch (error) {
             toast.error(error)
         } finally {
@@ -173,32 +168,32 @@ const ProfileUpdate = () => {
                         <div className="d-flex">
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">First Name</label>
-                                <input type="text" name="firstname" onChange={handleUserChange} value={userData.firstname} disabled={!editUser} placeholder="Kadwama" className={editUser ? "editable-input" : ""} />
+                                <input type="text" name="firstname" onChange={handleUserChange} value={userData?.firstname} disabled={!editUser} placeholder="Kadwama" className={editUser ? "editable-input" : ""} />
                             </div>
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Last Name</label>
-                                <input type="text" name="surname" onChange={handleUserChange} value={userData.surname} disabled={!editUser} placeholder="Lazarus" className={editUser ? "editable-input" : ""} />
+                                <input type="text" name="surname" onChange={handleUserChange} value={userData?.surname} disabled={!editUser} placeholder="Lazarus" className={editUser ? "editable-input" : ""} />
                             </div>
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Email Address</label>
-                                <input type="email" name="email" onChange={handleUserChange} value={userData.email} disabled={!editUser} placeholder="kadwamalazarus@gmail.com" className={editUser ? "editable-input" : ""} />
+                                <input type="email" name="email" onChange={handleUserChange} value={userData?.email} disabled={!editUser} placeholder="kadwamalazarus@gmail.com" className={editUser ? "editable-input" : ""} />
                             </div>
                         </div>
                         <div className="d-flex mt-4">
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Gender</label>
-                                <select name="gender" disabled={!editUser} onChange={handleUserChange} value={userData.gender} className={editUser ? "editable-input" : ""} >
+                                <select name="gender" disabled={!editUser} onChange={handleUserChange} value={userData?.gender} className={editUser ? "editable-input" : ""} >
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                 </select>
                             </div>
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Date of birth</label>
-                                <input type="date" name="DOB" disabled={!editUser} onChange={handleUserChange} value={userData.DOB} placeholder="22 July 1985" className={editUser ? "editable-input" : ""} />
+                                <input type="date" name="DOB" disabled={!editUser} onChange={handleUserChange} value={userData?.DOB} placeholder="22 July 1985" className={editUser ? "editable-input" : ""} />
                             </div>
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Phone Number</label>
-                                <input type="tel" name="phone" disabled placeholder="08104046671" value={userData.phone} className={editUser ? "editable-input" : ""} />
+                                <input type="tel" name="phone" disabled placeholder="08104046671" value={userData?.phone} className={editUser ? "editable-input" : ""} />
                             </div>
                         </div>
                         <div className="d-flex mt-4 me-auto">
@@ -208,7 +203,7 @@ const ProfileUpdate = () => {
                                     type="text"
                                     name="address"
                                     disabled={!editUser}
-                                    value={userData.address}
+                                    value={userData?.address}
                                     placeholder="Jimeta-Yola, barracks road, Yola Adamawa"
                                     onChange={handleUserChange}
                                     className={editUser ? "editable-input" : ""}

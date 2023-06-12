@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from 'react-query'
+import { toast } from "react-toastify";
 import { Icon } from '@iconify/react';
 import './home.css';
-import AddSavings from '../../../modal/AddSavings';
-import { GetWallet, MyLoan } from '../../../utils/api/member';
+import { MyLoan } from '../../../utils/api/member';
 import RecentTransaction from "../../../component/RecentTransaction";
 import SavingsWallet from "../../../component/SavingsWallet";
 
@@ -16,7 +16,7 @@ const fetchData = async (key) => {
 
   } catch (error) {
     console.log(error)
-    // toast.error(error.error);
+    toast.error(error?.error);
   }
 };
 
@@ -25,8 +25,6 @@ export default function DashboardHome() {
   const [loanInputType, setLoanInputType] = useState("false");
   const [myLoan, setMyLoan] = useState({});
   const [loanIcon, setLoanIcon] = useState("mdi:eye-off");
-  const [wallet, setWallet] = useState([])
-  const [savingsVisibility, setSavingsVisibility] = useState({});
 
   // React query fecth data
   const { data, status } = useQuery(['fetchData'], fetchData)
@@ -78,7 +76,7 @@ export default function DashboardHome() {
                     <Icon icon={loanIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
                   </div> */}
                 {loanInputType ? (
-                  <span className="savings-value">0.00 NGN</span>
+                  <span className="savings-value">{`${myLoan?.amount || 0} NGN`}</span>
                 ) : (
                   <span className="hidden-input">*********</span>
                 )}

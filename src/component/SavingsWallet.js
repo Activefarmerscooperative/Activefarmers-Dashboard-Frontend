@@ -5,6 +5,7 @@ import { Icon } from '@iconify/react';
 import AddSavings from "../modal/AddSavings";
 import Modal from 'react-modal';
 import { RotatingLines } from "react-loader-spinner";
+import { toast } from "react-toastify";
 
 const fetchData = async (key) => {
 
@@ -13,12 +14,14 @@ const fetchData = async (key) => {
     return res
 
   } catch (error) {
-    console.log(error)
-    // toast.error(error.error);
+    toast.error(error?.error);
   }
 };
 
-function SavingsWallet({ openSavingsModal, setOpenSavingsModal }) {
+function SavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavingsCategory }) {
+  //openSavingsModal comes from dashboardHome
+  //setSavingsCategory comes from withdrawal page.
+
   const [savingsVisibility, setSavingsVisibility] = useState({});
   const [wallet, setWallet] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -36,13 +39,18 @@ function SavingsWallet({ openSavingsModal, setOpenSavingsModal }) {
   useEffect(() => {
     if (!data) return
     setWallet(data.savingsWallet?.categories)
+    if (setSavingsCategory)
+      setSavingsCategory(data.savingsWallet?.categories)
   }, [data])
 
   function openModal() {
     setIsOpen(true);
   }
   function closeModal() {
-    setOpenSavingsModal(false)
+    if (openSavingsModal) {
+      setOpenSavingsModal(false)
+    }
+    setSelectedCategory(null)
     setIsOpen(false);
   }
   const toggleSavingsVisibility = (wallet) => {
@@ -64,7 +72,7 @@ function SavingsWallet({ openSavingsModal, setOpenSavingsModal }) {
       {
         wallet?.map(item => <div className="px-3 card my-savings" key={item._id}>
 
-          <p className='text-start savings-title'>{item.category.name}</p>
+          <p className='text-start savings-title'>{item.category}</p>
 
           <div className="form-group d-flex align-items-center justify-content-between">
 

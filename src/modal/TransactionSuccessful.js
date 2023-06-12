@@ -4,6 +4,7 @@ import { Icon } from '@iconify/react';
 import "./modal.css"
 import { ValidatePayment } from "../utils/api/member";
 import { RotatingLines } from "react-loader-spinner";
+import { throttle } from 'lodash';
 
 function TransactionSuccessful({ reference }) {
     const navigate = useNavigate();
@@ -13,11 +14,14 @@ function TransactionSuccessful({ reference }) {
         error: false,
         success: false
     })
+    const [run, setRun] = useState(true)
 
     useEffect(() => {
-        if (!reference) return
-        async function validatePayment(reference) {
-            try {
+        
+        async function validatePayment(ref) {
+            if (!ref) return
+            console.log("Yeah")
+            try {       
                 const data = await ValidatePayment({ reference })
                 if (data.status === "success") {
                     setPayment({
@@ -39,7 +43,7 @@ function TransactionSuccessful({ reference }) {
 
         }
         validatePayment(reference)
-    }, [reference])
+    }, [])
 
 
     return (

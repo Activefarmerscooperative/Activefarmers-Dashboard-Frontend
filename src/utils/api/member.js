@@ -97,6 +97,15 @@ export const UpdateUserDetails = async (item) => {
   }
 };
 
+export const UpdateProfilePhoto = async (item) => {
+  try {
+    const { data } = await api.post(`/api/users/update-user-photo`, item);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
 export const UpdateBankDetails = async (item) => {
   try {
     const { data } = await api.put(`/api/users/bank-details`, item);
@@ -180,7 +189,7 @@ export const AddSaving = async (savings) => {
 };
 export const ValidatePayment = async (reference) => {
   try {
-    const { data } = await api.post(`/api/users/savings/validate`, reference);
+    const { data } = await api.post(`/api/payments/validate`, reference);
     return data;
   } catch (error) {
     throw error.response.data;

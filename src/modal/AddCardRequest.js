@@ -53,6 +53,7 @@ function AddCardRequest({ message }) {
             const { message } = await CancelLoan()
             toast.success(message)
         } catch (error) {
+            setIsLoading(false)
             console.log(error)
             toast.error(error)
             toast.error(error?.error)
@@ -82,9 +83,8 @@ function AddCardRequest({ message }) {
                             </ul>
 
                             <div className='d-flex align-items-start justify-content-around'>
-                                <button className="btn btn-modal mt-4" onClick={handleCancelLoan}>Cancel Loan</button>
-
                                 {isLoading && <center className="btn btn-modal mt-4"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+                                {!isLoading && <button className="btn btn-modal mt-4" onClick={handleCancelLoan}>Cancel Loan</button>}
                                 {!isLoading && <button className="btn btn-modal mt-4" onClick={handleValidateCard}>Continue</button>}
                             </div>
                         </>

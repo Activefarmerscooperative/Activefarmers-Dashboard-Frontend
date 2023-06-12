@@ -36,7 +36,11 @@ export default function Guarantor() {
 
         async function confirmToken() {
             try {
-                await confirmTokenIsValid(signal)
+                const { user } = await confirmTokenIsValid(signal)
+                console.log(user)
+                if (user.membershipType === "Farmer" && user.regCompletePercent < 60) {
+                    navigate("/register/farm", { replace: true })
+                }
             } catch (error) {
                 toast.error("Un-Authorized");
                 navigate("/register", { replace: true })
@@ -79,7 +83,7 @@ export default function Guarantor() {
             }
             // errors.phone = 'Invalid phone number format';
         }
-        
+
         if (!guarantor.gender) {
             errors.phone = 'Gender is required';
         }
@@ -93,7 +97,7 @@ export default function Guarantor() {
     const isValidPhoneNumber = (phone) => {
         // Regular expression for phone number validation
         const phoneRegex = /^\+\d+$/;
-        
+
         return phoneRegex.test(phone);
     };
 
@@ -115,7 +119,7 @@ export default function Guarantor() {
             const data = await AddGuarantor(guarantor);
             toast.success(data.message)
             openModal()
-            // localStorage.setItem("AFCS-token", data.afcsToken)
+            localStorage.setItem("AFCS-token", data.token)
 
             setIsLoading(false);
             navigate("/register/guarantor", { replace: true })

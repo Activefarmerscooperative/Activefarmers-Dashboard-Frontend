@@ -1,18 +1,24 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from 'react-modal';
 import './loan.css';
 import LoanSummary from '../../../modal/LoanSummary';
 import { toast } from "react-toastify";
 import SavingsWallet from '../../../component/SavingsWallet';
+import PaymentAccount from "../../../component/PaymentAccount";
 
 
-export default function LoanForm() {
+export default function LoanForm({user}) {
     const [modalIsOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
     const [loanData, setLoanData] = useState({})
 
-
+    useEffect(() => {
+        if (user.regCompletePercent < 100) {
+            toast.info(`Your profile is ${user.regCompletePercent}% completed. Please complete your profile to be eligible for Loan.`)
+            navigate("/dashboard/guarantor", { state: { requestTab: true },replace: true })
+        }
+    }, [user])
     const handleChange = (e) => {
 
         const { name, value } = e.target;
@@ -27,7 +33,7 @@ export default function LoanForm() {
     }
 
     function nextPage() {
-        if (!loanData.amount || !loanData.repaymentMethod || !loanData.repaymentPeriod) return toast.error("All values are required.")
+        if (!loanData.amount || !loanData.repaymentMethod || !loanData.repaymentPeriod ||!loanData.paymentMethod || loanData.paymentMethod==="") return toast.error("All values are required.")
         openModal()
     }
 
@@ -50,10 +56,10 @@ export default function LoanForm() {
                             </select>
                         </div>
                         <div>
-                            <select name="paymentMethod">
-                                <option value="">Payment Method</option>
-                                <option value="">Instant (my account)</option>
-                            </select>
+                           <PaymentAccount 
+                           
+                           withdrawalData={loanData}
+                           setWithdrawalData={setLoanData}/>
                             <select name="repaymentPeriod" value={loanData?.repaymentPeriod} onChange={handleChange}>
                                 <option value="">Repayment Period (in months) </option>
                                 <option value="1">1</option>
