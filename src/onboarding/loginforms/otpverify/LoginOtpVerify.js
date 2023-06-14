@@ -1,20 +1,37 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import '../login.css';
 import { Icon } from '@iconify/react';
 
 export default function LoginOtpVerify() {
-
     const [showSnackbar, setShowSnackbar] = useState(false);
+    const [countdown, setCountdown] = useState(0);
     const navigate = useNavigate();
 
     const handleClick = () => {
-        setShowSnackbar(true); 
+        setShowSnackbar(true);
         setTimeout(() => {
-          setShowSnackbar(false);
-          navigate('/login/createpassword'); 
-        }, 3000); 
-      };
+            setShowSnackbar(false);
+            navigate('/login/createpassword');
+        }, 3000);
+    };
+
+    useEffect(() => {
+        let timer;
+        if (countdown > 0) {
+            timer = setTimeout(() => {
+                setCountdown((prevCountdown) => prevCountdown - 1);
+            }, 1000);
+        }
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [countdown]);
+
+    const handleResendOTP = () => {
+        setCountdown(94); // Set the initial countdown time (e.g., 01:34)
+        setShowSnackbar(false); // Assuming you want to hide the snackbar when resending OTP
+    };
 
 
 
@@ -70,10 +87,30 @@ export default function LoginOtpVerify() {
                         <button className='login-btn mt-4 mx-auto' onClick={handleClick} >Verify OTP</button>
 
                     </form>
-                    {showSnackbar ? <button className=' d-flex align-items-center btn mx-4 profile-saved' >
-                       <p>Verification Successful</p><Icon icon="clarity:success-standard-line" className='btn-icon' />
-                       </button> 
-                        : <p>Yet to receive OTP?<a href="" style={{ color: "#FB9129", fontWeight: "600" }}> Resend OTP (01:34)</a></p>}
+                    {showSnackbar ? (<button className=' d-flex align-items-center btn mx-4 profile-saved' >
+                        <p>Verification Successful</p><Icon icon="clarity:success-standard-line" className='btn-icon' />
+                    </button>)
+                        : (
+                            <p>
+                            Yet to receive OTP?
+                            {countdown > 0 ? (
+                              <span style={{ color: "#FB9129", fontWeight: "600" }}>
+                                {' '}
+                                Resend OTP ({Math.floor(countdown / 60)
+                                  .toString()
+                                  .padStart(2, '0')}:
+                                {Math.floor(countdown % 60).toString().padStart(2, '0')})
+                              </span>
+                            ) : (
+                              <a href="#" style={{ color: "#FB9129", fontWeight: "600" }} onClick={handleResendOTP}>
+                                {' '}
+                                Resend OTP
+                              </a>
+                            )}
+                          </p>
+                        // <p>Yet to receive OTP?<a href="" style={{ color: "#FB9129", fontWeight: "600" }} onClick={handleResendOTP}> {' '} Resend OTP ({countdown.toString().padStart(2, '0')})</a></p>
+                        )
+                        }
 
                 </div>
             </div>

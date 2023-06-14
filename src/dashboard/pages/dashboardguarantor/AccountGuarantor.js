@@ -31,12 +31,14 @@ const AccountGuarantor = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [guarantorLoading, setGuarantorLoading] = useState(false)
   const [modalIsOpen, setIsOpen] = useState(false);
-  
-  
-  function openModal() {
+  const [modalActionType, setModalActionType] = useState('');
+
+
+  function openModal(actionType) {
     setIsOpen(true);
     setEditAccount(false);
     setEditGuarantor(false)
+    setModalActionType(actionType);
   }
   function closeModal() {
     setIsOpen(false);
@@ -67,9 +69,12 @@ const AccountGuarantor = () => {
 
   async function updateAccount() {
 
-    if (!bankDetails?.bankName || !bankDetails?.accountNumber || !bankDetails?.accountName) return toast.error("All inputs are required.")
-    if (!window.confirm("Are you sure you want to update your bank details?")) return
-    setIsLoading(true)
+    if (!bankDetails?.bankName || !bankDetails?.accountNumber || !bankDetails?.accountName)
+     {return toast.error("All inputs are required.");
+  }
+    openModal('save');
+    // if (!window.confirm("Are you sure you want to update your bank details?")) return
+    // setIsLoading(true)
 
     try {
       const data = await UpdateBankDetails({ ...bankDetails, accountNumber: `${bankDetails.accountNumber}` })
@@ -86,11 +91,15 @@ const AccountGuarantor = () => {
 
     if (!guarantorDetails?.full_name || !guarantorDetails?.phone ||
       !guarantorDetails?.address || !guarantorDetails?.email || !guarantorDetails?.gender ||
-      !guarantorDetails?.occupation) return toast.error("All inputs are required.")
+      !guarantorDetails?.occupation) {return toast.error("All inputs are required.");
+      
+      }
+    openModal('save');
+  
 
-    if (!window.confirm("Are you sure you want to update your guarantor details?")) return
+    // if (!window.confirm("Are you sure you want to update your guarantor details?")) return
 
-    setGuarantorLoading(true)
+    // setGuarantorLoading(true)
 
     try {
       const data = await UpdateGuarantorDetails(guarantorDetails)
@@ -102,6 +111,7 @@ const AccountGuarantor = () => {
       setGuarantorLoading(false)
     }
   }
+
 
 
 
@@ -142,7 +152,7 @@ const AccountGuarantor = () => {
               </div>
               <div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Account Number</label>
-                <input type="number" name="accountNumber" value={bankDetails?.accountNumber} onChange={handleAccountChange} disabled={!editAccount} placeholder="0123456" />
+                <input type="number" name="accountNumber" value={bankDetails?.accountNumber} onChange={handleAccountChange} disabled={!editAccount} placeholder="Eg. 0123456789" />
               </div>
             </div>
           </form>
@@ -162,9 +172,10 @@ const AccountGuarantor = () => {
                     <>
                       {!isLoading && <button onClick={
                         // () => setEditAccount(false)
-                        openModal
-                        } disabled={isLoading} className="btn discard mx-4 my-5">Discard Changes</button>}
-                      <button onClick={updateAccount} disabled={isLoading} className="btn mx-4 my-5">Save</button>
+                        // openModal
+                        () => openModal('discard')
+                      } disabled={isLoading} className="btn discard mx-4 my-5">Discard Changes</button>}
+                      <button onClick={updateAccount} disabled={isLoading} className="btn mx-4 my-5 ">Save</button>
                     </>}
 
                 </>
@@ -179,25 +190,25 @@ const AccountGuarantor = () => {
             <div className="d-flex">
               <div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Guarantor's Full Name</label>
-                <input type="text" name="full_name" onChange={handleGuarantorChange} disabled={!editGuarantor} value={guarantorDetails?.full_name} placeholder="Joseph Ojih" />
+                <input type="text" name="full_name" onChange={handleGuarantorChange} disabled={!editGuarantor} value={guarantorDetails?.full_name} placeholder="E.g. John Deo" />
               </div>
               <div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Guarantor's Phone Number</label>
-                <input type="tel" name="phone" value={guarantorDetails?.phone} onChange={handleGuarantorChange} disabled={!editGuarantor} placeholder="+2348123456789" />
+                <input type="tel" name="phone" value={guarantorDetails?.phone} onChange={handleGuarantorChange} disabled={!editGuarantor} placeholder="E.g. +2340123456789" />
               </div>
               <div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Guarantor's Email Address</label>
-                <input type="email" name="email" value={guarantorDetails?.email} onChange={handleGuarantorChange} disabled={!editGuarantor} placeholder="joe@yahoo.com" />
+                <input type="email" name="email" value={guarantorDetails?.email} onChange={handleGuarantorChange} disabled={!editGuarantor} placeholder="E.g johndeo@yahoo.com" />
               </div>
             </div>
             <div className="d-flex mt-4">
               <div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Guarantor's Residential Address</label>
-                <input type="text" name="address" value={guarantorDetails?.address} onChange={handleGuarantorChange} disabled={!editGuarantor} placeholder="Airforce Base, Jimeta-Yola Adamawa" />
+                <input type="text" name="address" value={guarantorDetails?.address} onChange={handleGuarantorChange} disabled={!editGuarantor} placeholder="E.g Tafawal Balewal Street, Abuja" />
               </div>
               <div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Guarantor's Occupation</label>
-                <input type="text" name="occupation" onChange={handleGuarantorChange} value={guarantorDetails?.occupation} disabled={!editGuarantor} placeholder="FullStack Developer" />
+                <input type="text" name="occupation" onChange={handleGuarantorChange} value={guarantorDetails?.occupation} disabled={!editGuarantor} placeholder="E.g. Entrepreneurs" />
               </div>
               <div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Gender</label>
@@ -224,9 +235,9 @@ const AccountGuarantor = () => {
                     <>
                       {!isLoading && <button onClick={
                         // () => setEditGuarantor(false)
-                        openModal
-                        } disabled={isLoading} className="btn mx-4 discard my-5">Discard Changes</button>}
-                      <button onClick={updateGuarantor} disabled={isLoading} className="btn mx-4 my-5">Save</button>
+                        () => openModal('discard')
+                      } disabled={isLoading} className="btn mx-4 discard my-5">Discard Changes</button>}
+                      <button onClick={updateGuarantor} disabled={isLoading} className="btn mx-4 my-5 save">Save</button>
                     </>}
 
                 </>
@@ -258,6 +269,7 @@ const AccountGuarantor = () => {
         <ProfileUpdateModal
           closeModal={closeModal}
           closeModaltwo={closeModal}
+          actionType={modalActionType}
         // loanData={loanData}
         />
       </Modal>

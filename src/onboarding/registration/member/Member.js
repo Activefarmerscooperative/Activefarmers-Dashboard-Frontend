@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import { useState } from "react";
 import Modal from 'react-modal';
-import OnboardingInputField from '../../../widgets/reusablecodes/OnboardingInputField';
-import OnboardingSelectField from '../../../widgets/reusablecodes/OnboardingSelectField';
 import OtpModal from "../../../modal/OTP";
 import "./member.css";
 import { fetchAllStates } from "../../../utils/api/general"
@@ -119,13 +117,13 @@ export default function Member() {
     const isValidPhoneNumber = (phone) => {
         // Regular expression for phone number validation
         const phoneRegex = /^\+\d+$/;
-        
+
         return phoneRegex.test(phone);
     };
 
     async function handleSubmit(e) {
         e.preventDefault()
-      
+
         // Validate the form inputs
         const errors = validateForm();
 
@@ -168,20 +166,21 @@ export default function Member() {
 
     }
 
-    const genderoptions = [
-        { value: "", label: "Gender" },
-        { value: "male", label: "Male" },
-        { value: "female", label: "Female" },
-    ];
-    const membershipoptions = [
-        { value: "", label: "Membership catgory" },
-        { value: "farmer", label: "Farmer" },
-        { value: "nonfarmer", label: "Non-farmer" },
-    ];
 
 
 
 
+// Get all input elements with the "asterisk-placeholder" class
+const inputElements = document.getElementsByClassName('asterisk-placeholder');
+
+// Iterate over the input elements
+Array.from(inputElements).forEach((input) => {
+  const placeholderText = input.getAttribute('placeholder');
+
+  // Modify the placeholder by adding an asterisk and setting its color to red
+  input.setAttribute('placeholder', `${placeholderText} *`);
+  input.style.color = 'red';
+});
 
 
 
@@ -194,18 +193,10 @@ export default function Member() {
                 <span>Create an account to join our cooperative as a member</span>
                 <div className="d-flex flex-column align-items-center form mt-5 ">
                     <p>Please complete this form to the best of your ability providing all relevant details. Please note that your application will go through confirmation prior to processing. </p>
-                    <form className=" d-flex align-items-center justify-content-center mb-4">
+                    <form className=" d-flex align-items-start justify-content-center mb-4">
                         <div>
-                            <input autocomplete="off" type="text" name="surname" required value={member.surname} onChange={handleChange} placeholder="Surname" />
-                            <input autocomplete="off" type="email" name="email" required value={member.email} onChange={handleChange} placeholder="Email Address" />
-
-
-                            {/* <OnboardingInputField type="text" name="surname" required value={member.surname} onChange={handleChange} placeholder="Surname" />
-                            <OnboardingInputField type="email" name="email" required value={member.email} onChange={handleChange} placeholder="Email Address" /> */}
-
-
-
-
+                            <input type="text" name="surname" required value={member.surname} onChange={handleChange} placeholder="Surname" />
+                            <input type="email" name="email" required value={member.email} onChange={handleChange} placeholder="Email Address" />
                             <select name="gender" value={member.gender} required onChange={handleChange}>
                                 <option value="">Gender</option>
                                 <option value="Male">Male</option>
@@ -216,67 +207,51 @@ export default function Member() {
                                 <option value="Farmer">Farmer</option>
                                 <option value="Non-Farmer">Non-Farmer</option>
                             </select>
-                            <input autocomplete="off" required type="password" name="password" onChange={handleChange} value={member.password} placeholder="Password"/>
-
-
-                            {/* <OnboardingSelectField
-                                name="gender"
-                                options={genderoptions}
-                                value={member.gender}
-                                onChange={handleChange}
-                                required
-                            />
-                            <OnboardingSelectField
-                                name="membershipType"
-                                options={membershipoptions}
-                                value={member.membershipType}
-                                onChange={handleChange}
-                                required
-                            />
-                            <OnboardingInputField required type="password" name="password" onChange={handleChange} value={member.password} placeholder="Password" /> */}
-
-
-
-
-
-
-
-
+                            <input autocomplete="new-password" required type="password" name="password" onChange={handleChange} value={member.password} placeholder="Password" />
                         </div>
+
                         <div>
-                            <input autocomplete="off" required type="text" name="firstname" onChange={handleChange} value={member.firstname} placeholder="Firstname" />
-                            <input autocomplete="off" required type="tel" name="phone" value={member.phone} onChange={handleChange} placeholder="Phone Number e.g:+2348123456789" />
-                            
-                            {/* <OnboardingInputField required type="text" name="firstname" onChange={handleChange} value={member.firstname} placeholder="Firstname" />
-                            <OnboardingInputField required type="tel" name="phone" value={member.phone} onChange={handleChange} placeholder="Phone Number e.g:+2348123456789" /> */}
+                            <input required type="text" name="firstname" onChange={handleChange} value={member.firstname} placeholder="Firstname" />
+                            <input required type="tel" name="phone" value={member.phone} onChange={handleChange} placeholder="Phone Number e.g:+2348123456789" />
+                            <select required name="location" value={member.location} onChange={handleChange} className="">
+                                <option value="">Location</option>
+                                {
+                                    location.map(item => <option key={item._id} value={item._id}>{item.name}</option>)
+                                }
 
-                            {/* <div className="onboarding-form-input"> */}
-                                <select required name="location" value={member.location} onChange={handleChange} className="">
-                                    <option value="">Location</option>
-                                    {
-                                        location.map(item => <option key={item._id} value={item._id}>{item.name}</option>)
+                            </select>
+                            <input required type="text" name="address" onChange={handleChange} value={member.address} placeholder="Home Address" />
+
+                            <div className="mx-0">
+                                <input required type="password" name="confirmpass" value={confirmPass} onChange={(e) => {
+                                    setConfirmPass(e.target.value);
+                                    if (member.password.startsWith(e.target.value)) {
+                                        // Password and Confirm Password match
+                                        // You can clear any previous error message if needed
+                                    } else {
+                                        // Password and Confirm Password don't match
+                                        // Display error message and set text color to red
                                     }
+                                }}
+                                    placeholder="Confirm Password" />
+                                {confirmPass !== '' && !member.password.startsWith(confirmPass) && (
+                                    <p className="password-match">Password and Confirm Password do not match.</p>
+                                )}
+                            </div>
 
-                                </select>
-                            {/* </div> */}
 
 
-                            {/* <OnboardingInputField required type="text" name="address" onChange={handleChange} value={member.address} placeholder="Home Address" />
-                            <OnboardingInputField required type="password" name="confirmpass" value={confirmPass} onChange={(e) => setConfirmPass(e.target.value)} placeholder="Confirm Password" /> */}
-
-                            <input autocomplete="off" required type="text" name="address" onChange={handleChange} value={member.address} placeholder="Home Address" />
-                            <input autocomplete="off" required type="password" name="confirmpass" value={confirmPass} onChange={(e) => setConfirmPass(e.target.value)} placeholder="Confirm Password" />
                         </div>
                     </form>
                     {isLoading && <center className="btn member-btn"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
-                    {!isLoading && <button onClick={handleSubmit} disabled={isLoading} className="btn member-btn">Create Account</button>}
+                    {!isLoading && <button onClick={handleSubmit} disabled={isLoading} className="btn member-btn mx-auto mt-3">Create Account</button>}
 
 
                 </div>
                 <Modal
                     isOpen={modalIsOpen}
                     // onAfterOpen={afterOpenModal}
-                    // onRequestClose={closeModal}
+                    onRequestClose={closeModal}
                     contentLabel="Enter OTP"
                     className={{
                         base: 'modal-base',
@@ -293,7 +268,7 @@ export default function Member() {
                 >
                     <OtpModal
                         message={message} />
-                        {/* <OtpInputModal message={message} /> */}
+                    {/* <OtpInputModal message={message} /> */}
                 </Modal>
             </div>
         </div>

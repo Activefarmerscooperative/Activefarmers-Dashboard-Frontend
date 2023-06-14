@@ -10,7 +10,7 @@ import SavingsWallet from '../../../component/SavingsWallet';
 export default function LoanForm() {
     const [modalIsOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
-    const [loanData, setLoanData] = useState({})
+    const [ loanData, setLoanData] = useState({})
 
 
     const handleChange = (e) => {

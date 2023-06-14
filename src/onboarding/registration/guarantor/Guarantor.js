@@ -9,7 +9,7 @@ import { RotatingLines } from "react-loader-spinner";
 
 export default function Guarantor() {
     const navigate = useNavigate();
-    const [modalIsOpen, setIsOpen] = useState(false);
+    const [modalIsOpen, setIsOpen] = useState(true);
     const [isLoading, setIsLoading] = useState(false)
 
     function openModal() {
@@ -34,15 +34,15 @@ export default function Guarantor() {
         const abortController = new AbortController();
         const signal = abortController.signal;
 
-        async function confirmToken() {
-            try {
-                await confirmTokenIsValid(signal)
-            } catch (error) {
-                toast.error("Un-Authorized");
-                navigate("/register", { replace: true })
-            }
-        }
-        confirmToken()
+        // async function confirmToken() {
+        //     try {
+        //         await confirmTokenIsValid(signal)
+        //     } catch (error) {
+        //         toast.error("Un-Authorized");
+        //         navigate("/register", { replace: true })
+        //     }
+        // }
+        // confirmToken()
 
         return () => {
             abortController.abort(); // Cancel the request on component unmount

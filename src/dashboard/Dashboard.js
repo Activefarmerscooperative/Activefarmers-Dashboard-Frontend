@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   useNavigate,
   useSearchParams,
+  useLocation
 } from "react-router-dom";
 import Sidebar from './sidebar/Sidebar'
 import { Outlet } from 'react-router-dom'
@@ -11,11 +12,12 @@ import TransactionSuccessful from "../modal/TransactionSuccessful";
 
 function Dashboard() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [user, setUser] = useState({})
   const [open, setOpen] = useState(false)
   const [urlParams, setSearchParams] = useSearchParams();
   const [paymentRef, setPaymentRef] = useState("")
-
+  const [isNewUser, setIsNewUser] = useState(false)
   const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
@@ -30,6 +32,9 @@ function Dashboard() {
     // Check if user can access this page info on component mount.
     const abortController = new AbortController();
     const signal = abortController.signal;
+
+    const { newUser } = location;
+    setIsNewUser(newUser)
 
     async function confirmToken() {
       try {
@@ -60,7 +65,7 @@ function Dashboard() {
           <Sidebar
             user={user}
           />
-          <Outlet />
+          <Outlet isNewUser={isNewUser} />
         </div>
       }
       <Modal

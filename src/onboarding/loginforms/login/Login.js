@@ -5,6 +5,7 @@ import '../login.css';
 import { LoginMember } from "../../../utils/api/member";
 import { toast } from "react-toastify";
 import { RotatingLines } from "react-loader-spinner";
+import { Icon } from '@iconify/react';
 
 
 
@@ -12,7 +13,17 @@ import { RotatingLines } from "react-loader-spinner";
 
 export default function Login() {
     const navigate = useNavigate();
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
+
+
+    const [inputType, setInputType] = useState("true");
+    const [savingsIcon, setSavingsIcon] = useState("mdi:eye-off");
+
+    const toggleSavingsVisiblity = () => {
+        setInputType(inputType ? false : true);
+        setSavingsIcon(!savingsIcon);
+    };
+
     const [user, setUser] = useState({
         phone: "",
         password: "",
@@ -98,10 +109,18 @@ export default function Login() {
                     <h1>Log In to Dashboard</h1>
                     Log in to your existing account
                     <form className='d-flex flex-column my-4 '>
-                        <input type="tel" name="phone" placeholder='Enter phone number e.g: 08012345678' required value={user.phone} onChange={handleChange} />
-                        
+                    <input type="tel" name="phone" className="email-input" placeholder='Enter phone number e.g: 08012345678'  value={user.phone} onChange={handleChange} autocomplete="on" required />
 
-                        <input type="password" name="password" placeholder='password' required value={user.password} onChange={handleChange} className="my-2" />
+
+                        <div className="d-flex align-items-center justify-content-between password mt-3">
+                            <input type={!inputType ? "text" : "password"} name="password" placeholder='password' required value={user.password} onChange={handleChange} className="my-2" />
+
+                            <div onClick={toggleSavingsVisiblity}>
+                                <Icon icon={savingsIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
+                            </div>
+
+                        </div>
+
 
                         <div className='d-flex align-items-center mt-2'>
                             <input type="checkbox" name="" id="" className='mx-2' />

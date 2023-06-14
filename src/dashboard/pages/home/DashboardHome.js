@@ -22,7 +22,7 @@ const fetchData = async (key) => {
   }
 };
 
-export default function DashboardHome() {
+export default function DashboardHome({ isNewUser }) {
 
   const [loanInputType, setLoanInputType] = useState("false");
   const [savingsInputType, setSavingsInputType] = useState(false);
@@ -36,10 +36,11 @@ export default function DashboardHome() {
   const { data, status } = useQuery(['fetchData'], fetchData)
 
   useEffect(() => {
+    console.log(isNewUser);
     if (!data) return
-    setMyLoan(data[1].myLoan)
+    setMyLoan(data[1]?.myLoan)
     setWallet(data[0]?.savingsWallet?.categories)
-  }, [data])
+  }, [data, isNewUser])
 
 
 
@@ -47,19 +48,6 @@ export default function DashboardHome() {
     setLoanInputType(loanInputType ? false : true);
     setLoanIcon(!loanIcon);
   };
-  // const toggleSavingsVisibility = (wallet) => {
-  //   setToggleWalletVisibility(wallet);
-  //   setSavingsInputType((prevState) => ({
-  //     ...prevState,
-  //     [wallet]: !prevState[wallet]
-  //   }));
-  //   setSavingsIcon((prevState) => ({
-  //     ...prevState,
-  //     [wallet]: !prevState[wallet]
-  //   }));
-  //   // setSavingsInputType(!savingsInputType);
-  //   // setSavingsIcon(!savingsIcon);
-  // };
   const toggleSavingsVisibility = (wallet) => {
     setSavingsVisibility((prevState) => ({
       ...prevState,
@@ -83,19 +71,25 @@ export default function DashboardHome() {
     <div className='my-5 px-5 home'>
       <div className=''>
         <h1>Dashboard</h1>
-        <div className="welcome py-3 px-4">
-          <h4>Welcome to your dashboard !</h4>
-          <p>Lorem ipsum dolor sit amet consectetur. Turpis posuere donec ipsum lectus cursus. Pellentesque tellus ornare id neque. Rutrum fringilla </p>
-        </div>
+
+        {
+          !isNewUser ? (
+            <div className="welcome py-3 px-4">
+              <h4>Welcome to your dashboard !</h4>
+              <p>Lorem ipsum dolor sit amet consectetur. Turpis posuere donec ipsum lectus cursus. Pellentesque tellus ornare id neque. Rutrum fringilla </p>
+            </div>
+          ) : null}
+
 
 
         <div className="savings my-4">
           <div className="d-flex align-items-center">
-            <div className="px-3 card loan">
-              <div className="d-flex align-items-center justify-content-between">
-                <p className='savings-title'>My Loan</p>
-                <p>(0) </p>
-              </div>
+            <div className="card-container row row-cols-1 row-cols-md-4 g-0" >
+              <div className="px-3 card loan col">
+                <div className="d-flex align-items-center justify-content-between">
+                  <p className='savings-title'>My Loan</p>
+                  <p>(0) </p>
+                </div>
                 <div className="form-group d-flex align-items-center justify-content-between">
                   {/* <input
                     type={loanInputType ? "text" : "password"}
@@ -107,7 +101,7 @@ export default function DashboardHome() {
                     <Icon icon={loanIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
                   </div> */}
                   {loanInputType ? (
-                    <span className="savings-value">0.00 NGN</span>
+                    <span className="savings-value">{`${myLoan?.amount || 0} NGN`}</span>
                   ) : (
                     <span className="hidden-input">*********</span>
                   )}
@@ -119,21 +113,21 @@ export default function DashboardHome() {
                   </div>
 
                 </div>
-              <div className="">
-                <p >View loan</p>
+                <div className="">
+                  <p >View loan</p>
+                </div>
               </div>
-            </div>
 
-            {
-              status === "loading" && <div className="px-3 card pikin">
-                <center style={{ height: '100', overflow: 'hidden' }} className=""><RotatingLines width="20" /></center>
-              </div>
-            }
+              {
+                status === "loading" && <div className="px-3 card pikin">
+                  <center style={{ height: '100', overflow: 'hidden' }} className=""><RotatingLines width="20" /></center>
+                </div>
+              }
 
-            {
-              wallet?.map(item => <div className="px-3 card my-savings" key={item._id}>
+              {
+                wallet?.map(item => <div className="px-3 card my-savings col" key={item._id}>
 
-                <p className='text-start savings-title'>{item.category.name}</p>
+                  <p className='text-start savings-title'>{item.category}</p>
 
                   <div className="form-group d-flex align-items-center justify-content-between">
 
@@ -161,12 +155,14 @@ export default function DashboardHome() {
                     </div>
 
                   </div>
-                <div className="">
-                <p onClick={() => openModal(item.category.name)}>Add Savings</p>
-                </div>
-                
-              </div>)
-            }
+                  <div className="">
+                    <p onClick={() => openModal(item.category.name)}>Add Savings</p>
+                  </div>
+
+                </div>)
+              }
+            </div>
+
 
 
             <button className='d-flex align-items-center justify-content-around btn addsaving-btn' onClick={openModal} >

@@ -42,17 +42,23 @@ text-decoration: none;
   background-color: #ffffff !important;
 }
 
-.landing-page .btn:nth-child(1):hover{
-  color: #0D9068;
-  border-color: #0D9068;
-}
 
-.landing-page .btn:nth-child(2):hover{
+
+.landing-page .btn:nth-child(1):hover{
   color: #555555;
   border-color: #555555;
 }
 
-.landing-page .btn:nth-child(3):hover{
+.landing-page .btn:nth-child(2):hover{
   color: #FB9129;
   border-color: #FB9129;
 }
+
+
+@media screen and (max-width: 1024px) {}
+@media screen and (max-width: 991px) {}
+@media screen and (max-width: 769px) {}
+@media screen and (max-width: 600px) {}
+@media screen and (max-width: 426px) {}
+@media screen and (max-width: 376px) {}
+@media screen and (max-width: 321px) {}
