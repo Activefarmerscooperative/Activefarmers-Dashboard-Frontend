@@ -88,29 +88,28 @@ export default function DashboardHome({ isNewUser }) {
               <div className="">
                 <p >View loan</p>
               </div>
-
-              <SavingsWallet
-                openSavingsModal={modalIsOpen}
-                setOpenSavingsModal={setIsOpen}
-              />
-
-
-              <button className='d-flex align-items-center justify-content-around btn addsaving-btn' onClick={() => setIsOpen(true)} >
-                <Icon icon="material-symbols:add-circle-outline-rounded" className='add-icon' />
-                Add Savings
-              </button>
             </div>
+            <SavingsWallet
+              openSavingsModal={modalIsOpen}
+              setOpenSavingsModal={setIsOpen}
+            />
+
+
+            <button className='d-flex align-items-center justify-content-around btn addsaving-btn' onClick={() => setIsOpen(true)} >
+              <Icon icon="material-symbols:add-circle-outline-rounded" className='add-icon' />
+              Add Savings
+            </button>
           </div>
+        </div>
 
 
-          <div className="transaction-history mt-5">
-            <RecentTransaction />
-          </div>
-
+        <div className="transaction-history mt-5">
+          <RecentTransaction />
         </div>
 
       </div>
 
     </div>
+
   )
 }
