@@ -20,7 +20,7 @@ const fetchData = async (key) => {
   }
 };
 
-export default function DashboardHome() {
+export default function DashboardHome({ isNewUser }) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [loanInputType, setLoanInputType] = useState("false");
   const [myLoan, setMyLoan] = useState({});
@@ -30,9 +30,11 @@ export default function DashboardHome() {
   const { data, status } = useQuery(['fetchData'], fetchData)
 
   useEffect(() => {
+    console.log(isNewUser);
     if (!data) return
     setMyLoan(data.myLoan)
-  }, [data])
+
+  }, [data, isNewUser])
 
 
 
@@ -40,8 +42,6 @@ export default function DashboardHome() {
     setLoanInputType(loanInputType ? false : true);
     setLoanIcon(!loanIcon);
   };
-
-
 
   function createData(id, action, date, amount, status) {
     return { id, action, date, amount, status };
@@ -52,10 +52,15 @@ export default function DashboardHome() {
     <div className='my-5 px-5 home'>
       <div className=''>
         <h1>Dashboard</h1>
-        <div className="welcome py-3 px-4">
-          <h4>Welcome to your dashboard !</h4>
-          <p>Lorem ipsum dolor sit amet consectetur. Turpis posuere donec ipsum lectus cursus. Pellentesque tellus ornare id neque. Rutrum fringilla </p>
-        </div>
+
+        {
+          !isNewUser ? (
+            <div className="welcome py-3 px-4">
+              <h4>Welcome to your dashboard !</h4>
+              <p>Lorem ipsum dolor sit amet consectetur. Turpis posuere donec ipsum lectus cursus. Pellentesque tellus ornare id neque. Rutrum fringilla </p>
+            </div>
+          ) : null}
+
 
 
         <div className="savings my-4">
@@ -66,15 +71,7 @@ export default function DashboardHome() {
                 <p>(0) </p>
               </div>
               <div className="form-group d-flex align-items-center justify-content-between">
-                {/* <input
-                    type={loanInputType ? "text" : "password"}
-                    name="loan"
-                    id="loan"
-                    value={`${myLoan?.amount || 0} NGN`}
-                    placeholder='' />
-                  <div onClick={toggleLoanVisibility}>
-                    <Icon icon={loanIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
-                  </div> */}
+
                 {loanInputType ? (
                   <span className="savings-value">{`${myLoan?.amount || 0} NGN`}</span>
                 ) : (
@@ -91,24 +88,25 @@ export default function DashboardHome() {
               <div className="">
                 <p >View loan</p>
               </div>
+
+              <SavingsWallet
+                openSavingsModal={modalIsOpen}
+                setOpenSavingsModal={setIsOpen}
+              />
+
+
+              <button className='d-flex align-items-center justify-content-around btn addsaving-btn' onClick={() => setIsOpen(true)} >
+                <Icon icon="material-symbols:add-circle-outline-rounded" className='add-icon' />
+                Add Savings
+              </button>
             </div>
-
-            <SavingsWallet
-              openSavingsModal={modalIsOpen}
-              setOpenSavingsModal={setIsOpen}
-            />
-
-
-            <button className='d-flex align-items-center justify-content-around btn addsaving-btn' onClick={() => setIsOpen(true)} >
-              <Icon icon="material-symbols:add-circle-outline-rounded" className='add-icon' />
-              Add Savings
-            </button>
           </div>
-        </div>
 
 
-        <div className="transaction-history mt-5">
-          <RecentTransaction />
+          <div className="transaction-history mt-5">
+            <RecentTransaction />
+          </div>
+
         </div>
 
       </div>

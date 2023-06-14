@@ -11,7 +11,7 @@ import PaymentAccount from "../../../component/PaymentAccount";
 export default function LoanForm({user}) {
     const [modalIsOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
-    const [loanData, setLoanData] = useState({})
+    const [ loanData, setLoanData] = useState({})
 
     useEffect(() => {
         if (user.regCompletePercent < 100) {

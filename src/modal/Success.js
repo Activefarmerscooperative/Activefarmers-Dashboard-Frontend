@@ -16,7 +16,7 @@ function Success() {
                 <h1>Membership registration successful</h1>
                 <p>
                     You will receive a congratulatory email shortly, proceed to dashboard and explore better ways to new opportunities</p>
-                <button onClick={() => { navigate("/dashboard",{newUser:true}); }} className="btn btn-modal mt-5">Go to dashboard</button>
+                <button onClick={() => navigate("/dashboard",{state:{newUser:true}})} className="btn btn-modal mt-5">Go to dashboard</button>
             </div>
         </div>
     )

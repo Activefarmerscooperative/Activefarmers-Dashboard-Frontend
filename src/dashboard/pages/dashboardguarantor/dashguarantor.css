@@ -17,12 +17,14 @@
     border-radius: 12px;
     border: none;
 }
-.guarantor-account-form p{
+
+.guarantor-account-form p {
     font-weight: 700;
-font-size: 22px;
-color: #444444;
-margin: 10px 15px;
+    font-size: 22px;
+    color: #444444;
+    margin: 10px 15px;
 }
+
 .guarantor-account-form .form-group label {
     font-weight: 500;
     font-size: 14px;
@@ -30,7 +32,8 @@ margin: 10px 15px;
     margin: 10px 0;
 }
 
-.guarantor-account-form .form-group input, .guarantor-account-form select {
+.guarantor-account-form .form-group input,
+.guarantor-account-form select {
     height: 40px;
     width: 270px;
     background: rgba(217, 217, 217, 0.3);
@@ -41,47 +44,52 @@ margin: 10px 15px;
     color: #444444;
     opacity: 0.7;
     padding: 10px;
-    
+
 }
-.guarantor-account-form select{
+
+.guarantor-account-form select {
     appearance: none;
     background-image: url('../outline-arrow.png');
     background-repeat: no-repeat;
     background-position: right 1em top 50%, 0 0;
     background-size: 1em auto, 100%;
-    
-   
-  }
-.guarantor-account-form .form-group input:focus, .guarantor-account-form select:focus{
-   outline: none;
-   /* border: none; */
+
+
 }
+
+.guarantor-account-form .form-group input:focus,
+.guarantor-account-form select:focus {
+    outline: none;
+    /* border: none; */
+}
+
 .guarantor-account-form input::-webkit-outer-spin-button,
 .guarantor-account-form input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-.guarantor-account-form .btn{
+.guarantor-account-form .btn {
     width: 180px;
-height: 50px;
-background: #FB9129;
-border-radius: 4px;
+    height: 50px;
+    background: #FB9129;
+    border-radius: 4px;
     font-weight: 500;
-font-size: 20px;
-color: #FFFFFF;
+    font-size: 20px;
+    color: #FFFFFF;
 
 }
 
-.guarantor-account-form .btn.profile-saved{
+.guarantor-account-form .btn.profile-saved {
     width: 425px;
-/* height: 45px; */
-background: #444444;
-border-radius: 4px;
-color: #FFFFFF;
+    /* height: 45px; */
+    background: #444444;
+    border-radius: 4px;
+    color: #FFFFFF;
 }
-.btn.profile-saved .btn-icon{
-    background-color:#0d9068;
+
+.btn.profile-saved .btn-icon {
+    background-color: #0d9068;
     color: #FFFFFF;
     font-size: 28px;
     /* width: 25px;
@@ -91,27 +99,36 @@ color: #FFFFFF;
     border-radius: 50px;
 }
 
-.guarantor-account-form .btn.edit{
+.guarantor-account-form .btn.edit {
     width: 180px;
     height: 50px;
-    background-color:  #FB9129;
-    color:#fff;
+    background-color: #FB9129;
+    color: #fff;
     font-size: 20px;
     border: 2px solid #FB9129;
 }
+
 .guarantor-account-form .btn.discard {
     width: 180px;
     height: 50px;
-    background-color:#FFFFFF;
-        color:#FB9129;
+    background-color: #FFFFFF;
+    color: #FB9129;
     font-size: 20px;
     border: 2px solid #FB9129;
 }
-.guarantor-account-form .btn.profile-saved p{
+
+.guarantor-account-form .btn.save:active {
+  
+    background-color: #FFFFFF;
+    color: #FB9129;
+    border: 2px solid #FB9129;
+}
+
+.guarantor-account-form .btn.profile-saved p {
     font-weight: 500;
-font-size: 16px;
-color: #FFFFFF;
-margin: 0 10px;
+    font-size: 16px;
+    color: #FFFFFF;
+    margin: 0 10px;
 }
 
 .guarantor-account .modal {
@@ -165,4 +182,3 @@ margin: 0 10px;
 .guarantor-account .overlay-base_before-close {
     opacity: 0;
 }
-

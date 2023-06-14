@@ -33,14 +33,15 @@ const ProfileUpdate = ({ setToken }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [location, setLocation] = useState([])
     const [modalIsOpen, setIsOpen] = useState(false);
+    const [modalActionType, setModalActionType] = useState('');
 
 
-
-    function openModal() {
+    function openModal(actionType) {
         setIsOpen(true);
         setEditUser(false);
         setEditOccupation(false);
         setEditNextKin(false);
+        setModalActionType(actionType);
     }
     function closeModal() {
         setIsOpen(false);
@@ -62,9 +63,10 @@ const ProfileUpdate = ({ setToken }) => {
         e.preventDefault()
         if (!userData?.surname || !userData?.firstname || !userData?.phone ||
             !userData.email || !userData.location || !userData.gender || !userData.address
-        ) return toast.error("All inputs are required.")
-        if (!window.confirm("Are you sure you want to update your details?")) return
-        setIsLoading(true)
+        ) {return toast.error("All inputs are required.")}
+        openModal('save');
+        // if (!window.confirm("Are you sure you want to update your details?")) return
+        // setIsLoading(true)
 
         try {
             const data = await UpdateUserDetails({
@@ -117,8 +119,9 @@ const ProfileUpdate = ({ setToken }) => {
         e.preventDefault()
         if (!occupationData?.occupation || !occupationData?.salary || !occupationData?.workLevel ||
             !occupationData?.companyName
-        ) return toast.error("All inputs are required.")
-        if (!window.confirm("Are you sure you want to update your details?")) return
+        ) {return toast.error("All inputs are required.")}
+        openModal('save');
+        // if (!window.confirm("Are you sure you want to update your details?")) return
 
         setIsLoading(true)
 
@@ -139,8 +142,10 @@ const ProfileUpdate = ({ setToken }) => {
         e.preventDefault()
         if (!nextKinData?.full_name || !nextKinData?.relationship || !nextKinData?.address ||
             !nextKinData?.phone
-        ) return toast.error("All inputs are required.")
-        if (!window.confirm("Are you sure you want to update your Next of Kin details?")) return
+        ) {return toast.error("All inputs are required.")}
+        openModal('save');
+
+        // if (!window.confirm("Are you sure you want to update your Next of Kin details?")) return
 
         setIsLoading(true)
 
@@ -236,7 +241,7 @@ const ProfileUpdate = ({ setToken }) => {
                                             <>
                                                 {!isLoading && <button onClick={
                                                     // () => setEditUser(false)
-                                                    openModal
+                                                    () => openModal('discard')
                                                 } disabled={isLoading} className="btn discard mx-4 my-5">Discard Changes</button>}
                                                 <button onClick={updateUser} disabled={isLoading} className="btn mx-4 my-5">Save</button>
                                             </>}
@@ -295,7 +300,7 @@ const ProfileUpdate = ({ setToken }) => {
                                             <>
                                                 {!isLoading && <button onClick={
                                                     // () => setEditOccupation(false)
-                                                    openModal
+                                                    () => openModal('discard')
                                                 } disabled={isLoading} className="btn discard mx-4 my-5">Discard Changes</button>}
                                                 <button onClick={updateUserOccupation} disabled={isLoading} className="btn mx-4 my-5">Save</button>
                                             </>}
@@ -353,7 +358,7 @@ const ProfileUpdate = ({ setToken }) => {
                                             <>
                                                 {!isLoading && <button onClick={
                                                     // () => setEditNextKin(false)
-                                                    openModal
+                                                    () => openModal('discard')
                                                 } disabled={isLoading} className="btn discard mx-4 my-5">Discard Changes</button>}
                                                 <button onClick={updateNextOfKin} disabled={isLoading} className="btn mx-4 my-5">Save</button>
                                             </>}
@@ -387,6 +392,7 @@ const ProfileUpdate = ({ setToken }) => {
                 <ProfileUpdateModal
                     closeModal={closeModal}
                     closeModaltwo={closeModal}
+                    actionType={modalActionType}
                 // loanData={loanData}
                 />
             </Modal>

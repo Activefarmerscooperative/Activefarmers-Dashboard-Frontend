@@ -86,7 +86,7 @@ function AddSavings({ selectedCategory, wallet,closeModal }) {
             }
 
           </form>
-          {isLoading && <center className="btn member-btn"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+          {isLoading && <center className="btn mt-5"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
           {!isLoading && <button onClick={addSavings} className="btn btn-modal mt-5">Next</button>}
 
 

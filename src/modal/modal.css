@@ -104,7 +104,7 @@
 
 .add-savings-modal .btn {
     width: 180px;
-    height: 45px;
+ /* padding: 5px; */
     background: #FB9129;
     border-radius: 4px;
     font-weight: 500;
@@ -277,16 +277,20 @@
 .loan-summary-modal .btn:focus,
 .loan-success-modal .btn:focus,
 .profile-update-modal .btn:focus {
-    width: 150px;
-    height: 50px;
+    width: 200px;
+    /* height: 50px; */
     background: #FB9129;
     border-radius: 4px;
     font-weight: 500;
     font-size: 16px;
     color: #FFFFFF;
+    white-space: nowrap;
+    padding: 10px 0;
 }
 
-
+.loan-summary-modal h2{
+    color: #0D9068;
+}
 
 .loan-summary-modal p {
     font-weight: 400;
@@ -295,7 +299,6 @@
     margin-bottom: 0;
 
 }
-
 .loan-summary-modal hr {
     width: 100px;
     border: 1px solid #0D9068;
@@ -306,8 +309,20 @@
     font-weight: 500;
     font-size: 14px;
     color: #000000;
+    margin: 0 15px;
 }
+.loan-summary-modal span.status{
+    width: 100px;
+    padding: 5px;
+    text-align: center;
+border: 1px solid #0D9068;
+border-radius: 33px;
+font-weight: 500;
+font-size: 14px;
 
+color: #0D9068;
+
+}
 .loan-summary-modal a:nth-child(1) .btn,
 .profile-update-modal .btn:first-child {
     background-color: #FFFFFF;

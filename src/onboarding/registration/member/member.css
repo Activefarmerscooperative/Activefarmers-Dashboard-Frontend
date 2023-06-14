@@ -12,6 +12,7 @@
   color: #000000;
 }
 
+
 .member span {
   font-weight: 400;
   font-size: 18px;
@@ -41,7 +42,10 @@
 .member select {
   color: #727070;
 }
-
+/* .member input::placeholder::after {
+  content: '*';
+  color: red;
+} */
 .member input::placeholder,
 .member select option {
   font-weight: 400;
@@ -92,6 +96,13 @@
   border: 2px solid #0D9068;
 }
 
+.member p.password-match{
+  color: red;
+  width: auto;
+  margin: 0;
+  font-size: 13px
+}
+
 
 .member .modal {
   z-index: 999;
@@ -137,7 +148,7 @@
   transition: all 0.3s ease-out;
 }
 
-.profile-overlay-base{
+.profile-overlay-base {
   position: fixed;
   top: 0;
   left: 0;

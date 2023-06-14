@@ -61,31 +61,68 @@ a {
     white-space: nowrap;
 }
 
-.login-page input {
-    width: 400px;
+.login-page input.email-input {
+    /* width: 400px; */
     border: 1px solid #444444;
     border-radius: 8px;
     padding: 10px;
     margin: 3px 2px;
 }
 
-.login-page input:hover,
-input:focus {
+.login-page .password {
+    /* width: 400px; */
+    border: 1px solid #444444;
+    border-radius: 8px;
+    padding: 2px 10px;
+    margin: 3px 2px;
+}
+
+.password input,
+.password input:hover,
+.password input:focus {
+    outline: none;
+    border: none;
+    background-color: transparent;
+
+}
+
+.password input[type=text]:enabled {
+    background: transparent;
+}
+
+.password input[type=text]:disabled {
+    background: transparent;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+.login-page input.email-input:hover,
+input.email-input:focus {
     outline: 1px solid #FB9129;
     border: 1px solid #FB9129;
 }
-.login-page input[type=checkbox]:hover{
+
+
+
+.login-page input[type=checkbox]:hover {
     border: none;
     outline: none;
 }
+
 .login-page input[type=checkbox] {
     width: 18px;
     height: 18px;
     accent-color: #FB9129;
     color: #fff;
-    
+
 }
-.login-page input[type=checkbox]::after{
+
+.login-page input[type=checkbox]::after {
     content: "";
     color: #FFFFFF;
 }
@@ -95,43 +132,44 @@ input:focus {
     color: #FFFFFF;
 }
 
-.login-page .otp-input input{
+.login-page .otp-input input {
     width: 50px;
     height: 50px;
     background: #EFEFEF;
     border: 1px solid #A19E9E;
     border-radius: 10px;
-border: 0.5px solid #ADADAD;
-border-radius: 4px;
-font-size: 18px;
-text-align: center;
-line-height: normal;
-margin: 0.5rem
+    border: 0.5px solid #ADADAD;
+    border-radius: 4px;
+    font-size: 18px;
+    text-align: center;
+    line-height: normal;
+    margin: 0.5rem
 }
+
 .login-page .otp-input input::-webkit-outer-spin-button,
 .login-page .otp-input input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-p.create{
+p.create {
     font-style: normal;
-font-weight: 400;
-font-size: 12px;
-color: #000000;
+    font-weight: 400;
+    font-size: 12px;
+    color: #000000;
 }
 
-.login-page .btn.profile-saved{
+.login-page .btn.profile-saved {
     width: 400px;
-/* height: 45px; */
-background: #444444;
-border-radius: 4px;
-color: #FFFFFF;
+    /* height: 45px; */
+    background: #444444;
+    border-radius: 4px;
+    color: #FFFFFF;
 }
 
-.login-page .btn.profile-saved p{
+.login-page .btn.profile-saved p {
     font-weight: 500;
-font-size: 16px;
-color: #FFFFFF;
-margin: 0 10px;
+    font-size: 16px;
+    color: #FFFFFF;
+    margin: 0 10px;
 }

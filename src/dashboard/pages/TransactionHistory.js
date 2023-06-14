@@ -8,8 +8,10 @@ import {
     TableRow,
     TableHead, TableContainer, Paper, Box, TablePagination
 } from "@mui/material";
-
+import Modal from 'react-modal';
 import { Icon } from '@iconify/react';
+import LoanRequestSummary from "../../modal/LoanRequestSummary";
+import SavingsWithdrawalSummary from "../../modal/SavingsWithdrawalSummary";
 
 const fetchTransactions = async (key) => {
 
@@ -23,9 +25,12 @@ const fetchTransactions = async (key) => {
     }
 };
 
-function TransactionHistory({closeModal}) {
+function TransactionHistory({ closeModal }) {
 
     const [transactions, setTransactions] = useState([])
+    const [modalIsOpen, setIsOpen] = useState(false);
+    const [selectedTransaction, setSelectedTransaction] = useState(null);
+
 
     // React query fecth data
     const { data, status } = useQuery(['fetchTransactions'], fetchTransactions)
@@ -42,7 +47,14 @@ function TransactionHistory({closeModal}) {
         }
         setTransactions(data.filter(item => item.type === sortParams))
     }
-
+    function openModal(transaction) {
+        // console.log(transaction);
+        setSelectedTransaction(transaction);
+        setIsOpen(true);
+    }
+    function closeModal() {
+        setIsOpen(false);
+    }
 
 
     const [page, setPage] = useState(0);
@@ -59,7 +71,7 @@ function TransactionHistory({closeModal}) {
 
     const goBack = () => {
         window.history.go(-1);
-      };
+    };
 
     return (
         <div className="transaction-history mt-5 px-4">
@@ -124,10 +136,7 @@ function TransactionHistory({closeModal}) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {(rowsPerPage > 0
-                                ? transactions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                : transactions
-                            ).map((row) => {
+                            {transactions.map((row) => {
                                 let color = (row.item?.status === "Pending") ? "#FB9129" : "#0D9068"
                                 return (
                                     <TableRow
@@ -144,12 +153,12 @@ function TransactionHistory({closeModal}) {
                                         <TableCell >{row.amount}</TableCell>
                                         <TableCell >
                                             <div className="d-flex align-items-center">
-                                            {(row.item?.status === "Pending") ? <Icon icon="solar:record-broken" rotate={1} style={{ width: "25px", height: "25px", fontWeight: "900", color: `${color}`}} /> : <Icon icon="material-symbols:circle-outline" style={{ width: "25px", height: "25px", color: `${color}`, fontWeight: "900" }} />}
+                                                {(row.item?.status === "Pending") ? <Icon icon="solar:record-broken" rotate={1} style={{ width: "25px", height: "25px", fontWeight: "900", color: `${color}` }} /> : <Icon icon="material-symbols:circle-outline" style={{ width: "25px", height: "25px", color: `${color}`, fontWeight: "900" }} />}
                                                 {/* <Icon icon="material-symbols:circle-outline" style={{ width: "20px", height: "20px", color: `${color}`, fontWeight: "900" }} /> */}
                                                 <p className='my-0 mx-2' style={{ color: `${color}` }}>{row.item?.status}</p>
                                             </div>
                                         </TableCell>
-                                        <TableCell ><Icon icon="mdi:open-in-new" style={{
+                                        <TableCell ><Icon icon="mdi:open-in-new" onClick={() => openModal(row)} style={{
                                             color: " #FB9129", width: "20px", height: "20px"
                                         }} /></TableCell>
                                     </TableRow>
@@ -177,6 +186,41 @@ function TransactionHistory({closeModal}) {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </Box>
+
+            <Modal
+                isOpen={modalIsOpen}
+                // onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                contentLabel="Example Modal"
+                className={{
+                    base: 'modal-base',
+                    afterOpen: 'modal-base_after-open',
+                    beforeClose: 'modal-base_before-close'
+                }}
+                overlayClassName={{
+                    base: 'overlay-base',
+                    afterOpen: 'overlay-base_after-open',
+                    beforeClose: 'overlay-base_before-close'
+                }}
+                shouldCloseOnOverlayClick={true}
+                closeTimeoutMS={2000}>
+                {/* <LoanRequestSummary
+               closeModal={closeModal} 
+                loanData={selectedTransaction} /> */}
+
+                {modalIsOpen && selectedTransaction && (
+                    <>
+                        {selectedTransaction.type === "loan" && (
+                            <LoanRequestSummary closeModal={closeModal} loanData={selectedTransaction} />
+                        )}
+
+                        {selectedTransaction.type === "withdrawal" && (
+                            <SavingsWithdrawalSummary closeModal={closeModal} withdrawalData={selectedTransaction} />
+                        )}
+                    </>
+                )}
+
+            </Modal>
         </div>
 
     )

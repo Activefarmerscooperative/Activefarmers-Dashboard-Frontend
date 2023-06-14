@@ -40,14 +40,27 @@ h4 {
 }
 
 .loan-category-scrollable {
-    height: 150px;
+    /* height: 150px; */
 }
-
+.home .card-container {
+    max-height: 130px;
+    max-width: fit-content;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+  }
+  .card-container::-webkit-scrollbar {
+    width: 0; /* Chrome, Safari, and Opera */
+  }
+  
+  .card-container::-webkit-scrollbar-thumb {
+    background-color: blue; /* Change to desired color */
+  }
 .home .card {
     width: 250px;
     background: rgba(13, 144, 104, 0.25);
     border-radius: 12px;
-    margin: auto 8px;
+    margin: auto 5px;
     /* padding: 5px; */
 }
 
@@ -101,15 +114,17 @@ h4 {
 }
 
 .btn.addsaving-btn {
-    width: 130px;
+    width: 200px;
     /* height: 50px; */
-    padding: 10px 10px;
+    padding: 10px 8px;
     background: #0D9068;
     border-radius: 6px;
     font-weight: 500;
     font-size: 14px;
     text-align: center;
     color: #FFFFFF;
+    white-space: nowrap;
+    margin: 0 8px;
 }
 
 .btn.addsaving-btn .add-icon {

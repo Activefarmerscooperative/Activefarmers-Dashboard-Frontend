@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from 'react-modal';
 import Verify from "./Verified";
 import { Icon } from '@iconify/react';
@@ -78,6 +78,32 @@ export default function OtpModal({ message }) {
         }
 
     }
+    const [showSnackbar, setShowSnackbar] = useState(false);
+    const [countdown, setCountdown] = useState(0);
+
+    const handleClick = () => {
+        setShowSnackbar(true);
+        setTimeout(() => {
+            setShowSnackbar(false);
+            // navigate('/login/createpassword');
+        }, 3000);
+    };
+    useEffect(() => {
+        let timer;
+        if (countdown > 0) {
+            timer = setTimeout(() => {
+                setCountdown((prevCountdown) => prevCountdown - 1);
+            }, 1000);
+        }
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [countdown]);
+
+    const handleResendOTP = () => {
+        setCountdown(94); // Set the initial countdown time (e.g., 01:34)
+        setShowSnackbar(false); // Assuming you want to hide the snackbar when resending OTP
+    };
 
     return (
         <div className='otp-modal p-4 my-4'>
@@ -102,7 +128,23 @@ export default function OtpModal({ message }) {
 
                 {isLoading && <center className="btn member-btn"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
                 {!isLoading && <button onClick={handleSubmit} className="btn btn-modal mt-5">Submit</button>}
-
+                <p className="mt-3">
+                            Yet to receive OTP?
+                            {countdown > 0 ? (
+                              <span style={{ color: "#FB9129", fontWeight: "600" }}>
+                                {' '}
+                                Resend OTP ({Math.floor(countdown / 60)
+                                  .toString()
+                                  .padStart(2, '0')}:
+                                {Math.floor(countdown % 60).toString().padStart(2, '0')})
+                              </span>
+                            ) : (
+                              <a href="#" style={{ color: "#FB9129", fontWeight: "600" }} onClick={handleResendOTP}>
+                                {' '}
+                                Resend OTP
+                              </a>
+                            )}
+                          </p>
 
             </div>
             <Modal
