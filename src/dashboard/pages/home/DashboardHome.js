@@ -6,8 +6,11 @@ import './home.css';
 import { MyLoan } from '../../../utils/api/member';
 import RecentTransaction from "../../../component/RecentTransaction";
 import SavingsWallet from "../../../component/SavingsWallet";
+import {
+  useLocation
+} from "react-router-dom";
 
-const fetchData = async (key) => {
+const fetchLoan = async (key) => {
 
   try {
 
@@ -20,21 +23,22 @@ const fetchData = async (key) => {
   }
 };
 
-export default function DashboardHome({ isNewUser }) {
+export default function DashboardHome({ user }) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [loanInputType, setLoanInputType] = useState("false");
   const [myLoan, setMyLoan] = useState({});
   const [loanIcon, setLoanIcon] = useState("mdi:eye-off");
-
+  const location = useLocation();
   // React query fecth data
-  const { data, status } = useQuery(['fetchData'], fetchData)
+  const { data, status } = useQuery(['fetchLoan'], fetchLoan)
+  const newUser = location.state;
 
   useEffect(() => {
-    console.log(isNewUser);
+
     if (!data) return
     setMyLoan(data.myLoan)
 
-  }, [data, isNewUser])
+  }, [data, newUser])
 
 
 
@@ -54,12 +58,12 @@ export default function DashboardHome({ isNewUser }) {
         <h1>Dashboard</h1>
 
         {
-          !isNewUser ? (
+          user?.regCompletePercent < 100 && (
             <div className="welcome py-3 px-4">
-              <h4>Welcome to your dashboard !</h4>
-              <p>Lorem ipsum dolor sit amet consectetur. Turpis posuere donec ipsum lectus cursus. Pellentesque tellus ornare id neque. Rutrum fringilla </p>
+              {newUser && <h4>Welcome to your dashboard !</h4>}
+              <p>Your profile is {user?.regCompletePercent}% completed. Visit the account settings tab to complete your profile </p>
             </div>
-          ) : null}
+          )}
 
 
 

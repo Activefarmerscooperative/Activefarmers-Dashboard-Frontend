@@ -172,7 +172,6 @@ export const MyLoan = async (signal) => {
 export const GetTransactions = async (type) => {
   try {
     const { data } = await api.get(`/api/users/transactions?type=${type}`);
-    console.log(data);
     return data;
   } catch (error) {
     throw error.response.data;

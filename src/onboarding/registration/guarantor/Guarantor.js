@@ -9,7 +9,7 @@ import { RotatingLines } from "react-loader-spinner";
 
 export default function Guarantor() {
     const navigate = useNavigate();
-    const [modalIsOpen, setIsOpen] = useState(true);
+    const [modalIsOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
 
     function openModal() {

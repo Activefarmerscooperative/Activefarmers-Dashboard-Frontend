@@ -27,7 +27,6 @@ function Dashboard() {
   const [urlParams, setSearchParams] = useSearchParams();
   const [paymentRef, setPaymentRef] = useState("")
   const [token, setToken] = useState(false)
-  const [isNewUser, setIsNewUser] = useState(false)
   const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
@@ -44,13 +43,9 @@ function Dashboard() {
     const abortController = new AbortController();
     const signal = abortController.signal;
 
-    const { newUser } = location;
-    setIsNewUser(newUser)
-
     async function confirmToken() {
       try {
         const data = await confirmTokenIsValid(signal)
-
         setUser(data.user)
         if (data.user.regCompletePercent < 70) {
           toast.success("Please provide the following information to complete your registration.")
@@ -87,8 +82,8 @@ function Dashboard() {
               user={user}
             />
             <Routes>
-              <Route path="" element={<DashboardHome />} />
-              <Route path="home" element={<DashboardHome />} />
+              <Route path="" element={<DashboardHome user={user}/>} />
+              <Route path="home" element={<DashboardHome user={user} />} />
               <Route path="witdrawal" element={<WitdrawalForm user={user} />} />
               <Route path="loan" element={<LoanForm user={user} />} />
               <Route path="profile" element={<ProfileUpdate setToken={setToken} />} />

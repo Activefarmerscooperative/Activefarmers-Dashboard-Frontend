@@ -38,12 +38,12 @@ const AccountGuarantor = ({ setToken }) => {
 
   function openModal(actionType) {
     setIsOpen(true);
-    setEditAccount(false);
-    setEditGuarantor(false)
     setModalActionType(actionType);
   }
 
   function closeModal() {
+    setEditAccount(false);
+    setEditGuarantor(false)
     setIsOpen(false);
   }
 
@@ -93,11 +93,9 @@ const AccountGuarantor = ({ setToken }) => {
 
   async function updateAccount() {
 
-    if (!bankDetails?.bankName || !bankDetails?.accountNumber || !bankDetails?.accountName) return toast.error("All inputs are required.");
-  
-    openModal('save');
     // if (!window.confirm("Are you sure you want to update your bank details?")) return
-    // setIsLoading(true)
+    // if (!updateData) return
+    setIsLoading(true)
 
     try {
       const data = await UpdateBankDetails({ ...bankDetails, accountNumber: `${bankDetails.accountNumber}` })
@@ -115,17 +113,7 @@ const AccountGuarantor = ({ setToken }) => {
 
   async function updateGuarantor() {
 
-    if (!guarantorDetails?.full_name || !guarantorDetails?.phone ||
-      !guarantorDetails?.address || !guarantorDetails?.email || !guarantorDetails?.gender ||
-      !guarantorDetails?.occupation) {return toast.error("All inputs are required.");
-      
-      }
-    openModal('save');
-  
-
-    // if (!window.confirm("Are you sure you want to update your guarantor details?")) return
-
-    // setGuarantorLoading(true)
+    setIsLoading(true)
 
     try {
       const data = await UpdateGuarantorDetails(guarantorDetails)
@@ -134,8 +122,25 @@ const AccountGuarantor = ({ setToken }) => {
     } catch (error) {
       toast.error(error)
     } finally {
-      setGuarantorLoading(false)
+      setIsLoading(false)
     }
+  }
+
+  function confirmUpdate(type) {
+    if (type === "Account") {
+      if (!bankDetails?.bankName || !bankDetails?.accountNumber || !bankDetails?.accountName) return toast.error("All inputs are required.");
+
+      openModal('save');
+    } else {
+      if (!guarantorDetails?.full_name || !guarantorDetails?.phone ||
+        !guarantorDetails?.address || !guarantorDetails?.email || !guarantorDetails?.gender ||
+        !guarantorDetails?.occupation) {
+        return toast.error("All inputs are required.");
+
+      }
+      openModal('save');
+    }
+
   }
 
 
@@ -201,7 +206,7 @@ const AccountGuarantor = ({ setToken }) => {
                         // openModal
                         () => openModal('discard')
                       } disabled={isLoading} className="btn discard mx-4 my-5">Discard Changes</button>}
-                      <button onClick={updateAccount} disabled={isLoading} className="btn mx-4 my-5 ">Save</button>
+                      <button onClick={() => confirmUpdate("Account")} disabled={isLoading} className="btn mx-4 my-5 ">Save</button>
                     </>}
 
                 </>
@@ -256,14 +261,13 @@ const AccountGuarantor = ({ setToken }) => {
             {editGuarantor && (
               <div>
                 <>
-                  {guarantorLoading && <button className="btn mx-4 my-5"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></button>}
                   {!guarantorLoading &&
                     <>
                       {!isLoading && <button onClick={
                         // () => setEditGuarantor(false)
                         () => openModal('discard')
                       } disabled={isLoading} className="btn mx-4 discard my-5">Discard Changes</button>}
-                      <button onClick={updateGuarantor} disabled={isLoading} className="btn mx-4 my-5 save">Save</button>
+                      <button onClick={() => confirmUpdate("Guarantor")} disabled={isLoading} className="btn mx-4 my-5 save">Save</button>
                     </>}
 
                 </>
@@ -296,6 +300,8 @@ const AccountGuarantor = ({ setToken }) => {
           closeModal={closeModal}
           closeModaltwo={closeModal}
           actionType={modalActionType}
+          updateAction={editAccount ? updateAccount : updateGuarantor}
+          isLoading={isLoading}
         // loanData={loanData}
         />
       </Modal>
