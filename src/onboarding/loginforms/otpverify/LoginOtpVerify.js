@@ -2,23 +2,25 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import '../login.css';
 import { Icon } from '@iconify/react';
+import { toast } from "react-toastify";
+import { RotatingLines } from "react-loader-spinner";
+import { LoginVerifyOTP } from "../../../utils/api/member"
+
+
 
 export default function LoginOtpVerify() {
 
     const [showSnackbar, setShowSnackbar] = useState(false);
+    const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate();
 
-    const handleClick = () => {
-        setShowSnackbar(true); 
-        setTimeout(() => {
-          setShowSnackbar(false);
-          navigate('/login/createpassword'); 
-        }, 3000); 
-      };
-
-
-
-
+    // const handleClick = () => {
+    //     setShowSnackbar(true); 
+    //     setTimeout(() => {
+    //       setShowSnackbar(false);
+    //       navigate('/login/createpassword'); 
+    //     }, 3000); 
+    //   };
 
     const [otp, setOtp] = useState(["", "", "", "", "", ""]);
     const handleChange = (e, index) => {
@@ -35,7 +37,38 @@ export default function LoginOtpVerify() {
         setOtp([...otpArray, ...otp.slice(otpArray.length)]);
     };
 
+    async function handleClick() { 
+        let errors = {};
+        let token = otp.slice(0, 6).join("");
+        
+        if (token[0] === " ") return console.log("Please enter a valid token")
+        const AFCStoken = localStorage.getItem("AFCS-token")
 
+        if (AFCStoken === "null") return console.log("Please enter a valid token")
+        console.log(AFCStoken)
+        console.log(token)
+        try {
+            setIsLoading(true)
+            await LoginVerifyOTP({
+                token
+            });
+            setShowSnackbar(true);
+            navigate('/login/createpassword', { replace: true });
+            //localStorage.removeItem("AFCStoken")
+
+        } catch (error) {
+            // setTimeout(() => {
+            //   setShowSnackbar(false);
+            //   navigate('/login/createpassword'); 
+            // }, 3000);
+            toast.error(error)
+            toast.error(error.error)
+            toast.error(error.message)
+        } finally {
+            setIsLoading(false)
+        }
+
+    }
 
 
 
@@ -63,11 +96,9 @@ export default function LoginOtpVerify() {
                         </div>
 
 
+                        {isLoading && <button className='login-btn'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
+                        {!isLoading && <button className='login-btn mt-4 mx-auto' onClick={handleClick}>Verify OTP</button>}
 
-
-                        {/* {isLoading && <button className='login-btn'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
-                        {!isLoading && <button className='login-btn mt-4 mx-auto' onClick={handleClick} >Verify OTP</button>} */}
-                        <button className='login-btn mt-4 mx-auto' onClick={handleClick} >Verify OTP</button>
 
                     </form>
                     {showSnackbar ? <button className=' d-flex align-items-center btn mx-4 profile-saved' >
