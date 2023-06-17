@@ -38,13 +38,13 @@ const ProfileUpdate = ({ setToken }) => {
 
     function openModal(actionType) {
         setIsOpen(true);
-        setEditUser(false);
-        setEditOccupation(false);
-        setEditNextKin(false);
         setModalActionType(actionType);
     }
     function closeModal() {
         setIsOpen(false);
+        setEditUser(false);
+        setEditOccupation(false);
+        setEditNextKin(false);
     }
 
     // React query fecth data
@@ -73,7 +73,7 @@ const ProfileUpdate = ({ setToken }) => {
                 address: userData.address
             })
             toast.success(data.message)
-            setEditUser(false)
+            closeModal()
         } catch (error) {
             toast.error(error)
         } finally {
@@ -109,7 +109,6 @@ const ProfileUpdate = ({ setToken }) => {
     };
 
     async function updateUserOccupation() {
-
         // if (!window.confirm("Are you sure you want to update your details?")) return
 
         setIsLoading(true)
@@ -117,7 +116,7 @@ const ProfileUpdate = ({ setToken }) => {
         try {
             const data = await UpdateOccupationDetails(occupationData)
             toast.success(data.message)
-            setEditOccupation(false)
+            closeModal()
             localStorage.setItem("AFCS-token", data.token)
             setToken(data.token)
         } catch (error) {
@@ -130,13 +129,12 @@ const ProfileUpdate = ({ setToken }) => {
     async function updateNextOfKin() {
 
         // if (!window.confirm("Are you sure you want to update your Next of Kin details?")) return
-
         setIsLoading(true)
 
         try {
             const data = await UpdateNextOfKinDetails(nextKinData)
             toast.success(data.message)
-            setEditNextKin(false)
+            closeModal()
             localStorage.setItem("AFCS-token", data.token)
             setToken(data.token)
         } catch (error) {
