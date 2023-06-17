@@ -100,7 +100,7 @@ const AccountGuarantor = ({ setToken }) => {
     try {
       const data = await UpdateBankDetails({ ...bankDetails, accountNumber: `${bankDetails.accountNumber}` })
       toast.success(data.message)
-      setEditAccount(false)
+      closeModal()
       localStorage.setItem("AFCS-token", data.token)
       setToken(data.token)
     } catch (error) {
@@ -118,7 +118,7 @@ const AccountGuarantor = ({ setToken }) => {
     try {
       const data = await UpdateGuarantorDetails(guarantorDetails)
       toast.success(data.message)
-      setEditGuarantor(false)
+      closeModal()
     } catch (error) {
       toast.error(error)
     } finally {
