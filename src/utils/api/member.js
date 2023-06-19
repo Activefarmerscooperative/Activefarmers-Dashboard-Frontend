@@ -14,6 +14,8 @@ export const RegisterMember = async (user) => {
   }
 };
 
+
+
 export const VerifyOTP = async (token) => {
   try {
     const { data } = await api.put(`/api/users`, token);
@@ -58,6 +60,33 @@ export const AddGuarantor = async (guarantor) => {
 export const LoginMember = async (user) => {
   try {
     const { data } = await api.post(`/api/users/login`, user);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const ForgotPassword = async (user) => {
+  try {
+    const { data } = await api.post(`/api/users/forgot-pw`, user);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const LoginVerifyOTP = async (token) => {
+  try {
+    const { data } = await api.post(`/api/users/verify-token`, token);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const ResetPassword = async (user) => {
+  try {
+    const { data } = await api.put(`/api/users/reset-pw`, user);
     return data;
   } catch (error) {
     throw error.response.data;
