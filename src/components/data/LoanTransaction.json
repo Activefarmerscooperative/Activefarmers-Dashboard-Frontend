@@ -1,0 +1,57 @@
+[
+    {
+      "_id": "1",
+      "type": "Loan Request",
+      "createdAt": "2023-06-29T10:30:00Z",
+      "amount": 1000,
+      "item": {
+        "status": "Pending"
+      }
+    },
+    {
+      "_id": "2",
+      "type": "Loan Request",
+      "createdAt": "2023-06-28T14:15:00Z",
+      "amount": 2000,
+      "item": {
+        "status": "Active"
+      }
+    },
+    {
+      "_id": "3",
+      "type": "Loan Request",
+      "createdAt": "2023-06-27T09:45:00Z",
+      "amount": 1500,
+      "item": {
+        "status": "Paid"
+      }
+    },
+    {
+      "_id": "4",
+      "type": "Loan Request",
+      "createdAt": "2023-06-26T16:20:00Z",
+      "amount": 3000,
+      "item": {
+        "status": "Paid"
+      }
+    },
+    {
+      "_id": "4",
+      "type": "Loan Request",
+      "createdAt": "2023-06-26T16:20:00Z",
+      "amount": 3000,
+      "item": {
+        "status": "Paid"
+      }
+    },
+    {
+      "_id": "4",
+      "type": "Loan Request",
+      "createdAt": "2023-06-26T16:20:00Z",
+      "amount": 3000,
+      "item": {
+        "status": "Paid"
+      }
+    }
+  ]
+  

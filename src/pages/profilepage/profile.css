@@ -1,0 +1,234 @@
+.user-profile {
+    display: flex;
+    /* height: 100vh; */
+}
+.sidebar {
+    position: fixed;
+    width: 200px;
+    height: 85vh;
+    max-height: 90vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px 0px #0000000D;
+    border: 1px solid #44444440
+}
+
+.sidebar p {
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: normal;
+    color: #000000;
+    text-align: center;
+    padding: 5px 15px;
+    margin: 10px 0;
+}
+
+.sidebar p.active,
+.sidebar p:hover {
+    display: flex;
+    align-items: center;
+    width: 150px;
+    height: auto;
+    border-radius: 33px;
+    color: #0D9068;
+    background: #0d906949;
+}
+
+.content {
+    width: auto;
+    margin-left: 200px;
+    padding: 20px;
+    overflow-y: auto;
+}
+.profile h4.go-back{
+font-size: 20px;
+font-weight: 500;
+color: #0D9068;
+
+
+}
+ .back-icon{
+    width: 25px;
+height: 25px;
+background-color: #0D9068;
+color: #ffffff;
+border-radius: 20px;
+
+}
+
+.user-info-section{
+    width: auto;
+height: auto;
+background-color: #FFFFFF;
+border: 1px solid #44444440;
+border-radius: 15px;
+}
+
+.profile p.h6, .loan p.h6{
+font-size: 22px;
+font-weight: 500;
+color: #0D9068;
+
+}
+.personalinfo-user{
+    flex-wrap: wrap;
+}
+
+.loan .css-1ygcj2i-MuiTableCell-root, .loan .css-1ex1afd-MuiTableCell-root {
+    text-align: left !important;
+    width: 200px !important;
+}
+.transaction-history .css-1ygcj2i-MuiTableCell-root, .transaction-history .css-1ex1afd-MuiTableCell-root {
+    text-align: left !important;
+}
+.loan .css-15wwp11-MuiTableHead-root{
+    background: #F6F9FF;
+    border-radius: 50px 50px 0 0 !important;
+}
+
+
+.loan .css-rqglhn-MuiTable-root {
+    width: 90%;
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1px solid #dbe7ff;
+}
+
+.profile p.info, .loan p.info{
+font-size: 14px;
+font-weight: 500;
+color: #000000;
+
+}
+.profile span, .loan span{
+font-size: 12px;
+font-weight: 400;
+color: #444444;
+
+}
+
+
+
+
+.tab-headers .tab-header{
+    font-size: 16px;
+    font-weight: 500;
+    padding: 5px 10px;
+    color: #0D9068;
+    border: 0;
+}
+
+.tab-headers .tab-header:hover {
+    cursor: pointer;
+}
+
+.tab-headers .tab-header.active {
+    border-bottom: 4px solid #0D9068;
+
+}
+.tab-header .notification{
+    padding: 0 5px;
+background: #FB9129;
+border-radius: 100px;
+font-size: 12px;
+color: #FFFFFF;
+
+}
+
+/* loanTable.css */
+
+.paid-icon {
+    color: #0D9068;
+    width: 20px;
+    height: 20px;
+    border-left: 1px solid #fff;
+  }
+  
+  .active-icon {
+    color: #FB9129;
+    width: 20px;
+    height: 20px;
+    border-left: 1px solid #fff;
+  }
+  
+  .pending-icon {
+    color: #FB9129;
+    width: 20px;
+    height: 20px;
+    border-left: 1px solid #fff;
+  }
+  .pending-status {
+    color: #FB9129;
+    width: 20px;
+    height: 20px;
+    white-space: nowrap;
+    margin: 0 2px;
+  }
+  
+  .paid-status {
+    color: #0D9068;
+    width: 20px;
+    height: 20px;
+    white-space: nowrap;
+    margin: 0 2px;
+  }
+  
+  .active-status {
+    color: #FB9129;
+    width: 20px;
+    height: 20px;
+    white-space: nowrap;
+    margin: 0 2px;
+  }
+  
+  
+  .modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    width: 400px;
+    max-width: 80%;
+    outline: none;
+  }
+  
+  .modal-content {
+    margin-bottom: 20px;
+  }
+  
+  .modal-content h2 {
+    margin-bottom: 10px;
+  }
+  
+  .modal-content p {
+    margin-bottom: 5px;
+  }
+  
+  .modal-content button {
+    margin-right: 10px;
+  }
+  
+
+
+@media (max-width: 768px) {
+    .user-profile {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        align-items: center;
+    }
+
+    .sidebar p {
+        width: 100%;
+        max-width: 200px;
+    }
+}
