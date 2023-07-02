@@ -1,0 +1,126 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "personalInfo": {
+        "firstName": "Kadwama",
+        "lastName": "Lazarus",
+        "email": "lazarus@deo.com",
+        "phoneNumber": "09022299999"
+      },
+      "addressInfo": {
+        "state": "Adamawa",
+        "originLGA": "Guyuk",
+        "residenceLGA": "Yola North",
+        "residentialAddress": "N012 Barracks road Jimeta-Yola"
+      },
+      "occupationInfo": {
+        "jobTitle": "UI/UX Designer",
+        "monthlyIncome": "1,500,000",
+        "accountNumber": "0026733389",
+        "companyName": "Ministry of Health",
+        "workGrade": "Level 7"
+      },
+      "nextOfKin": {
+        "fullName": "Gloria Zira",
+        "phoneNumber": "93994849493",
+        "relationship": "Siblings",
+        "email": "gloria.com@gmail",
+        "residentialAddress": "N012 Barracks road Jimeta-Yola"
+      },
+      "guarantorInformation": {
+        "fullName": "Joy Stone",
+        "phoneNumber": "93994849493",
+        "gender": "Female",
+        "email": "docjoy.com@gmail",
+        "residentialAddress": "N012 Barracks road Jimeta-Yola",
+        "occupation": "Doctor"       
+      },
+      "activeLoan":{
+        "amount":"250,000",
+        "repaymentPeriod":"10 Months",
+        "repaymentStartDate":"12th July 2023",
+        "repaymentEndDate":"12th July 2024",
+        "amountPayable":"300,000",
+        "repaymentPerMonthPayable":"34,500",
+        "amountPaid":"69,000",
+        "outstandingBalance":"179,000",
+        "nextPaymentDate":"12th August 2023"
+      }
+    },
+    {
+      "id": 2,
+      "personalInfo": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "john.doe@example.com",
+        "phoneNumber": "1234567890"
+      },
+      "addressInfo": {
+        "state": "California",
+        "originLGA": "Los Angeles",
+        "residenceLGA": "San Francisco",
+        "residentialAddress": "123 Main Street"
+      },
+      "occupationInfo": {
+        "jobTitle": "Software Engineer",
+        "monthlyIncome": "2,000,000",
+        "accountNumber": "9876543210",
+        "companyName": "Tech Corp",
+        "workGrade": "Level 8"
+      },
+      "nextOfKin": {
+        "fullName": "Jane Doe",
+        "phoneNumber": "9876543210",
+        "relationship": "Spouse",
+        "email": "jane.doe@example.com",
+        "residentialAddress": "456 Elm Street"
+      },
+      "guarantorInformation": {
+        "fullName": "Mayor Cherry",
+        "phoneNumber": "939949493",
+        "gender": "Female",
+        "email": "cherry.com@gmail",
+        "residentialAddress": "Jan gada, Abuja",
+        "occupation": "Entrepreneur"       
+      }
+    },
+    {
+      "id": 3,
+      "personalInfo": {
+        "firstName": "Alice",
+        "lastName": "Smith",
+        "email": "alice.smith@example.com",
+        "phoneNumber": "5551234567"
+      },
+      "addressInfo": {
+        "state": "New York",
+        "originLGA": "Manhattan",
+        "residenceLGA": "Brooklyn",
+        "residentialAddress": "789 Oak Avenue"
+      },
+      "occupationInfo": {
+        "jobTitle": "Marketing Manager",
+        "monthlyIncome": "1,800,000",
+        "accountNumber": "5678901234",
+        "companyName": "Marketing Inc",
+        "workGrade": "Level 6"
+      },
+      "nextOfKin": {
+        "fullName": "Bob Smith",
+        "phoneNumber": "5559876543",
+        "relationship": "Brother",
+        "email": "bob.smith@example.com",
+        "residentialAddress": "321 Maple Lane"
+      },
+      "guarantorInformation": {
+        "fullName": "Mayor Mc",
+        "phoneNumber": "939949003",
+        "gender": "Male",
+        "email": "mayor22.com@gmail",
+        "residentialAddress": "Aso Rock Abuja",
+        "occupation": "Professor"       
+      }
+    }
+  ]
+}

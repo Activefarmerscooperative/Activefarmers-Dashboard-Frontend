@@ -1,0 +1,108 @@
+
+{
+  "members": [
+    {
+      "id": 1,
+      "image": "/assets/team1.png",
+      
+      "name": "John Doe",
+      "email": "johndoe@example.com",
+      "phone": "1234567890",
+      "dateJoined": "2022-01-01",
+      "category": "Member",
+      "location": "City A",
+      "gender": "Male"
+    },
+    {
+      "id": 2,
+      "image": "img",
+      "name": "Jane Smith",
+      "email": "janesmith@example.com",
+      "phone": "0987654321",
+      "dateJoined": "2022-02-01",
+      "category": "Member",
+      "location": "City B",
+      "gender": "Female"
+    }
+  ],
+  "borrowers": [
+    {
+      "id": 1,
+      "image": "img",
+      "loanAmount": 5000,        
+      "savingsBalance": 1000,
+      "borrower": "John Doe",
+      "dateJoined": "2022-03-01",
+      "category": "Borrower",
+      "location": "City C",
+      "gender": "Male"
+    },
+    {
+      "id": 2,
+      "image": "img",
+      "loanAmount": 50000,        
+      "savingsBalance": 1000,
+      "borrower": "Deo John",
+      "dateJoined": "2022-03-01",
+      "category": "Borrower",
+      "location": "Yola",
+      "gender": "Male"
+    },
+    {
+      "id": 3,
+      "image": "img",
+      "loanAmount": 7000,
+      "savingsBalance": 2000,
+      "borrower": "Jane Smith",
+      "dateJoined": "2022-04-01",
+      "category": "Borrower",
+      "location": "City D",
+      "gender": "Female"
+    }
+  ],
+  "loanRequests": [
+    {
+      "id": 1,
+      "loanAmount": 10000,
+      "savingsBalance": 5000,
+      "borrower": "John Doe",
+      "dateJoined": "2022-05-01",
+      "phone": "0987654321",
+      "category": "Loan Request",
+      "location": "Lamurde",
+      "gender": "Male"
+    }
+  ],
+  "savingsWithdrawalRequests": [
+    {
+      "id": 1,
+      "loanAmount": 0,
+      "savingsBalance": 5000,
+      "borrower": "John Doe",
+      "dateJoined": "2022-07-01",
+      "category": "Savings Withdrawal Request",
+      "location": "City G",
+      "gender": "Male"
+    },
+    {
+      "id": 2,
+      "loanAmount": 0,
+      "savingsBalance": 8000,
+      "borrower": "Jane Smith",
+      "dateJoined": "2022-08-01",
+      "category": "Savings Withdrawal Request",
+      "location": "City H",
+      "gender": "Female"
+    },
+    {
+      "id": 3,
+      "loanAmount": 15000,
+      "savingsBalance": 8000,
+      "borrower": "Alice Smith",
+      "dateJoined": "2022-06-01",
+      "category": "Loan Request",
+      "location": "Jimeta",
+      "gender": "Female"
+    }
+  ]
+}

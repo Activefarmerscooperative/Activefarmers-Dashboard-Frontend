@@ -1,0 +1,77 @@
+{
+    "notifications": [
+      {
+        "id": 1,
+        "message": "New user just signed up with Active Farmers Cooperative",
+        "date": "56 Mins ago",
+        "read": false
+      },
+      {
+        "id": 2,
+        "message": "New loan request from Kadwama Lazarus",
+        "date": "3 Hrs ago",
+        "read": true
+      },
+      {
+        "id": 3,
+        "message": "New savings withdrawal request from Gloria Zira",
+        "date": "16 Hrs ago",
+        "read": false
+      },
+      {
+        "id": 4,
+        "message": "New loan request from Kadwama Lazarus",
+        "date": "21 Hrs ago",
+        "read": true
+      },
+      {
+        "id": 5,
+        "message": "Lorem ipsum dolor sit amet consectetur Nunc augue vulputate lectus integer",
+        "date": "5months ago",
+        "read": false
+      },
+      {
+        "id": 6,
+        "message": "Witdrawal Request from Kadwama",
+        "date": "2 weeks ago",
+        "read": true
+      },
+      {
+        "id": 7,
+        "message": "Lorem ipsum dolor sit amet consectetur Nunc augue vulputate lectus integer",
+        "date": "2 months ago",
+        "read": true
+      },
+      {
+        "id": 8,
+        "message": "Lorem ipsum dolor sit amet consectetur Nunc augue vulputate lectus integer",
+        "date": "3 months ago",
+        "read": true
+      },
+      {
+        "id": 9,
+        "message": "Lorem ipsum dolor sit amet consectetur Nunc augue vulputate lectus integer",
+        "date": "3 months ago",
+        "read": false
+      },
+      {
+        "id": 10,
+        "message": "New loan request from Kadwama Lazarus",
+        "date": "4 onths ago",
+        "read": true
+      },
+      {
+        "id": 11,
+        "message": "Lorem ipsum dolor sit amet consectetur Nunc augue vulputate lectus integer",
+        "date": "1st January 2023",
+        "read": true
+      },
+      {
+        "id": 12,
+        "message": "New loan request from Kadwama Lazarus",
+        "date": "1st January, 2023",
+        "read": true
+      }
+    ]
+  }
+  
