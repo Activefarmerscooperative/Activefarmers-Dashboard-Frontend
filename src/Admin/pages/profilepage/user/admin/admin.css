@@ -1,0 +1,174 @@
+.admin-profile-page {
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.admin-profile-page h1{
+font-size: 35px;
+font-weight: 600;
+color: #0D9068;
+text-align: center;
+
+}
+.admin-profile-page .tabs {
+  display: flex;
+
+}
+
+.admin-profile-page .tab {
+  padding: 10px 20px;
+  background-color: transparent;
+  cursor: pointer;
+  width: 100px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+  text-align: center;
+  margin: 0 50px;
+
+
+}
+
+.admin-profile-page .tab.active {
+  background-color: #0D9068;
+  color: #fff;
+
+}
+
+.admin-profile-page .content {
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0px 4px 45px 0px #0000001A;
+  background: #FFFFFF;
+
+  border-radius: 15px
+  
+}
+
+.admin-profile-page .edit-profile {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-profile-page .input-field {
+  width: 345px;
+ 
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+  
+}
+.admin-profile-page .input-field input{
+  outline: none;
+  border-radius: 10px;
+  border: 1px solid #FB9129;
+  padding: 8px 10px;
+font-size: 16px;
+font-weight: 400;
+color: #000000;
+
+}
+
+.input-container {
+  position: relative;
+  width: 200px; /* Set the desired width of the input field */
+}
+
+
+.admin-profile-page .profile-info {
+  display: flex;
+  align-items: center;
+}
+
+
+
+.admin-profile-page .image-preview {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.admin-profile-page .edit-icon {
+background-color: #FB9129;
+  color: #e5e5e5;
+  border-radius: 50%;
+  padding: 6px;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: hidden;
+
+}
+.profile-picture{
+  width: auto;
+}
+.admin-profile-page .camera-icon {
+  position: absolute;
+color: #FB9129;
+    background-color: #fff;
+  border-radius: 50%;
+  padding: 6px;
+  cursor: pointer;
+  bottom: 150px;
+left: 660px;
+  width: 40px;
+  height: 40px;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: hidden;
+  box-shadow: 0px 2px 10px 0px #00000040;
+
+}
+.admin-profile-page .info{
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.admin-profile-page .info .field {
+  margin: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  white-space: none;
+font-size: 14px;
+font-weight: 500;
+
+}
+.admin-profile-page .info .field span{
+ 
+font-size: 12px;
+font-weight: 400;
+}
+
+.admin-profile-page .save-button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #0d9068;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+border-radius: 50px
+
+}
+.admin-profile-page  .input-field{
+
+}
+.admin-profile-page .snackbar {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #0d9068;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
