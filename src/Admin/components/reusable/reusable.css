@@ -1,0 +1,108 @@
+
+.loan-summary-modal {
+    width: 700px;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fefefe;
+    margin: 0 auto;
+    border-radius: 22px;
+}
+
+.loan-summary-modal {
+    height: fit-content;
+}
+
+.icon {
+    width: 75px;
+    height: 75px;
+    color: #2F9909;
+}
+
+.loan-summary-modal .loan-summary-div {
+    width: 750px;
+}
+
+.loan-summary-modal a.back-to {
+    font-weight: 500;
+    font-size: 16px;
+    float: left;
+    color: #0D9068;
+    text-decoration: none;
+}
+
+.loan-summary-modal .add-icon {
+    background: #0D9068;
+    color: #ffffff;
+    font-size: 20px;
+    margin: 0 5px;
+    border-radius: 50px;
+}
+
+
+.loan-summary-modal .btn,
+.loan-summary-modal .btn:focus {
+    width: 200px;
+    /* height: 50px; */
+    background: #FB9129;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #FFFFFF;
+    white-space: nowrap;
+    padding: 10px 0;
+}
+
+.loan-summary-modal h2{
+    color: #0D9068;
+}
+
+.loan-summary-modal p {
+    font-weight: 400;
+    font-size: 14px;
+    color: #303030;
+    margin-bottom: 0;
+
+}
+.loan-summary-modal hr {
+    width: 100px;
+    border: 1px solid #0D9068;
+    margin: 0 8px;
+}
+
+.loan-summary-modal span {
+    font-weight: 500;
+    font-size: 14px;
+    color: #000000;
+    margin: 0 15px;
+}
+.loan-summary-modal span.status{
+    width: 100px;
+    padding: 5px;
+    text-align: center;
+border: 1px solid #0D9068;
+border-radius: 33px;
+font-weight: 500;
+font-size: 14px;
+
+color: #0D9068;
+
+}
+.loan-summary-modal a:nth-child(1) .btn{
+    background-color: #FFFFFF;
+    color: #FB9129;
+    border: 2px solid #FB9129;
+}
+
+.loan-summary-modal p.agree {
+    font-weight: 400;
+    font-size: 10px;
+    color: #000000;
+}
+
+p.agree a {
+    font-weight: 600;
+    color: #000000;
+}
+

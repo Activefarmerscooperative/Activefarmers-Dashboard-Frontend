@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../login.css';
-import { LoginMember } from "../../../utils/api/member";
+import { ResetPassword } from "../../../utils/api/member";
 import { toast } from "react-toastify";
 import { RotatingLines } from "react-loader-spinner";
 import OtpModal from "../../../modal/OTP";
@@ -18,9 +18,8 @@ export default function CreateNewPassword() {
     const [isLoading, setIsLoading] = useState(false);
     const [modalIsOpen, setIsOpen] = useState(false);
     const [message, setMessage] = useState("")
-
+    const [confirmPass, setConfirmPass] = useState("")
     const [user, setUser] = useState({
-        email: "",
         password: "",
 
     })
@@ -40,49 +39,29 @@ export default function CreateNewPassword() {
     const validateForm = () => {
         let errors = {};
 
-        if (!user.email) {
-            errors.email = 'Email Address is required';
-        } else if (!isValidEmail(user.email)) {
-            errors.email = 'Invalid email format';
-        }
-
         if (!user.password) {
             errors.password = 'Password is required';
+        } else if (user.password.length < 6) {
+            errors.password = 'Password must be at least 6 characters long';
+        }
+
+        if (user.password !== user.confirmpassword) {
+            errors.confirmPass = 'Passwords do not match';
         }
 
         return errors;
     };
 
-    // Helper functions for email and phone number validation
-    const isValidEmail = (email) => {
-        // Regular expression for email validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    };
 
     async function handleSubmit(e) {
         e.preventDefault()
 
-        // Validate the form inputs
         const errors = validateForm();
-
-
-        // If form validation fails
-        if (Object.keys(errors).length > 0) {
-            const firstFieldName = Object.keys(errors)[0];
-            toast.error(errors[firstFieldName]);
-            return;
-        }
         setIsLoading(true)
         try {
-            const data = await LoginMember(user);
-            localStorage.setItem("AFCS-token", data.token)
-            toast.success(data.message);
-
+            const data = await ResetPassword(user);
             setIsLoading(false);
-            navigate("/dashboard", { replace: true })
             openModal()
-            // return data;
         } catch (error) {
             setIsLoading(false);
             toast.error(error.error);
@@ -101,7 +80,7 @@ export default function CreateNewPassword() {
                         <p className="text-end my-0 create">Both passwords must match</p>
                     </div>
                     <div className="my-2">
-                        <input type="password" name="password" placeholder='password' required value={user.password} onChange={handleChange} />
+                        <input type="password" name="password" placeholder='password' required value={confirmPass} onChange={(e) => setConfirmPass(e.target.value)} />
                         <p className="text-end my-0 create">Both passwords must match</p>
                     </div>
 
@@ -109,7 +88,7 @@ export default function CreateNewPassword() {
 
                     
                     {isLoading && <button className='login-btn mt-3'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
-                    {!isLoading && <button className='login-btn mx-auto mt-3' onClick={openModal}>Done</button>}
+                    {!isLoading && <button className='login-btn mx-auto mt-3' onClick={handleSubmit}>Done</button>}
 
 
 

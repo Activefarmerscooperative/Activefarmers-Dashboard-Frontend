@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../login.css';
 import { Icon } from '@iconify/react';
+import { toast } from "react-toastify";
+import { RotatingLines } from "react-loader-spinner";
+import { LoginVerifyOTP } from "../../../utils/api/member"
+
+
 
 export default function LoginOtpVerify() {
+    const [isLoading, setIsLoading] = useState(false)
     const [showSnackbar, setShowSnackbar] = useState(false);
     const [countdown, setCountdown] = useState(0);
     const navigate = useNavigate();
-
-    const handleClick = () => {
-        setShowSnackbar(true);
-        setTimeout(() => {
-            setShowSnackbar(false);
-            navigate('/login/createpassword');
-        }, 3000);
-    };
 
     useEffect(() => {
         let timer;
@@ -33,10 +31,6 @@ export default function LoginOtpVerify() {
         setShowSnackbar(false); // Assuming you want to hide the snackbar when resending OTP
     };
 
-
-
-
-
     const [otp, setOtp] = useState(["", "", "", "", "", ""]);
     const handleChange = (e, index) => {
         const value = e.target.value;
@@ -52,11 +46,37 @@ export default function LoginOtpVerify() {
         setOtp([...otpArray, ...otp.slice(otpArray.length)]);
     };
 
+    async function handleClick() {
+        let errors = {};
+        let token = otp.slice(0, 6).join("");
 
+        if (token[0] === " ") return console.log("Please enter a valid token")
+        const AFCStoken = localStorage.getItem("AFCS-token")
 
+        if (AFCStoken === "null") return console.log("Please enter a valid token")
 
+        try {
+            setIsLoading(true)
+            await LoginVerifyOTP({
+                token
+            });
+            setShowSnackbar(true);
+            navigate('/login/createpassword', { replace: true });
+            //localStorage.removeItem("AFCStoken")
 
+        } catch (error) {
+            // setTimeout(() => {
+            //   setShowSnackbar(false);
+            //   navigate('/login/createpassword'); 
+            // }, 3000);
+            toast.error(error)
+            toast.error(error.error)
+            toast.error(error.message)
+        } finally {
+            setIsLoading(false)
+        }
 
+    }
 
     return (
         <div className="login-page pt-3 px-5">
@@ -80,11 +100,9 @@ export default function LoginOtpVerify() {
                         </div>
 
 
+                        {isLoading && <button className='login-btn'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
+                        {!isLoading && <button className='login-btn mt-4 mx-auto' onClick={handleClick}>Verify OTP</button>}
 
-
-                        {/* {isLoading && <button className='login-btn'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
-                        {!isLoading && <button className='login-btn mt-4 mx-auto' onClick={handleClick} >Verify OTP</button>} */}
-                        <button className='login-btn mt-4 mx-auto' onClick={handleClick} >Verify OTP</button>
 
                     </form>
                     {showSnackbar ? (<button className=' d-flex align-items-center btn mx-4 profile-saved' >
@@ -92,25 +110,25 @@ export default function LoginOtpVerify() {
                     </button>)
                         : (
                             <p>
-                            Yet to receive OTP?
-                            {countdown > 0 ? (
-                              <span style={{ color: "#FB9129", fontWeight: "600" }}>
-                                {' '}
-                                Resend OTP ({Math.floor(countdown / 60)
-                                  .toString()
-                                  .padStart(2, '0')}:
-                                {Math.floor(countdown % 60).toString().padStart(2, '0')})
-                              </span>
-                            ) : (
-                              <a href="#" style={{ color: "#FB9129", fontWeight: "600" }} onClick={handleResendOTP}>
-                                {' '}
-                                Resend OTP
-                              </a>
-                            )}
-                          </p>
-                        // <p>Yet to receive OTP?<a href="" style={{ color: "#FB9129", fontWeight: "600" }} onClick={handleResendOTP}> {' '} Resend OTP ({countdown.toString().padStart(2, '0')})</a></p>
+                                Yet to receive OTP?
+                                {countdown > 0 ? (
+                                    <span style={{ color: "#FB9129", fontWeight: "600" }}>
+                                        {' '}
+                                        Resend OTP ({Math.floor(countdown / 60)
+                                            .toString()
+                                            .padStart(2, '0')}:
+                                        {Math.floor(countdown % 60).toString().padStart(2, '0')})
+                                    </span>
+                                ) : (
+                                    <a href="#" style={{ color: "#FB9129", fontWeight: "600" }} onClick={handleResendOTP}>
+                                        {' '}
+                                        Resend OTP
+                                    </a>
+                                )}
+                            </p>
+                            // <p>Yet to receive OTP?<a href="" style={{ color: "#FB9129", fontWeight: "600" }} onClick={handleResendOTP}> {' '} Resend OTP ({countdown.toString().padStart(2, '0')})</a></p>
                         )
-                        }
+                    }
 
                 </div>
             </div>

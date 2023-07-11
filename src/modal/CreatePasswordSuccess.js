@@ -16,7 +16,7 @@ function CreatePasswordSuccess() {
                 <h5>Password changed successfully!</h5>
                 <p>
                     Proceed to login, remember to use your new password</p>
-                <button onClick={() => { navigate("/dashboard"); }} className="btn btn-modal mt-5">Login</button>
+                <button onClick={() => { navigate("/login"); }} className="btn btn-modal mt-5">Login</button>
             </div>
         </div>
     )

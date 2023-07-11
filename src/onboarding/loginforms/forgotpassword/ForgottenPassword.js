@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import '../login.css';
 import { Icon } from '@iconify/react';
-import { LoginMember } from "../../../utils/api/member"
+import { ForgotPassword } from "../../../utils/api/member"
 import { RotatingLines } from "react-loader-spinner";
 import { toast } from "react-toastify";
 
@@ -11,7 +11,6 @@ export default function ForgottenPassword() {
     const [isLoading, setIsLoading] = useState(false)
     const [user, setUser] = useState({
         email: "",
-        password: "",
 
     })
 
@@ -30,10 +29,6 @@ export default function ForgottenPassword() {
             errors.email = 'Invalid email format';
         }
 
-        if (!user.password) {
-            errors.password = 'Password is required';
-        }
-
         return errors;
     };
 
@@ -44,34 +39,36 @@ export default function ForgottenPassword() {
         return emailRegex.test(email);
     };
 
-    // async function handleSubmit(e) {
-    //     e.preventDefault()
+    async function handleSubmit(e) {
+        e.preventDefault()
 
-    //     // Validate the form inputs
-    //     const errors = validateForm();
+        // Validate the form inputs
+        const errors = validateForm();
+        let email = user.email
 
+        // If form validation fails
+        if (!isValidEmail(email)) {
 
-    //     // If form validation fails
-    //     if (Object.keys(errors).length > 0) {
-    //         const firstFieldName = Object.keys(errors)[0];
-    //         toast.error(errors[firstFieldName]);
-    //         return;
-    //     }
-    //     setIsLoading(true)
-    //     try {
-    //         const data = await LoginMember(user);
-    //         localStorage.setItem("AFCS-token", data.token)
-    //         toast.success(data.message);
+            errors.email = 'Invalid email format';
+            setIsLoading(false)
+        } else {
+            setIsLoading(true)
+            try {
 
-    //         setIsLoading(false);
-    //         navigate("/dashboard", { replace: true })
-    //         // return data;
-    //     } catch (error) {
-    //         setIsLoading(false);
-    //         toast.error(error.error);
-    //     }
+                const data = await ForgotPassword(user);
+                localStorage.setItem("AFCS-token", data.token)
+                toast.success(data.message);
 
-    // }
+                setIsLoading(false);
+                navigate("/login/otp", { replace: true })
+                // return data;
+            } catch (error) {
+                setIsLoading(false);
+                toast.error(error);
+                toast.error(error?.error);
+            }
+        }
+    }
 
     return (
         <div className="login-page pt-3 px-5">
@@ -84,7 +81,7 @@ export default function ForgottenPassword() {
                         <input type="email" name="email" placeholder='email' required value={user.email} onChange={handleChange} />
 
                         {isLoading && <button className='login-btn'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
-                        {!isLoading && <button className='login-btn mt-4 mx-auto' onClick={() => { navigate("/login/otp"); }}>Send OTP</button>}
+                        {!isLoading && <button className='login-btn mt-4 mx-auto' onClick={handleSubmit}>Send OTP</button>}
 
 
 

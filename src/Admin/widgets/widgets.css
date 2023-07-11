@@ -1,0 +1,198 @@
+.statistic-card {
+    width: 180px;
+    /* height: fit-content; */
+    border-radius: 10px;
+    border: 0.5px solid #0D9068;
+    line-height: normal;
+    text-align: center;
+    margin: 0 5px;
+}
+
+.statistic-card span {
+    font-size: 20px;
+    font-weight: 700;
+    color: #FB9129;
+    white-space: nowrap;
+}
+
+.statistic-card p {
+    font-size: 14px;
+    font-weight: 400;
+    coor: #444444;
+    white-space: nowrap;
+
+
+}
+
+.statistic-card .toggle-icon .iconify {
+    font-size: 24px;
+}
+
+
+.tab-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.tab-header .tab-item {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 5px 10px;
+    color: #444444;
+}
+
+.tab-header .tab-item:hover {
+    cursor: pointer;
+}
+
+.tab-header .tab-item.active {
+    color: #0D9068;
+
+    border-bottom: 4px solid #0D9068;
+
+}
+
+.sorting-button .btn {
+    width: auto;
+    padding: 10px;
+    margin: 0 5px;
+    border-radius: 45px;
+    white-space: nowrap;
+    border: 0.6px solid #635E5E;
+    color: #000000;
+
+
+}
+
+.sorting-button .search,
+.search input::placeholder {
+    width: 250px;
+    color: #635E5E;
+}
+
+.sorting-button .search input,
+.search input:hover,
+.search input:focus {
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
+.table-button .btn {
+
+    width: 140px;
+    background: #0D9068;
+    color: #ffffff;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 400;
+    white-space: nowrap;
+    padding: 10px;
+    margin: 0 5px;
+}
+
+.sorting-button .iconify,
+.table-button .iconify {
+    font-size: 20px;
+    margin: 0 5px;
+}
+
+.table {
+    margin-bottom: 0;
+}
+.tab-pane{
+    background-color: #f2f0f0;
+border-radius: 10px
+
+}
+.css-1ygcj2i-MuiTableCell-root {
+font-size: 16px !important;
+font-weight: 600;
+line-height: normal;
+color: #444444 !important;
+
+}
+
+.css-1ex1afd-MuiTableCell-root {
+    font-weight: 400;
+    font-size: 14px !important;
+    /* color: #000000 !important; */
+    ;
+}
+
+.css-11xur9t-MuiPaper-root-MuiTableContainer-root {
+    display: flex;
+    justify-content: center;
+    background-color: #F6F9FF !important;
+    /* color: rgba(0, 0, 0, 0.87); */
+    border-radius: 20px 20px 0px 0px !important;
+    box-shadow: none !important;
+}
+
+p.MuiTablePagination-selectLabel, p.MuiTablePagination-displayedRows{
+    margin: 0;
+}
+.MuiBox-root{
+    background-color: #F6F9FF
+}
+.css-1ygcj2i-MuiTableCell-root, .css-1ex1afd-MuiTableCell-root {
+    text-align: center !important;
+}
+.css-1ex1afd-MuiTableCell-root {
+    white-space: normal;
+}
+
+
+
+.personal-info{
+    line-height: normal;
+    white-space: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.personal-info img{
+    max-width: 12%;
+    /* height: auto; */
+    border-radius: 50%;
+}
+
+.personal-info h4{
+font-size: 22px;
+font-weight: 600;
+color: #0D9068;
+
+}
+.personal-info p{
+    font-size: 15px;
+font-weight: 400;
+color: #000000;
+}
+.personal-info .account-info p span{
+    font-size: 13px;
+    color: #444444;
+}
+
+
+img.headshot {
+    width: 60px;
+    border-radius: 30px;
+}
+
+
+@media screen and (max-width: 376px) {
+    .tab-header .tab-item {
+        font-size: 10px;
+    }
+
+    .tab-header .tab-item {
+        width: auto;
+        line-height: normal;
+        text-align: center;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .tab-header .tab-item {
+        font-size: 12px;
+    }
+}
