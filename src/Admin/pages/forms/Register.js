@@ -1,14 +1,160 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import './forms.css';
-import { Icon } from '@iconify/react';
-
-
-
+import { fetchAllStates } from "../../../utils/api/general"
+import { RegisterAdmin } from "../../../utils/api/admin"
+import { RotatingLines } from "react-loader-spinner";
+import { toast } from "react-toastify";
 
 export default function Register() {
     const navigate = useNavigate();
+    const [modalIsOpen, setIsOpen] = useState(false);
+    const [message, setMessage] = useState("")
+    const [confirmPass, setConfirmPass] = useState("")
+    const [location, setLocation] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
+    const [member, setMember] = useState({
+        surname: "",
+        firstname: "",
+        email: "",
+        phone: "",
+        isoCode: "+234",
+        gender: "",
+        location: "",
+        address: "",
+        password: "",
+        membershipType: ""
+    })
 
+    const fetchState = async (signal) => {
+        try {
+            const data = await fetchAllStates(signal);
+            setLocation(data.states);
+        } catch (error) {
+            if (error) {
+                console.log(error)
+            }
+        }
+    };
+
+    useEffect(() => {
+
+        // Fetch location info on component mount.
+        const abortController = new AbortController();
+        const signal = abortController.signal;
+        fetchState({ signal })
+
+        return () => {
+            abortController.abort(); // Cancel the request on component unmount
+        };
+    }, [])
+
+    const handleChange = (e) => {
+
+        const { name, value } = e.target;
+        setMember({ ...member, [name]: value });
+    };
+
+    const validateForm = () => {
+        let errors = {};
+
+        if (!member.surname) {
+            errors.surname = 'Surname is required';
+        }
+
+        if (!member.firstname) {
+            errors.firstname = 'Firstname is required';
+        }
+
+        if (!member.email) {
+            errors.email = 'Email Address is required';
+        } else if (!isValidEmail(member.email)) {
+            errors.email = 'Invalid email format';
+        }
+
+        if (!member.phone) {
+            errors.phone = 'Phone Number is required';
+        } else if (!isValidPhoneNumber(member.phone)) {
+            const firstCharacter = member.phone.charAt(0);
+            if (firstCharacter === "0") {
+                member.phone = "+234" + member.phone.substring(1);
+            }
+            // errors.phone = 'Invalid phone number format';
+        }
+
+        if (!member.location) {
+            errors.location = 'Location is required';
+        }
+
+        if (!member.password) {
+            errors.password = 'Password is required';
+        } else if (member.password.length < 6) {
+            errors.password = 'Password must be at least 6 characters long';
+        }
+
+        if (member.password !== confirmPass) {
+            errors.confirmPass = 'Passwords do not match';
+        }
+
+        return errors;
+    };
+
+    // Helper functions for email and phone number validation
+    const isValidEmail = (email) => {
+        // Regular expression for email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
+    const isValidPhoneNumber = (phone) => {
+        // Regular expression for phone number validation
+        const phoneRegex = /^\+\d+$/;
+
+        return phoneRegex.test(phone);
+    };
+
+    async function handleSubmit(e) {
+        e.preventDefault()
+
+        // Validate the form inputs
+        const errors = validateForm();
+
+
+        // If form validation fails
+        if (Object.keys(errors).length > 0) {
+            const firstFieldName = Object.keys(errors)[0];
+            toast.error(errors[firstFieldName]);
+            return;
+        }
+        setIsLoading(true)
+        try {
+            const data = await RegisterAdmin(member);
+            console.log(data)
+            localStorage.setItem("AFCS-token", data.afcsToken)
+            toast.success("Registration Successful. Please contact the Management for Approval.")
+            setMember({
+                surname: "",
+                firstname: "",
+                email: "",
+                phone: "",
+                isoCode: "+234",
+                gender: "",
+                location: "",
+                address: "",
+                password: "",
+                membershipType: ""
+            })
+            setConfirmPass("")
+            setIsLoading(false);
+
+            // return data;
+        } catch (error) {
+            console.log(error)
+            setIsLoading(false);
+            toast.error(error);
+        }
+
+    }
 
     return (
 
@@ -20,58 +166,73 @@ export default function Register() {
                 <form action="" className="d-flex ">
                     <div className="mx-3">
                         <div className="form-group my-4">
-                            <input type="text" name="surname" placeholder="Surname" autoComplete="off" aria-autocomplete="none" />
+                            <input type="text" name="surname" required value={member.surname} onChange={handleChange} placeholder="Surname" />
                         </div>
                         <div className="form-group my-4">
-                            <input type="email" name="email" placeholder="Email address" autoComplete="off" aria-autocomplete="none" />
+                            <input type="email" name="email" required value={member.email} onChange={handleChange} placeholder="Email Address" />
                         </div>
                         <div className="form-group my-4">
-                            <select name="gender" autoComplete="off" aria-autocomplete="none">
+                            <select name="gender" value={member.gender} required onChange={handleChange}>
                                 <option value="">Gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
                             </select>
 
                         </div>
                         <div className="form-group my-4">
-                            <select name="gender" autoComplete="off" aria-autocomplete="none">
+                            <select required name="membershipType" value={member.membershipType} onChange={handleChange}>
                                 <option value="">Membership Category</option>
-                                <option value="male">Admin</option>
-                                <option value="female">Super Admin</option>
+                                <option value="admin">Admin</option>
+
                             </select>
                         </div>
                         <div className="d-flex align-items-center justify-content-between form-group my-4">
-                            <input type="password" name="password" placeholder="Password" autoComplete="password" />
+                            <input autocomplete="new-password" required type="password" name="password" onChange={handleChange} value={member.password} placeholder="Password" />
                         </div>
                     </div>
 
                     <div className="mx-3">
                         <div className="form-group my-4">
-                            <input type="text" name="fname" placeholder="First Name" autoComplete="off" aria-autocomplete="none" />
+                            <input required type="text" name="firstname" onChange={handleChange} value={member.firstname} placeholder="Firstname" />
                         </div>
                         <div className="form-group my-4">
-                            <input type="tel" name="phone" placeholder="Phone Number" autoComplete="off" aria-autocomplete="none" />
+                            <input required type="tel" name="phone" value={member.phone} onChange={handleChange} placeholder="Phone Number e.g:+2348123456789" />
                         </div>
 
                         <div className="form-group my-4">
-                            <select name="location" autoComplete="off" aria-autocomplete="none">
+                            <select required name="location" value={member.location} onChange={handleChange} className="">
                                 <option value="">Location</option>
-                                <option value="male">Guyuk</option>
-                                <option value="female">Numan</option>
-                                <option value="female">Michika</option>
+                                {
+                                    location.map(item => <option key={item._id} value={item._id}>{item.name}</option>)
+                                }
                             </select>
                         </div>
                         <div className="form-group my-4">
-                            <input type="text" name="address" autoComplete="off" placeholder="Home address" aria-autocomplete="none" />
+                            <input required type="text" name="address" onChange={handleChange} value={member.address} placeholder="Home Address" />
                         </div>
                         <div className="d-flex align-items-center justify-content-between form-group my-4">
-                            <input type="password" name="confirmpassword" placeholder="Confirm Password" autoComplete="confirm password" aria-autocomplete="none" />
+                            <input required type="password" name="confirmpass" value={confirmPass} onChange={(e) => {
+                                setConfirmPass(e.target.value);
+                                if (member.password.startsWith(e.target.value)) {
+                                    // Password and Confirm Password match
+                                    // You can clear any previous error message if needed
+                                } else {
+                                    // Password and Confirm Password don't match
+                                    // Display error message and set text color to red
+                                }
+                            }}
+                                placeholder="Confirm Password" />
+                            {confirmPass !== '' && !member.password.startsWith(confirmPass) && (
+                                <p className="password-match">Password and Confirm Password do not match.</p>
+                            )}
                         </div>
                     </div>
                 </form>
 
                 <div className="">
-                    <button onClick={() => { navigate("/admin/login"); }} className="btn login-btn my-3">Create Account</button>
+                    {isLoading && <center className="btn member-btn"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+                    {!isLoading && <button onClick={handleSubmit} disabled={isLoading} className="btn member-btn mx-auto mt-3">Create Account</button>}
+
                 </div>
             </div>
         </div>

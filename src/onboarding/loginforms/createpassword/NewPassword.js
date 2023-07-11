@@ -57,11 +57,9 @@ export default function CreateNewPassword() {
         e.preventDefault()
 
         const errors = validateForm();
-        console.log(user)
         setIsLoading(true)
         try {
             const data = await ResetPassword(user);
-            console.log(user)
             setIsLoading(false);
             openModal()
         } catch (error) {

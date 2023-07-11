@@ -6,10 +6,12 @@ import Guarantor from './sidebar_content/Guarantor';
 import PersonalInfoCard from '../../../widgets/UserPersonalInfoCard';
 import Loan from './sidebar_content/Loan';
 import SavingsWithdrawals from './sidebar_content/Witdrawal';
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function UserProfile() {
+  const location = useLocation()
   const [selectedComponent, setSelectedComponent] = useState('profile');
-
+  const data = location.state
   const handleComponentClick = (component) => {
     setSelectedComponent(component);
   };
@@ -37,11 +39,13 @@ export default function UserProfile() {
         <div className='mx-3'>
           <h4 className='go-back' onClick={goBack}>< Icon icon="material-symbols:arrow-back-rounded" className="back-icon" /> Back To Dashboard</h4>
           <div className='user-info-section py-3 my-3'>
-            <PersonalInfoCard />
+            <PersonalInfoCard
+              userData={data}
+            />
             <hr />
             <div>
-              {selectedComponent === 'profile' && <Profile />}
-              {selectedComponent === 'guarantor' && <Guarantor />}
+              {selectedComponent === 'profile' && <Profile userData={data} />}
+              {selectedComponent === 'guarantor' && <Guarantor userData={data}/>}
               {selectedComponent === 'loan' && <Loan />}
               {selectedComponent === 'withdrawal' && <SavingsWithdrawals />}
             </div>

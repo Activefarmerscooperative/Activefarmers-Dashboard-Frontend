@@ -1,34 +1,41 @@
 // Profile.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Icon } from '@iconify/react';
 import PersonalInfoCard from '../../../../widgets/UserPersonalInfoCard';
 import InformationSection from '../../../../components/reusable/UserAccountInfo';
 import userData from './UsersInfo.json';
 
 
-const Guarantor = () => {
-
-    const user = userData.users[1]; // Assuming you want to display the information for the first user
+const Guarantor = ({ userData }) => {
+    const [userInfo, setData] = useState()
+    useEffect(() => {
+        if (!userData.user) {
+         
+            setData(userData)
+        } else {
+            setData(userData?.user)
+        }
+    }, [userData])
 
     const guarantorInformation = [
-        { label: 'Full Name', value: user.guarantorInformation.fullName},
-        { label: 'Phone Number', value: user.guarantorInformation.phoneNumber },
-        { label: 'Gender', value: user.guarantorInformation.gender },
-        { label: 'Email Address', value: user.guarantorInformation.email },
-        { label: 'Residential Address', value: user.guarantorInformation.residentialAddress },
-        { label: 'Occupation', value: user.guarantorInformation.occupation },        
+        { label: 'Full Name', value: userInfo?.guarantor?.full_name },
+        { label: 'Phone Number', value: userInfo?.guarantor?.phone },
+        { label: 'Gender', value: userInfo?.guarantor?.gender },
+        { label: 'Email Address', value: userInfo?.guarantor?.email },
+        { label: 'Residential Address', value: userInfo?.guarantor?.address },
+        { label: 'Occupation', value: userInfo?.guarantor?.occupation },
     ];
 
- 
+
     return (
         <div className="">
 
             <div className="profile mx-2">
-                
-                    
-                        <InformationSection title="Guarantor's Information" information={guarantorInformation} />
-                    
-                
+
+
+                <InformationSection title="Guarantor's Information" information={guarantorInformation} />
+
+
             </div>
         </div>
     );

@@ -14,14 +14,6 @@ export default function LoginOtpVerify() {
     const [countdown, setCountdown] = useState(0);
     const navigate = useNavigate();
 
-    const handleClick = () => {
-        setShowSnackbar(true);
-        setTimeout(() => {
-            setShowSnackbar(false);
-            navigate('/login/createpassword');
-        }, 3000);
-    };
-
     useEffect(() => {
         let timer;
         if (countdown > 0) {

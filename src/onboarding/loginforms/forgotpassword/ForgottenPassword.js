@@ -48,17 +48,14 @@ export default function ForgottenPassword() {
 
         // If form validation fails
         if (!isValidEmail(email)) {
-            
+
             errors.email = 'Invalid email format';
-            console.log('Invalid email format')
             setIsLoading(false)
-        }else{
+        } else {
             setIsLoading(true)
             try {
-                
-                console.log('i am running')
-                const data = await ForgotPassword(user); 
-                console.log(data)
+
+                const data = await ForgotPassword(user);
                 localStorage.setItem("AFCS-token", data.token)
                 toast.success(data.message);
 
@@ -66,7 +63,6 @@ export default function ForgottenPassword() {
                 navigate("/login/otp", { replace: true })
                 // return data;
             } catch (error) {
-
                 setIsLoading(false);
                 toast.error(error);
                 toast.error(error?.error);
