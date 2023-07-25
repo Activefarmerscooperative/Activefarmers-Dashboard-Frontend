@@ -37,13 +37,13 @@
         "occupation": "Doctor"       
       },
       "activeLoan":{
-        "amount":"250,000",
-        "repaymentPeriod":"10 Months",
+        "amount":"250000",
+        "repaymentPeriod":"10",
         "repaymentStartDate":"12th July 2023",
         "repaymentEndDate":"12th July 2024",
         "amountPayable":"300,000",
         "repaymentPerMonthPayable":"34,500",
-        "amountPaid":"69,000",
+        "amountPaid":"69000",
         "outstandingBalance":"179,000",
         "nextPaymentDate":"12th August 2023"
       }
@@ -83,6 +83,17 @@
         "email": "cherry.com@gmail",
         "residentialAddress": "Jan gada, Abuja",
         "occupation": "Entrepreneur"       
+      },
+      "activeLoan":{
+        "amount":"250000",
+        "repaymentPeriod":"10",
+        "repaymentStartDate":"12th July 2023",
+        "repaymentEndDate":"12th July 2024",
+        "amountPayable":"300,000",
+        "repaymentPerMonthPayable":"34,500",
+        "amountPaid":"69,000",
+        "outstandingBalance":"179,000",
+        "nextPaymentDate":"12th August 2023"
       }
     },
     {
@@ -120,6 +131,17 @@
         "email": "mayor22.com@gmail",
         "residentialAddress": "Aso Rock Abuja",
         "occupation": "Professor"       
+      },
+      "activeLoan":{
+        "amount":"250,000",
+        "repaymentPeriod":"10 Months",
+        "repaymentStartDate":"12th July 2023",
+        "repaymentEndDate":"12th July 2024",
+        "amountPayable":"300,000",
+        "repaymentPerMonthPayable":"34,500",
+        "amountPaid":"69,000",
+        "outstandingBalance":"179,000",
+        "nextPaymentDate":"12th August 2023"
       }
     }
   ]

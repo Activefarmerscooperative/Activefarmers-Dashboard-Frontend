@@ -12,6 +12,7 @@ export default function UserProfile() {
   const location = useLocation()
   const [selectedComponent, setSelectedComponent] = useState('profile');
   const data = location.state
+  console.log(data)
   const handleComponentClick = (component) => {
     setSelectedComponent(component);
   };
@@ -46,8 +47,8 @@ export default function UserProfile() {
             <div>
               {selectedComponent === 'profile' && <Profile userData={data} />}
               {selectedComponent === 'guarantor' && <Guarantor userData={data}/>}
-              {selectedComponent === 'loan' && <Loan />}
-              {selectedComponent === 'withdrawal' && <SavingsWithdrawals />}
+              {selectedComponent === 'loan' && <Loan userData={data}/>}
+              {selectedComponent === 'withdrawal' && <SavingsWithdrawals userData={data}/>}
             </div>
           </div>
         </div>

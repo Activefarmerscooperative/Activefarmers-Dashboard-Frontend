@@ -69,8 +69,6 @@ export default function Dashboard() {
                 <div>
                     <Outlet notifications={notifications} markAllAsRead={markAllAsRead} handleDelete={handleDelete} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} />
                 </div>
-
-
             </div>
             {showNotificationPopUp && (
         <NotificationPopUp

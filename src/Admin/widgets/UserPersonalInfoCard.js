@@ -6,12 +6,10 @@ import { MemberLoan, MemberSavings } from "../../utils/api/admin"
 import { toast } from "react-toastify";
 
 const userStat = async (key, user) => {
- 
     if (!user) return
     try {
         let savings = await MemberSavings(user)
         let loan = await MemberLoan(user)
-
         const res = Promise.all([savings, loan])
         return res
 
@@ -25,7 +23,6 @@ export default function PersonalInfoCard({ userData }) {
     const [stat, setSTat] = useState([])
     // React query fetch data
     const { data, status } = useQuery(['userStat', userInfo?._id], userStat)
-
     useEffect(() => {
         if (!data) return
         setSTat(data)

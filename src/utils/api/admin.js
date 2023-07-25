@@ -113,3 +113,28 @@ export const MembersCount = async (signal) => {
     throw error.response.data;
   }
 };
+
+export const UserLoan = async (userId, signal) => {
+  try {
+    const { data } = await api.get(`/api/admins/loan/${userId}`);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+export const LoanHistory = async (userId, signal) => {
+  try {
+    const { data } = await api.get(`/api/admins/loans/${userId}`);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+export const withdrawalHistory = async (userId, signal) => {
+  try {
+    const { data } = await api.get(`/api/admins/withdrawal/${userId}`);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
