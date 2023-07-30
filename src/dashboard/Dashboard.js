@@ -18,6 +18,7 @@ import Support from "./pages/support/Support";
 import AccountGuarantor from "./pages/dashboardguarantor/AccountGuarantor";
 import TransactionHistory from "./pages/TransactionHistory";
 import { toast } from "react-toastify";
+import ScheduleSavings from "./pages/schedule_savings/ScheduleSavings";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -77,21 +78,25 @@ function Dashboard() {
         open &&
         <>
           <div className="d-flex">
-            <Sidebar
+            <Sidebar className="sidebar"
               setToken={setToken}
               user={user}
             />
-            <Routes>
-              <Route path="" element={<DashboardHome user={user}/>} />
-              <Route path="home" element={<DashboardHome user={user} />} />
-              <Route path="witdrawal" element={<WitdrawalForm user={user} />} />
-              <Route path="loan" element={<LoanForm user={user} />} />
-              <Route path="profile" element={<ProfileUpdate setToken={setToken} />} />
-              <Route path="support" element={<Support />} />
-              <Route path="guarantor" element={<AccountGuarantor setToken={setToken} />} />
-              <Route path="transactions" element={<TransactionHistory />} />
+            <div className="content" style={{marginLeft: "250px", width:"-webkit-fill-available"}}>
+              <Routes>
+                <Route path="" element={<DashboardHome user={user} />} />
+                <Route path="home" element={<DashboardHome user={user} />} />
+                <Route path="witdrawal" element={<WitdrawalForm user={user} />} />
+                <Route path="loan" element={<LoanForm user={user} />} />
+                <Route path="profile" element={<ProfileUpdate setToken={setToken} />} />
+                <Route path="support" element={<Support />} />
+                <Route path="guarantor" element={<AccountGuarantor setToken={setToken} />} />
+                <Route path="transactions" element={<TransactionHistory />} />
+                <Route path="schedule-savings" element={<ScheduleSavings />} />
 
-            </Routes>
+              </Routes>
+            </div>
+
 
 
           </div>

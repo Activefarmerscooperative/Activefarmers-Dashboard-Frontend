@@ -53,13 +53,13 @@ export default function DashboardHome({ user }) {
 
 
   return (
-    <div className='my-5 px-5 home'>
+    <div className='my-5 px-4 user-dashboard-home'>
       <div className=''>
         <h1>Dashboard</h1>
 
         {
           user?.regCompletePercent < 100 && (
-            <div className="welcome py-3 px-4">
+            <div className="user-home-welcome py-3 px-4">
               {newUser && <h4>Welcome to your dashboard !</h4>}
               <p>Your profile is {user?.regCompletePercent}% completed. Visit the account settings tab to complete your profile </p>
             </div>
@@ -74,12 +74,12 @@ export default function DashboardHome({ user }) {
                 <p className='savings-title'>My Loan</p>
                 <p>(0) </p>
               </div>
-              <div className="form-group d-flex align-items-center justify-content-between">
+              <div className="  d-flex align-items-center justify-content-between">
 
                 {loanInputType ? (
                   <span className="savings-value">{`${myLoan?.amount || 0} NGN`}</span>
                 ) : (
-                  <span className="hidden-input">*********</span>
+                  <span className="hidden-input ">*********</span>
                 )}
                 <div onClick={toggleLoanVisibility}>
                   <Icon
@@ -99,8 +99,8 @@ export default function DashboardHome({ user }) {
             />
 
 
-            <button className='d-flex align-items-center justify-content-around btn addsaving-btn' onClick={() => setIsOpen(true)} >
-              <Icon icon="material-symbols:add-circle-outline-rounded" className='add-icon' />
+            <button className='d-flex align-items-center justify-content-center btn addsaving-btn' onClick={() => setIsOpen(true)} >
+              <Icon icon="material-symbols:add-circle-outline-rounded" className='add-icon me-2' />
               Add Savings
             </button>
           </div>

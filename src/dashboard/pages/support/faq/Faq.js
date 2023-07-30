@@ -1,54 +1,14 @@
 import { Icon } from '@iconify/react';
-import "./faq.css"
-
-
-// export default function Faq() {
-//     return (
-//         <div className="faq ">
-//             <div className="my-3">
-//                 <ul className="faq-list p-0">
-//                     <li>
-//                         <p>Lorem ipsum dolor sit amet consectetur. Nunc augue vulputate lectus integer. Eget sed quisque et </p>
-//                         <Icon icon="material-symbols:add-circle-outline-rounded" className='faq-icons' />
-//                     </li>
-//                     <li>
-//                         <p>Lorem ipsum dolor sit amet consectetur. Nunc augue vulputate lectus integer. Eget sed quisque et </p>
-//                         <Icon icon="material-symbols:add-circle-outline-rounded" className='faq-icons' />
-//                     </li>
-//                     <li>
-//                         <p>Lorem ipsum dolor sit amet consectetur. Nunc augue vulputate lectus integer. Eget sed quisque et </p>
-//                         <Icon icon="material-symbols:add-circle-outline-rounded" className='faq-icons' />
-//                     </li>
-//                     <li>
-//                         <p>Lorem ipsum dolor sit amet consectetur. Nunc augue vulputate lectus integer. Eget sed quisque et </p>
-//                         <Icon icon="material-symbols:add-circle-outline-rounded" className='faq-icons' />
-//                     </li>
-//                     <li>
-//                         <p>Lorem ipsum dolor sit amet consectetur. Nunc augue vulputate lectus integer. Eget sed quisque et </p>
-//                         <Icon icon="material-symbols:add-circle-outline-rounded" className='faq-icons' />
-//                     </li>
-//                     <li>
-//                         <p>Lorem ipsum dolor sit amet consectetur. Nunc augue vulputate lectus integer. Eget sed quisque et </p>
-//                         <Icon icon="material-symbols:add-circle-outline-rounded" className='faq-icons' />
-//                     </li>
-//                     <li>
-//                     <p>Lorem ipsum dolor sit amet consectetur. Nunc augue vulputate lectus integer. Eget sed quisque et </p>
-//                     <Icon icon="material-symbols:add-circle-outline-rounded" className='faq-icons' />
-//                 </li>
-//                 </ul>
-//             </div>
-
-//         </div>
-//     )
-// }
-
+import "./faq.css";
 import React, { useState } from 'react';
 
 function Accordion(props) {
     const [isExpanded, setIsExpanded] = useState(false);
+    const [iconToggle, setIconToggle] = useState("");
 
     const handleToggle = () => {
         setIsExpanded(!isExpanded);
+        setIconToggle(!iconToggle);
     }
 
     return (
@@ -59,7 +19,7 @@ function Accordion(props) {
                         {props.title}
                     </p>
 
-                    <Icon icon="material-symbols:add-circle-outline-rounded" className='faq-icons' />
+                    <Icon icon={!isExpanded ? "material-symbols:expand-circle-down-outline-rounded" : "material-symbols:expand-circle-up-outline-rounded"} className='faq-icons' />
                 </div>
                 {isExpanded && (
                     <div className="accordion-content">
@@ -80,30 +40,46 @@ function Fag() {
 
     const accordionData = [
         {
-          title: 'Lorem ipsum dolor sit amet consectetur. Nunc augue vulputate lectus integer. Eget sed quisque et ',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+            title: 'How can I apply for a loan on your website?',
+            content: 'Applying for a loan on our website is quick and easy. Simply visit our loan application page and fill out the required information. Once submitted, our team will review your application and get back to you with a decision within a specified timeframe.',
         },
         {
-          title: 'Lorem ipsum dolor sit amet consectetur. Nunc augue vulputate lectus integer. Eget sed quisque et ',
-          content: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?',
+            title: 'What are the interest rates and repayment terms for your loans?',
+            content: 'Our interest rates and repayment terms vary depending on the type and amount of loan you are applying for. We strive to offer competitive interest rates and flexible repayment options to suit your needs. You can find detailed information about our loan products on our website or by contacting our customer support team.',
         },
         {
-          title: 'Lorem ipsum dolor sit amet consectetur. Nunc augue vulputate lectus integer. Eget sed quisque et ',
-          content: 'But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. ',
+            title: 'Can I make early loan repayments or pay off my loan ahead of schedule?',
+            content: 'Yes, we encourage early loan repayments and provide flexibility for our customers. If you wish to pay off your loan ahead of schedule, you can do so without incurring any penalties or additional fees. Simply contact our customer support team, and they will assist you with the necessary steps.',
         },
-      ];
+        {
+            title: 'How do I open a savings account with your institution?',
+            content: 'Opening a savings account with us is a straightforward process. You can begin by filling out an online application form on our website or by visiting our nearest branch. You will need to provide some personal information and identification documents. Once your application is approved, you will receive details about your new savings account.',
+        },
+        {
+            title: 'What are the benefits of saving with your institution compared to other banks?',
+            content: 'There are several benefits to saving with us. We offer competitive interest rates on savings accounts, ensuring that your money grows steadily over time. Additionally, we provide personalized customer service, convenient online banking options, and various tools to help you manage and track your savings effectively.',
+        },
+        {
+            title: 'Are my deposits insured by a government agency?',
+            content: 'Yes, your deposits are insured by the Federal Deposit Insurance Corporation (FDIC) up to the maximum allowed by law. This means that in the unlikely event of our institution experiencing financial difficulties, your deposits are protected, providing you with peace of mind.',
+        },
+    ];
+
     
+
     return (
         <div className="faq ">
             <div className="my-3">
-                <div className="faq-list p-0">
+                <p>
+                    Certainly! Here are six frequently asked questions (FAQs) for a loans and savings website, along with their answers:
+                </p>
 
-                {accordionData.map((data, index) => (
-        <Accordion key={index} title={data.title} content={data.content} />
-      ))}
-                    {/* <Accordion title="Lorem ipsum dolor sit amet consectetur. Nunc augue vulputate lectus integer. Eget sed quisque et " content="Content for Section 1" className="li" />
-                    <Accordion title="Lorem ipsum dolor sit amet consectetur. Nunc augue vulputate lectus integer. Eget sed quisque et " content="Content for Section 2" className="li" />
-                    <Accordion title="Lorem ipsum dolor sit amet consectetur. Nunc augue vulputate lectus integer. Eget sed quisque et " content="Content for Section 3" className="li" /> */}
+                <div className="faq-list p-0 mt-5">
+                    <hr />
+                    {accordionData.map((data, index) => (
+                        <Accordion key={index} title={data.title} content={data.content} />
+                    ))
+                    }
                 </div>
 
             </div>

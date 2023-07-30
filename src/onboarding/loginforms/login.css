@@ -18,7 +18,7 @@ a {
     color: #0D9068;
 }
 
-.login-form-page button {
+.login-form-page .login-button, .register-link-btn, .register-link-btn:hover {
     width: 160px;
     height: 45px;
     background-color: transparent;
@@ -127,7 +127,7 @@ input.email-input:focus {
     color: #FFFFFF;
 }
 
-.form .login-btn {
+.form .login-button, .form .login-button:hover {
     background: #0D9068;
     color: #FFFFFF;
 }

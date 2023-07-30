@@ -126,8 +126,8 @@ export default function Login() {
                             <input type="checkbox" name="" id="" className='mx-2' />
                             Remember Me
                         </div>
-                        {isLoading && <button className='login-btn mt-5'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
-                        {!isLoading && <button className='login-btn mt-5' onClick={handleSubmit}>Log In</button>}
+                        {isLoading && <button className='login-button mt-5'><RotatingLines width="15" strokeColor="#FFF" strokeWidth="3" /></button>}
+                        {!isLoading && <button className='login-button mt-5' onClick={handleSubmit}>Log In</button>}
 
 
 

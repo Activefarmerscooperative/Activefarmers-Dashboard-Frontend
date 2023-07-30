@@ -1,6 +1,6 @@
-.user-profile {
+/* .user-profile {
     display: flex;
-    /* height: 100vh; */
+    height: 100vh;
 }
 .sidebar {
     position: fixed;
@@ -140,7 +140,7 @@ color: #FFFFFF;
 
 }
 
-/* loanTable.css */
+
 
 .paid-icon {
     color: #0D9068;
@@ -228,4 +228,4 @@ color: #FFFFFF;
         width: 100%;
         max-width: 200px;
     }
-}
+} */

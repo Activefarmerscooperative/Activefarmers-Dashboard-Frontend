@@ -148,18 +148,18 @@ const AccountGuarantor = ({ setToken }) => {
 
 
   return (
-    <div className="my-5 p-4 guarantor-account">
+    <div className="my-5 px-4 guarantor-account">
       <h1>Account & Guarantor</h1>
-      <div className="px-4 py-2 card guarantor-account-form">
+      <div className="px-4 py-3 card guarantor-account-form">
         <div>
           <form action="" className="d-flex flex-column align-items-center">
             <p>Account Details</p>
             <div className="d-flex">
-              <div className="form-group d-flex flex-column mx-3">
+              <div className="form-group">
                 <label htmlFor="">Account Name</label>
                 <input type="text" name="accountName" onChange={handleAccountChange} value={bankDetails?.accountName} disabled={!editAccount} placeholder="Enter account name" />
               </div>
-              <div className="form-group d-flex flex-column mx-3">
+              <div className="form-group ">
                 <label htmlFor="">Bank Name</label>
                 {/* Note this is because the bank list is passed as object */}
                 <select name="" onChange={(e) => {
@@ -181,7 +181,7 @@ const AccountGuarantor = ({ setToken }) => {
 
                 </select>
               </div>
-              <div className="form-group d-flex flex-column mx-3">
+              <div className="form-group">
                 <label htmlFor="">Account Number</label>
                 <input type="text" name="accountNumber" value={bankDetails?.accountNumber} onChange={handleAccountChange} disabled={!editAccount} placeholder="0123456" />
               </div>
