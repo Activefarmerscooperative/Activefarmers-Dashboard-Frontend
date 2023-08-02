@@ -4,16 +4,32 @@ import {
     TableCell,
     TableBody,
     TableRow,
-    TableHead, TableContainer, Paper, Box, TablePagination
+    TableHead,
+    TableContainer,
+    Paper,
+    Box,
+    TablePagination
 } from "@mui/material";
 import { Icon } from '@iconify/react';
-import loanData from "../../../../components/data/LoanTransaction.json";
 import LoanDetails from "../../../../components/reusable/LoanDetailsModal";
 import Modal from 'react-modal';
+import { toast } from "react-toastify";
+import { useQuery } from 'react-query'
+import { LoanHistory } from "../../../../../utils/api/admin";
 
+const userLoanHistory = async (key, user) => {
+    if (!user) return
+    try {
+        let res = await LoanHistory(user)
+        return res
 
+    } catch (error) {
+        console.log("not working")
+        toast.error(error.error);
+    }
+};
 
-function LoanTable() {
+function LoanTable({ userId }) {
 
     const [transactions, setTransactions] = useState([])
     const [page, setPage] = useState(0);
@@ -21,7 +37,13 @@ function LoanTable() {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [selectedTransaction, setSelectedTransaction] = useState(null);
 
+    const { data, status } = useQuery(['userLoanHistory', userId], userLoanHistory);
 
+    useEffect(() => {
+        if (!data) return
+
+        setTransactions(data.userLoans)
+    }, [data]);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -31,17 +53,18 @@ function LoanTable() {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
-    useEffect(() => {
-        setTransactions(loanData);
-    }, []);
+
+
     function openModal(transaction) {
         // console.log(transaction);
         setSelectedTransaction(transaction);
         setIsOpen(true);
     }
+
     function closeModal() {
         setIsOpen(false);
     }
+
     return (
         <div className="transaction-history mt-5 px-4">
 
@@ -64,14 +87,18 @@ function LoanTable() {
                                 let statusText = "";
                                 let statusClassName = "pending-status"; // Default class for pending status
 
-                                if (row.item?.status === "Paid") {
+                                if (row.status === "Confirmed" && row.repaymentStatus === "Completed") {
                                     statusClassName = "paid-status";
                                     statusIcon = <Icon icon="material-symbols:circle-outline" className={statusClassName} />;
                                     statusText = "Paid";
-                                } else if (row.item?.status === "Active") {
+                                } else if (row.status === "Confirmed") {
                                     statusClassName = "active-status";
                                     statusIcon = <Icon icon="fontisto:radio-btn-active" className={statusClassName} />;
                                     statusText = "Active";
+                                } else if (row.status === "Rejected") {
+                                    statusClassName = "rejected-status";
+                                    statusIcon = <Icon icon="fontisto:radio-btn-active" className={statusClassName} />;
+                                    statusText = "Declined";
                                 } else {
                                     statusIcon = <Icon icon="material-symbols:circle-outline" className={statusClassName} />;
                                     statusText = "Pending Request";
@@ -83,7 +110,7 @@ function LoanTable() {
                                     >
 
                                         <TableCell component="th" scope="row">
-                                            {row.type}
+                                            Loan Request
                                         </TableCell>
                                         <TableCell >
                                             {new Date(row.createdAt).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
@@ -92,13 +119,7 @@ function LoanTable() {
                                         <TableCell >
                                             <div className="d-flex align-items-center">
                                                 {statusIcon}
-                                                <p className={`mb-0 mx-2
-                                                    row.item?.status === "Paid"
-                                                        ? "paid-status"
-                                                        : row.item?.status === "Active"
-                                                            ? "active-status"
-                                                            : "pending-status"
-                                                `}>{statusText}</p>
+                                                <p className={`mb-0 mx-2 ${statusClassName}`}>{statusText}</p>
                                             </div>
                                         </TableCell>
                                         <TableCell><Icon icon="mdi:open-in-new" className={
@@ -152,20 +173,8 @@ function LoanTable() {
                 shouldCloseOnOverlayClick={true}
                 closeTimeoutMS={2000}>
                 <LoanDetails
-               closeModal={closeModal} 
-                loanData={selectedTransaction} />
-
-                {/* {modalIsOpen && selectedTransaction && (
-                    <>
-                        {selectedTransaction.type === "loan" && (
-                            <LoanRequestSummary closeModal={closeModal} loanData={selectedTransaction} />
-                        )}
-
-                        {selectedTransaction.type === "withdrawal" && (
-                            <SavingsWithdrawalSummary closeModal={closeModal} withdrawalData={selectedTransaction} />
-                        )}
-                    </>
-                )} */}
+                    closeModal={closeModal}
+                    loanData={selectedTransaction} />
 
             </Modal>
 

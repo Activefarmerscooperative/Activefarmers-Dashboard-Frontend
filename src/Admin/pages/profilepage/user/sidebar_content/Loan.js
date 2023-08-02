@@ -34,8 +34,8 @@ const LoanPage = (userData) => {
                         onClick={() => handleTabClick(1)}
                     >
                         Loan Tab
-                        {activeStatusCount !== 0 ? <sup className="notification mx-1">{activeStatusCount}</sup> : null }
-                        
+                        {activeStatusCount !== 0 ? <sup className="notification mx-1">{activeStatusCount}</sup> : null}
+
                     </div>
                 </div>
                 <div className="tab-content">
@@ -46,7 +46,7 @@ const LoanPage = (userData) => {
                     )}
                     {activeTab === 1 && (
                         <div>
-                            <div className="p-2"><LoanTable /></div>
+                            <div className="p-2"><LoanTable userId={userid} /></div>
                         </div>
                     )}
                 </div>

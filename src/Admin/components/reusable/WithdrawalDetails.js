@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { RotatingLines } from "react-loader-spinner";
+
 import "./reusable.css";
-import { approveLoan, declineLoan } from "../../../utils/api/admin";
+import { RotatingLines } from "react-loader-spinner";
+import { approveWithdrawal, declineWithdrawal } from "../../../utils/api/admin";
 import { toast } from "react-toastify";
 
-function LoanDetails({ closeModal, loanData }) {
+function WithdrawalDetails({ closeModal, withdrawalData }) {
     const [isLoading, setIsLoading] = useState(false)
     const [rejectionReason, setRejectionReason] = useState(null)
     const [step, setStep] = useState(1)
 
-    const amountPayable = parseFloat(((loanData?.amount || 0) * 1.15).toFixed(2))
-    const monthlyPayment = parseFloat((amountPayable / (loanData?.repaymentPeriod || 1)).toFixed(2))
-
-
-    async function declineLoanRequest(loanId) {
+    async function declineWithdrawalRequest(withdrawalId) {
         setIsLoading(true)
         try {
-            const { message } = await declineLoan(loanId, { rejectionReason })
+            const { message } = await declineWithdrawal(withdrawalId, { rejectionReason })
             toast.success(message)
             closeModal()
         } catch (error) {
@@ -29,12 +26,12 @@ function LoanDetails({ closeModal, loanData }) {
 
     }
 
-    async function approveLoanRequest(loanId) {
-        if (!window.confirm("Are you sure you want to approve loan request?")) return
+    async function approveWithdrawalRequest(withdrawalId) {
+        if (!window.confirm("Are you sure you want to approve withdrawal request?")) return
 
         setIsLoading(true)
         try {
-            const { message } = await approveLoan(loanId)
+            const { message } = await approveWithdrawal(withdrawalId)
             toast.success(message)
             closeModal()
         } catch (error) {
@@ -52,86 +49,58 @@ function LoanDetails({ closeModal, loanData }) {
                 step === 1 &&
                 <div className="d-flex flex-column align-items-center loan-summary-div">
                     <div className="text-center">
-                        <h2 className="mb-0">Loan Details</h2>
+                        <h2 className="mb-0">Savings Withdrawals</h2>
 
                     </div>
 
                     <div className="d-flex flex-column align-items-center  mt-3">
                         <ul className="loan-info d-flex flex-column">
-
-                            <><li className='d-flex align-items-center  my-2'>
-                                <p>
-                                    Loan Amount: </p>
-
-                                <span> {loanData?.amount} NGN</span>
-
-                            </li><li className='d-flex align-items-center my-2'>
+                            <>
+                                <li className='d-flex align-items-center  my-2'>
                                     <p>
-                                        Interest Rate: </p>
+                                        Withdrawal Amount: </p>
 
-                                    <span>15%</span>
-                                </li><li className='d-flex align-items-center my-2'>
-                                    <p>
-                                        Repayment Period: </p>
-
-                                    <span>{loanData?.repaymentPeriod}</span>
-
-                                </li><li className='d-flex align-items-center my-2'>
-                                    <p>
-                                        Total Amount Payable: </p>
-
-                                    <span>{amountPayable}</span>
-
-                                </li><li className='d-flex align-items-center my-2'>
-                                    <p>
-                                        Repayment per month: </p>
-
-                                    <span> {monthlyPayment} NGN</span>
+                                    <span> {withdrawalData?.amount} NGN</span>
 
                                 </li>
-                                {/* <li className='d-flex align-items-center my-2'>
-                                <p>
-                                    Repayment Date: </p>
 
-                                <span>ddd</span>
+                                <li className='d-flex align-items-center my-2'>
+                                    <p>Withdrawal Category: </p>
 
-                            </li> */}
+                                    <span>{withdrawalData?.category}</span>
+
+                                </li>
+
                                 <li className='d-flex align-items-center my-2'>
                                     <p>
-                                        Repayment Method: </p>
+                                        Withdrawal Date: </p>
 
-                                    <span>{loanData?.repaymentMethod}</span>
+                                    <span>{new Date(withdrawalData?.createdAt).toDateString()}</span>
 
                                 </li><li className='d-flex align-items-center my-2'>
                                     <p>
                                         Status: </p>
 
                                     <span className="status mx-auto">
-                                        {(loanData?.status === "Confirmed" && loanData?.repaymentStatus === "Completed") ? "Paid" :
-                                            loanData?.status === "Confirmed" ? "Active" :
-                                                loanData?.status === "Rejected" ? "Declined" : "Pending"}
+                                        {withdrawalData?.status}
                                     </span>
 
-                                </li></>
-
-
-
+                                </li>
+                            </>
                         </ul>
-
-
 
                         <div className="d-flex align-items-center justify-content-even">
 
                             {
-                                loanData.status === "Confirmed" || loanData.status === "Rejected" ?
+                                withdrawalData.status === "Confirmed" || withdrawalData.status === "Rejected" ?
                                     <>
                                         <button onClick={() => closeModal()} className="btn btn-modal mx-3">Back to List</button>
                                     </> :
                                     <>
                                         {isLoading && <button className='login-btn mt-5'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
                                         {!isLoading && <>
-                                            <button onClick={() => setStep(2)} className="btn btn-modal mx-3">Decline Loan</button>
-                                            <button onClick={() => approveLoanRequest(loanData._id)} className="btn btn-modal mx-3">Approve Loan</button>
+                                            <button onClick={() => setStep(2)} className="btn btn-modal mx-3">Decline Withdrawal</button>
+                                            <button onClick={() => approveWithdrawalRequest(withdrawalData._id)} className="btn btn-modal mx-3">Approve Withdrawal</button>
                                         </>}</>
                             }
 
@@ -139,10 +108,7 @@ function LoanDetails({ closeModal, loanData }) {
                         </div>
 
                     </div>
-
-
                 </div>
-
             }
             {
                 step === 2 &&
@@ -156,14 +122,15 @@ function LoanDetails({ closeModal, loanData }) {
                         {isLoading && <button className='login-btn mt-5'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
                         {!isLoading && <>
                             <button onClick={() => setStep(1)} className="btn btn-modal mx-3">Go Back</button>
-                            <button onClick={() => declineLoanRequest(loanData._id)} className="btn btn-modal mx-3">Submit</button>
+                            <button onClick={() => declineWithdrawalRequest(withdrawalData._id)} className="btn btn-modal mx-3">Submit</button>
                         </>}
 
                     </div>
                 </div>
             }
+
         </div>
     )
 }
 
-export default LoanDetails
+export default WithdrawalDetails
