@@ -6,7 +6,7 @@
 .loan-success-modal,
 .profile-update-modal {
     width: 700px;
-    height: 500px;
+    /* height: 500px; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -288,7 +288,7 @@
     padding: 10px 0;
 }
 
-.loan-summary-modal h2{
+.loan-summary-modal h2, .savings-plan h4{
     color: #0D9068;
 }
 
@@ -324,7 +324,7 @@ color: #0D9068;
 
 }
 .loan-summary-modal a:nth-child(1) .btn,
-.profile-update-modal .btn:first-child {
+.profile-update-modal .btn:first-child, .continue-saving .btn.change-card {
     background-color: #FFFFFF;
     color: #FB9129;
     border: 2px solid #FB9129;
@@ -354,4 +354,10 @@ p.agree a {
     margin: 10px 0;
     color: #000000;
     display: list-item;
+}
+.savings-plan span{
+    width: 400px;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 30px;
 }

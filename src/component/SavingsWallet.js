@@ -62,7 +62,7 @@ function SavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavingsCatego
 
 
   return (
-    <div className="category-form-group d-flex align-items-center">
+    <div className="list-of-wallets  d-flex align-items-center">
       {
         status === "loading" && <div className="px-3 card pikin">
           <center style={{ height: '100', overflow: 'hidden' }} className=""><RotatingLines width="20" /></center>
@@ -74,7 +74,7 @@ function SavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavingsCatego
 
           <p className='text-start savings-title'>{item.category}</p>
 
-          <div className="form-group d-flex align-items-center justify-content-between">
+          <div className="  d-flex align-items-center justify-content-between">
 
             {savingsVisibility[item._id] ? (
               // <input

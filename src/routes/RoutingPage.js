@@ -9,20 +9,20 @@ import {
 
 
 //Onboarding Routes
-import LandingPage from '../onboarding/LandingPage';
-import Login from '../onboarding/loginforms/login/Login';
-import Registration from "../onboarding/registration/Registration";
-import Member from '../onboarding/registration/member/Member';
-import Farm from '../onboarding/registration/farm/Farm';
-import Guarantor from '../onboarding/registration/guarantor/Guarantor';
+import LandingPage from '../User_App/LandingPage';
+import Login from '../User_App/User_Onboarding/loginforms/login/Login';
+import Registration from "../User_App/User_Onboarding/registration/Registration";
+import Member from '../User_App/User_Onboarding/registration/member/Member';
+import Farm from '../User_App/User_Onboarding/registration/farm/Farm';
+import Guarantor from '../User_App/User_Onboarding/registration/guarantor/Guarantor';
 
 //Dashboard Routes
-import Dashboard from "../dashboard/Dashboard";
+import Dashboard from "../User_App/User_Dashboard/Dashboard";
 
-import LoginForm from "../onboarding/loginforms/LoginForms";
-import ForgottenPassword from "../onboarding/loginforms/forgotpassword/ForgottenPassword";
-import LoginOtpVerify from "../onboarding/loginforms/otpverify/LoginOtpVerify";
-import CreateNewPassword from "../onboarding/loginforms/createpassword/NewPassword";
+import LoginForm from "../User_App/User_Onboarding/loginforms/LoginForms";
+import ForgottenPassword from "../User_App/User_Onboarding/loginforms/forgotpassword/ForgottenPassword";
+import LoginOtpVerify from "../User_App/User_Onboarding/loginforms/otpverify/LoginOtpVerify";
+import CreateNewPassword from "../User_App/User_Onboarding/loginforms/createpassword/NewPassword";
 import RootLayout from "../Admin/rootpage/RootLayout";
 import FormPage from "../Admin/pages/forms/Form";
 import AdminLogin from "../Admin/pages/forms/Login";
