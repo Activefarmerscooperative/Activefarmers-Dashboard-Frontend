@@ -6,12 +6,13 @@ import Guarantor from './sidebar_content/Guarantor';
 import PersonalInfoCard from '../../../widgets/UserPersonalInfoCard';
 import Loan from './sidebar_content/Loan';
 import SavingsWithdrawals from './sidebar_content/Witdrawal';
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function UserProfile() {
   const location = useLocation()
   const [selectedComponent, setSelectedComponent] = useState('profile');
   const data = location.state
+
   const handleComponentClick = (component) => {
     setSelectedComponent(component);
   };
@@ -45,9 +46,9 @@ export default function UserProfile() {
             <hr />
             <div>
               {selectedComponent === 'profile' && <Profile userData={data} />}
-              {selectedComponent === 'guarantor' && <Guarantor userData={data}/>}
-              {selectedComponent === 'loan' && <Loan />}
-              {selectedComponent === 'withdrawal' && <SavingsWithdrawals />}
+              {selectedComponent === 'guarantor' && <Guarantor userData={data} />}
+              {selectedComponent === 'loan' && <Loan userData={data} />}
+              {selectedComponent === 'withdrawal' && <SavingsWithdrawals userData={data} />}
             </div>
           </div>
         </div>

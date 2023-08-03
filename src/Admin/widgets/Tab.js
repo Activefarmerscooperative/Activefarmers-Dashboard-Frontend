@@ -57,6 +57,7 @@ const Tab = ({ tabs, defaultTab }) => {
             }
 
             setShowData(dataArray)
+            console.log(data)
         } else if (activeTab === "Borrowers") {
 
             for (let i = 0; i < data.length; i++) {
