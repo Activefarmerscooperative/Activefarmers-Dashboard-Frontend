@@ -112,7 +112,7 @@ export default function DashboardHome({ user, setToken }) {
 
 
         <div className="savings my-4">
-          <div className="d-flex align-items-center">
+          <div className="d-flex align-items-center user-dashboard-header">
             <div className="savings-wallet-category">
               <div className="px-3 card loan">
                 <div className="d-flex align-items-center justify-content-between">

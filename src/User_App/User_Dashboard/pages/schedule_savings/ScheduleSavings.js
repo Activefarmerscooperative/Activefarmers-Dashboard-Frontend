@@ -8,6 +8,7 @@ import EditScheduleSavings from "../../../../modal/savings_plans_modal/EditSched
 import SavingsPaymentMethod from "../../../../modal/savings_plans_modal/SavingsPaymentMethod";
 import ScheduleSavingsPlans from "../../../../modal/savings_plans_modal/ScheduleSavingsPlans";
 import CancelSavingsPlan from "../../../../modal/savings_plans_modal/CancelSavingsPlan";
+import SavingsWallet from "../../../../component/SavingsWallet";
 
 export default function ScheduleSavings() {
     const [loanInputType, setLoanInputType] = useState("false");
@@ -27,7 +28,7 @@ export default function ScheduleSavings() {
     function closeModal() {
         setIsOpen(false);
     }
-    
+
 
 
     return (
@@ -43,6 +44,11 @@ export default function ScheduleSavings() {
                     </button>
                 </div>
             </div> */}
+
+            <div className="savings-wallet-category my-4">
+
+                <SavingsWallet />
+            </div>
 
 
             <div className="schedule-savings-list">
