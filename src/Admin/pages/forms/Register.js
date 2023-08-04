@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import './forms.css';
-import { fetchAllStates } from "../../../utils/api/general"
+import { fetchAllStates, fetchAllLga } from "../../../utils/api/general"
 import { RegisterAdmin } from "../../../utils/api/admin"
 import { RotatingLines } from "react-loader-spinner";
 import { toast } from "react-toastify";
@@ -12,6 +12,7 @@ export default function Register() {
     const [message, setMessage] = useState("")
     const [confirmPass, setConfirmPass] = useState("")
     const [location, setLocation] = useState([])
+    const [lga, setLga] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [member, setMember] = useState({
         surname: "",
@@ -21,6 +22,7 @@ export default function Register() {
         isoCode: "+234",
         gender: "",
         location: "",
+        lga: "",
         address: "",
         password: "",
         membershipType: ""
@@ -36,6 +38,16 @@ export default function Register() {
             }
         }
     };
+    const fetchLga = async (signal) => {
+        try {
+            const data = await fetchAllLga(signal);
+            setLga(data.lgas);
+        } catch (error) {
+            if (error) {
+                console.log(error)
+            }
+        }
+    };
 
     useEffect(() => {
 
@@ -43,11 +55,13 @@ export default function Register() {
         const abortController = new AbortController();
         const signal = abortController.signal;
         fetchState({ signal })
+        fetchLga({ signal })
 
         return () => {
             abortController.abort(); // Cancel the request on component unmount
         };
     }, [])
+
 
     const handleChange = (e) => {
 
@@ -84,6 +98,10 @@ export default function Register() {
 
         if (!member.location) {
             errors.location = 'Location is required';
+        }
+
+        if (!member.lga) {
+            errors.lga = 'lga is required';
         }
 
         if (!member.password) {
@@ -140,6 +158,7 @@ export default function Register() {
                 isoCode: "+234",
                 gender: "",
                 location: "",
+                lga: "",
                 address: "",
                 password: "",
                 membershipType: ""
@@ -189,6 +208,22 @@ export default function Register() {
                         <div className="d-flex align-items-center justify-content-between form-group my-4">
                             <input autocomplete="new-password" required type="password" name="password" onChange={handleChange} value={member.password} placeholder="Password" />
                         </div>
+                        <div className="d-flex align-items-center justify-content-between form-group my-4">
+                            <input required type="password" name="confirmpass" value={confirmPass} onChange={(e) => {
+                                setConfirmPass(e.target.value);
+                                if (member.password.startsWith(e.target.value)) {
+                                    // Password and Confirm Password match
+                                    // You can clear any previous error message if needed
+                                } else {
+                                    // Password and Confirm Password don't match
+                                    // Display error message and set text color to red
+                                }
+                            }}
+                                placeholder="Confirm Password" />
+                            {confirmPass !== '' && !member.password.startsWith(confirmPass) && (
+                                <p className="password-match">Password and Confirm Password do not match.</p>
+                            )}
+                        </div>
                     </div>
 
                     <div className="mx-3">
@@ -208,23 +243,15 @@ export default function Register() {
                             </select>
                         </div>
                         <div className="form-group my-4">
-                            <input required type="text" name="address" onChange={handleChange} value={member.address} placeholder="Home Address" />
-                        </div>
-                        <div className="d-flex align-items-center justify-content-between form-group my-4">
-                            <input required type="password" name="confirmpass" value={confirmPass} onChange={(e) => {
-                                setConfirmPass(e.target.value);
-                                if (member.password.startsWith(e.target.value)) {
-                                    // Password and Confirm Password match
-                                    // You can clear any previous error message if needed
-                                } else {
-                                    // Password and Confirm Password don't match
-                                    // Display error message and set text color to red
+                            <select required name="lga" value={member.lga} onChange={handleChange} className="">
+                                <option value="">Local Goverment</option>
+                                {
+                                    lga.map(item => <option key={item._id} value={item._id}>{item.name}</option>)
                                 }
-                            }}
-                                placeholder="Confirm Password" />
-                            {confirmPass !== '' && !member.password.startsWith(confirmPass) && (
-                                <p className="password-match">Password and Confirm Password do not match.</p>
-                            )}
+                            </select>
+                        </div>
+                        <div className="form-group my-4">
+                            <input required type="text" name="address" onChange={handleChange} value={member.address} placeholder="Home Address" />
                         </div>
                     </div>
                 </form>

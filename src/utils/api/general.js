@@ -17,6 +17,19 @@ export const fetchAllStates = async (signal) => {
 
     }
 };
+export const fetchAllLga = async (signal) => {
+    try {
+        const { data } = await api.get(`/api/location/lga/630500d3c9ae75a1ce111f0f`,signal);
+        return data;
+    } catch (error) {
+        if (error.name === 'AbortError') {
+            console.log('Request aborted', error.message);
+        } else {
+            throw error.response?.data;
+        }
+
+    }
+};
 
 /**
  * Get list of savings category

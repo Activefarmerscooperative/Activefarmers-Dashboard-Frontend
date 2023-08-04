@@ -8,9 +8,6 @@ import { RotatingLines } from "react-loader-spinner";
 import { Icon } from '@iconify/react';
 
 
-
-
-
 export default function Login() {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
