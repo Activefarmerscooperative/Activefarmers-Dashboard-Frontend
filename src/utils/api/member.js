@@ -188,6 +188,14 @@ export const GetWallet = async (signal) => {
   }
 };
 
+export const GetScheduledSavings = async (signal) => {
+  try {
+    const { data } = await api.get(`/api/users/scheduled-savings`, signal);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
 
 export const MyLoan = async (signal) => {
   try {
@@ -207,10 +215,36 @@ export const GetTransactions = async (type) => {
   }
 };
 
+export const SavingsCategory = async (savings) => {
+  try {
+    const { data } = await api.get(`/api/users/savings-category`, savings);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
 
 export const AddSaving = async (savings) => {
   try {
     const { data } = await api.post(`/api/users/savings`, savings);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const AddScheduledSaving = async (savings) => {
+  try {
+    const { data } = await api.post(`/api/users/scheduled-savings`, savings);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const AddScheduledSavingCard = async (type, itemId) => {
+  try {
+    const { data } = await api.put(`/api/users/scheduled-savings/${itemId}/card?type=${type}`);
     return data;
   } catch (error) {
     throw error.response.data;
