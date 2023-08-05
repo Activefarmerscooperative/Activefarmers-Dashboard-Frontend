@@ -176,6 +176,26 @@ img.headshot {
     width: 60px;
     border-radius: 30px;
 }
+.success-icon.iconify, .failed-icon.iconify{
+    width: 20px;
+    height: 20px;
+}
+.success-icon{
+    color: #0D9068;
+    
+
+}
+
+.failed-icon{
+    color: #ff0000;
+    
+
+}
+
+.pending-icon{
+    color: #FB9129;
+
+}
 
 
 @media screen and (max-width: 376px) {

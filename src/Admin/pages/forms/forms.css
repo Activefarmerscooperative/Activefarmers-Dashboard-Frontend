@@ -1,4 +1,4 @@
-/* .header-section {
+.admin-form.header-section {
     box-shadow: 0px 4px 15px 0px #0000000D;
    
     position: fixed;
@@ -7,29 +7,29 @@
     background-color: #FFFFFF;
 }
 
-.header-components {
+.admin-form .header-components {
     padding: 10px 50px;
 }
 
-.header-components img {
+.admin-form .header-components img {
     width: 50px;
 }
 
-.header-components h1 {
+.admin-form .header-components h1 {
     font-size: 24px;
     font-weight: 400;
     line-height: normal;
     margin: 0 5px;
 }
 
-.header-components .header-buttons span {
+.admin-form .header-components .header-buttons span {
     font-size: 16px;
     font-weight: 400;
     line-height: normal;
     margin: 0 8px;
 }
 
-.header-buttons .btn {
+.admin-form .header-buttons .btn {
     width: 150px;
     height: auto;
     font-size: 20px;
@@ -41,12 +41,12 @@
     color: #0D9068;
 }
 
-.header-buttons .btn:focus {
+.admin-form .header-buttons .btn:focus {
     color: #0D9068;
 }
 
 
-.login-form {
+.admin-form .login-form {
     width: 590px;
     height: fit-content;
     border-radius: 15px;
@@ -56,7 +56,7 @@
 
 }
 
-.register-form {
+.admin-form .register-form {
     width: fit-content;
     height: fit-content;
     border-radius: 15px;
@@ -65,14 +65,14 @@
 
 }
 
-.login-form h1,
-.register-form h1 {
+.admin-form .login-form h1,
+.admin-form .register-form h1 {
     font-size: 40px;
     font-weight: lighter;
 }
 
-.login-form p,
-.register-form p {
+.admin-form .login-form p,
+.admin-form .register-form p {
     width: 700px;
     font-size: 15px;
     font-weight: normal;
@@ -80,37 +80,37 @@
 }
 
 
-.login-form p a {
+.admin-form .login-form p a {
     font-weight: 600;
     text-decoration: none;
     color: inherit;
 
 }
 
-.form-group {
+.admin-form .form-group {
     padding: 10px;
     border-radius: 8px;
 
 }
 
-.login-form .form-group {
+.admin-form .login-form .form-group {
     border: 1px solid #ffffff;
 }
 
-.register-form .form-group {
+.admin-form .register-form .form-group {
     border: 1px solid #444444
 }
 
-.form-group:hover {
+.admin-form .form-group:hover {
     border: 1px solid #FB9129;
 }
 
-.form-group input,
-.form-group input:hover,
-.form-group input:focus,
-.form-group select,
-.form-group select:hover,
-.form-group select:focus {
+.admin-form .form-group input,
+.admin-form .form-group input:hover,
+.admin-form .form-group input:focus,
+.admin-form .form-group select,
+.admin-form .form-group select:hover,
+.admin-form .form-group select:focus {
     width: 300px;
     background-color: transparent;
     outline: none;
@@ -120,29 +120,29 @@
 
 }
 
-.form-group input::placeholder,
-.form-group input,
-.register-form select,
-.register-form select option,
-.form-group select option:first-child {
+.admin-form .form-group input::placeholder,
+.admin-form .form-group input,
+.admin-form .register-form select,
+.admin-form .register-form select option,
+.admin-form .form-group select option:first-child {
     font-size: 14px;
     font-weight: 400;
     color: #444444;
 
 }
 
-input:-internal-autofill-selected {
+.admin-form input:-internal-autofill-selected {
     background-color: rgba(0, 0, 0, 0) !important;
 }
 
 
-.form-group input::-webkit-outer-spin-button,
-.form-group input::-webkit-inner-spin-button {
+.admin-form .form-group input::-webkit-outer-spin-button,
+.admin-form .form-group input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-.form-group select {
+.admin-form .form-group select {
     appearance: none;
     background-image: url('../../assets/outline-arrow.png');
     background-repeat: no-repeat, repeat;
@@ -152,7 +152,7 @@ input:-internal-autofill-selected {
 
 }
 
-.login-btn {
+.admin-form .login-btn {
     width: 200px;
     padding: 5px 0;
     border-radius: 55px;
@@ -162,7 +162,7 @@ input:-internal-autofill-selected {
     color: #FFFFFF;
 }
 
-.register-form .login-btn{
+.admin-form .register-form .login-btn{
     width: 250px;
     background-color: #0D9068;
-} */
+}

@@ -51,7 +51,7 @@ export default function WitdrawalForm({ user }) {
     }
 
     return (
-        <div className="my-5 px-4 withdrawal-form">
+        <div className="my-4 px-4 withdrawal-form">
             <h1>Savings Withdrawal Form</h1>
             <div className="savings-wallet-category">
               

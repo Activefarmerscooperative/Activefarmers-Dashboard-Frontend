@@ -58,6 +58,9 @@ export default function Home() {
             name: 'Savings Withdrawal Request',
 
         },
+        {
+            name: 'Auto Transactions',
+        },
     ];
 
     return (

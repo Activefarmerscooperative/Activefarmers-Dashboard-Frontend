@@ -165,7 +165,7 @@ const ProfileUpdate = ({ setToken }) => {
 
     }
     return (
-        <div className="my-5 p-4 profile-update">
+        <div className="my-3 px-4 profile-update">
             <h1>Profile Update</h1>
 
             <div className="px-4 py-2 card profile-form">
