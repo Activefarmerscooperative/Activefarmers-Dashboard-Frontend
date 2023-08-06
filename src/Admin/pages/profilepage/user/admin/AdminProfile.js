@@ -1,38 +1,95 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import profileImage from "../../../../assets/team1.png";
 // import Snackbar from "./Snackbar";
+import { GetUserDetails, UpdateUserDetails, UpdateProfilePicture } from "../../../../../utils/api/admin.js"
+import { useQuery } from 'react-query'
+import { toast } from "react-toastify";
 import "./admin.css";
+
+const getUserDetails = async (key, tab) => {
+    try {
+        let userDetails = await GetUserDetails()       
+        return userDetails
+        console.log(userDetails)
+
+    } catch (error) {
+        console.log("not working")
+        const errorr = "not working"
+        toast.error(error.error);
+    }
+};
 
 export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState("John Doe");
-  const [phoneNumber, setPhoneNumber] = useState("1234567890");
+  const [phoneNumber, setPhoneNumber] = useState("012345678900");
   const [address, setAddress] = useState("123 Main St, City");
   const [emailaddress, setEmailAddress] = useState("ladyglow@gmai.com");
   const [gender, setGender] = useState("Male");
   const [role, setRole] = useState("Super Admin");
   const [profilePicture, setProfilePicture] = useState(profileImage);
   //   const [showSnackbar, setShowSnackbar] = useState(false);
+  const { data, status } = useQuery("userDetails", getUserDetails);
+  useEffect(() =>{
+    if (data) {
+      const fullName = data.firstname + " " + data.surname;
+      setName(fullName);
+      setPhoneNumber(data.phone)
+      setAddress(data.address)
+      setEmailAddress(data.email)
+      setGender(data.gender)
+      setRole(data.adminType)
+    }
+  },[data]);
 
   const handleEdit = () => {
     setIsEditing(true);
   };
 
-  const handleSave = () => {
-    setIsEditing(false);
-    // setShowSnackbar(true);
-  };
-
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
     const reader = new FileReader();
+    const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
 
-    reader.onload = (e) => {
-      setProfilePicture(e.target.result);
-    };
+    if (file && allowedTypes.includes(file.type)) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setProfilePicture(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      // Display an error message to the user for invalid file type
+      toast.error("Invalid file type. Please select a valid image (JPEG, PNG, or GIF).");
+    }
+
+      reader.onload = (e) => {
+        setProfilePicture(e.target.result);
+      };
 
     reader.readAsDataURL(file);
+  };
+
+  const handleSave = async () => {
+    setIsEditing(false);
+    const userDetails = {
+      surname: name.split(" ")[1],
+      firstname: name.split(" ")[0],
+      phone: phoneNumber,
+      address: address,
+      gender: gender,
+    };
+    const data = new FormData();
+    data.append(`profilePicture`, profilePicture);
+
+    try {
+      const data = await UpdateUserDetails(userDetails);
+      const profilePicRes = await UpdateProfilePicture(profilePicture);
+      toast.success("Admin Profile Updated");
+
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   return (
@@ -82,7 +139,7 @@ export default function ProfilePage() {
                   type="email"
                   id="emailaddress"
                   value={emailaddress}
-                  onChange={(e) => setEmailAddress(e.target.value)}
+                  onChange={(e) => setEmailAddress(e.target.value)} disabled
                 />
               </div>
               <div className="input-field">
@@ -91,7 +148,7 @@ export default function ProfilePage() {
               </div>
               <div className="input-field">
                 <label htmlFor="role">Role</label>
-                <input type="text" id="role" value={role} onChange={(e) => setRole(e.target.value)} />
+                <input type="text" id="role" value={role} onChange={(e) => setRole(e.target.value)} disabled/>
               </div>
               <div className="input-field">
               <label htmlFor="address">Address</label>

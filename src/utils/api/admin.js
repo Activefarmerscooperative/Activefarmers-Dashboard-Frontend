@@ -138,3 +138,35 @@ export const withdrawalHistory = async (userId, signal) => {
     throw error.response.data;
   }
 };
+export const loanHistory = async (userId, signal) => {
+  try {
+    const { data } = await api.get(`/api/admins/loans/${userId}`);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+export const GetUserDetails = async (signal) => {
+  try {
+    const { data } = await api.get(`/api/admins/me`, signal);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+export const UpdateUserDetails = async (userDetails) => {
+  try {
+    const { data } = await api.put(`/api/admins/profile`, userDetails);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+export const UpdateProfilePicture = async (profilePicture) => {
+  try {
+    const { data } = await api.put(`/api/admins/update-admin-photo`, profilePicture);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
