@@ -1,4 +1,4 @@
-.header-section {
+/* .header-section {
     box-shadow: 0px 4px 15px 0px #0000000D;
    
     position: fixed;
@@ -39,7 +39,6 @@
     border: 2px solid #0D9068;
     border-radius: 55px;
     color: #0D9068;
-    /* outline: none; */
 }
 
 .header-buttons .btn:focus {
@@ -134,7 +133,6 @@
 
 input:-internal-autofill-selected {
     background-color: rgba(0, 0, 0, 0) !important;
-    /* Add any other desired styles */
 }
 
 
@@ -154,8 +152,7 @@ input:-internal-autofill-selected {
 
 }
 
-.login-btn,
-.login-btn:hover {
+.login-btn {
     width: 200px;
     padding: 5px 0;
     border-radius: 55px;
@@ -168,4 +165,4 @@ input:-internal-autofill-selected {
 .register-form .login-btn{
     width: 250px;
     background-color: #0D9068;
-}
+} */

@@ -12,6 +12,7 @@ import Modal from 'react-modal';
 import { withdrawalHistory } from "../../../../../utils/api/admin.js";
 import { toast } from "react-toastify";
 import { useQuery } from 'react-query'
+import WithdrawalDetails from "../../../../components/reusable/WithdrawalDetails";
 
 
 
@@ -37,6 +38,7 @@ function SavingsWithdrawals(userData) {
     const [stat, setSTat] = useState([])
     // React query fetch data
     const { data: withdrawals, status } = useQuery(['withDrawal', id], withDrawal);
+
     useEffect(() => {
         if (withdrawals) {
             const { message, userWithdrawals } = withdrawals;
@@ -44,10 +46,11 @@ function SavingsWithdrawals(userData) {
             setTransactions(userWithdrawals);
         }
     }, [withdrawals]);
+
     useEffect(() => {
         if (!userData.user) {
             setData(userData)
-        }else{
+        } else {
 
             setData(userData.user)
         }
@@ -71,6 +74,7 @@ function SavingsWithdrawals(userData) {
     function closeModal() {
         setIsOpen(false);
     }
+
     return (
         <div className="transaction-history mt-5 px-4">
 
@@ -93,10 +97,14 @@ function SavingsWithdrawals(userData) {
                                 let statusText = "";
                                 let statusClassName = "pending-status"; // Default class for pending status
 
-                                if (row.item?.status === "Successful") {
+                                if (row.status === "Confirmed") {
                                     statusClassName = "paid-status";
                                     statusIcon = <Icon icon="material-symbols:circle-outline" className={statusClassName} />;
                                     statusText = "Successful";
+                                } else if (row.status === "Rejected") {
+                                    statusClassName = "rejected-status";
+                                    statusIcon = <Icon icon="material-symbols:circle-outline" className={statusClassName} />;
+                                    statusText = "Rejected";
                                 } else {
                                     statusIcon = <Icon icon="material-symbols:circle-outline" className={statusClassName} />;
                                     statusText = "Pending Request";
@@ -108,7 +116,7 @@ function SavingsWithdrawals(userData) {
                                     >
 
                                         <TableCell component="th" scope="row">
-                                            {row.type}
+                                            Withdrawal Request
                                         </TableCell>
                                         <TableCell >
                                             {new Date(row.createdAt).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
@@ -118,16 +126,16 @@ function SavingsWithdrawals(userData) {
                                             <div className="d-flex align-items-center">
                                                 {statusIcon}
                                                 <p className={
-                                                    row.item?.status === "Successful"
+                                                    row.status === "Confirmed"
                                                         ? "paid-status"
-                                                        :  "pending-status"
+                                                        : row.status === "Rejected" ? "rejected-status" : "pending-status"
                                                 }>{statusText}</p>
                                             </div>
                                         </TableCell>
                                         <TableCell><Icon icon="mdi:open-in-new" className={
-                                            row.item?.status === "Successful"
+                                            row.status === "Confirmed"
                                                 ? "paid-icon"
-                                                : "pending-icon"
+                                                : row.status === "Rejected" ? "rejected-icon" : "pending-icon"
                                         } onClick={() => openModal(row)} /></TableCell>
                                     </TableRow>
                                 )
@@ -154,7 +162,29 @@ function SavingsWithdrawals(userData) {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </Box>
+            <Modal
+                isOpen={modalIsOpen}
+                // onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                contentLabel="Example Modal"
+                className={{
+                    base: 'modal-base',
+                    afterOpen: 'modal-base_after-open',
+                    beforeClose: 'modal-base_before-close'
+                }}
+                overlayClassName={{
+                    base: 'overlay-base',
+                    afterOpen: 'overlay-base_after-open',
+                    beforeClose: 'overlay-base_before-close'
+                }}
+                shouldCloseOnOverlayClick={true}
+                closeTimeoutMS={2000}>
 
+                <WithdrawalDetails
+                    closeModal={closeModal}
+                    withdrawalData={selectedTransaction} />
+
+            </Modal>
         </div>
     )
 }

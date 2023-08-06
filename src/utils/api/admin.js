@@ -138,6 +138,7 @@ export const withdrawalHistory = async (userId, signal) => {
     throw error.response.data;
   }
 };
+<<<<<<< HEAD
 export const loanHistory = async (userId, signal) => {
   try {
     const { data } = await api.get(`/api/admins/loans/${userId}`);
@@ -170,3 +171,42 @@ export const UpdateProfilePicture = async (profilePicture) => {
     throw error.response.data;
   }
 };
+||||||| 46d5ac7
+=======
+
+export const approveWithdrawal= async (withdrawalId, signal) => {
+  try {
+    const { data } = await api.put(`/api/admins/withdrawal/${withdrawalId}/approval`);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const declineWithdrawal= async (withdrawalId, rejectionReason) => {
+  try {
+    const { data } = await api.put(`/api/admins/withdrawal/${withdrawalId}/rejection`,rejectionReason);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const approveLoan= async (loanId, signal) => {
+  try {
+    const { data } = await api.put(`/api/admins/loan/${loanId}/approval`);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const declineLoan= async (loanId, rejectionReason) => {
+  try {
+    const { data } = await api.put(`/api/admins/loan/${loanId}/rejection`,rejectionReason);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+>>>>>>> refs/remotes/origin/main

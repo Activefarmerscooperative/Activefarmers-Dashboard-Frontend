@@ -1,0 +1,99 @@
+.schedule-savings-page h1 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: normal;
+    color: #0D9068;
+
+}
+
+.empty-schedule-savings {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    height: 70vh;
+    text-align: center;
+}
+
+.savings-icon {
+    width: 60px;
+    height: 60px;
+    background: #FB9129;
+    color: #fff;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+
+.empty-schedule-savings p {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: normal;
+    color: #444444;
+    margin-top: 10px;
+}
+
+.empty-schedule-savings span {
+    width: 350px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+    color: #444444;
+}
+
+.empty-schedule-savings .btn.schedule-savings-btn {
+    width: 180px;
+    padding: 10px;
+    border-radius: 33px;
+    background: #0D9068;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: normal;
+    color: #FFFFFF;
+}
+
+.total-schedule-savings .card {
+    background: #F6F9FF;
+    width: 300px;
+}
+
+.history-title {
+    display: none;
+}
+
+.schedule-savings-history .css-1ygcj2i-MuiTableCell-root,
+.schedule-savings-history .css-1ex1afd-MuiTableCell-root {
+    text-align: left !important;
+    width: 200px;
+}
+
+.schedule-savings-history .css-15wwp11-MuiTableHead-root {
+    background: #F6F9FF;
+    border-radius: 50px 50px 0 0;
+
+}
+
+
+.schedule-savings-history .css-rqglhn-MuiTable-root {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1px solid #dbe7ff;
+}
+
+.savings-plan-link h5 {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: normal;
+    color: #FB9129;
+    cursor: pointer;
+}
+
+
+.savings-plan-link p {
+    width: 220px;
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+    color: #444444;
+}
