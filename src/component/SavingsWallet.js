@@ -18,7 +18,7 @@ const fetchData = async (key) => {
   }
 };
 
-function SavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavingsCategory, setActiveWallet }) {
+function SavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavingsCategory }) {
   //openSavingsModal comes from dashboardHome
   //setSavingsCategory comes from withdrawal page.
 
@@ -60,10 +60,7 @@ function SavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavingsCatego
     }));
   };
 
-  //method to handle active wallet
-  const handleWalletSelection = (wallet) => {
-    setActiveWallet(wallet);
-  };
+  
 
   
 
@@ -77,7 +74,7 @@ function SavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavingsCatego
       }
 
       {
-        wallet?.map(item => <div className="px-3 card my-savings" key={item._id} onClick={() => handleWalletSelection(item)}>
+        wallet?.map(item => <div className="px-3 card my-savings" key={item._id}>
 
           <p className='text-start savings-title'>{item.category}</p>
 
