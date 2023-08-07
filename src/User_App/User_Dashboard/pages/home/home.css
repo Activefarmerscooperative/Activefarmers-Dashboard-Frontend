@@ -14,6 +14,11 @@
 
 }
 
+
+.card.my-savings.active{
+    background-color: #016b4b;
+   
+}
 .user-home-welcome {
     width: 930px;
     background: #FB9129;
@@ -44,13 +49,14 @@
     overflow-x: scroll !important;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    cursor: pointer;
 }
 
 .savings-wallet-category::-webkit-scrollbar {
     display: none;
 }
 
-.savings-wallet-category .card {
+.savings-wallet-category .card, .schedule-savings-page .card {
     flex: 0 0 200px;
     margin-right: 10px;
     background: rgba(13, 144, 104, 0.25);
