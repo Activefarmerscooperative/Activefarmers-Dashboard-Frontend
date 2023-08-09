@@ -14,6 +14,11 @@
 
 }
 
+
+.card.my-savings.active{
+    background-color: #016b4b;
+   
+}
 .user-home-welcome {
     width: 930px;
     background: #FB9129;
@@ -38,19 +43,20 @@
 }
 
 
-.user-dashboard-home .savings-wallet-category {
+.savings-wallet-category {
     display: flex;
     white-space: nowrap;
     overflow-x: scroll !important;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    cursor: pointer;
 }
 
 .savings-wallet-category::-webkit-scrollbar {
     display: none;
 }
 
-.savings-wallet-category .card {
+.savings-wallet-category .card, .schedule-savings-page .card {
     flex: 0 0 200px;
     margin-right: 10px;
     background: rgba(13, 144, 104, 0.25);
@@ -60,7 +66,7 @@
 .savings-value,
 .hidden-input {
     font-weight: 600;
-    font-size: 25px;
+    font-size: 18px;
     white-space: nowrap;
     color: #E98923;
     line-height: normal;
@@ -367,8 +373,29 @@ p.MuiTablePagination-displayedRows {
 
 
 
-@media screen and (max-width: 769px) {}
-@media screen and (max-width: 600px) {}
+@media screen and (max-width: 769px) {
+    .savings-value, .hidden-input {
+        font-size: 20px;
+      }
+      .user-dashboard-home .eye-icon {
+        width: 20px;
+        height: 20px;
+    }
+    .user-dashboard-home .card p {
+      font-size: 18px;
+    }
+    .user-dashboard-home h1 {
+      font-size: 30px;
+      margin-bottom: 0px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .user-dashboard-header{
+        flex-direction: column;
+        
+    align-items: flex-end !important;
+    }
+}
 @media screen and (max-width: 426px) {}
 @media screen and (max-width: 376px) {}
 @media screen and (max-width: 321px) {}

@@ -6,6 +6,13 @@ import { Table, TableHead, TableBody, TableRow, TableCell, TableContainer, Paper
 import { Members, Borrowers, LoanRequests, WithdrawalRequest } from "../../utils/api/admin"
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import AutoTransaction from '../components/data/AutoTransaction';
+import WithdrawalDetails from '../components/reusable/WithdrawalDetails';
+import Modal from 'react-modal';
+import AutoTransactionModal from '../components/reusable/AutoTransactionModal';
+
+
+
 
 const getData = async (key, tab) => {
     let res;
@@ -32,7 +39,25 @@ const Tab = ({ tabs, defaultTab }) => {
     const [rowsPerPage, setRowsPerPage] = useState(10);
     // React query fetch data
     const { data, status } = useQuery(['getData', activeTab], getData)
-    const [showData, setShowData] = useState([])
+    const [showData, setShowData] = useState([]);
+    const [modalIsOpen, setIsOpen] = useState(false);
+    const [selectedTransaction, setSelectedTransaction] = useState(null);
+
+
+
+    function openModal(transactions) {
+        // console.log(transaction);
+        setSelectedTransaction(transactions);
+        setIsOpen(true);
+    }
+    function closeModal() {
+        setIsOpen(false);
+    }
+
+
+
+
+
 
     useEffect(() => {
         if (!data) return
@@ -132,6 +157,10 @@ const Tab = ({ tabs, defaultTab }) => {
                 tableHeaders = ['S/N', 'Request Amount', 'Savings Balance', 'Member', 'Joined On', 'Phone Number', 'Category', 'Location', 'Gender'];
                 tableData = showData
                 break;
+            case 'Auto Transactions':
+                tableHeaders = ['S/N', 'Action', 'User', 'Number', 'Amount', 'Date', 'Time', 'Status', 'View'];
+                tableData = showData
+                break;
             default:
                 return null;
         }
@@ -151,14 +180,43 @@ const Tab = ({ tabs, defaultTab }) => {
                         <TableBody>
                             {/* {tableData.map((row) => ( */}
                             {tableData?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((row,i) => (
-                                    <TableRow key={row.id} onClick={(e)=>navigate('/admin/dashboard/userprofile', { state:data[i]} )} >
+                                .map((row, i) => (
+                                    <TableRow key={row.id} onClick={(e) => navigate('/admin/dashboard/userprofile', { state: data[i] })} >
                                         {Object.values(row).map((cellValue, index) => (
                                             <TableCell key={index}>{cellValue}</TableCell>
                                         ))}
                                     </TableRow>
                                 ))}
                         </TableBody>
+                        {tabName === "Auto Transactions" &&
+                            <TableBody>
+                                {/* {tableData.map((row) => ( */}
+                                {AutoTransaction?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    .map((transactions, index) => (
+                                        <TableRow key={index.id} >
+                                            <TableCell>{index + 1}</TableCell>
+                                            <TableCell>{transactions.action}</TableCell>
+                                            <TableCell>{transactions.user}</TableCell>
+                                            <TableCell>{transactions.number}</TableCell>
+                                            <TableCell>{transactions.amount}</TableCell>
+                                            <TableCell>{transactions.date}</TableCell>
+                                            <TableCell>{transactions.time}</TableCell>
+                                            <TableCell className='d-flex align-items'><Icon icon="ic:outline-circle" className={
+                                                transactions.item.status === "Successful"
+                                                    ? "success-icon"
+                                                    : "failed-icon"
+                                            } />
+                                                <p className={
+                                                    transactions.item.status === "Successful"
+                                                        ? "success-icon"
+                                                        : "failed-icon"
+                                                }>{transactions.item.status}</p>
+                                            </TableCell>
+
+                                            <TableCell><Icon icon="mdi:open-in-new" className="pending-icon" onClick={() => openModal(transactions)}  /></TableCell>
+                                        </TableRow>
+                                    ))}
+                            </TableBody>}
                     </Table>
 
                 </TableContainer>
@@ -179,62 +237,86 @@ const Tab = ({ tabs, defaultTab }) => {
         );
     };
 
-return (
-    <div>
-        <div className="tab-header">
-            <div className=" d-flex align-items-center justify-content-between">
+    return (
+        <div>
+            <div className="tab-header">
+                <div className=" d-flex align-items-center justify-content-between">
+                    {tabs.map((tab) => (
+                        <div
+                            key={tab.name}
+                            className={`tab-item ${activeTab === tab.name ? 'active' : ''}`}
+                            onClick={() => handleTabClick(tab.name)}
+                        >
+                            {tab.name}
+                        </div>
+                    ))}
+
+
+                </div>
+            </div>
+
+            <div className=" d-flex align-items-center justify-content-between px-3 my-4">
+                <div className='d-flex sorting-button'>
+                    <button className="btn d-flex align-items-center search">
+                        <Icon icon="eva:search-outline" />
+                        <input type="search" placeholder='Search' />
+                    </button>
+                    <button className="btn d-flex align-items-center filter">
+                        <Icon icon="clarity:filter-line" color="#0d9068" />
+                        Filter Members
+                    </button>
+                </div>
+
+                <div className='d-flex table-button'>
+                    <button className="btn d-flex align-items-center add-member">
+                        <Icon icon="basil:add-solid" />
+                        Add Member
+                    </button>
+                    <button className='btn d-flex align-items-center export-list'>
+                        <Icon icon="mingcute:file-export-fill" />
+                        Export List
+                    </button>
+                </div>
+
+
+            </div>
+            <div className="tab-content mt-3 ">
                 {tabs.map((tab) => (
                     <div
                         key={tab.name}
-                        className={`tab-item ${activeTab === tab.name ? 'active' : ''}`}
-                        onClick={() => handleTabClick(tab.name)}
+                        className={`tab-pane ${activeTab === tab.name ? 'active' : ''}`}
                     >
-                        {tab.name}
+                        {renderTable(tab.name)}
+                        {/* {tab.content} */}
                     </div>
                 ))}
-
-
-            </div>
-        </div>
-
-        <div className=" d-flex align-items-center justify-content-between px-3 my-4">
-            <div className='d-flex sorting-button'>
-                <button className="btn d-flex align-items-center search">
-                    <Icon icon="eva:search-outline" />
-                    <input type="search" placeholder='Search' />
-                </button>
-                <button className="btn d-flex align-items-center filter">
-                    <Icon icon="clarity:filter-line" color="#0d9068" />
-                    Filter Members
-                </button>
             </div>
 
-            <div className='d-flex table-button'>
-                <button className="btn d-flex align-items-center add-member">
-                    <Icon icon="basil:add-solid" />
-                    Add Member
-                </button>
-                <button className='btn d-flex align-items-center export-list'>
-                    <Icon icon="mingcute:file-export-fill" />
-                    Export List
-                </button>
-            </div>
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                contentLabel="Example Modal"
+                className={{
+                    base: 'modal-base',
+                    afterOpen: 'modal-base_after-open',
+                    beforeClose: 'modal-base_before-close'
+                }}
+                overlayClassName={{
+                    base: 'overlay-base',
+                    afterOpen: 'overlay-base_after-open',
+                    beforeClose: 'overlay-base_before-close'
+                }}
+                shouldCloseOnOverlayClick={true}
+                closeTimeoutMS={2000}>
 
+                <AutoTransactionModal
+                    closeModal={closeModal}
+                    autoTransactionData = {selectedTransaction}
+                />
 
+            </Modal>
         </div>
-        <div className="tab-content mt-3 ">
-            {tabs.map((tab) => (
-                <div
-                    key={tab.name}
-                    className={`tab-pane ${activeTab === tab.name ? 'active' : ''}`}
-                >
-                    {renderTable(tab.name)}
-                    {/* {tab.content} */}
-                </div>
-            ))}
-        </div>
-    </div>
-);
+    );
 };
 
 export default Tab;

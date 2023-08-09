@@ -6,6 +6,7 @@ import AddSavings from "../modal/AddSavings";
 import Modal from 'react-modal';
 import { RotatingLines } from "react-loader-spinner";
 import { toast } from "react-toastify";
+import EditScheduleSavings from "../modal/savings_plans_modal/EditScheduleSavings";
 
 const fetchData = async (key) => {
 
@@ -18,7 +19,7 @@ const fetchData = async (key) => {
   }
 };
 
-function SavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavingsCategory }) {
+function ScheduleSavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavingsCategory, setActiveWallet }) {
   //openSavingsModal comes from dashboardHome
   //setSavingsCategory comes from withdrawal page.
 
@@ -60,8 +61,13 @@ function SavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavingsCatego
     }));
   };
 
-  
+  //method to handle active wallet
+  const handleWalletSelection = (wallet) => {
+    setActiveWallet(wallet);
+  };
 
+
+  
   
 
 
@@ -74,7 +80,7 @@ function SavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavingsCatego
       }
 
       {
-        wallet?.map(item => <div className="px-3 card my-savings" key={item._id}>
+        wallet?.map(item => <div className="px-3 card my-savings" key={item._id} onClick={() => handleWalletSelection(item)}>
 
           <p className='text-start savings-title'>{item.category}</p>
 
@@ -108,7 +114,7 @@ function SavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavingsCatego
             <p onClick={() => {
               setSelectedCategory(item.category)
               openModal()
-            }}>Add Savings</p>
+            }}>Edit Savings</p>
           </div>
         </div>)
       }
@@ -130,7 +136,7 @@ function SavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavingsCatego
         shouldCloseOnOverlayClick={true}
         closeTimeoutMS={2000}
       >
-        <AddSavings
+        <EditScheduleSavings
           closeModal={closeModal}
           selectedCategory={selectedCategory}
           wallet={wallet}
@@ -140,4 +146,4 @@ function SavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavingsCatego
   )
 }
 
-export default SavingsWallet
+export default ScheduleSavingsWallet

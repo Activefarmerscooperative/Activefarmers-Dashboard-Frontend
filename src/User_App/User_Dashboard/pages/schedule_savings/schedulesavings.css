@@ -97,3 +97,7 @@
     line-height: normal;
     color: #444444;
 }
+
+.schedule-savings-page .card.my-savings.active {
+    background-color: #015038;
+}

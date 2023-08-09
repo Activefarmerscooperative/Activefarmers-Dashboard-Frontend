@@ -174,3 +174,12 @@ export const declineLoan= async (loanId, rejectionReason) => {
     throw error.response.data;
   }
 };
+
+export const autoTransactions= async () => {
+  try {
+    const { data } = await api.get(`/api/admins/auto-transactions`,);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
