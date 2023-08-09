@@ -38,7 +38,7 @@
 }
 
 
-.user-dashboard-home .savings-wallet-category {
+.savings-wallet-category {
     display: flex;
     white-space: nowrap;
     overflow-x: scroll !important;
@@ -60,7 +60,7 @@
 .savings-value,
 .hidden-input {
     font-weight: 600;
-    font-size: 25px;
+    font-size: 18px;
     white-space: nowrap;
     color: #E98923;
     line-height: normal;
@@ -367,8 +367,29 @@ p.MuiTablePagination-displayedRows {
 
 
 
-@media screen and (max-width: 769px) {}
-@media screen and (max-width: 600px) {}
+@media screen and (max-width: 769px) {
+    .savings-value, .hidden-input {
+        font-size: 20px;
+      }
+      .user-dashboard-home .eye-icon {
+        width: 20px;
+        height: 20px;
+    }
+    .user-dashboard-home .card p {
+      font-size: 18px;
+    }
+    .user-dashboard-home h1 {
+      font-size: 30px;
+      margin-bottom: 0px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .user-dashboard-header{
+        flex-direction: column;
+        
+    align-items: flex-end !important;
+    }
+}
 @media screen and (max-width: 426px) {}
 @media screen and (max-width: 376px) {}
 @media screen and (max-width: 321px) {}

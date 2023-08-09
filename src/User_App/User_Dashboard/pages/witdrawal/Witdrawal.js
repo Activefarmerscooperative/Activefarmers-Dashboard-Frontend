@@ -51,11 +51,15 @@ export default function WitdrawalForm({ user }) {
     }
 
     return (
-        <div className="my-5 px-5 withdrawal-form">
+        <div className="my-4 px-4 withdrawal-form">
             <h1>Savings Withdrawal Form</h1>
-            <SavingsWallet
+            <div className="savings-wallet-category">
+              
+              <SavingsWallet
                 setSavingsCategory={setSavingsCategory}
             />
+            </div>
+            
 
             <p className="note my-4">Withdrawal amount can not be more than savings balance. </p>
             <div className="withdrawal-input-form mt-5">

@@ -107,3 +107,22 @@ p.agree a {
     color: #000000;
 }
 
+.success-icon{
+    color: #0D9068;
+    width: 20px;
+    height: 20px;
+
+}
+
+.failed-icon{
+    color: #ff0000;
+    width: 20px;
+    height: 20px;
+
+}
+.loan-summary-modal span.status.failed-icon{
+   
+border: 1px solid #ff0000;
+color: #ff0000;
+
+}

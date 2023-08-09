@@ -93,7 +93,7 @@ export default function Login() {
     return (
         <div >
             {location.pathname === "/login"
-                ? <div className="header-section">
+                ? <div className="header-section admin-form">
                     <div className="d-flex align-items-center justify-content-between header-components">
                         <div className='d-flex align-items-center'>
                             <img src={header} alt="" />

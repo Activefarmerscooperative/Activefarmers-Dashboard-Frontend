@@ -286,6 +286,15 @@ export const ValidateCard = async () => {
   }
 };
 
+export const ValidateCardForScheduledSavings = async () => {
+  try {
+    const { data } = await api.post(`/api/users/loan/card`);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
 export const ValidateSavedCard = async () => {
   try {
     const { data } = await api.put(`/api/users/loan/card`);

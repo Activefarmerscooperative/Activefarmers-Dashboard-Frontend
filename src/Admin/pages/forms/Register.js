@@ -177,7 +177,7 @@ export default function Register() {
 
     return (
 
-        <div className="d-flex justify-content-center my-3 p-2">
+        <div className="d-flex justify-content-center my-3 p-2 admin-form">
             <div className="d-flex flex-column align-items-center register-form px-5 py-3">
                 <h1>Register as an Admin</h1>
                 <p>Please complete this form to the best of your ability providing all relevant details. Please note that your application will go through confirmation prior to processing. </p>

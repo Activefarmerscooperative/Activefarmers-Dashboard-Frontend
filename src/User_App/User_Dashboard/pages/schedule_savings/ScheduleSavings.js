@@ -13,6 +13,7 @@ import ScheduledSavingsCards from "../../../../component/ScheduledSavingsCard";
 import { RotatingLines } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import { GetScheduledSavings } from "../../../../utils/api/member";
+import SavingsWallet from "../../../../component/SavingsWallet";
 
 const fetchScheduledSavings = async (key) => {
 
@@ -36,7 +37,7 @@ export default function ScheduleSavings() {
 
     useEffect(() => {
         if (!data) return
-        setSavingsData(data.scheduledSavings)
+        // setSavingsData(data.scheduledSavings)
     }, [data])
 
     const toggleLoanVisibility = () => {
@@ -81,6 +82,11 @@ export default function ScheduleSavings() {
             }
 
 
+
+            <div className="savings-wallet-category my-4">
+
+                <SavingsWallet />
+            </div>
 
 
             <div className="schedule-savings-list">

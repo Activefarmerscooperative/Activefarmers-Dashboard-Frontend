@@ -63,10 +63,13 @@ function Sidebar({ user, setToken }) {
     const handleClick = () => {
         setClicked(!clicked);
     };
+    const closeSidebar = () => {
+        setClicked(false)
+    }
 
 
     return (
-        <div className='sidebar-user'>
+        <div className={`sidebar-user ${clicked ? "open" : ""}`}>
             <div className='my-3 d-flex flex-column sidebar-user-content'>
                 <div className=' px-4 profile-info mb-3 '>
                     <label htmlFor="image-upload" className="profile-img-container">
@@ -178,69 +181,56 @@ function Sidebar({ user, setToken }) {
 
                 {clicked ? (
 
-                <ul className="sidebar-user-menu p-0 mobile" >
-                    <li>
-                        <NavLink className="link active-link dashboard " to="/dashboard/home" >
-                            
-                            Dashboard
-                        </NavLink>
-                    </li>
-
-                    <li>
-                        <div>
+                    <ul className="sidebar-user-menu p-0 mobile" >
+                        <li onClick={closeSidebar}>
+                            <NavLink className="link active-link dashboard " to="/dashboard/home" >
+                                Dashboard
+                            </NavLink>
+                        </li>
+                        <li onClick={closeSidebar}>
                             <NavLink className="link " to="/dashboard/witdrawal">
-                                
+
                                 Saving Withdrawal
                             </NavLink>
+                        </li>
+                        <li onClick={closeSidebar}>
                             <NavLink className="link " to="/dashboard/loan">
-                                
                                 Loan Request
                             </NavLink>
-                        </div>
+                        </li>
 
-                    </li>
-
-                    <li>
-                        <div className="">
+                        <li onClick={closeSidebar}>
                             <NavLink className="link " to="/dashboard/profile">
-                                
                                 Profile Update
                             </NavLink>
+                        </li>
+                        <li onClick={closeSidebar}>
                             <NavLink className="link " to="/dashboard/guarantor">
-                                
                                 Account & Guarantor
                             </NavLink>
+                        </li>
+                        <li onClick={closeSidebar}>
                             <NavLink className="link " to="/dashboard/schedule-savings">
-                                
                                 Schedule Savings
                             </NavLink>
-                        </div>
-
-
-                    </li>
-
-                    <li>
-                        <NavLink className="link " to="/dashboard/support" >
-                            
-                            Help & Support
-                        </NavLink>
-                    </li>
-
-                    <li>
-                        <NavLink className="link  " to="/dashboard/terms">
-                            
-                            Terms & Conditions
-                        </NavLink>
-                    </li>
-
-                    <li>
-                        <div className="logout " onClick={logOut}>
-                          
-                            Log Out
-                        </div>
-                    </li>
-                </ul>
-                ): null}
+                        </li>
+                        <li onClick={closeSidebar}>
+                            <NavLink className="link " to="/dashboard/support" >
+                                Help & Support
+                            </NavLink>
+                        </li>
+                        <li onClick={closeSidebar}>
+                            <NavLink className="link  " to="/dashboard/terms">
+                                Terms & Conditions
+                            </NavLink>
+                        </li>
+                        <li onClick={closeSidebar}>
+                            <div className="logout " onClick={logOut}>
+                                Log Out
+                            </div>
+                        </li>
+                    </ul>
+                ) : null}
 
 
 
