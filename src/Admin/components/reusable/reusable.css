@@ -90,6 +90,9 @@ font-size: 14px;
 color: #0D9068;
 
 }
+.autotrans-status{
+   margin-left: 60px; 
+}
 .loan-summary-modal a:nth-child(1) .btn{
     background-color: #FFFFFF;
     color: #FB9129;
@@ -107,19 +110,7 @@ p.agree a {
     color: #000000;
 }
 
-.success-icon{
-    color: #0D9068;
-    width: 20px;
-    height: 20px;
 
-}
-
-.failed-icon{
-    color: #ff0000;
-    width: 20px;
-    height: 20px;
-
-}
 .loan-summary-modal span.status.failed-icon{
    
 border: 1px solid #ff0000;

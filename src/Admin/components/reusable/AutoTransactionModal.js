@@ -53,7 +53,7 @@ function AutoTransactionModal({ closeModal, autoTransactionData }) {
                                     Status: </p>
 
 
-                                <div className="d-flex flex-column">
+                                <div className="d-flex flex-column justify-content-between autotrans-status">
                                     <span className={`status mx-auto ${autoTransactionData.item.status === "Successful"
                                                     ? "success-icon"
                                                     : "failed-icon"
@@ -65,7 +65,7 @@ function AutoTransactionModal({ closeModal, autoTransactionData }) {
                                 </div>
 
                             </li>
-                            <li className="d-flex">
+                            <li className="d-flex justify-content-around">
                                 {autoTransactionData.user} {autoTransactionData.number}
                             </li>
                         </>

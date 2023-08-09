@@ -1,4 +1,3 @@
-
 import { Icon } from '@iconify/react';
 import "../modal.css";
 import React, { useEffect, useState } from 'react';
@@ -6,6 +5,7 @@ import { AddScheduledSaving, SavingsCategory } from '../../utils/api/member';
 import { toast } from "react-toastify"
 import { RotatingLines } from "react-loader-spinner";
 import SavingsPaymentMethod from './SavingsPaymentMethod';
+import DatePicker from "react-datepicker";
 
 function ScheduleSavingsPlans({ openModal, closeModal }) {
     const [savingCat, setSavingCat] = useState([])
@@ -18,6 +18,7 @@ function ScheduleSavingsPlans({ openModal, closeModal }) {
     const [showCustom, setShowCustom] = useState(false)
     const [step, setStep] = useState(1)
     const [modalData, setModalData] = useState({})
+    const [startDate, setStartDate] = useState(new Date())
 
 
     async function fetchCategory(params) {
@@ -100,6 +101,7 @@ function ScheduleSavingsPlans({ openModal, closeModal }) {
                                     }
                                     <option value="Custom" required>Add New Category</option>
                                 </select>
+                                <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
                                 {//Show this input when user selects custom category
                                     showCustom && <input type="text" value={savingsData?.newCategory} onChange={handleChange} name="newCategory" placeholder="Enter new savings category" />
                                 }

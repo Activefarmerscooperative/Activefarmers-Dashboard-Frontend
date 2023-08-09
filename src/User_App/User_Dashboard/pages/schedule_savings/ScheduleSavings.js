@@ -14,6 +14,7 @@ import { RotatingLines } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import { GetScheduledSavings } from "../../../../utils/api/member";
 import SavingsWallet from "../../../../component/SavingsWallet";
+import ScheduleSavingsWallet from "../../../../component/ScheduleSavingsWallet";
 
 const fetchScheduledSavings = async (key) => {
 
@@ -25,7 +26,8 @@ const fetchScheduledSavings = async (key) => {
         toast.error(error?.error);
     }
 };
-export default function ScheduleSavings() {
+
+export default function ScheduleSavings({wallet}) {
     const [loanInputType, setLoanInputType] = useState("false");
     const [loanIcon, setLoanIcon] = useState("mdi:eye-off");
     const [modalIsOpen, setIsOpen] = useState(false);
@@ -39,6 +41,7 @@ export default function ScheduleSavings() {
         if (!data) return
         // setSavingsData(data.scheduledSavings)
     }, [data])
+    const [activeWallet, setActiveWallet] = useState(null);
 
     const toggleLoanVisibility = () => {
         setLoanInputType(loanInputType ? false : true);
@@ -56,6 +59,11 @@ export default function ScheduleSavings() {
         setIsOpen(false);
     }
 
+
+
+
+    // Filter the data based on the active wallet
+    const filteredData = savingsPlansData.find((item) => item.categoryName === activeWallet?.category)?.historyList || [];
 
 
     return (
@@ -84,8 +92,7 @@ export default function ScheduleSavings() {
 
 
             <div className="savings-wallet-category my-4">
-
-                <SavingsWallet />
+                <ScheduleSavingsWallet setActiveWallet={setActiveWallet} savingsPlansData={savingsPlansData} />
             </div>
 
 
@@ -94,7 +101,7 @@ export default function ScheduleSavings() {
                     This is history of your scheduled saving, 50,000 is deducted from your account on 30th of every month
                 </p>
 
-                <div className="d-flex justify-content-evenly align-items-center">
+                <div className="d-flex justify-content-evenly align-items-start">
                     <div className="schedule-savings-history ">
                         <h3 className="history-title">History</h3>
                         <Table className=''>
@@ -106,7 +113,9 @@ export default function ScheduleSavings() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {savingsPlansData.map((item, index) => (
+                                {/* {savingsPlansData.map((item, index) => ( */}
+
+                                {filteredData.map((item, index) => (
                                     <TableRow key={index}>
                                         <TableCell>{item.date}</TableCell>
                                         <TableCell>{item.amount}</TableCell>
@@ -117,7 +126,7 @@ export default function ScheduleSavings() {
                         </Table>
                     </div>
                     <div className="edit-savings-plans-section">
-                        <div className="total-schedule-savings my-4">
+                        <div className="total-schedule-savings mb-4">
                             <div className="p-3 card loan">
                                 <div className="d-flex flex-column">
                                     <p className='savings-title'>Total scheduled savings</p>
@@ -136,7 +145,13 @@ export default function ScheduleSavings() {
                                 </div>
                             </div>
                         </div>
-
+                        <div className="edit-savings savings-plan-link mt-3" onClick={openModal('addSavingsPlans')}>
+                            <h5 className="edit-savings">
+                                Add Savings
+                                <Icon icon="fluent:ios-arrow-24-filled" />
+                            </h5>
+                            <p>Add a new scheduled savings with date, amount and your wallet category</p>
+                        </div>
                         <div className="edit-savings savings-plan-link mt-3" onClick={openModal('edit')}>
                             <h5 className="edit-savings">
                                 Edit Savings
