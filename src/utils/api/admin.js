@@ -175,7 +175,7 @@ export const declineLoan= async (loanId, rejectionReason) => {
   }
 };
 
-export const autoTransactions= async () => {
+export const AutoTransactions = async () => {
   try {
     const { data } = await api.get(`/api/admins/auto-transactions`,);
     return data;

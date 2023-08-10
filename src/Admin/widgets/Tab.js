@@ -3,7 +3,7 @@ import { useQuery } from 'react-query'
 import { Icon } from '@iconify/react';
 import './widgets.css';
 import { Table, TableHead, TableBody, TableRow, TableCell, TableContainer, Paper, Box, TablePagination } from '@mui/material';
-import { Members, Borrowers, LoanRequests, WithdrawalRequest } from "../../utils/api/admin"
+import { Members, Borrowers, LoanRequests, WithdrawalRequest, AutoTransactions } from "../../utils/api/admin"
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import AutoTransaction from '../components/data/AutoTransaction';
@@ -23,6 +23,8 @@ const getData = async (key, tab) => {
             res = await Borrowers();
         } else if (tab === "Loan Requests") {
             res = await LoanRequests();
+        } else if (tab === "Auto Transactions") {
+            res = await AutoTransactions()
         } else {
             res = await WithdrawalRequest();
         }
@@ -42,8 +44,7 @@ const Tab = ({ tabs, defaultTab }) => {
     const [showData, setShowData] = useState([]);
     const [modalIsOpen, setIsOpen] = useState(false);
     const [selectedTransaction, setSelectedTransaction] = useState(null);
-
-
+    const [autoTransaction, setAutoTransaction] = useState([])
 
     function openModal(transactions) {
         // console.log(transaction);
@@ -53,11 +54,6 @@ const Tab = ({ tabs, defaultTab }) => {
     function closeModal() {
         setIsOpen(false);
     }
-
-
-
-
-
 
     useEffect(() => {
         if (!data) return
@@ -82,7 +78,7 @@ const Tab = ({ tabs, defaultTab }) => {
             }
 
             setShowData(dataArray)
-            console.log(data)
+
         } else if (activeTab === "Borrowers") {
 
             for (let i = 0; i < data.length; i++) {
@@ -102,6 +98,10 @@ const Tab = ({ tabs, defaultTab }) => {
             }
 
             setShowData(dataArray)
+        } else if (activeTab === "Auto Transactions") {
+            console.log(data)
+            setAutoTransaction(data.results)
+
         } else {
 
             for (let i = 0; i < data.length; i++) {
@@ -177,43 +177,47 @@ const Tab = ({ tabs, defaultTab }) => {
                                 ))}
                             </TableRow>
                         </TableHead>
-                        <TableBody>
-                            {/* {tableData.map((row) => ( */}
-                            {tableData?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((row, i) => (
-                                    <TableRow key={row.id} onClick={(e) => navigate('/admin/dashboard/userprofile', { state: data[i] })} >
-                                        {Object.values(row).map((cellValue, index) => (
-                                            <TableCell key={index}>{cellValue}</TableCell>
-                                        ))}
-                                    </TableRow>
-                                ))}
-                        </TableBody>
+                        {
+                            tabName !== "Auto Transactions" &&
+                            <TableBody>
+                                {/* {tableData.map((row) => ( */}
+                                {tableData?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    .map((row, i) => (
+                                        <TableRow key={row.id} onClick={(e) => navigate('/admin/dashboard/userprofile', { state: data[i] })} >
+                                            {Object.values(row).map((cellValue, index) => (
+                                                <TableCell key={index}>{cellValue}</TableCell>
+                                            ))}
+                                        </TableRow>
+                                    ))}
+                            </TableBody>
+                        }
+
                         {tabName === "Auto Transactions" &&
                             <TableBody>
                                 {/* {tableData.map((row) => ( */}
-                                {AutoTransaction?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                {autoTransaction?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((transactions, index) => (
                                         <TableRow key={index.id} >
                                             <TableCell>{index + 1}</TableCell>
-                                            <TableCell>{transactions.action}</TableCell>
-                                            <TableCell>{transactions.user}</TableCell>
-                                            <TableCell>{transactions.number}</TableCell>
-                                            <TableCell>{transactions.amount}</TableCell>
-                                            <TableCell>{transactions.date}</TableCell>
-                                            <TableCell>{transactions.time}</TableCell>
+                                            <TableCell>{transactions.type}</TableCell>
+                                            <TableCell>{transactions.user.firstname} {transactions.user.surname}</TableCell>
+                                            <TableCell>{transactions?.user.phone}</TableCell>
+                                            <TableCell>{transactions?.amount}</TableCell>
+                                            <TableCell>{new Date(transactions?.createdAt).toDateString()}</TableCell>
+                                            <TableCell>{new Date(transactions?.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</TableCell>
                                             <TableCell className='d-flex align-items'><Icon icon="ic:outline-circle" className={
-                                                transactions.item.status === "Successful"
+                                                transactions.status === "Successful"
                                                     ? "success-icon"
                                                     : "failed-icon"
                                             } />
                                                 <p className={
-                                                    transactions.item.status === "Successful"
+                                                    transactions.status === "Successful"
                                                         ? "success-icon"
                                                         : "failed-icon"
-                                                }>{transactions.item.status}</p>
+                                                }>{transactions.status}</p>
                                             </TableCell>
 
-                                            <TableCell><Icon icon="mdi:open-in-new" className="pending-icon" onClick={() => openModal(transactions)}  /></TableCell>
+                                            <TableCell><Icon icon="mdi:open-in-new" className="pending-icon" onClick={() => openModal(transactions)} /></TableCell>
                                         </TableRow>
                                     ))}
                             </TableBody>}
@@ -224,7 +228,7 @@ const Tab = ({ tabs, defaultTab }) => {
                     <TablePagination
                         rowsPerPageOptions={[5, 10, 25]}
                         component="div"
-                        count={tableData?.length}
+                        count={tabName !== "Auto Transactions" ? tableData?.length : autoTransaction?.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}
@@ -311,7 +315,7 @@ const Tab = ({ tabs, defaultTab }) => {
 
                 <AutoTransactionModal
                     closeModal={closeModal}
-                    autoTransactionData = {selectedTransaction}
+                    autoTransactionData={selectedTransaction}
                 />
 
             </Modal>

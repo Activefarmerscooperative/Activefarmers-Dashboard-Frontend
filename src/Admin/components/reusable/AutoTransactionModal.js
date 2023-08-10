@@ -9,14 +9,13 @@ function AutoTransactionModal({ closeModal, autoTransactionData }) {
     // const [rejectionReason, setRejectionReason] = useState(null)
     // const [step, setStep] = useState(1)
 
-
     return (
         <div className='loan-summary-modal p-4 my-4'>
 
             <div className="d-flex flex-column align-items-center loan-summary-div">
                 <div className="text-center">
 
-                    <h2 className="mb-0">{autoTransactionData.action}</h2>
+                    <h2 className="mb-0">{autoTransactionData.type}</h2>
 
                 </div>
 
@@ -26,7 +25,7 @@ function AutoTransactionModal({ closeModal, autoTransactionData }) {
 
 
                             <li className='d-flex align-items-center my-2'>
-                                {autoTransactionData.action === "Loan Deduction Transaction" && <p>Loan deduction Amount :</p>}
+                                {autoTransactionData.type === "LoanDeduction" && <p>Loan deduction Amount :</p>}
                                 {autoTransactionData.action === "Scheduled Savings Transaction" && <p>Monthly Savings Amount :</p>}
 
 
@@ -38,10 +37,10 @@ function AutoTransactionModal({ closeModal, autoTransactionData }) {
                                 <p>
                                     Deduction Date: </p>
 
-                                <span>{new Date(autoTransactionData?.date).toDateString()}</span>
+                                <span>{new Date(autoTransactionData?.createdAt).toDateString()}</span>
 
                             </li>
-                            {autoTransactionData.action === "Loan Deduction Transaction" && <li className='d-flex align-items-center my-2'>
+                            {autoTransactionData.type === "LoanDeduction" && <li className='d-flex align-items-center my-2'>
                                 <p>
                                     Withdrawal Date: </p>
 
@@ -54,28 +53,25 @@ function AutoTransactionModal({ closeModal, autoTransactionData }) {
 
 
                                 <div className="d-flex flex-column justify-content-between autotrans-status">
-                                    <span className={`status mx-auto ${autoTransactionData.item.status === "Successful"
+                                    <span className={`status mx-auto ${autoTransactionData.status === "Successful"
                                                     ? "success-icon"
                                                     : "failed-icon"
                                             }`}>
-                                        {autoTransactionData.item.status}
+                                        {autoTransactionData.status}
                                     </span>
-                                    {autoTransactionData.item.status === "Failed" && <span>Insufficient funds</span>}
+                                    {autoTransactionData.status === "Failed" && <span>{autoTransactionData?.message}</span>}
 
                                 </div>
 
                             </li>
                             <li className="d-flex justify-content-around">
-                                {autoTransactionData.user} {autoTransactionData.number}
+                                {autoTransactionData?.user?.firstname} {autoTransactionData?.user?.phone}
                             </li>
                         </>
                     </ul>
 
                     <div className="">
-
-
                         <button className="btn btn-modal mx-3">View Profile</button>
-
 
                     </div>
 
