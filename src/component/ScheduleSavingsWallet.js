@@ -19,12 +19,12 @@ const fetchData = async (key) => {
   }
 };
 
-function ScheduleSavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavingsCategory, setActiveWallet }) {
+function ScheduleSavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavingsCategory, setActiveWallet, savingsPlansData }) {
   //openSavingsModal comes from dashboardHome
   //setSavingsCategory comes from withdrawal page.
 
   const [savingsVisibility, setSavingsVisibility] = useState({});
-  const [wallet, setWallet] = useState([])
+
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [modalIsOpen, setIsOpen] = useState(false);
   // React query fecth data
@@ -36,14 +36,6 @@ function ScheduleSavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavin
     }
   }, [openSavingsModal])
 
-
-  useEffect(() => {
-    if (!data) return
-    setWallet(data.savingsWallet?.categories)
-    if (setSavingsCategory)
-      setSavingsCategory(data.savingsWallet?.categories)
-  }, [data])
-
   function openModal() {
     setIsOpen(true);
   }
@@ -51,7 +43,6 @@ function ScheduleSavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavin
     if (openSavingsModal) {
       setOpenSavingsModal(false)
     }
-    setSelectedCategory(null)
     setIsOpen(false);
   }
   const toggleSavingsVisibility = (wallet) => {
@@ -67,8 +58,8 @@ function ScheduleSavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavin
   };
 
 
-  
-  
+
+
 
 
   return (
@@ -80,7 +71,7 @@ function ScheduleSavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavin
       }
 
       {
-        wallet?.map(item => <div className="px-3 card my-savings" key={item._id} onClick={() => handleWalletSelection(item)}>
+        savingsPlansData?.map(item => <div className="px-3 card my-savings" key={item._id} onClick={() => handleWalletSelection(item)}>
 
           <p className='text-start savings-title'>{item.category}</p>
 
@@ -112,7 +103,7 @@ function ScheduleSavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavin
           </div>
           <div className="">
             <p onClick={() => {
-              setSelectedCategory(item.category)
+              setSelectedCategory(item)
               openModal()
             }}>Edit Savings</p>
           </div>
@@ -138,8 +129,8 @@ function ScheduleSavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavin
       >
         <EditScheduleSavings
           closeModal={closeModal}
-          selectedCategory={selectedCategory}
-          wallet={wallet}
+          activeSavings={selectedCategory}
+
         />
       </Modal>
     </div>

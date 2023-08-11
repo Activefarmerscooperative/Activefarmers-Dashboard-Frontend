@@ -26,7 +26,7 @@ function AutoTransactionModal({ closeModal, autoTransactionData }) {
 
                             <li className='d-flex align-items-center my-2'>
                                 {autoTransactionData.type === "LoanDeduction" && <p>Loan deduction Amount :</p>}
-                                {autoTransactionData.action === "Scheduled Savings Transaction" && <p>Monthly Savings Amount :</p>}
+                                {autoTransactionData.type === "SavingsDeduction" && <p>Monthly Savings Amount :</p>}
 
 
                                 <span> {autoTransactionData.amount} NGN</span>

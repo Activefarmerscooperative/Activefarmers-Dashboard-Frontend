@@ -10,9 +10,7 @@ import AutoTransaction from '../components/data/AutoTransaction';
 import WithdrawalDetails from '../components/reusable/WithdrawalDetails';
 import Modal from 'react-modal';
 import AutoTransactionModal from '../components/reusable/AutoTransactionModal';
-
-
-
+import DatePicker from "react-datepicker";
 
 const getData = async (key, tab) => {
     let res;
@@ -45,6 +43,8 @@ const Tab = ({ tabs, defaultTab }) => {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [selectedTransaction, setSelectedTransaction] = useState(null);
     const [autoTransaction, setAutoTransaction] = useState([])
+    const [filter, setFilter] = useState("")
+    const [startDate, setStartDate] = useState(new Date())
 
     function openModal(transactions) {
         // console.log(transaction);
@@ -99,8 +99,7 @@ const Tab = ({ tabs, defaultTab }) => {
 
             setShowData(dataArray)
         } else if (activeTab === "Auto Transactions") {
-            console.log(data)
-            setAutoTransaction(data.results)
+            setAutoTransaction(data?.results)
 
         } else {
 
@@ -241,6 +240,29 @@ const Tab = ({ tabs, defaultTab }) => {
         );
     };
 
+    useEffect(() => {
+        if (!filter) {
+            handleFilter("")
+        }
+    }, [filter])
+
+    function handleFilter(params) {
+
+        if (filter === "type" && params) {
+            setAutoTransaction(data?.results.filter(item => item.type === params))
+        } else if (filter === "date") {
+
+            const filteredData = data?.results.filter(item => {
+                const createdAtDate = new Date(item.createdAt).setHours(0, 0, 0, 0);
+                return params && createdAtDate === params.setHours(0, 0, 0, 0);
+            });
+            setAutoTransaction(filteredData)
+        } else {
+            setAutoTransaction(data?.results)
+        }
+
+    }
+
     return (
         <div>
             <div className="tab-header">
@@ -260,18 +282,43 @@ const Tab = ({ tabs, defaultTab }) => {
             </div>
 
             <div className=" d-flex align-items-center justify-content-between px-3 my-4">
-                <div className='d-flex sorting-button'>
-                    <button className="btn d-flex align-items-center search">
-                        <Icon icon="eva:search-outline" />
-                        <input type="search" placeholder='Search' />
-                    </button>
-                    <button className="btn d-flex align-items-center filter">
-                        <Icon icon="clarity:filter-line" color="#0d9068" />
-                        Filter Members
-                    </button>
-                </div>
+                {
+                    activeTab !== "Auto Transactions" ?
+                        <div className='d-flex sorting-button'>
+                            <button className="btn d-flex align-items-center search">
+                                <Icon icon="eva:search-outline" />
+                                <input type="search" placeholder='Search' />
+                            </button>
+                            <button className="btn d-flex align-items-center filter">
+                                <Icon icon="clarity:filter-line" color="#0d9068" />
+                                Filter Members
+                            </button>
+                        </div> :
+                        <div className='d-flex sorting-button'>
+                            <select className="btn d-flex align-items-center filter" value={filter} onChange={(e) => setFilter(e.target.value)}>
+                                <option value="">Filter</option>
+                                <option value="type">Transaction Type</option>
+                                <option value="date">Date</option>
+                            </select>
+                            {
+                                filter === "type" ?
+                                    <select className="btn d-flex align-items-center filter" onChange={(e) => handleFilter(e.target.value)}>
+                                        <option value="">Select transaction type</option>
+                                        <option value="LoanDeduction">LoanDeduction</option>
+                                        <option value="SavingsDeduction">SavingsDeduction</option>
+                                    </select> :
+                                    filter === "date" ?
+                                        <DatePicker selected={startDate} onChange={(date) => {
+                                            setStartDate(date)
+                                            handleFilter(date)
+                                        }} /> :
+                                        null
+                            }
+                        </div>
+                }
 
-                <div className='d-flex table-button'>
+
+                {/* <div className='d-flex table-button'>
                     <button className="btn d-flex align-items-center add-member">
                         <Icon icon="basil:add-solid" />
                         Add Member
@@ -280,7 +327,7 @@ const Tab = ({ tabs, defaultTab }) => {
                         <Icon icon="mingcute:file-export-fill" />
                         Export List
                     </button>
-                </div>
+                </div> */}
 
 
             </div>
