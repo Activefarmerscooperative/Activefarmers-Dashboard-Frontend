@@ -242,9 +242,34 @@ export const AddScheduledSaving = async (savings) => {
   }
 };
 
+export const EditScheduledSaving = async (id, savings) => {
+  try {
+    const { data } = await api.put(`/api/users/scheduled-savings/${id}`, savings);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const GetScheduledSavingCard = async (id) => {
+  try {
+    const { data } = await api.get(`/api/users/scheduled-savings/${id}/card`);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
 export const AddScheduledSavingCard = async (type, itemId) => {
   try {
     const { data } = await api.put(`/api/users/scheduled-savings/${itemId}/card?type=${type}`);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+export const CancelScheduledSavingPlan = async (itemId) => {
+  try {
+    const { data } = await api.patch(`/api/users/scheduled-savings/${itemId}?type=cancel`);
     return data;
   } catch (error) {
     throw error.response.data;

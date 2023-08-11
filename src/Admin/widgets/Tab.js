@@ -3,16 +3,14 @@ import { useQuery } from 'react-query'
 import { Icon } from '@iconify/react';
 import './widgets.css';
 import { Table, TableHead, TableBody, TableRow, TableCell, TableContainer, Paper, Box, TablePagination } from '@mui/material';
-import { Members, Borrowers, LoanRequests, WithdrawalRequest } from "../../utils/api/admin"
+import { Members, Borrowers, LoanRequests, WithdrawalRequest, AutoTransactions } from "../../utils/api/admin"
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import AutoTransaction from '../components/data/AutoTransaction';
 import WithdrawalDetails from '../components/reusable/WithdrawalDetails';
 import Modal from 'react-modal';
 import AutoTransactionModal from '../components/reusable/AutoTransactionModal';
-
-
-
+import DatePicker from "react-datepicker";
 
 const getData = async (key, tab) => {
     let res;
@@ -23,6 +21,8 @@ const getData = async (key, tab) => {
             res = await Borrowers();
         } else if (tab === "Loan Requests") {
             res = await LoanRequests();
+        } else if (tab === "Auto Transactions") {
+            res = await AutoTransactions()
         } else {
             res = await WithdrawalRequest();
         }
@@ -42,8 +42,9 @@ const Tab = ({ tabs, defaultTab }) => {
     const [showData, setShowData] = useState([]);
     const [modalIsOpen, setIsOpen] = useState(false);
     const [selectedTransaction, setSelectedTransaction] = useState(null);
-
-
+    const [autoTransaction, setAutoTransaction] = useState([])
+    const [filter, setFilter] = useState("")
+    const [startDate, setStartDate] = useState(new Date())
 
     function openModal(transactions) {
         // console.log(transaction);
@@ -53,11 +54,6 @@ const Tab = ({ tabs, defaultTab }) => {
     function closeModal() {
         setIsOpen(false);
     }
-
-
-
-
-
 
     useEffect(() => {
         if (!data) return
@@ -82,7 +78,7 @@ const Tab = ({ tabs, defaultTab }) => {
             }
 
             setShowData(dataArray)
-            console.log(data)
+
         } else if (activeTab === "Borrowers") {
 
             for (let i = 0; i < data.length; i++) {
@@ -102,6 +98,9 @@ const Tab = ({ tabs, defaultTab }) => {
             }
 
             setShowData(dataArray)
+        } else if (activeTab === "Auto Transactions") {
+            setAutoTransaction(data?.results)
+
         } else {
 
             for (let i = 0; i < data.length; i++) {
@@ -177,43 +176,47 @@ const Tab = ({ tabs, defaultTab }) => {
                                 ))}
                             </TableRow>
                         </TableHead>
-                        <TableBody>
-                            {/* {tableData.map((row) => ( */}
-                            {tableData?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((row, i) => (
-                                    <TableRow key={row.id} onClick={(e) => navigate('/admin/dashboard/userprofile', { state: data[i] })} >
-                                        {Object.values(row).map((cellValue, index) => (
-                                            <TableCell key={index}>{cellValue}</TableCell>
-                                        ))}
-                                    </TableRow>
-                                ))}
-                        </TableBody>
+                        {
+                            tabName !== "Auto Transactions" &&
+                            <TableBody>
+                                {/* {tableData.map((row) => ( */}
+                                {tableData?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    .map((row, i) => (
+                                        <TableRow key={row.id} onClick={(e) => navigate('/admin/dashboard/userprofile', { state: data[i] })} >
+                                            {Object.values(row).map((cellValue, index) => (
+                                                <TableCell key={index}>{cellValue}</TableCell>
+                                            ))}
+                                        </TableRow>
+                                    ))}
+                            </TableBody>
+                        }
+
                         {tabName === "Auto Transactions" &&
                             <TableBody>
                                 {/* {tableData.map((row) => ( */}
-                                {AutoTransaction?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                {autoTransaction?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((transactions, index) => (
                                         <TableRow key={index.id} >
                                             <TableCell>{index + 1}</TableCell>
-                                            <TableCell>{transactions.action}</TableCell>
-                                            <TableCell>{transactions.user}</TableCell>
-                                            <TableCell>{transactions.number}</TableCell>
-                                            <TableCell>{transactions.amount}</TableCell>
-                                            <TableCell>{transactions.date}</TableCell>
-                                            <TableCell>{transactions.time}</TableCell>
+                                            <TableCell>{transactions.type}</TableCell>
+                                            <TableCell>{transactions.user.firstname} {transactions.user.surname}</TableCell>
+                                            <TableCell>{transactions?.user.phone}</TableCell>
+                                            <TableCell>{transactions?.amount}</TableCell>
+                                            <TableCell>{new Date(transactions?.createdAt).toDateString()}</TableCell>
+                                            <TableCell>{new Date(transactions?.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</TableCell>
                                             <TableCell className='d-flex align-items'><Icon icon="ic:outline-circle" className={
-                                                transactions.item.status === "Successful"
+                                                transactions.status === "Successful"
                                                     ? "success-icon"
                                                     : "failed-icon"
                                             } />
                                                 <p className={
-                                                    transactions.item.status === "Successful"
+                                                    transactions.status === "Successful"
                                                         ? "success-icon"
                                                         : "failed-icon"
-                                                }>{transactions.item.status}</p>
+                                                }>{transactions.status}</p>
                                             </TableCell>
 
-                                            <TableCell><Icon icon="mdi:open-in-new" className="pending-icon" onClick={() => openModal(transactions)}  /></TableCell>
+                                            <TableCell><Icon icon="mdi:open-in-new" className="pending-icon" onClick={() => openModal(transactions)} /></TableCell>
                                         </TableRow>
                                     ))}
                             </TableBody>}
@@ -224,7 +227,7 @@ const Tab = ({ tabs, defaultTab }) => {
                     <TablePagination
                         rowsPerPageOptions={[5, 10, 25]}
                         component="div"
-                        count={tableData?.length}
+                        count={tabName !== "Auto Transactions" ? tableData?.length : autoTransaction?.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}
@@ -236,6 +239,29 @@ const Tab = ({ tabs, defaultTab }) => {
 
         );
     };
+
+    useEffect(() => {
+        if (!filter) {
+            handleFilter("")
+        }
+    }, [filter])
+
+    function handleFilter(params) {
+
+        if (filter === "type" && params) {
+            setAutoTransaction(data?.results.filter(item => item.type === params))
+        } else if (filter === "date") {
+
+            const filteredData = data?.results.filter(item => {
+                const createdAtDate = new Date(item.createdAt).setHours(0, 0, 0, 0);
+                return params && createdAtDate === params.setHours(0, 0, 0, 0);
+            });
+            setAutoTransaction(filteredData)
+        } else {
+            setAutoTransaction(data?.results)
+        }
+
+    }
 
     return (
         <div>
@@ -256,18 +282,43 @@ const Tab = ({ tabs, defaultTab }) => {
             </div>
 
             <div className=" d-flex align-items-center justify-content-between px-3 my-4">
-                <div className='d-flex sorting-button'>
-                    <button className="btn d-flex align-items-center search">
-                        <Icon icon="eva:search-outline" />
-                        <input type="search" placeholder='Search' />
-                    </button>
-                    <button className="btn d-flex align-items-center filter">
-                        <Icon icon="clarity:filter-line" color="#0d9068" />
-                        Filter Members
-                    </button>
-                </div>
+                {
+                    activeTab !== "Auto Transactions" ?
+                        <div className='d-flex sorting-button'>
+                            <button className="btn d-flex align-items-center search">
+                                <Icon icon="eva:search-outline" />
+                                <input type="search" placeholder='Search' />
+                            </button>
+                            <button className="btn d-flex align-items-center filter">
+                                <Icon icon="clarity:filter-line" color="#0d9068" />
+                                Filter Members
+                            </button>
+                        </div> :
+                        <div className='d-flex sorting-button'>
+                            <select className="btn d-flex align-items-center filter" value={filter} onChange={(e) => setFilter(e.target.value)}>
+                                <option value="">Filter</option>
+                                <option value="type">Transaction Type</option>
+                                <option value="date">Date</option>
+                            </select>
+                            {
+                                filter === "type" ?
+                                    <select className="btn d-flex align-items-center filter" onChange={(e) => handleFilter(e.target.value)}>
+                                        <option value="">Select transaction type</option>
+                                        <option value="LoanDeduction">LoanDeduction</option>
+                                        <option value="SavingsDeduction">SavingsDeduction</option>
+                                    </select> :
+                                    filter === "date" ?
+                                        <DatePicker selected={startDate} onChange={(date) => {
+                                            setStartDate(date)
+                                            handleFilter(date)
+                                        }} /> :
+                                        null
+                            }
+                        </div>
+                }
 
-                <div className='d-flex table-button'>
+
+                {/* <div className='d-flex table-button'>
                     <button className="btn d-flex align-items-center add-member">
                         <Icon icon="basil:add-solid" />
                         Add Member
@@ -276,7 +327,7 @@ const Tab = ({ tabs, defaultTab }) => {
                         <Icon icon="mingcute:file-export-fill" />
                         Export List
                     </button>
-                </div>
+                </div> */}
 
 
             </div>
@@ -311,7 +362,7 @@ const Tab = ({ tabs, defaultTab }) => {
 
                 <AutoTransactionModal
                     closeModal={closeModal}
-                    autoTransactionData = {selectedTransaction}
+                    autoTransactionData={selectedTransaction}
                 />
 
             </Modal>
