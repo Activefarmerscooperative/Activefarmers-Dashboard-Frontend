@@ -30,6 +30,7 @@ function SavingsPaymentMethod({ closeModal, data }) {
     }
 
     async function handleValidateCard(type, id) {
+      
         try {
             setIsLoading(true)
             const { data, message } = await AddScheduledSavingCard(type, id)

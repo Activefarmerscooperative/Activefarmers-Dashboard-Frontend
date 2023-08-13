@@ -10,7 +10,7 @@ import DatePicker from "react-datepicker";
 function ScheduleSavingsPlans({ openModal, closeModal }) {
     const [savingCat, setSavingCat] = useState([])
     const [savingsData, setSavingsData] = useState({
-        date: new Date(),
+        date: "",
         category: "",
         newCategory: "",
     })
@@ -18,7 +18,7 @@ function ScheduleSavingsPlans({ openModal, closeModal }) {
     const [showCustom, setShowCustom] = useState(false)
     const [step, setStep] = useState(1)
     const [modalData, setModalData] = useState({})
-    const [startDate, setStartDate] = useState(new Date())
+    const [startDate, setStartDate] = useState()
 
 
     async function fetchCategory(params) {
@@ -62,15 +62,16 @@ function ScheduleSavingsPlans({ openModal, closeModal }) {
         setIsLoading(true)
         try {
 
-            const { status, message,data } = await AddScheduledSaving(savingsData);
+            const { status, message, data } = await AddScheduledSaving(savingsData);
             console.log(data)
             setIsLoading(false)
             setStep(2)
-            setModalData({ status, message,data })
+            setModalData({ status, message, data })
         } catch (error) {
-            setIsLoading(false)
-            toast.error(error.message)
             console.log(error)
+            setIsLoading(false)
+            toast.error(error)
+            toast.error(error.error)
 
         }
     };
@@ -101,7 +102,13 @@ function ScheduleSavingsPlans({ openModal, closeModal }) {
                                     }
                                     <option value="Custom" required>Add New Category</option>
                                 </select>
-                                <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+                                {/* <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} /> */}
+                                <select name="date" value={savingsData?.date} onChange={handleChange}>
+                                    <option value="">Select Day of month for deduction</option>
+                                    {Array.from({ length: 30 }, (_, index) => index + 1).map((day) => (
+                                        <option key={day} value={day}>{day}</option>
+                                    ))}
+                                </select>
                                 {//Show this input when user selects custom category
                                     showCustom && <input type="text" value={savingsData?.newCategory} onChange={handleChange} name="newCategory" placeholder="Enter new savings category" />
                                 }

@@ -12,7 +12,7 @@ import { useQuery } from 'react-query'
 import ScheduledSavingsCards from "../../../../component/ScheduledSavingsCard";
 import { RotatingLines } from "react-loader-spinner";
 import { toast } from "react-toastify";
-import { GetScheduledSavings } from "../../../../utils/api/member";
+import { GetScheduledSavingCard, GetScheduledSavings } from "../../../../utils/api/member";
 import SavingsWallet from "../../../../component/SavingsWallet";
 import ScheduleSavingsWallet from "../../../../component/ScheduleSavingsWallet";
 
@@ -27,44 +27,57 @@ const fetchScheduledSavings = async (key) => {
     }
 };
 
-export default function ScheduleSavings({wallet}) {
+export default function ScheduleSavings({ wallet }) {
     const [loanInputType, setLoanInputType] = useState("false");
     const [loanIcon, setLoanIcon] = useState("mdi:eye-off");
     const [modalIsOpen, setIsOpen] = useState(false);
     const [modalType, setModalType] = useState('');
     const [modalData, setModalData] = useState({})
     const [savingsData, setSavingsData] = useState([])
+    const [activeWallet, setActiveWallet] = useState(null);
     // React query fecth data
     const { data, status } = useQuery(['fetchScheduledSavings'], fetchScheduledSavings)
 
     useEffect(() => {
         if (!data) return
-        // setSavingsData(data.scheduledSavings)
+        setSavingsData(data.scheduledSavings)
     }, [data])
-    const [activeWallet, setActiveWallet] = useState(null);
+
 
     const toggleLoanVisibility = () => {
         setLoanInputType(loanInputType ? false : true);
         setLoanIcon(!loanIcon);
     };
 
-    const openModal = (modalType, info) => () => {
-        console.log("yeah")
-        setIsOpen(true);
-        setModalType(modalType);
-        setModalData(info)
+    const openModal = (modalType, info) => {
+        if (modalType === "addSavingsPlans" || activeWallet) {
+            setIsOpen(true);
+            setModalType(modalType);
+            setModalData(info);
+        }
     };
+
 
     function closeModal() {
         setIsOpen(false);
     }
+    const suffix = (d) => (d > 3 && d < 21) || d % 10 > 3 ? 'th' : ['st', 'nd', 'rd'][d % 10 - 1] || 'th';
 
+    // console.log(filteredData)
 
-
-
-    // Filter the data based on the active wallet
-    const filteredData = savingsPlansData.find((item) => item.categoryName === activeWallet?.category)?.historyList || [];
-
+    async function getScheduledSavingsCard(id) {
+        if (!activeWallet) return toast.error("Please click on a scheduled savings to change card details.")
+        try {
+            toast.info("Fetching Card Please wait")
+            const data = await GetScheduledSavingCard(id)
+            console.log(data)
+            openModal("changeCard", data)
+        } catch (error) {
+            console.log(error)
+            toast.error(error)
+            toast.error(error?.error)
+        }
+    }
 
     return (
         <div className="schedule-savings-page my-3 px-3">
@@ -79,27 +92,24 @@ export default function ScheduleSavings({wallet}) {
                                 <Icon icon="fluent:savings-20-filled" hFlip={true} className='savings-icon' />
                                 <p>No Scheduled Savings</p>
                                 <span>You currently do not have a scheduled savings plan, click on the button below to start</span>
-                                <button onClick={openModal('addSavingsPlans')} className="schedule-savings-btn btn mt-5">
+                                <button onClick={() => openModal('addSavingsPlans')} className="schedule-savings-btn btn mt-5">
                                     Schedule Savings
                                 </button>
                             </div>
                         </div> :
-                        <ScheduledSavingsCards
-                            data={savingsData}
-                        />
+                        <div className="savings-wallet-category my-4">
+                            <ScheduleSavingsWallet setActiveWallet={setActiveWallet} savingsPlansData={savingsData} />
+                        </div>
             }
 
-
-
-            <div className="savings-wallet-category my-4">
-                <ScheduleSavingsWallet setActiveWallet={setActiveWallet} savingsPlansData={savingsPlansData} />
-            </div>
-
-
             <div className="schedule-savings-list">
-                <p>
-                    This is history of your scheduled saving, 50,000 is deducted from your account on 30th of every month
-                </p>
+                {
+
+                    activeWallet &&
+                    <p>
+                        This is history of your scheduled saving, {activeWallet?.amount} is deducted from your account on {activeWallet.scheduledDate}{suffix(activeWallet.scheduledDate)} of every month
+                    </p>
+                }
 
                 <div className="d-flex justify-content-evenly align-items-start">
                     <div className="schedule-savings-history ">
@@ -115,11 +125,11 @@ export default function ScheduleSavings({wallet}) {
                             <TableBody>
                                 {/* {savingsPlansData.map((item, index) => ( */}
 
-                                {filteredData.map((item, index) => (
+                                {activeWallet && activeWallet.savings?.map((item, index) => (
                                     <TableRow key={index}>
-                                        <TableCell>{item.date}</TableCell>
-                                        <TableCell>{item.amount}</TableCell>
-                                        <TableCell>{item.status}</TableCell>
+                                        <TableCell>{new Date(item?.createdAt).toDateString()}</TableCell>
+                                        <TableCell>{item?.amount}</TableCell>
+                                        <TableCell>{item?.status}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
@@ -129,9 +139,9 @@ export default function ScheduleSavings({wallet}) {
                         <div className="total-schedule-savings mb-4">
                             <div className="p-3 card loan">
                                 <div className="d-flex flex-column">
-                                    <p className='savings-title'>Total scheduled savings</p>
+                                    <p className='savings-title'>Total scheduled savings in {activeWallet?.category} category</p>
                                     {loanInputType ? (
-                                        <span className="savings-value"> 450,000 NGN</span>
+                                        <span className="savings-value"> {activeWallet && activeWallet?.savings?.reduce((total, { amount }) => total + amount, 0)} NGN</span>
                                     ) : (
                                         <span className="hidden-input ">*********</span>
                                     )}
@@ -145,28 +155,28 @@ export default function ScheduleSavings({wallet}) {
                                 </div>
                             </div>
                         </div>
-                        <div className="edit-savings savings-plan-link mt-3" onClick={openModal('addSavingsPlans')}>
+                        <div className="edit-savings savings-plan-link mt-3" onClick={() => openModal('addSavingsPlans')}>
                             <h5 className="edit-savings">
                                 Add Savings
                                 <Icon icon="fluent:ios-arrow-24-filled" />
                             </h5>
                             <p>Add a new scheduled savings with date, amount and your wallet category</p>
                         </div>
-                        <div className="edit-savings savings-plan-link mt-3" onClick={openModal('edit')}>
+                        <div className="edit-savings savings-plan-link mt-3" onClick={() => openModal('edit')}>
                             <h5 className="edit-savings">
                                 Edit Savings
                                 <Icon icon="fluent:ios-arrow-24-filled" />
                             </h5>
                             <p>Change your scheduled savings date and amount</p>
                         </div>
-                        <div className="change-savings-card savings-plan-link mt-3" onClick={openModal('changeCard')}>
+                        <div className="change-savings-card savings-plan-link mt-3" onClick={() => getScheduledSavingsCard(activeWallet?._id)}>
                             <h5 className="edit-savings">
                                 Change savings card
                                 <Icon icon="fluent:ios-arrow-24-filled" />
                             </h5>
                             <p>Change the card your scheduled savings will be deducted from</p>
                         </div>
-                        <div className="cancel-savings savings-plan-link mt-3" onClick={openModal('cancelPlan')}>
+                        <div className="cancel-savings savings-plan-link mt-3" onClick={() => openModal('cancelPlan')}>
                             <h5 className="edit-savings">
                                 Cancel savings
                                 <Icon icon="fluent:ios-arrow-24-filled" />
@@ -201,13 +211,16 @@ export default function ScheduleSavings({wallet}) {
                     openModal={openModal}
                 />}
                 {modalType === "edit" && <EditScheduleSavings
+                    activeSavings={activeWallet}
                     closeModal={closeModal} />}
-                {modalType === "handleCard" && <SavingsPaymentMethod
+                {modalType === "changeCard" && <SavingsPaymentMethod
+
                     closeModal={closeModal}
                     data={modalData}
                 />}
 
                 {modalType === "cancelPlan" && <CancelSavingsPlan
+                   activeSavings={activeWallet}
                     closeModal={closeModal} />}
 
             </Modal>
