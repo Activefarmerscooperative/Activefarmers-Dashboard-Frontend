@@ -16,9 +16,10 @@ export default function LandingPage() {
                     <Icon icon="material-symbols:arrow-back-rounded" style={{ fontSize: "20px", margin: "0 5px" }} />
                     Back to Homepage
                 </a>
-                <div className="d-flex flex-column align-items-center my-5">
+                
+                <div className="d-flex flex-column align-items-center my-5 justify-content-center landing-page-content">
                     <h1>Active Farmers{<br />}Cooperative System</h1>
-                    <div className="d-flex align-items-center my-4 py-4">
+                    <div className="d-flex align-items-center my-4 py-4 landing-page-btn">
                         <button className="btn member" style={{ backgroundColor: "#555555" }} onClick={() => { navigate("/login"); }}>Member Login</button>
                         <button className="btn register" style={{ backgroundColor: "#FB9129" }} onClick={() => { navigate("/register"); }}>Register</button>
                     </div>
