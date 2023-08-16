@@ -70,7 +70,7 @@ function Fag() {
     return (
         <div className="faq ">
             <div className="my-3">
-                <p>
+                <p className='faq-descr'>
                     Certainly! Here are six frequently asked questions (FAQs) for a loans and savings website, along with their answers:
                 </p>
 

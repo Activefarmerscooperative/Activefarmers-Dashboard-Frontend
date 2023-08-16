@@ -8,11 +8,11 @@
 }
 
 .loan-form .card {
-    width: 250px;
+    /* width: 250px;
     background: rgba(13, 144, 104, 0.25);
     border-radius: 12px;
     margin: auto 8px;
-    padding: 5px;
+    padding: 5px; */
 }
 
 .category-form-group input,
@@ -28,44 +28,24 @@
     background-color: transparent;
 }
 
-.loan-form .card p {
-    font-size: 20px;
-    text-align: center;
 
-    color: #444444;
-}
 
-.loan-form .card input::placeholder {
-    font-weight: 600;
-    font-size: 25px;
-    text-align: center;
-    color: #E98923
-}
 
-.loan-form .card input::-webkit-outer-spin-button,
-.loan-form .card input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
 
-.loan-form .eye-icon {
-    width: 25px;
-    height: 25px;
-    margin-right: 50px;
-}
 
 .loan-form .card p:last-child {
-    font-weight: 400;
-    font-size: 14px;
+    /* font-weight: 400; */
+    /* font-size: 14px; */
     text-align: right;
-    color: #444444;
+    /* color: #444444; */
 }
 
 .loan-form p.note {
-    width: 90%;
+    /* width: 90%; */
     font-weight: 400;
     font-size: 13px;
     color: #444444;
+    text-align: justify;
 
 }
 
@@ -101,6 +81,8 @@
     margin: 0;
 }
 .loan-input-form select {
+    text-overflow: ellipsis;
+    padding-right: 50px;
     appearance: none;
     background-image: url('../../../../assets/filled-arrow.png');
     background-repeat: no-repeat, repeat;
@@ -169,3 +151,66 @@
 .loan-form .overlay-base_before-close {
     opacity: 0;
 }
+
+.loan-input{
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 1024px) {
+    .loan-input-form input, .loan-input-form select, .loan-input-form input:hover {
+ 
+        width: 300px;
+    }
+    
+}
+@media screen and (max-width: 991px) {}
+@media screen and (max-width: 769px) {
+    .loan-form h1 {
+        font-size: 26px;
+    }
+    .loan-form{
+        padding: 0 !important;
+    }
+}
+@media screen and (max-width: 600px) {
+    .loan-input-form input, .loan-input-form select, .loan-input-form input:hover {
+        width: 230px;
+    }
+    .loan-form h1 {
+        font-size: 24px;
+    }
+    .loan-form p.note {
+        width: auto;
+    }
+}
+@media screen and (max-width: 426px) {
+    .loan-form h1 {
+        font-size: 18px;
+    }
+    .loan-form-field{
+        flex-direction: column;
+        align-items: center;
+    }
+    .loan-input-form input, .loan-input-form select, .loan-input-form input:hover {
+        width: 300px;
+    }
+    .loan-form .next-btn {
+        width: -webkit-fill-available;
+        margin: 0 50px;
+        font-size: 16px;
+    }
+    .loan-input-form input, .loan-input-form select, .loan-input-form input:hover {
+        width: 250px;
+    }
+    .loan-input-form select option {
+
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 376px) {
+    .loan-form .next-btn {
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 321px) {}

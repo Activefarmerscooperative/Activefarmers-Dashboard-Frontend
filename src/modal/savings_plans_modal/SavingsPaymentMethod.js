@@ -48,8 +48,8 @@ function SavingsPaymentMethod({ closeModal, data }) {
         <div className='add-savings-modal p-4 my-4'>
             {
                 step === 1 &&
-                <div className='d-flex flex-column add-savings-div'>
-                    <p onClick={closeModal} className='d-flex align-items-center mx-5'>
+                <div className='d-flex flex-column add-savings-div '>
+                    <p onClick={closeModal} className='d-flex align-items-center ms-2'>
                         <Icon icon='material-symbols:arrow-back-rounded' className='add-icon' />
                         Savings Payment Method
                     </p>
@@ -57,7 +57,8 @@ function SavingsPaymentMethod({ closeModal, data }) {
                         <p>{data.status === 'validate_card' ? 'Continue with saved card' : 'Add Card Details'}</p>
 
                         <form action='' className='d-flex flex-column align-items-center '>
-                            {data.message}
+                            <p className="schedule-data">
+                              {data.message}  </p>
                         </form>
 
                         <div className='d-flex mt-5 continue-saving'>
@@ -78,8 +79,8 @@ function SavingsPaymentMethod({ closeModal, data }) {
                                 </>
                             ) : (
                                 <>
-                                    <button className='btn change-card btn-modal mx-3'>Cancel</button>
-                                    <button onClick={changeCard} className='btn no btn-modal mx-3'>Yes</button>
+                                    <button onClick={closeModal} className='btn change-card btn-modal mx-1'>Cancel</button>
+                                    <button onClick={changeCard} className='btn no btn-modal mx-1'>Yes</button>
                                 </>
                             )}
                         </div>
@@ -94,7 +95,7 @@ function SavingsPaymentMethod({ closeModal, data }) {
                             <p>
                                 Add Card For Scheduled Savings Deduction.
                             </p>
-                            <p style={{ fontSize: "13px", width: "400px", fontWeight: "400" }}>
+                            <p style={{ fontSize: "13px", width: "400px", fontWeight: "400" }} className='p-tag'>
                                 To enable scheduled savings, you need to add details of your valid debit card, your card needs to meet this criteria:
                             </p>
 
@@ -105,9 +106,9 @@ function SavingsPaymentMethod({ closeModal, data }) {
                             </ul>
 
                             <div className='d-flex align-items-start justify-content-around'>
-                                {isLoading && <center className="btn btn-modal mt-4"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
-                                {!isLoading && <button className="btn btn-modal mt-4" >Cancel Request</button>}
-                                {!isLoading && <button className="btn btn-modal mt-4" onClick={() => handleValidateCard("Add new card", data.data)} >Continue</button>}
+                                {isLoading && <center className="btn btn-modal mt-4 mx-1"><RotatingLines width="25" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+                                {!isLoading && <button className="btn btn-modal mt-4 mx-1" onClick={closeModal} >Cancel Request</button>}
+                                {!isLoading && <button className="btn btn-modal mt-4 mx-1" onClick={() => handleValidateCard("Add new card", data.data)} >Continue</button>}
                             </div>
                         </>
 

@@ -66,7 +66,7 @@ function LoanTable({ userId }) {
     }
 
     return (
-        <div className="transaction-history mt-5 px-4">
+        <div className="transaction-history mt-5 ">
 
             <div className="d-flex justify-content-center table mt-3">
 

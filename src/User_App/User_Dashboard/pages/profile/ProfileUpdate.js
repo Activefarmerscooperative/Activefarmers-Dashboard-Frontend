@@ -165,14 +165,14 @@ const ProfileUpdate = ({ setToken }) => {
 
     }
     return (
-        <div className="my-3 px-4 profile-update">
+        <div className="my-3 profile-update">
             <h1>Profile Update</h1>
 
-            <div className="px-4 py-2 card profile-form">
+            <div className="px-1 py-2 profile-form">
                 <form className="d-flex flex-column align-items-center">
                     <div className="personal-info-section">
                         <p>Personal Details</p>
-                        <div className="d-flex">
+                        <div className="d-flex profile-input">
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">First Name</label>
                                 <input type="text" name="firstname" onChange={handleUserChange} value={userData?.firstname} disabled={!editUser} placeholder="Kadwama" className={editUser ? "editable-input" : ""} />
@@ -186,7 +186,7 @@ const ProfileUpdate = ({ setToken }) => {
                                 <input type="email" name="email" onChange={handleUserChange} value={userData?.email} disabled={!editUser} placeholder="kadwamalazarus@gmail.com" className={editUser ? "editable-input" : ""} />
                             </div>
                         </div>
-                        <div className="d-flex mt-4">
+                        <div className="d-flex profile-input mt-4">
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Gender</label>
                                 <select name="gender" disabled={!editUser} onChange={handleUserChange} value={userData?.gender} className={editUser ? "editable-input" : ""} >
@@ -203,7 +203,7 @@ const ProfileUpdate = ({ setToken }) => {
                                 <input type="tel" name="phone" disabled placeholder="08104046671" value={userData?.phone} className={editUser ? "editable-input" : ""} />
                             </div>
                         </div>
-                        <div className="d-flex mt-4 me-auto">
+                        <div className="d-flex profile-input mt-4 me-auto">
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="address">Home Address</label>
                                 <input
@@ -227,10 +227,10 @@ const ProfileUpdate = ({ setToken }) => {
                                 </select>
                             </div>
                         </div>
-                        <div className="d-flex">
+                        <div className="d-flex profile-input">
                             {
                                 !editUser &&
-                                <button onClick={() => setEditUser(true)} className="btn edit mx-4 my-5" >
+                                <button onClick={() => setEditUser(true)} className="btn edit mx-4 mt-3" >
                                     Edit
                                 </button>
                             }
@@ -238,14 +238,14 @@ const ProfileUpdate = ({ setToken }) => {
                             {editUser && (
                                 <div>
                                     <>
-                                        {isLoading && <button className="btn mx-4 my-5"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></button>}
+                                        {isLoading && <button className="btn mx-4 mt-3"><RotatingLines width="25" strokeColor="#1B7B44" strokeWidth="3" /></button>}
                                         {!isLoading &&
                                             <>
                                                 {!isLoading && <button onClick={
                                                     // () => setEditUser(false)
                                                     () => openModal('discard')
-                                                } disabled={isLoading} className="btn discard mx-4 my-5">Discard Changes</button>}
-                                                <button onClick={(e) => confirmUpdate(e, "User")} disabled={isLoading} className="btn mx-4 my-5">Save</button>
+                                                } disabled={isLoading} className="btn discard mx-4 mt-3">Discard Changes</button>}
+                                                <button onClick={(e) => confirmUpdate(e, "User")} disabled={isLoading} className="btn mx-4 mt-3">Save</button>
                                             </>}
 
                                     </>
@@ -257,7 +257,7 @@ const ProfileUpdate = ({ setToken }) => {
 
                     <div className="mt-5 occupation-info-section">
                         <p>Occupation Details</p>
-                        <div className="d-flex">
+                        <div className="d-flex profile-input">
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Occupation</label>
                                 <input type="text" name="occupation" value={occupationData?.occupation} onChange={handleOccupationChange} disabled={!editOccupation} placeholder="UI/UX Designer" className={editUser ? "editable-input" : ""} />
@@ -271,7 +271,7 @@ const ProfileUpdate = ({ setToken }) => {
                                 <input type="text" name="workLevel" value={occupationData?.workLevel} onChange={handleOccupationChange} disabled={!editOccupation} placeholder="Grade 7" className={editUser ? "editable-input" : ""} />
                             </div>
                         </div>
-                        <div className="d-flex mt-4">
+                        <div className="d-flex profile-input mt-4">
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Ministry (Company Name)</label>
                                 <input type="text" name="companyName" value={occupationData?.companyName} onChange={handleOccupationChange} disabled={!editOccupation} placeholder="Discovery Hub Labondo" className={editUser ? "editable-input" : ""} />
@@ -286,10 +286,10 @@ const ProfileUpdate = ({ setToken }) => {
                             </div> */}
                         </div>
 
-                        <div className="d-flex">
+                        <div className="d-flex profile-input">
                             {
                                 !editOccupation &&
-                                <button onClick={() => setEditOccupation(true)} className="btn edit mx-4 my-5">
+                                <button onClick={() => setEditOccupation(true)} className="btn edit mx-4 mt-3">
                                     Edit
                                 </button>
                             }
@@ -297,14 +297,14 @@ const ProfileUpdate = ({ setToken }) => {
                             {editOccupation && (
                                 <div>
                                     <>
-                                        {isLoading && <button className="btn mx-4 my-5"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></button>}
+                                        {isLoading && <button className="btn mx-4 mt-3"><RotatingLines width="25" strokeColor="#1B7B44" strokeWidth="3" /></button>}
                                         {!isLoading &&
                                             <>
                                                 {!isLoading && <button onClick={
                                                     // () => setEditOccupation(false)
                                                     () => openModal('discard')
-                                                } disabled={isLoading} className="btn discard mx-4 my-5">Discard Changes</button>}
-                                                <button onClick={(e) => confirmUpdate(e, "Occupation")} disabled={isLoading} className="btn mx-4 my-5">Save</button>
+                                                } disabled={isLoading} className="btn discard mx-4 mt-3">Discard Changes</button>}
+                                                <button onClick={(e) => confirmUpdate(e, "Occupation")} disabled={isLoading} className="btn mx-4 mt-3">Save</button>
                                             </>}
 
                                     </>
@@ -316,7 +316,7 @@ const ProfileUpdate = ({ setToken }) => {
 
                     <div className="mt-5 nok-info-section">
                         <p>Next Kin</p>
-                        <div className="d-flex">
+                        <div className="d-flex profile-input">
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Name of Next of Kin</label>
                                 <input type="text" name="full_name" value={nextKinData?.full_name} onChange={handleNextKinChange} disabled={!editNextKin} placeholder="Fred Lazarus" className={editUser ? "editable-input" : ""} />
@@ -330,7 +330,7 @@ const ProfileUpdate = ({ setToken }) => {
                                 <input type="text" name="address" value={nextKinData?.address} onChange={handleNextKinChange} disabled={!editNextKin} placeholder="Jimeta-Yola, barracks road, Yola Adamawa" className={editUser ? "editable-input" : ""} />
                             </div>
                         </div>
-                        <div className="d-flex mt-4 me-auto">
+                        <div className="d-flex profile-input mt-4 me-auto">
                             <div className="form-group d-flex flex-column mx-3">
                                 <label htmlFor="">Phone Number</label>
                                 <input type="tel" name="phone" value={nextKinData?.phone} onChange={handleNextKinChange} disabled={!editNextKin} placeholder="08104046671" className={editUser ? "editable-input" : ""} />
@@ -347,7 +347,7 @@ const ProfileUpdate = ({ setToken }) => {
                                 !editNextKin &&
                                 <button onClick={() =>
                                     setEditNextKin(true)
-                                } className="btn edit mx-4 my-5">
+                                } className="btn edit mx-4 mt-3">
                                     Edit
                                 </button>
                             }
@@ -355,14 +355,14 @@ const ProfileUpdate = ({ setToken }) => {
                             {editNextKin && (
                                 <div>
                                     <>
-                                        {isLoading && <button className="btn mx-4 my-5"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></button>}
+                                        {isLoading && <button className="btn mx-4 mt-3"><RotatingLines width="25" strokeColor="#1B7B44" strokeWidth="3" /></button>}
                                         {!isLoading &&
                                             <>
                                                 {!isLoading && <button onClick={
                                                     // () => setEditNextKin(false)
                                                     () => openModal('discard')
-                                                } disabled={isLoading} className="btn discard mx-4 my-5">Discard Changes</button>}
-                                                <button onClick={(e) => confirmUpdate(e)} disabled={isLoading} className="btn mx-4 my-5">Save</button>
+                                                } disabled={isLoading} className="btn discard mx-4 mt-3">Discard Changes</button>}
+                                                <button onClick={(e) => confirmUpdate(e)} disabled={isLoading} className="btn mx-4 mt-3">Save</button>
                                             </>}
 
                                     </>

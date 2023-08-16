@@ -71,24 +71,24 @@ export default function ForgottenPassword() {
     }
 
     return (
-        <div className="login-page pt-3 px-5">
-            <div className=''>
+        <div className="login-page  pt-3 px-5">
+            
 
                 <div className="form d-flex flex-column align-items-center mt-5 px-5 pt-3">
                     <h1>Forgotten Password</h1>
                     To reset your password, an OTP will be sent to your email, please input the email address you registered with below
                     <form className='d-flex flex-column my-5'>
-                        <input type="email" name="email" placeholder='email' required value={user.email} onChange={handleChange} />
+                        <input type="email" name="email" placeholder='email' required value={user.email} onChange={handleChange} className="email-input" />
 
-                        {isLoading && <button className='login-btn'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
-                        {!isLoading && <button className='login-btn mt-4 mx-auto' onClick={handleSubmit}>Send OTP</button>}
+                        {isLoading && <button className='login-button mt-4 mx-auto'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
+                        {!isLoading && <button className='login-button mt-4 mx-auto' onClick={handleSubmit}>Send OTP</button>}
 
 
 
                     </form>
                     <p>Having Issues or don’t have access to email? <a href="" style={{ color: "#FB9129", fontWeight: "600" }}>Contact Admin</a></p>
                 </div>
-            </div>
+          
         </div>
     )
 }

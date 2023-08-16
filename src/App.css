@@ -8,17 +8,39 @@
 
 
 
-*, body, html {
+* {
   margin: 0;
   padding: 0;
-  /* min-height: 1000px; */
   box-sizing: border-box;
-  font-family: 'Lato', sans-serif;
+  
 }
+:root {
+  --paragraph-font-family: 'Poppins', sans-serif;
+  --headings-font-family: MillikFont;
+}
+
+/* body, html { */
+  /* min-height: 1000px; */
+  /* font-family: 'Lato', sans-serif; */
+/* } */
 body, html {
   overflow-x: hidden;
+  font-family: var(--paragraph-font-family);
+  background-color: #ffffff;
+}
+h1, h2, h3, h4, h5, h6{
+  font-family: var(--headings-font-family);
 }
 
 .Toastify__toast-container {
 width: 400px !important;
 }
+
+
+
+
+
+
+
+
+

@@ -72,7 +72,7 @@ function AddCardRequest({ message }) {
                             <p>
                                 Add Card to request for a loan
                             </p>
-                            <p style={{ fontSize: "13px", width: "400px", fontWeight: "400" }}>
+                            <p style={{ fontSize: "13px", width: "400px", fontWeight: "400" }} className="p-tag">
                                 To send a loan request, you need to add details of your valid debit card, your card needs to meet this criteria:
                             </p>
 
@@ -83,9 +83,9 @@ function AddCardRequest({ message }) {
                             </ul>
 
                             <div className='d-flex align-items-start justify-content-around'>
-                                {isLoading && <center className="btn btn-modal mt-4"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
-                                {!isLoading && <button className="btn btn-modal mt-4" onClick={handleCancelLoan}>Cancel Loan</button>}
-                                {!isLoading && <button className="btn btn-modal mt-4" onClick={handleValidateCard}>Continue</button>}
+                                {isLoading && <center className="btn btn-modal mt-4 mx-2"><RotatingLines width="25" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+                                {!isLoading && <button className="btn btn-modal mt-4 mx-2" onClick={handleCancelLoan}>Cancel Loan</button>}
+                                {!isLoading && <button className="btn btn-modal mt-4 mx-2" onClick={handleValidateCard}>Continue</button>}
                             </div>
                         </>
 
@@ -95,18 +95,18 @@ function AddCardRequest({ message }) {
                     {
                         message &&
                         <>
-                            <p>{message}</p>
+                            <p className="mssg-p">{message}</p>
 
-                            <p style={{ fontSize: "13px", width: "400px", fontWeight: "400" }}>
+                            <p style={{ fontSize: "13px", width: "400px", fontWeight: "400" }} className="p-tag">
                                 Please note: We will deduct 50 naira to confirm your card's validity and credit back to your savings account with us
                             </p>
 
-                            <div className='d-flex align-items-start justify-content-around'>
-                                <button className="btn btn-modal mt-4" onClick={handleCancelLoan} disabled={isLoading}>Cancel Loan</button>
+                            <div className='d-flex align-items-start justify-content-around text-button'>
+                                <p className=" mt-4 mx-2" onClick={handleCancelLoan} disabled={isLoading}>Cancel Loan</p>
 
-                                {isLoading && <center className="btn btn-modal mt-4 ml-2"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
-                                {!isLoading && <button className="btn btn-modal mt-4 ml-2" onClick={handleValidateSavedCard}>Continue</button>}
-                                <button className="btn btn-modal mt-4 ml-2" onClick={handleValidateCard} disabled={isLoading}>Add another Card</button>
+                                {isLoading && <center className=" mt-4 mx-2 "><RotatingLines width="25" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+                                {!isLoading && <p className=" mt-4 mx-2 " onClick={handleValidateSavedCard}>Continue</p>}
+                                <p className=" mt-4 mx-2 " onClick={handleValidateCard} disabled={isLoading}>Add another Card</p>
                             </div>
                         </>
 

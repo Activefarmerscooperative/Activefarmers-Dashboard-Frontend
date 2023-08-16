@@ -55,7 +55,7 @@ const Profile = ({ userData }) => {
 
         <div>
           <InformationSection title="Personal Information" information={personalInfoData} />
-          <InformationSection title="Address Information" information={addressInfoData} />
+          <InformationSection title="Address Information" information={addressInfoData} className="users-address" />
           <InformationSection title="Occupation Information" information={occupationInfoData} />
           <InformationSection title="Next of Kin" information={nextOfKinData} />
         </div>

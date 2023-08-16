@@ -12,11 +12,11 @@ export default function Support() {
     }
 
     return (
-        <div className="my-5 p-4 mx-4 support">
+        <div className="my-5 p-4  support">
             <h1>Loan Request Form</h1>
             <div>
                 <div className="support-tab my-5">
-                    <div className=" d-flex align-items-center justify-content-around w-25">
+                    <div className=" d-flex align-items-center justify-content-around w-25 support-tab-header">
                         <div
                             className={activeTab === 1 ? "tab-item active" : "tab-item"}
                             onClick={() => handleTabClick(1)}

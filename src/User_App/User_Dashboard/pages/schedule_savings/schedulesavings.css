@@ -86,6 +86,7 @@
     line-height: normal;
     color: #FB9129;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 
@@ -100,4 +101,78 @@
 
 .schedule-savings-page .card.my-savings.active {
     background-color: #015038;
+}
+.schedule-span{
+    text-align: center;
+}
+
+@media screen and (max-width: 1024px) {
+    .edit-savings-plans-section{
+        margin: 0 10px;
+        /* display: flex; */
+    }
+    .total-schedule-savings .card {
+
+    width: 250px;
+}
+}
+@media screen and (max-width: 991px) {}
+@media screen and (max-width: 769px) {
+    .schedule-savings-page h1 {
+        font-size: 24px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .schedule-savings-list{
+        flex-direction: column-reverse;
+    }
+     .edit-savings-plans-section{
+        display: flex;
+    }
+    .savings-edit-links{
+        /* display: flex; */
+        
+    }
+    .savings-plan-link p {
+        display: none;
+    }
+    .schedule-savings-page{
+        padding: 0 !important;
+    }
+}
+@media screen and (max-width: 426px) {
+    .savings-plan-link h5 {
+        font-size: 14px;
+    }
+    .total-schedule-savings .card {
+        width: 200px;
+    }
+    .savings-title{
+        font-size: 14px;
+    }
+    .schedule-savings-page h1 {
+        font-size: 20px;
+    }
+}
+@media screen and (max-width: 376px) {
+    .total-schedule-savings .card {
+        width: 170px;
+    }
+    .schedule-savings-page h1 {
+        font-size: 18px;
+    }
+}
+@media screen and (max-width: 321px) {
+    .edit-savings-plans-section {
+    margin: 0;
+        flex-direction: column-reverse;
+    }
+    .savings-edit-links {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 15px;
+    }
+    .total-schedule-savings .card {
+        width: auto;
+    }
 }

@@ -20,7 +20,7 @@ export default function Header() {
                 <div className="d-flex align-items-center justify-content-between header-components">
                     <div className='d-flex align-items-center'>
                         <img src={header} alt="" />
-                        <h1>AFC Admin Dashboard</h1>
+                        <h1 className="header-h1">AFC Admin Dashboard</h1>
                     </div>
 
                     <div>

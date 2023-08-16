@@ -20,6 +20,10 @@
   color: #000000;
 }
 
+.input-form-group {
+  margin: 0 30px;
+  justify-content: space-around;
+}
 
 .guarantor input,
 .guarantor select {
@@ -31,6 +35,8 @@
   border-radius: 4px;
   color: #444444;
   font-size: 15px;
+  margin: 10px 15px;
+  
 }
 
 .guarantor select {
@@ -67,10 +73,10 @@
 
 
 
-.guarantor form div {
+/* .guarantor form div {
   width: min-content;
   margin: 0 30px;
-}
+} */
 
 .guarantor-btn,
 .guarantor-btn.prev:hover {
@@ -146,3 +152,65 @@
 .guarantor-content .overlay-base_before-close {
   opacity: 0;
 }
+
+
+
+@media screen and (max-width: 800px) {
+  .guarantor input, .guarantor select  {
+    width: 290px;
+  }
+}
+@media screen and (max-width: 769px) {}
+@media screen and (max-width: 600px) {
+  .guarantor {
+    width: auto;
+  }
+  .guarantor h1 {
+    font-size: 26px;
+  }
+  .guarantor  p {
+    width: 400px;
+  }
+  .guarantor input, .guarantor select  {
+    width: 220px;
+  }
+
+
+  .input-form-group {
+    margin: 0;
+  }
+  .guarantor select option{
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 552px) {
+
+  .guarantor input,
+  .guarantor select {
+    width: 200px;
+    font-size: 14px;
+    margin: 8px ;
+  }
+}
+@media screen and (max-width: 426px) {
+  .guarantor h1 {
+    font-size: 20px;
+  }
+  .guarantor p {
+    width: 300px;
+}
+.guarantor input,
+  .guarantor select {
+    width: 290px;
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 376px) {
+  .guarantor input, .guarantor select {
+    width: 250px;
+}
+.guarantor p {
+  width: 240px;
+}
+}
+@media screen and (max-width: 321px) {}

@@ -6,6 +6,7 @@ import LoanSummary from '../../../../modal/LoanSummary';
 import { toast } from "react-toastify";
 import SavingsWallet from '../../../../component/SavingsWallet';
 import PaymentAccount from "../../../../component/PaymentAccount";
+import AddCardRequest from "../../../../modal/AddCardRequest";
 
 
 export default function LoanForm({user}) {
@@ -48,8 +49,8 @@ export default function LoanForm({user}) {
             <p className="note my-4">Please note that Loan request can not exceed five times (5X)  your savings, you’re eligible for a maximum loan of up to 450,000 NGN </p>
             <div className="loan-input-form mt-5">
                 <form>
-                    <div className="d-flex">
-                        <div>
+                    <div className="d-flex loan-form-field">
+                        <div className="loan-input">
                             <input type="number" name="amount" value={loanData?.amount} onChange={handleChange} placeholder='Loan Amount' />
                             <select name="repaymentMethod" value={loanData?.repaymentMethod} onChange={handleChange}>
                                 <option value="">Repayment Method</option>
@@ -58,7 +59,7 @@ export default function LoanForm({user}) {
                                 <option value="Card">From account (Saved Debit Card)</option>
                             </select>
                         </div>
-                        <div>
+                        <div className="loan-input">
                            <PaymentAccount 
                            
                            withdrawalData={loanData}
@@ -85,10 +86,13 @@ export default function LoanForm({user}) {
                 NB: This loan is granted at the rate of 15% and subject to ability to repay within maximum of 12 months. Loan deduction will commence a month after loan approval
                 </p>
 
+                <p onClick={openModal}>modal</p>
+
                 <button onClick={nextPage} className='btn next-btn mt-5'>
                     Next
-                </button>
+                </button> 
             </div>
+
 
             <Modal
                 isOpen={modalIsOpen}
@@ -107,10 +111,13 @@ export default function LoanForm({user}) {
                 }}
                 shouldCloseOnOverlayClick={true}
                 closeTimeoutMS={2000}>
-                <LoanSummary
+                <AddCardRequest
+                    closeModal={closeModal}
+                />
+                {/* <LoanSummary
                     closeModal={closeModal}
                     loanData={loanData}
-                />
+                /> */}
             </Modal>
 
 

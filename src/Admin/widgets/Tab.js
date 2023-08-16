@@ -184,7 +184,7 @@ const Tab = ({ tabs, defaultTab }) => {
                                     .map((row, i) => (
                                         <TableRow key={row.id} onClick={(e) => navigate('/admin/dashboard/userprofile', { state: data[i] })} >
                                             {Object.values(row).map((cellValue, index) => (
-                                                <TableCell key={index}>{cellValue}</TableCell>
+                                                <TableCell className={tableHeaders === "Location" ? "" : "location-cell"} key={index}>{cellValue}</TableCell>
                                             ))}
                                         </TableRow>
                                     ))}
@@ -289,20 +289,20 @@ const Tab = ({ tabs, defaultTab }) => {
                                 <Icon icon="eva:search-outline" />
                                 <input type="search" placeholder='Search' />
                             </button>
-                            <button className="btn d-flex align-items-center filter">
+                            {/* <button className="btn d-flex align-items-center filter">
                                 <Icon icon="clarity:filter-line" color="#0d9068" />
                                 Filter Members
-                            </button>
+                            </button> */}
                         </div> :
                         <div className='d-flex sorting-button'>
-                            <select className="btn d-flex align-items-center filter" value={filter} onChange={(e) => setFilter(e.target.value)}>
+                            <select className=" filter" value={filter} onChange={(e) => setFilter(e.target.value)}>
                                 <option value="">Filter</option>
                                 <option value="type">Transaction Type</option>
                                 <option value="date">Date</option>
                             </select>
                             {
                                 filter === "type" ?
-                                    <select className="btn d-flex align-items-center filter" onChange={(e) => handleFilter(e.target.value)}>
+                                    <select className=" filter" onChange={(e) => handleFilter(e.target.value)}>
                                         <option value="">Select transaction type</option>
                                         <option value="LoanDeduction">LoanDeduction</option>
                                         <option value="SavingsDeduction">SavingsDeduction</option>
@@ -311,7 +311,7 @@ const Tab = ({ tabs, defaultTab }) => {
                                         <DatePicker selected={startDate} onChange={(date) => {
                                             setStartDate(date)
                                             handleFilter(date)
-                                        }} /> :
+                                        }} className=" filter" /> :
                                         null
                             }
                         </div>

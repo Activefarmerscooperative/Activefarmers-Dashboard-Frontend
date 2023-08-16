@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
-import './forms.css'
+import './adminforms.css'
 import header from '../../assets/logol.png';
 import Login from "../../pages/forms/Login";
 import Register from "./Register";
@@ -25,7 +25,7 @@ export default function FormPage() {
                     </div>
 
                     <div className="d-flex align-items-center header-buttons">
-                        <p className="mx-2 mb-0">
+                        <p className="admin-span mx-2 mb-0">
                             {formMode === "login"
                             ? " Don't have an account?"
                             : "Already have an account? "}

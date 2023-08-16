@@ -1,0 +1,361 @@
+.header-section {
+    box-shadow: 0px 4px 15px 0px #0000000D;
+
+    position: fixed;
+    top: 0;
+    z-index: 900;
+    background-color: #FFFFFF;
+}
+
+.header-components {
+    padding: 10px 50px;
+}
+
+.header-components img {
+    width: 50px;
+}
+
+.header-components h1 {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0 5px;
+}
+
+.header-components .header-buttons span {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0 8px;
+}
+
+.header-buttons .btn {
+    width: 150px;
+    height: auto;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: normal;
+    padding: 10px;
+    border: 2px solid #0D9068;
+    border-radius: 55px;
+    color: #0D9068;
+}
+
+.header-buttons .btn:focus {
+    color: #0D9068;
+}
+
+.admin-form .login-form h1 {
+    font-weight: normal;
+    font-size: 40px;
+    color: #FFFFFF;
+    text-align: center;
+}
+h1.register-form-h1 {
+    font-weight: normal;
+    font-size: 40px;
+    text-align: center;
+}
+
+.admin-form .login-form {
+    width: 590px;
+    height: fit-content;
+    border-radius: 15px;
+    background: #0D9068;
+    color: #FFFFFF;
+    line-height: normal;
+
+}
+
+.admin-form .login-button {
+    width: 200px;
+    padding: 5px 0;
+    border-radius: 55px;
+    background-color: #FB9129;
+    font-size: 24px;
+    font-weight: 400;
+    color: #FFFFFF;
+    border: none;
+    outline: none;
+}
+
+.admin-form .login-form,
+.admin-form .login-form .password input,
+.admin-form .reset-password,
+.admin-form .login-form input.email-input::placeholder,
+.admin-form .login-form .password input::placeholder {
+    color: #FFFFFF;
+}
+
+.admin-form .login-form input.email-input,
+.admin-form .login-form .password {
+    background-color: transparent;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+}
+
+.admin-form .reset-password a {
+    /* color: #FB9129; */
+    text-decoration: none;
+    color: inherit;
+    font-weight: 700;
+
+}
+
+.admin-form input:-internal-autofill-selected {
+    background-color: transparent !important;
+}
+
+.admin-form input:-webkit-autofill,
+.admin-form input:-webkit-autofill:hover,
+.admin-form input:-webkit-autofill:focus,
+.admin-form input:-webkit-autofill:active {
+    -webkit-transition-delay: 9999s;
+    transition-delay: 9999s;
+    /* background-color: transparent; */
+}
+
+/* 
+.admin-form .form-group input,
+.admin-form .form-group input:hover,
+.admin-form .form-group input:focus,
+.admin-form .form-group select,
+.admin-form .form-group select:hover,
+.admin-form .form-group select:focus {
+    width: 300px;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    box-shadow: none;
+
+
+}
+
+.admin-form .form-group input::placeholder,
+.admin-form .form-group input,
+.admin-form .register-form select,
+.admin-form .register-form select option,
+.admin-form .form-group select option:first-child {
+    font-size: 14px;
+    font-weight: 400;
+    color: #444444;
+
+}
+
+.admin-form input:-internal-autofill-selected {
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
+
+.admin-form .form-group input::-webkit-outer-spin-button,
+.admin-form .form-group input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.admin-form .form-group select {
+    appearance: none;
+    background-image: url('../../assets/outline-arrow.png');
+    background-repeat: no-repeat, repeat;
+    background-position: right center;
+    background-size: 1em auto, 100%;
+
+
+}
+
+.admin-form .login-button {
+    width: 200px;
+    padding: 5px 0;
+    border-radius: 55px;
+    background-color: #FB9129;
+    font-size: 24px;
+    font-weight: 400;
+    color: #FFFFFF;
+    border: navajowhite;
+}
+
+/*
+.admin-form .register-form {
+    width: fit-content;
+    height: fit-content;
+    border-radius: 15px;
+    box-shadow: 0px 4px 75px 0px #00000017;
+
+
+}
+
+.admin-form .login-form h1,
+.admin-form .register-form h1 {
+    font-size: 40px;
+    font-weight: lighter;
+}
+
+.admin-form .login-form p,
+.admin-form .register-form p {
+    width: 700px;
+    font-size: 15px;
+    font-weight: normal;
+    text-align: center;
+}
+
+
+.admin-form .login-form p a {
+    font-weight: 600;
+    text-decoration: none;
+    color: inherit;
+
+}
+
+.admin-form .form-group {
+    padding: 10px;
+    border-radius: 8px;
+
+}
+
+.admin-form .login-form .form-group {
+    border: 1px solid #ffffff;
+}
+
+.admin-form .register-form .form-group {
+    border: 1px solid #444444
+}
+
+.admin-form .form-group:hover {
+    border: 1px solid #FB9129;
+}
+
+.admin-form .form-group input,
+.admin-form .form-group input:hover,
+.admin-form .form-group input:focus,
+.admin-form .form-group select,
+.admin-form .form-group select:hover,
+.admin-form .form-group select:focus {
+    width: 300px;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    box-shadow: none;
+
+
+}
+
+.admin-form .form-group input::placeholder,
+.admin-form .form-group input,
+.admin-form .register-form select,
+.admin-form .register-form select option,
+.admin-form .form-group select option:first-child {
+    font-size: 14px;
+    font-weight: 400;
+    color: #444444;
+
+}
+
+.admin-form input:-internal-autofill-selected {
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
+
+.admin-form .form-group input::-webkit-outer-spin-button,
+.admin-form .form-group input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.admin-form .form-group select {
+    appearance: none;
+    background-image: url('../../assets/outline-arrow.png');
+    background-repeat: no-repeat, repeat;
+    background-position: right center;
+    background-size: 1em auto, 100%;
+
+
+}
+
+.admin-form .login-btn {
+    width: 200px;
+    padding: 5px 0;
+    border-radius: 55px;
+    background-color: #FB9129;
+    font-size: 24px;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+
+.admin-form .register-form .login-btn{
+    width: 250px;
+    background-color: #0D9068;
+} */
+
+@media screen and (max-width: 992px) {
+    .header-components {
+        padding: 10px;
+    }
+    .admin-form .login-form h1,h1.register-form-h1{
+        font-size: 34px;
+    }
+}
+
+@media screen and (max-width: 769px) {
+    .admin-form .login-form h1 {
+   font-size: 24px;
+        
+}
+.header-buttons .btn {
+    width: 115px;
+    font-size: 16px;
+}
+}
+
+@media screen and (max-width: 600px) {
+    .header-components h1 {
+        font-size: 18px;
+    }
+    .header-components img {
+        width: 40px;
+    }
+ .admin-form .login-form {
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .admin-span{
+        display: none;
+    }
+    .admin-form .login-form h1,h1.register-form-h1{
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .header-components h1 {
+        font-size: 14px;
+        width: 100px;
+    }
+    .admin-form .login-form  {
+        font-size: 14px;
+        white-space: normal;
+        padding: 1rem 0.5rem !important;
+
+    }
+    .admin-form.login-page h1, h1.register-form-h1 {
+        font-size: 20px;
+    }
+    .admin-form .login-form input.email-input{
+        width: 250px;
+    }
+    .header-buttons .btn {
+        width: 100px;
+        font-size: 14px;
+        padding: 8px 0;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .admin-form.login-page h1, h1.register-form-h1 {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 321px) {}

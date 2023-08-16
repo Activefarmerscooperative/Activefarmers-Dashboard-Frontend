@@ -30,10 +30,10 @@ const Guarantor = ({ userData }) => {
     return (
         <div className="">
 
-            <div className="profile mx-2">
+            <div className="profile mx-2 g-account">
 
 
-                <InformationSection title="Guarantor's Information" information={guarantorInformation} />
+                <InformationSection title="Guarantor's Information" information={guarantorInformation}  />
 
 
             </div>

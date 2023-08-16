@@ -81,7 +81,7 @@ export default function DashboardHome({ user, setToken }) {
 
 
   return (
-    <div className='my-5 px-4 user-dashboard-home'>
+    <div className='my-5 px-2 user-dashboard-home'>
       <div className=''>
         <div className='px-4 profile-info mb-3 mobile '>
           <label htmlFor="image-upload" className="profile-img-container">
@@ -113,36 +113,41 @@ export default function DashboardHome({ user, setToken }) {
 
         <div className="savings my-4">
           <div className="d-flex align-items-center user-dashboard-header">
-            <div className="savings-wallet-category">
-              <div className="px-3 card loan">
-                <div className="d-flex align-items-center justify-content-between">
-                  <p className='savings-title'>My Loan</p>
-                  <p>(0) </p>
-                </div>
-                <div className="  d-flex align-items-center justify-content-between">
 
-                  {loanInputType ? (
-                    <span className="savings-value">{`${myLoan?.amount || 0} NGN`}</span>
-                  ) : (
-                    <span className="hidden-input ">*********</span>
-                  )}
-                  <div onClick={toggleLoanVisibility}>
-                    <Icon
-                      icon={loanIcon ? "mdi:eye" : "mdi:eye-off"}
-                      className="eye-icon"
-                    />
+            <div className="">
+              <div className="savings-wallet-category">
+                <div className="px-3 card loan">
+                  <div className="d-flex align-items-center justify-content-between">
+                    <p className='savings-title'>My Loan</p>
+                    <p>(0) </p>
                   </div>
+                  <div className="  d-flex align-items-center justify-content-between">
 
+                    {loanInputType ? (
+                      <span className="savings-value">{`${myLoan?.amount || 0} NGN`}</span>
+                    ) : (
+                      <span className="hidden-input ">*********</span>
+                    )}
+                    <div onClick={toggleLoanVisibility}>
+                      <Icon
+                        icon={loanIcon ? "mdi:eye" : "mdi:eye-off"}
+                        className="eye-icon"
+                      />
+                    </div>
+
+                  </div>
+                  <div className="">
+                    <p >View loan</p>
+                  </div>
                 </div>
-                <div className="">
-                  <p >View loan</p>
-                </div>
+                <SavingsWallet
+                  openSavingsModal={modalIsOpen}
+                  setOpenSavingsModal={setIsOpen}
+                />
               </div>
-              <SavingsWallet
-                openSavingsModal={modalIsOpen}
-                setOpenSavingsModal={setIsOpen}
-              />
+              <div className="invisible"></div>
             </div>
+
 
             <button className='d-flex align-items-center justify-content-center btn addsaving-btn' onClick={() => setIsOpen(true)} >
               <Icon icon="material-symbols:add-circle-outline-rounded" className='add-icon me-2' />

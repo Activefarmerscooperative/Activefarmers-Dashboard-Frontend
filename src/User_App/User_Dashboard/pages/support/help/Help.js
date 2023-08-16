@@ -16,12 +16,15 @@ export default function Help() {
                     </div>
 
                     <div className="phone d-flex flex-column mt-5">
-                        <div className="d-flex align-items-start mt-5 mb-3">
+                        <div className="d-flex align-items-start mt-5 mb-3 phone-instruction">
                             <Icon icon="material-symbols:call" className='help-icons' />
                             <p>Tap the number to call {<br />} <span>Phone lines are available between {<br />} 9:00 AM and 5:00 PM on weekdays</span></p>
                         </div>
-                        <a href="tel:+2349024392982">09024392982</a>
+                        <div className='d-flex flex-column'>
+                            <a href="tel:+2349024392982">09024392982</a>
                         <a href="tel:+2348042736998">08042736998</a>
+                        </div>
+                        
                     </div>
                 </div>
                 <div className="contact-form">
@@ -31,9 +34,12 @@ export default function Help() {
                         <input type="email" name="email" placeholder='Email Address' id="" />
                         <textarea name="message" placeholder='Type message...' id="" cols="30" rows="10"></textarea>
                     </form>
-                    <button className="btn my-4">
+                    <div className='email-button'>
+                        <button className="btn my-4">
                         Submit
                     </button>
+                    </div>
+                    
                 </div>
             </div>
         </div>

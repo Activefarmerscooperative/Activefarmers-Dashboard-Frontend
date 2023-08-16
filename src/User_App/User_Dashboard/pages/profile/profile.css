@@ -1,5 +1,3 @@
-
-
 .profile-update h1 {
     font-weight: 700;
     font-size: 36px;
@@ -44,10 +42,11 @@
     padding: 10px;
 
 }
+
 .editable-input {
     border: 1px solid #0D9068 !important;
     background-color: #FFFFFF !important;
-  }
+}
 
 
 
@@ -75,7 +74,7 @@
 
 .profile-form .btn {
     width: 180px;
-    height: 50px;
+    height: auto;
     background: #FB9129;
     border-radius: 4px;
     font-weight: 500;
@@ -88,18 +87,18 @@
 
 .profile-form .btn.edit {
     width: 180px;
-    height: 50px;
-    background-color:  #FB9129;
-        color:#fff;
+    height: auto;
+    background-color: #FB9129;
+    color: #fff;
     font-size: 20px;
     border: 2px solid #FB9129;
 }
 
 .profile-form .btn.discard {
     width: 180px;
-    height: 50px;
-    background-color:#FFFFFF;
-        color:#FB9129;
+    height: auto;
+    background-color: #FFFFFF;
+    color: #FB9129;
     font-size: 20px;
     border: 2px solid #FB9129;
 }
@@ -163,18 +162,17 @@
     opacity: 0;
 }
 
-.profile-update 
-.overlay-base .overlay-base_after-open{
-   
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgb(19, 18, 18) !important;
-        opacity: 0;
-        transition: all 0.3s ease-out;
-    
+.profile-update .overlay-base .overlay-base_after-open {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgb(19, 18, 18) !important;
+    opacity: 0;
+    transition: all 0.3s ease-out;
+
 
 }
 
@@ -186,3 +184,83 @@
     opacity: 0;
 }
 
+
+
+
+@media screen and (max-width: 1024px) {
+
+    .profile-form .form-group input,
+    .profile-form select {
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .profile-update {
+        margin-top: 40px !important;
+
+    }
+}
+
+@media screen and (max-width: 769px) {
+    .profile-update h1 {
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .profile-input {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .profile-form .form-group input,
+    .profile-form select {
+        width: 235px;
+    }
+
+    .profile-form .btn.profile-saved,
+    .profile-form .btn.discard,
+    .profile-form .btn.edit {
+
+        font-size: 16px;
+    }
+
+    .profile-update h1 {
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .profile-input {
+        display: grid !important;
+        grid-template-columns: 1fr;
+    }
+
+    .profile-form .form-group input,
+    .profile-form select {
+        width: 290px;
+    }
+
+    .profile-form .btn.profile-saved,
+    .profile-form .btn.discard,
+    .profile-form .btn.edit {
+
+        font-size: 14px;
+    }
+
+    .profile-update h1 {
+        font-size: 18px;
+    }
+    .profile-form p {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 376px) {}
+
+@media screen and (max-width: 321px) {
+    .profile-form .form-group input, .profile-form select {
+        width: 230px;
+    }
+}

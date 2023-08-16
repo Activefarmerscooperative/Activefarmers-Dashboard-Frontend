@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; // Assuming you're using React Router
-import './notifications.css'
+import './notifications.css';
 
-const NotificationsPage = ({ notifications, markAllAsRead, handleDelete, handleMouseEnter, handleMouseLeave }) => {
+
+const NotificationsPage = ({ notifications, markAllAsRead, handleDelete, handleMouseEnter, onClose }) => {
 
   
   return (
@@ -22,7 +23,8 @@ const NotificationsPage = ({ notifications, markAllAsRead, handleDelete, handleM
     )} */}
      <ul>
         {notifications.map(notification => (
-          <li key={notification.id} className={`my-3 notification.read ? 'read' : 'unread' `}>
+          <li key={notification.id}  className={`my-3 notification.read ? 'read' : 'unread' `}>
+            
             <div className="notification-title">{notification.message}</div>
             <div className="notification-message">{notification.date}</div>
           </li>

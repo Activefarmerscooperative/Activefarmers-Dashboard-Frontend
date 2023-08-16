@@ -1,73 +1,182 @@
-.help .contact .help-icons{
+.help .contact .help-icons {
     width: 25px;
     height: auto;
     color: #0D9068;
 }
 
-.help .contact p{
+.help .contact p {
     font-weight: 400;
-font-size: 18px;
-margin: 0 10px;
-color: #000000;
+    font-size: 18px;
+    margin: 0 10px;
+    color: #000000;
 
 
 }
 
-.contact .phone p span{
+.contact .phone p span {
     font-size: 12px;
 }
 
-.help .contact a{
+.help .contact a {
     text-decoration: none;
     font-weight: 600;
-font-size: 24px;
-text-align: justify;
+    font-size: 24px;
+    text-align: justify;
 
-color: #0D9068;
+    color: #0D9068;
 }
 
-.help .contact-form p{
+.help .contact-form p {
     font-weight: 400;
-font-size: 18px;
+    font-size: 18px;
 
-color: #000000;
+    color: #000000;
 }
 
-.help .contact-form input{
+.help .contact-form input {
     width: 400px;
-height: 50px;
-border: 1px solid #797979;
-border-radius: 4px;
-padding: 10px;
-margin: 20px 0;
+    height: 50px;
+    border: 1px solid #797979;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 20px 0;
 
 }
-.help .contact-form textarea{
+
+.help .contact-form textarea {
     width: 400px;
-height: 150px;
-border: 1px solid #797979;
-border-radius: 4px;
-padding: 10px;
+    height: 150px;
+    border: 1px solid #797979;
+    border-radius: 4px;
+    padding: 10px;
 }
-.help .contact-form input::placeholder, .help .contact-form textarea::placeholder{
+
+.help .contact-form input::placeholder,
+.help .contact-form textarea::placeholder {
     font-weight: 400;
-font-size: 14px;
-text-align: justify;
+    font-size: 14px;
+    text-align: justify;
 
-color: #000000;
+    color: #000000;
 }
-.help .contact-form input:focus, .help .contact-form textarea:focus{
+
+.help .contact-form input:focus,
+.help .contact-form textarea:focus {
     outline: none;
     /* border: none; */
 
 }
-.help .contact-form .btn{
+
+.help .contact-form .btn {
     width: 180px;
     padding: 10px;
     float: right;
-background: #FB9129;
-border-radius: 4px;
-font-weight: 500;
-font-size: 20px;
-color: #FFFFFF;
+    background: #FB9129;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 20px;
+    color: #FFFFFF;
+}
+
+@media screen and (max-width: 1025px) {
+    .help .contact a {
+        font-size: 20px;
+    }
+    .help .contact-form input, .help .contact-form textarea {
+        width: 350px;
+        
+    }
+    .help{
+        padding: 0 !important;
+        margin: 0 10px !important;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .support h1 {
+        font-size: 26px;
+    }
+}
+
+@media screen and (max-width: 769px) {
+    .support h1 {
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .contact{
+        flex-direction: column;
+    }
+    .help .phone{
+        flex-direction: row !important;
+        align-items: center;
+        margin-top: 30px !important;
+        
+    }
+    .phone-instruction{
+        margin-top: 0 !important;
+    }
+
+    .contact-form{
+        margin-top: 10px;
+    }
+    .help .contact-form input, .help .contact-form textarea {
+        width: auto;
+    }
+    .email-button{
+        display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .help .contact p {
+        font-size: 14px;
+        white-space: nowrap;
+    }
+    .help .contact a {
+        font-size: 16px;
+    }
+    .help .phone {
+        flex-direction: inherit !important;
+        align-items: flex-start;
+    }
+    .phone .flex-column{
+        flex-direction: row !important;
+    }
+    .phone .flex-column a{
+      margin: 0 5px;
+    }
+    .help .contact-form .btn {
+        width: auto;
+        padding: 10px 30px;
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .help .contact-form .btn {
+        font-size: 16px;
+    }
+    .help .contact-form textarea {
+        height: 100px;
+    }
+    .support {
+        margin-top: 1rem !important;
+        padding: 1rem !important;
+    }
+    .help .contact p {
+        white-space: pre-wrap;
+    }
+}
+
+@media screen and (max-width: 321px) {
+    .help .contact a {
+        font-size: 14px;
+    }
+    .support-tab {
+        margin: 1rem 0 !important;
+    }
 }

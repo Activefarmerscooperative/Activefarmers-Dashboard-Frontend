@@ -68,8 +68,10 @@ export default function Home() {
             <div className="dashboard-body mt-5 pt-5 mx-3 px-3">
                 <div className="summary-section">
                     {!isCollapsed ? <p className='mb-4'> Welcome back Admin 1 to Active Farmers Cooperative Admin Dashboard</p> : ""}
-                    <div className="d-flex align-items-center statistics ">
-                        {!isCollapsed ? <div className={`d-flex justify-content-around cards-section ${isCollapsed ? "collapsed" : ""}`}>
+
+                    
+                    <div className="d-flex align-items-center  statistics ">
+                        {!isCollapsed ? <div className={`d-flex cards-section ${isCollapsed ? "collapsed" : ""}`}>
                             <StatisticCard title="Cooperative Balance" number={34000000} showIcon />
                             <StatisticCard title="Members Savings" number={stat[0]} showIcon />
                             <StatisticCard title="Loaned Out" number={stat[1]} showIcon />

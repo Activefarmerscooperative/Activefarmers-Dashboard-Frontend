@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import './forms.css';
+import './adminforms.css';
 import { Icon } from '@iconify/react';
 import header from '../../assets/logol.png';
 import { LoginAdmin } from "../../../utils/api/admin";
@@ -92,8 +92,8 @@ export default function Login() {
 
     return (
         <div >
-            {location.pathname === "/login"
-                ? <div className="header-section admin-form">
+            {/* {location.pathname === "/login"
+                ? <div className="header-section ">
                     <div className="d-flex align-items-center justify-content-between header-components">
                         <div className='d-flex align-items-center'>
                             <img src={header} alt="" />
@@ -113,34 +113,34 @@ export default function Login() {
 
                         </div>
                     </div> </div> : null
-            }
-            <center className=" my-3 p-2">
+            } */}
+            <center className="login-page admin-form my-3 p-2">
                 <div className="d-flex flex-column  align-items-center login-form p-3">
                     <h1>Admin Login</h1>
-                    <p> Login with your admin credentials</p>
+                    Login with your admin credentials
 
-                    <form action="">
-                        <div className="form-group my-4">
-                            <input type="email" name="email" placeholder="Email address" required value={admin.email} onChange={handleChange} autoComplete="off" aria-autocomplete="none" />
-                        </div>
+                    <form action="" className='d-flex flex-column my-4'>
 
-                        <div className="d-flex align-items-center justify-content-between form-group my-4">
-                            <input type={!inputType ? "text" : "password"} name="password" placeholder='password' required value={admin.password} onChange={handleChange} className="my-2" />
+                        <input type="email" name="email" placeholder="Email address" required value={admin.email} onChange={handleChange}  className="email-input" autoComplete="new-email" />
+
+
+                        <div className="d-flex align-items-center justify-content-between password my-4">
+                            <input type={!inputType ? "text" : "password"} name="password" placeholder='password' required value={admin.password} onChange={handleChange} className="my-2" autoComplete="new-password" />
                             <div onClick={toggleSavingsVisibility}>
                                 <Icon icon={savingsIcon ? "mdi:eye-off" : "mdi:eye"} className='eye-icon' />
                             </div>
                         </div>
                     </form>
 
-                    <div className="">
+                    {/* <div className=""> */}
 
-                        {isLoading && <button className='login-btn mt-5'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
-                        {!isLoading && <button className='login-btn mt-5' onClick={handleSubmit}>Log In</button>}
+                    {isLoading && <button className='login-button'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
+                    {!isLoading && <button className='login-button' onClick={handleSubmit}>Log In</button>}
 
 
-                    </div>
+                    {/* </div> */}
 
-                    <p className="reset-password">Forgotten Password? <a href="">Reset Here</a></p>
+                    <p className="reset-password mt-4">Forgotten Password? <a href="">Reset Here</a></p>
                 </div>
             </center>
 

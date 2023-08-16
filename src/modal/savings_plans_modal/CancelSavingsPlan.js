@@ -33,15 +33,15 @@ function CancelSavingsPlan({ activeSavings, closeModal }) {
 
                 <div className="d-flex flex-column align-items-center mt-4">
                     <h4>
-                        Cancel {activeSavings?.category} Scheduled Savings
+                        Cancel {activeSavings?.category}
                     </h4>
                     <span>Monthly automatic savings deduction of {activeSavings?.amount} will be stopped once you cancel. Are you sure you want to cancel your scheduled savings?</span>
 
                     <div className="d-flex mt-5 continue-saving">
                         {isLoading && <center className="btn mt-5"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
                         {!isLoading && <>
-                            <button onClick={closeModal} className="btn change-card btn-modal mx-3">No</button>
-                            <button className="btn no btn-modal mx-3" onClick={cancelSavingsPlan}>Yes</button>
+                            <button onClick={closeModal} className="btn change-card btn-modal mx-2">No</button>
+                            <button className="btn no btn-modal mx-2" onClick={cancelSavingsPlan}>Yes</button>
                         </>}
 
                     </div>

@@ -1,18 +1,17 @@
 
 .loan-summary-modal {
-    width: 700px;
-    height: 500px;
+    /* width: 700px; */
+    /* height: 500px; */
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #fefefe;
     margin: 0 auto;
-    margin-top: 5rem !important;
     border-radius: 22px;
 }
 
 .loan-summary-modal {
-    height: fit-content;
+    /* height: fit-content; */
 }
 
 .icon {
@@ -22,7 +21,7 @@
 }
 
 .loan-summary-modal .loan-summary-div {
-    width: 750px;
+    /* width: 750px; */
 }
 
 .loan-summary-modal a.back-to {
@@ -44,7 +43,7 @@
 
 .loan-summary-modal .btn,
 .loan-summary-modal .btn:focus {
-    width: 200px;
+    /* width: 200px; */
     /* height: 50px; */
     background: #FB9129;
     border-radius: 4px;
@@ -67,9 +66,9 @@
 
 }
 .loan-summary-modal hr {
-    width: 100px;
+    /* width: 100px;
     border: 1px solid #0D9068;
-    margin: 0 8px;
+    margin: 0 8px; */
 }
 
 .loan-summary-modal span {

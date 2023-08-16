@@ -1,5 +1,5 @@
 .login-form-page {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('/src/assets/bg.png');
+    background-image: linear-gradient(176deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('/src/assets/bg.png');
     background-repeat: no-repeat;
     height: 100vh;
     background-position: center;
@@ -16,9 +16,12 @@ a {
     font-size: 16px;
     text-align: center;
     color: #0D9068;
+    white-space: nowrap;
 }
 
-.login-form-page .login-button, .register-link-btn, .register-link-btn:hover {
+.login-form-page .login-button,
+.register-link-btn,
+.register-link-btn:hover {
     width: 160px;
     height: 45px;
     background-color: transparent;
@@ -26,12 +29,12 @@ a {
     border-radius: 55px;
     font-weight: 400;
     font-size: 20px;
-    line-height: 24px;
+    line-height: normal;
 
     color: #FFFFFF;
 }
 
-.login-page .text {
+.login-form-page .text {
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
@@ -62,7 +65,7 @@ a {
 }
 
 .login-page input.email-input {
-    /* width: 400px; */
+    width: 400px;
     border: 1px solid #444444;
     border-radius: 8px;
     padding: 10px;
@@ -70,7 +73,7 @@ a {
 }
 
 .login-page .password {
-    /* width: 400px; */
+    width: 400px;
     border: 1px solid #444444;
     border-radius: 8px;
     padding: 2px 10px;
@@ -95,9 +98,9 @@ a {
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
@@ -127,9 +130,14 @@ input.email-input:focus {
     color: #FFFFFF;
 }
 
-.form .login-button, .form .login-button:hover {
+.form .login-button,
+.form .login-button:hover {
     background: #0D9068;
     color: #FFFFFF;
+}
+
+.otp-input {
+    white-space: nowrap;
 }
 
 .login-page .otp-input input {
@@ -172,4 +180,124 @@ p.create {
     font-size: 16px;
     color: #FFFFFF;
     margin: 0 10px;
+}
+
+@media screen and (max-width: 1024px) {}
+
+@media screen and (max-width: 991px) {}
+
+@media screen and (max-width: 769px) {
+    .login-page h1 {
+        font-size: 24px;
+        text-align: center;
+
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .login-page .form {
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .login-page input.email-input,.admin-form .login-form input.email-input, 
+    .login-page .password {
+        width: 320px;
+    }
+
+    .login-form-page span {
+        display: none;
+    }
+
+    .form .login-button,
+    .form .login-button:hover {
+        margin: 0 auto !important;
+    }
+
+    .login-page .otp-input input {
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 426px) {
+.login-page{
+    padding: 10px !important;
+}
+    .login-page input.email-input, .admin-form .login-form input.email-input, 
+    .login-page .password {
+        width: 250px;
+    }
+
+    .login-page h1 {
+        font-size: 20px;
+    }
+
+    .login-form-page form {
+        margin: 20px 0 !important;
+    }
+
+    .login-form-page .login-button,
+    .register-link-btn,
+    .register-link-btn:hover {
+        width: 110px;
+        padding: 8px 10px;
+        height: fit-content;
+        font-size: 16px;
+
+
+    }
+
+    .form .login-button,
+    .form .login-button:hover {
+        margin-top: 15px !important;
+    }
+
+    .login-page .form {
+        font-size: 14px;
+        white-space: normal;
+        padding: 1rem 0.5rem !important;
+
+    }
+
+    .login-page .otp-input input {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .login-page p {
+        font-size: 14px;
+        white-space: normal;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .login-page .otp-input input {
+        width: 35px;
+        height: 35px;
+        margin: 0.4rem;
+    }
+    .login-page h1 {
+        font-size: 16px;
+    }
+    .login-form-page a:nth-child(1) {
+        font-size: 14px;
+    }
+    .login-form-page .login-button, .register-link-btn, .register-link-btn:hover {
+        width: 100px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 321px) {
+    .login-page .otp-input input {
+        width: 35px;
+        height: 30px;
+        margin: 0.25rem;
+    }
 }

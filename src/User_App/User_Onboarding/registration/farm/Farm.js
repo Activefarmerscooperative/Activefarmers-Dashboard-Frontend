@@ -96,25 +96,24 @@ export default function Farm() {
     }
 
     return (
-        <div className="farm px-5 py-2">
-            <div className="d-flex flex-column align-items-center py-3 my-2">
+        <div className="farm py-2 my-4">
+            <div className="d-flex flex-column align-items-center py-3 ">
                 <h1>Farm Details</h1>
                 <p>Please complete this form to the best of your ability providing all correct and relevant details about your farming experience and farm details</p>
 
                 <div className="d-flex flex-column align-items-center form ">
 
-                    <form className=" d-flex align-items-center justify-content-center my-5">
-                        <div>
+                    <form className="">
+                    <div className="d-flex input-form-group">
                             <input type="number" name="farmingExperience" value={farm.farmingExperience} onChange={handleChange} placeholder="Years of Experience" min="0" />
-
-                            <input type="text" name="cropTypes" value={farm.cropTypes} placeholder="Crop Type(s)" onChange={handleChange} />
-                        </div>
-                        <div>
                             <input type="number" name="farmSize" value={farm.farmSize} placeholder="Farm Size (Hectares)" onChange={handleChange} min="0" />
+                        </div>
+                        <div className="d-flex input-form-group">
+                            <input type="text" name="cropTypes" value={farm.cropTypes} placeholder="Crop Type(s)" onChange={handleChange} />
                             <input type="text" name="farmAddress" value={farm.farmAddress} onChange={handleChange} placeholder="Farm Address" />
                         </div>
                     </form>
-                    {isLoading && <center className="btn member-btn"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+                    {isLoading && <center className="btn member-btn"><RotatingLines width="25" strokeColor="#1B7B44" strokeWidth="3" /></center>}
                     {!isLoading && <button onClick={handleSubmit} disabled={isLoading} className="btn member-btn">Submit</button>}
 
                 </div>

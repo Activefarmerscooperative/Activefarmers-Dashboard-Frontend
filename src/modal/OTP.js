@@ -25,7 +25,7 @@ import { RotatingLines } from "react-loader-spinner";
 //     };
 // }
 
-export default function OtpModal({ message }) {
+export default function OtpModal({ message, closeModal }) {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [otp, setOtp] = useState(["", "", "", "", "", ""]);
     const [isLoading, setIsLoading] = useState(false)
@@ -126,8 +126,8 @@ export default function OtpModal({ message }) {
                 </div>
 
 
-                {isLoading && <center className="btn member-btn"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
-                {!isLoading && <button onClick={handleSubmit} className="btn btn-modal mt-5">Submit</button>}
+                {isLoading && <center className="btn btn-modal mt-3"><RotatingLines width="25" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+                {!isLoading && <button onClick={handleSubmit} className="btn btn-modal mt-3">Submit</button>}
                 <p className="mt-3">
                             Yet to receive OTP?
                             {countdown > 0 ? (

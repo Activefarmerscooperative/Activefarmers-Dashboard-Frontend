@@ -71,12 +71,12 @@ function LoanSummary({ closeModal, loanData }) {
   return (
     <div className='loan-summary-modal p-4 my-4'>
       <div className="d-flex flex-column loan-summary-div">
-        <div onClick={goBack} className="back-to d-flex  align-items-center mx-5" >
+        <div onClick={goBack} className="back-to d-flex  align-items-center" >
           <Icon icon="material-symbols:arrow-back-rounded" className="add-icon" />
           Loan Request Summary
         </div>
         <div className="d-flex flex-column align-items-center mb-2">
-          <ul className="loan-info my-3">
+          <ul className="loan-info ps-0 my-3">
             <li className='d-flex align-items-center my-3'>
               <p>Loan Amount:</p>
               <hr />
@@ -129,7 +129,7 @@ function LoanSummary({ closeModal, loanData }) {
           </ul>
 
 
-          <div className='d-flex align-items-start justify-content-around'>
+          <div className='d-flex align-items-start justify-content-around loan-button'>
 
             <button onClick={closeModal} className="btn btn-modal my-2 mx-3">Edit Loan</button>
 
@@ -140,6 +140,7 @@ function LoanSummary({ closeModal, loanData }) {
             </div>
 
           </div>
+          
 
         </div>
 

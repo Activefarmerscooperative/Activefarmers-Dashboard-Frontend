@@ -16,7 +16,7 @@ function LoanSuccessful() {
                     <p>
                         Your Card !
                     </p>
-                    <p style={{ fontSize: "13px", width: "400px", fontWeight: "400" }}>
+                    <p style={{ fontSize: "13px", width: "400px", fontWeight: "400" }} className='p-tag'>
                         Your loan request has been received and is being processed,
                         you'll receive a confirmation email/text from us soon and approved loan will reflect on your dashboard
                     </p>

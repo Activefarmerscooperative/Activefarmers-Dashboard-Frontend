@@ -3,7 +3,7 @@
   background: #FFFFFF;
   box-shadow: 0px 4px 75px rgba(0, 0, 0, 0.09);
   border-radius: 10px;
-  margin: auto;
+  margin: 0 auto !important;
 }
 
 .member h1 {
@@ -27,21 +27,28 @@
   color: #000000;
 }
 
+.input-form-group {
+  margin: 0 30px;
+  justify-content: space-around;
+}
+
 .member input,
 .member select {
   width: 350px;
   height: 50px;
-  margin: 10px auto;
   padding: 8px;
   border: 1px solid #444444;
   border-radius: 4px;
   color: #444444;
   font-size: 15px;
+  margin: 10px 15px;
+  
 }
 
 .member select {
   color: #727070;
 }
+
 /* .member input::placeholder::after {
   content: '*';
   color: red;
@@ -74,11 +81,6 @@
 }
 
 
-.member .form form div {
-  width: min-content;
-  margin: 0 30px;
-}
-
 .member-btn {
   width: 320px;
   height: 60px;
@@ -96,7 +98,7 @@
   border: 2px solid #0D9068;
 }
 
-.member p.password-match{
+.member p.password-match {
   color: red;
   width: auto;
   margin: 0;
@@ -150,6 +152,7 @@
 }
 
 .profile-overlay-base {
+  
   position: fixed;
   top: 0;
   left: 0;
@@ -168,3 +171,118 @@
 .overlay-base_before-close {
   opacity: 0;
 }
+
+
+@media screen and (max-width: 800px) {
+
+  .member input,
+  .member select {
+    width: 290px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .member {
+    width: auto;
+  }
+
+  .member h1 {
+    font-size: 26px;
+  }
+
+  .member p {
+    width: 400px;
+  }
+
+  .member input,
+  .member select {
+    width: 220px;
+  }
+
+  .member-btn {
+    width: 225px;
+    font-size: 20px;
+  }
+
+  .input-form-group {
+    margin: 0;
+  }
+  .member select option{
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 551px) {
+
+  .member input,
+  .member select {
+    width: 200px;
+    font-size: 14px;
+    margin: 8px ;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .input-form-group {
+    flex-direction: column;
+  }
+
+  .registration .reg-header button,
+  .member-btn {
+    
+    padding: 10px;
+    height: auto;
+    font-size: 16px;
+    line-height: normal;
+  }
+
+  .member h1 {
+    font-size: 20px;
+  }
+
+  .member span {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .member p {
+    width: 340px;
+  }
+  .member input, .member select {
+    width: 290px;
+}
+}
+
+@media screen and (max-width: 376px) {
+  .member h1 {
+    font-size: 18px;
+  }
+
+  .member span {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .member p {
+    width: 270px;
+  }
+  .member input, .member select {
+    width: 250px;
+}
+.registration {
+  padding: 0 15px !important;
+}
+.member span {
+  width: 255px;
+}
+.member select option{
+  font-size: 12px;
+}
+.overlay-base {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+}
+
+@media screen and (max-width: 321px) {}

@@ -29,6 +29,7 @@ const NotificationPopUp = ({ notifications, setNotifications, markAllAsRead, onC
 
 
   const displayedNotifications = notifications.slice(0, 5);
+  
   return (
     <Modal isOpen={true} onRequestClose={onClose} contentLabel="notification pop-up">
       <div className="notification-header px-4 py-2">
@@ -36,7 +37,7 @@ const NotificationPopUp = ({ notifications, setNotifications, markAllAsRead, onC
           Mark all as read
         </button>
         <button className="close-btn" onClick={onClose}>
-          <Icon icon="iconoir:cancel" className='mx-3' />
+          <Icon icon="iconoir:cancel" />
         </button>
       </div>
       <div className="notifications-container p-3">
@@ -44,7 +45,7 @@ const NotificationPopUp = ({ notifications, setNotifications, markAllAsRead, onC
         {displayedNotifications.map((notification, index) => (
           <div key={notification.id} className={`notification ${notification.read ? 'read' : 'unread'}`}>
 
-            <div className="notification-content">
+            <div className="notification-content" onClick={() =>  {navigate("/admin/dashboard/notifications"); onClose();}}>
               <div className="notification-title">{notification.message}</div>
               <div className="notification-message">{notification.date}</div>
             </div>
@@ -56,7 +57,7 @@ const NotificationPopUp = ({ notifications, setNotifications, markAllAsRead, onC
                 </button>
               )}
             </div> */}
-            <div className="notification-dot">
+            <div className={`notification-dot ${markAllAsRead ? "read" : "unread"}`}>
               <div
                 className=""
                 onMouseEnter={() => handleMouseEnter(index)}

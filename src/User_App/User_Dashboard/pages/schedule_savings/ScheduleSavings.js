@@ -102,7 +102,7 @@ export default function ScheduleSavings({ wallet }) {
                         </div>
             }
 
-            <div className="schedule-savings-list">
+            <div className="">
                 {
 
                     activeWallet &&
@@ -111,7 +111,7 @@ export default function ScheduleSavings({ wallet }) {
                     </p>
                 }
 
-                <div className="d-flex justify-content-evenly align-items-start">
+                <div className="d-flex justify-content-evenly align-items-start schedule-savings-list">
                     <div className="schedule-savings-history ">
                         <h3 className="history-title">History</h3>
                         <Table className=''>
@@ -141,7 +141,7 @@ export default function ScheduleSavings({ wallet }) {
                                 <div className="d-flex flex-column">
                                     <p className='savings-title'>Total scheduled savings in {activeWallet?.category} category</p>
                                     {loanInputType ? (
-                                        <span className="savings-value"> {activeWallet && activeWallet?.savings?.reduce((total, { amount }) => total + amount, 0)} NGN</span>
+                                        <span className="savings-value"> {activeWallet && activeWallet?.savings?.reduce((total, { amount }) => total + amount, 0)} 0 NGN</span>
                                     ) : (
                                         <span className="hidden-input ">*********</span>
                                     )}
@@ -155,6 +155,7 @@ export default function ScheduleSavings({ wallet }) {
                                 </div>
                             </div>
                         </div>
+                        <div className="savings-edit-links">
                         <div className="edit-savings savings-plan-link mt-3" onClick={() => openModal('addSavingsPlans')}>
                             <h5 className="edit-savings">
                                 Add Savings
@@ -183,6 +184,8 @@ export default function ScheduleSavings({ wallet }) {
                             </h5>
                             <p>Cancel your scheduled savings</p>
                         </div>
+                        </div>
+                        
 
                     </div>
                 </div>

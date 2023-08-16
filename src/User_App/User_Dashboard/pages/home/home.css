@@ -50,8 +50,11 @@
     scrollbar-width: none;
     -ms-overflow-style: none;
     cursor: pointer;
+    
 }
-
+.user-dashboard-home .savings-wallet-category{
+    max-width: 800px;
+}
 .savings-wallet-category::-webkit-scrollbar {
     display: none;
 }
@@ -238,7 +241,9 @@
 .dropdown-content span:hover {
     cursor: pointer;
 }
-
+.table-date{
+    white-space: nowrap;
+}
 .dropdown-content hr {
     margin: 5px 0;
     border: none;
@@ -302,13 +307,16 @@ input[type=checkbox]:focus {
 
 .css-11xur9t-MuiPaper-root-MuiTableContainer-root {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     width: 1000px !important;
     background-color: #F6F9FF !important;
     border-radius: 20px 20px 0px 0px !important;
     box-shadow: none !important;
 }
+.transaction-history .css-1ygcj2i-MuiTableCell-root, .transaction-history .css-1ex1afd-MuiTableCell-root {
 
+    white-space: nowrap;
+}
 p.MuiTablePagination-selectLabel,
 p.MuiTablePagination-displayedRows {
     margin: 0;
@@ -362,12 +370,30 @@ p.MuiTablePagination-displayedRows {
     opacity: 0;
 }
 
+.invisible{
+    display: none;
+}
 
-
-
+@media screen and (max-width: 1026px) {
+    .user-dashboard-home .savings-wallet-category {
+        max-width: 600px;
+    }
+    .user-dashboard-home{
+        padding: 0 !important;
+    }
+}
+@media screen and (max-width: 992px) {
+    .user-dashboard-home .savings-wallet-category {
+        max-width: 550px;
+    }
+}
 @media screen and (max-width: 800px) {
+    
     .user-dashboard-home .profile-info{
         display: flex;
+    }
+    .user-dashboard-home .savings-wallet-category {
+        max-width: 620px;
     }
 }
 
@@ -388,29 +414,141 @@ p.MuiTablePagination-displayedRows {
       font-size: 30px;
       margin-bottom: 0px;
     }
+    .user-dashboard-home .savings-wallet-category {
+        max-width: 600px;
+    }
+        .transaction-history h1 {
+       
+        font-size: 24px;
+        }
+    
+   
 }
 @media screen and (max-width: 600px) {
+    
     .user-dashboard-home{
         padding: 0 !important;
     }
     .user-dashboard-header{
         flex-direction: column;
     }
+    .invisible{
+        display: block;
+    }
     .btn.addsaving-btn {
         padding: 8px;
         margin: 8px 0 0 auto;
     }
+    .user-dashboard-home .savings-wallet-category {
+        max-width: 550px;
+    }
+    .transaction-history h1 {
+       
+        font-size: 20px;
+        }
 }
-@media screen and (max-width: 426px) {}
-@media screen and (max-width: 376px) {}
-@media screen and (max-width: 321px) {}
+@media screen and (max-width: 426px) {
+    .user-dashboard-home .savings-wallet-category {
+        max-width: 400px;
+    }
+
+    .user-dashboard-home h1 {
+        font-size: 20px;
+        margin-bottom: 0px;
+    }
+    .savings-wallet-category .card, .schedule-savings-page .card {
+        flex: 0 0 170px;
+    }
+    .savings-value, .hidden-input {
+        font-size: 16px;
+    }
+    .user-dashboard-home .card p {
+        font-size: 14px;
+        margin-bottom: 0.5rem;
+    }
+    .user-dashboard-home .eye-icon {
+        width: 15px;
+        height: 15px;
+    }
+    .btn.addsaving-btn {
+        width: auto;
+    }
+    .top-nav {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+    .top-nav p {
+        font-size: 16px;
+        text-align: left;
+    }
+    .sort select {
+        width: 100px;
+        height: auto;
+    }
+    .btn.view-all-btn {
+        width: auto;
+        font-size: 14px;
+    }
+    .download-icon {
+        width: 35px;
+        height: 35px;
+    }
+    .download-icon .icon {
+        width: 25px;
+        height: 25px;
+    }
+    .transaction-history h1 {
+       
+        font-size: 18px;
+        }
+        .css-1ygcj2i-MuiTableCell-root {
+            font-size: 14px !important;
+        }
+        .transaction-history .css-1ygcj2i-MuiTableCell-root, .transaction-history .css-1ex1afd-MuiTableCell-root {
+            white-space: nowrap;
+            font-size: 14px !important;
+        }
+}
+@media screen and (max-width: 376px) {
+    .user-dashboard-home h1 {
+        font-size: 18px;
+    }
+    .user-dashboard-home .savings-wallet-category {
+        max-width: 350px;
+    }
+}
+@media screen and (max-width: 321px) {
+    .user-dashboard-home .savings-wallet-category {
+        max-width: 300px;
+    }
+    .savings-wallet-category .card, .schedule-savings-page .card {
+        flex: 0 0 140px;
+    }
+    .savings-value, .hidden-input {
+        font-size: 14px;
+    }
+    .user-dashboard-home .card p, .btn.addsaving-btn,  .btn.view-all-btn {
+        font-size: 12px;
+    }
+}
 
 
 
-/* @media screen and (max-width: 1024px) {}
-@media screen and (max-width: 991px) {}
+/* @media screen and (max-width: 1024px) {
+    profile-stat-card
+}
+@media screen and (max-width: 800px) {
+  
+}
 @media screen and (max-width: 769px) {}
 @media screen and (max-width: 600px) {}
-@media screen and (max-width: 426px) {}
-@media screen and (max-width: 376px) {}
-@media screen and (max-width: 321px) {} */
+@media screen and (max-width: 426px) {
+}
+@media screen and (max-width: 376px) {
+    
+}
+@media screen and (max-width: 992px) {
+    .ReactModal__Overlay {
+    left: 491px !important;
+    }
+} */

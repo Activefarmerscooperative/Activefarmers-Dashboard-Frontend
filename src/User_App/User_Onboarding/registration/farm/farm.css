@@ -7,24 +7,23 @@
     margin: auto;
 }
 
-
 .farm h1{
     font-weight: 700;
     font-size: 36px;
     color: #000000;
 }
 
-
-
-
 .farm p{
-    width: 666px;
+    width: 665px;
     font-weight: 400;
     font-size: 14px;
     text-align: center;
     color: #000000;
 }
-
+.input-form-group {
+    margin: 0 30px;
+    justify-content: space-around;
+  }
 
 .farm input {
   width: 350px;
@@ -35,6 +34,7 @@
   border-radius: 4px;
   color: #444444;
   font-size: 15px;
+  margin: 10px 15px;
 }
 
 
@@ -132,3 +132,60 @@
 .farm .overlay-base_before-close {
     opacity: 0;
 }
+
+@media screen and (max-width: 800px) {
+    .farm input {
+      width: 290px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .farm {
+      width: auto;
+    }
+    .farm h1 {
+      font-size: 26px;
+    }
+    .farm  p {
+      width: 400px;
+    }
+    .farm input{
+      width: 220px;
+    }
+  
+  
+    .input-form-group {
+      margin: 0;
+    }
+    .farm select option{
+      font-size: 14px;
+    }
+  }
+  @media screen and (max-width: 552px) {
+
+    .farm input{
+      width: 200px;
+      font-size: 14px;
+      margin: 8px ;
+    }
+  }
+  @media screen and (max-width: 426px) {
+    .farm h1 {
+      font-size: 20px;
+    }
+    .farm p {
+      width: 300px;
+  }
+  .farm input{
+      width: 290px;
+      font-size: 14px;
+    }
+  }
+  @media screen and (max-width: 376px) {
+    .farm input {
+      width: 250px;
+  }
+  .farm p {
+    width: 240px;
+  }
+  }

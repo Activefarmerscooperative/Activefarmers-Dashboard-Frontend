@@ -147,18 +147,18 @@ const AccountGuarantor = ({ setToken }) => {
 
 
   return (
-    <div className="my-5 px-4 guarantor-account">
+    <div className="my-3  guarantor-account">
       <h1>Account & Guarantor</h1>
-      <div className="px-4 py-3 card guarantor-account-form">
+      <div className=" py-3 guarantor-account-form">
         <div>
-          <form action="" className="d-flex flex-column align-items-center">
+          <form action="" className="d-flex flex-column align-items-start justify-content-center">
             <p>Account Details</p>
-            <div className="d-flex">
-              <div className="form-group">
+            <div className="d-flex guarantor-input">
+              <div className="form-group d-flex flex-column mx-3 ">
                 <label htmlFor="">Account Name</label>
                 <input type="text" name="accountName" onChange={handleAccountChange} value={bankDetails?.accountName} disabled={!editAccount} placeholder="Enter account name" />
               </div>
-              <div className="form-group ">
+              <div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Bank Name</label>
                 {/* Note this is because the bank list is passed as object */}
                 <select name="" onChange={(e) => {
@@ -180,16 +180,16 @@ const AccountGuarantor = ({ setToken }) => {
 
                 </select>
               </div>
-              <div className="form-group">
+              <div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Account Number</label>
                 <input type="text" name="accountNumber" value={bankDetails?.accountNumber} onChange={handleAccountChange} disabled={!editAccount} placeholder="0123456" />
               </div>
             </div>
           </form>
-          <div className="d-flex">
+          <div className="d-flex guarantor-input">
             {
               !editAccount &&
-              <button onClick={() => setEditAccount(true)} className="btn edit mx-4 my-5">
+              <button onClick={() => setEditAccount(true)} className="btn edit mx-4 mt-3">
                 Edit
               </button>
             }
@@ -197,15 +197,15 @@ const AccountGuarantor = ({ setToken }) => {
             {editAccount && (
               <div>
                 <>
-                  {isLoading && <button className="btn mx-4 my-5"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></button>}
+                  {isLoading && <button className="btn mx-4 mt-3"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></button>}
                   {!isLoading &&
                     <>
                       {!isLoading && <button onClick={
                         // () => setEditAccount(false)
                         // openModal
                         () => openModal('discard')
-                      } disabled={isLoading} className="btn discard mx-4 my-5">Discard Changes</button>}
-                      <button onClick={() => confirmUpdate("Account")} disabled={isLoading} className="btn mx-4 my-5 ">Save</button>
+                      } disabled={isLoading} className="btn discard mx-4 mt-3">Discard Changes</button>}
+                      <button onClick={() => confirmUpdate("Account")} disabled={isLoading} className="btn mx-4 mt-3 ">Save</button>
                     </>}
 
                 </>
@@ -215,9 +215,9 @@ const AccountGuarantor = ({ setToken }) => {
           </div>
         </div>
         <div className="mt-5">
-          <form action="" className="d-flex flex-column align-items-center">
+          <form action="" className="d-flex flex-column align-items-start">
             <p>Guarantor's Details</p>
-            <div className="d-flex">
+            <div className="d-flex guarantor-input">
               <div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Guarantor's Full Name</label>
                 <input type="text" name="full_name" onChange={handleGuarantorChange} disabled={!editGuarantor} value={guarantorDetails?.full_name} placeholder="E.g. John Deo" />
@@ -231,7 +231,7 @@ const AccountGuarantor = ({ setToken }) => {
                 <input type="email" name="email" value={guarantorDetails?.email} onChange={handleGuarantorChange} disabled={!editGuarantor} placeholder="E.g johndeo@yahoo.com" />
               </div>
             </div>
-            <div className="d-flex mt-4">
+            <div className="d-flex guarantor-input mt-4">
               <div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Guarantor's Residential Address</label>
                 <input type="text" name="address" value={guarantorDetails?.address} onChange={handleGuarantorChange} disabled={!editGuarantor} placeholder="E.g Tafawal Balewal Street, Abuja" />
@@ -249,10 +249,10 @@ const AccountGuarantor = ({ setToken }) => {
               </div>
             </div>
           </form>
-          <div className="d-flex">
+          <div className="d-flex guarantor-input">
             {
               !editGuarantor &&
-              <button onClick={() => setEditGuarantor(true)} className="btn edit mx-4 my-5">
+              <button onClick={() => setEditGuarantor(true)} className="btn edit mx-4 mt-3">
                 Edit
               </button>
             }
@@ -265,8 +265,8 @@ const AccountGuarantor = ({ setToken }) => {
                       {!isLoading && <button onClick={
                         // () => setEditGuarantor(false)
                         () => openModal('discard')
-                      } disabled={isLoading} className="btn mx-4 discard my-5">Discard Changes</button>}
-                      <button onClick={() => confirmUpdate("Guarantor")} disabled={isLoading} className="btn mx-4 my-5 save">Save</button>
+                      } disabled={isLoading} className="btn mx-4 discard mt-3">Discard Changes</button>}
+                      <button onClick={() => confirmUpdate("Guarantor")} disabled={isLoading} className="btn mx-4 mt-3 save">Save</button>
                     </>}
 
                 </>

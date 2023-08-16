@@ -74,7 +74,7 @@ function TransactionHistory({ closeModal }) {
     };
 
     return (
-        <div className="transaction-history mt-5 px-4">
+        <div className="transaction-history mt-5 px-1">
             <div className=" top-nav">
                 <h1 >< Icon icon="material-symbols:arrow-back-rounded" onClick={goBack} className="add-icon" /> Transactions History</h1>
                 <div className="d-flex mt-5 top-nav-btn">

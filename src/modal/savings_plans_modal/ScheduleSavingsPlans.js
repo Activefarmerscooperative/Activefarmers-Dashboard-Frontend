@@ -82,7 +82,7 @@ function ScheduleSavingsPlans({ openModal, closeModal }) {
             {step === 1 &&
                 <div className='add-savings-modal p-4 my-4' onRequestClose={closeModal}>
                     <div className="d-flex flex-column add-savings-div">
-                        <p onClick={closeModal} className="d-flex align-items-center mx-5" >
+                        <p onClick={closeModal} className="d-flex align-items-center" >
                             <Icon icon="material-symbols:arrow-back-rounded" className="add-icon" />
                             Scheduled Savings
                         </p>
@@ -90,7 +90,7 @@ function ScheduleSavingsPlans({ openModal, closeModal }) {
                             <p>
                                 Schedule monthly savings into your cooperative account
                             </p>
-                            <span>You can cancel scheduled savings at anytime</span>
+                            <span className='schedule-span'>You can cancel scheduled savings at anytime</span>
                             <form action="" className="d-flex flex-column align-items-center">
                                 <input type="number" value={savingsData?.amount} onChange={handleChange} name="amount" placeholder="Amount to save" min="0" required />
                                 <select name="category"

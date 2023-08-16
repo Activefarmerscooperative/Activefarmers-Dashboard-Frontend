@@ -80,7 +80,7 @@ export default function LoginOtpVerify() {
 
     return (
         <div className="login-page pt-3 px-5">
-            <div className=''>
+           
 
                 <div className="form d-flex flex-column align-items-center mt-5 px-5 pt-3">
                     <h1>OTP Verification</h1>
@@ -100,8 +100,8 @@ export default function LoginOtpVerify() {
                         </div>
 
 
-                        {isLoading && <button className='login-btn'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
-                        {!isLoading && <button className='login-btn mt-4 mx-auto' onClick={handleClick}>Verify OTP</button>}
+                        {isLoading && <button className='login-button mt-4 mx-auto'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
+                        {!isLoading && <button className='login-button mt-4 mx-auto' onClick={handleClick}>Verify OTP</button>}
 
 
                     </form>
@@ -131,7 +131,7 @@ export default function LoginOtpVerify() {
                     }
 
                 </div>
-            </div>
+           
         </div>
     )
 }

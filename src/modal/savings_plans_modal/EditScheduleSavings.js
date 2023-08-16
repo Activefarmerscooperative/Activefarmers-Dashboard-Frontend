@@ -56,7 +56,7 @@ function EditScheduleSavings({ closeModal, activeSavings }) {
   return (
     <div className='add-savings-modal p-4 my-4' >
       <div className="d-flex flex-column add-savings-div">
-        <p onClick={closeModal} className="d-flex align-items-center mx-5" >
+        <p onClick={closeModal} className="d-flex align-items-center" >
           <Icon icon="material-symbols:arrow-back-rounded" className="add-icon" />
           Edit Scheduled Savings
         </p>
@@ -64,7 +64,7 @@ function EditScheduleSavings({ closeModal, activeSavings }) {
           <p>
             Schedule monthly savings into your cooperative account
           </p>
-          <span>You can cancel scheduled savings at anytime</span>
+          <span className="schedule-span">You can cancel scheduled savings at anytime</span>
           <form action="" className="d-flex flex-column align-items-center">
             <input type="number" name="amount" min="0" onChange={handleChange} required value={savingsData?.amount} />
 
@@ -78,9 +78,9 @@ function EditScheduleSavings({ closeModal, activeSavings }) {
             </select>
           </form>
           <div className='d-flex align-items-start justify-content-around'>
-            {isLoading && <center className="btn btn-modal mt-4"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
-            {!isLoading && <button className="btn btn-modal mt-4" onClick={closeModal}>Cancel</button>}
-            {!isLoading && <button className="btn btn-modal mt-4" onClick={editScheduledSavings} >Update</button>}
+            {isLoading && <center className="btn btn-modal mt-4 mx-2"><RotatingLines width="25" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+            {!isLoading && <button className="btn btn-modal mt-4 mx-2" onClick={closeModal}>Cancel</button>}
+            {!isLoading && <button className="btn btn-modal mt-4 mx-2" onClick={editScheduledSavings} >Update</button>}
           </div>
 
         </div>

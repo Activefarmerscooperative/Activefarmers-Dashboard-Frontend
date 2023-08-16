@@ -69,7 +69,7 @@ export default function CreateNewPassword() {
 
     }
     return (
-        <div className="login-page pt-3 px-5">
+        <div className="login-page pt-3 px-4">
             <div className="form text-center mt-5 px-5 py-3">
                 <h1>Create New Password</h1>
                 Create new password to use for logging into your active farmers account, do not share your new password with anyone
@@ -87,8 +87,8 @@ export default function CreateNewPassword() {
 
 
                     
-                    {isLoading && <button className='login-btn mt-3'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
-                    {!isLoading && <button className='login-btn mx-auto mt-3' onClick={handleSubmit}>Done</button>}
+                    {isLoading && <button className='login-button mx-auto mt-3'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
+                    {!isLoading && <button className='login-button mx-auto mt-3' onClick={handleSubmit}>Done</button>}
 
 
 

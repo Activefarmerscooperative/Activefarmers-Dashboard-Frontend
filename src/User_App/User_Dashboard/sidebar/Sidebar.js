@@ -171,12 +171,15 @@ function Sidebar({ user, setToken }) {
                     </li>
                 </ul>
 
-                <div className="admin hamburger-icon" onClick={handleClick}>
-                    <Icon
-                        icon={clicked ? "jam:close" : "ci:menu-alt-02"}
-                        className={clicked ? "close" : "bar"}
-                    />
-                </div>
+                {/* <div className={`container-fluid header-open ${clicked ? "header-isopen" : ""}`}> */}
+                    <div className={`admin hamburger-icon ${clicked ? "header-isopen" : ""}`} onClick={handleClick}>
+                        <Icon
+                            icon={clicked ? "jam:close" : "ci:menu-alt-02"}
+                            className={clicked ? "close" : "bar"}
+                        />
+                    </div>
+                {/* </div> */}
+
 
 
                 {clicked ? (

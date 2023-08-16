@@ -1,6 +1,7 @@
 .statistic-card {
-    width: 180px;
+    /* width: 180px; */
     /* height: fit-content; */
+    flex: 0 0 180px;
     border-radius: 10px;
     border: 0.5px solid #0D9068;
     line-height: normal;
@@ -18,7 +19,7 @@
 .statistic-card p {
     font-size: 14px;
     font-weight: 400;
-    coor: #444444;
+    color: #444444;
     white-space: nowrap;
 
 
@@ -50,7 +51,25 @@
     border-bottom: 4px solid #0D9068;
 
 }
-
+.sorting-button select, .sorting-button .filter{
+        width: max-content;
+        padding: 10px 5px;
+        margin: 0 5px;
+        border-radius: 45px;
+        white-space: nowrap;
+        border: 0.6px solid #635E5E;
+        color: #000000;
+        outline: none;
+}
+.sorting-button select.filter{
+text-overflow: ellipsis;
+    padding-right: 50px;
+    appearance: none;
+    background-image: url('../../assets/outline-arrow.png');
+    background-repeat: no-repeat, repeat;
+    background-position: right 1em top 50%, 0 0;
+    background-size: 0.8em auto, 100%;
+}
 .sorting-button .btn {
     width: auto;
     padding: 10px;
@@ -104,6 +123,9 @@
 border-radius: 10px
 
 }
+.active-loan .css-11xur9t-MuiPaper-root-MuiTableContainer-root {
+    border-radius: 0 !important;
+}
 .css-1ygcj2i-MuiTableCell-root {
 font-size: 16px !important;
 font-weight: 600;
@@ -121,7 +143,7 @@ color: #444444 !important;
 
 .css-11xur9t-MuiPaper-root-MuiTableContainer-root {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     background-color: #F6F9FF !important;
     /* color: rgba(0, 0, 0, 0.87); */
     border-radius: 20px 20px 0px 0px !important;
@@ -135,23 +157,31 @@ p.MuiTablePagination-selectLabel, p.MuiTablePagination-displayedRows{
     background-color: #F6F9FF
 }
 .css-1ygcj2i-MuiTableCell-root, .css-1ex1afd-MuiTableCell-root {
-    text-align: center !important;
+    /* text-align: center !important; */
+    white-space: nowrap;
 }
-.css-1ex1afd-MuiTableCell-root {
+.css-1ex1afd-MuiTableCell-root.location-cell {
+    
+    max-width: 200px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+/* .css-1ex1afd-MuiTableCell-root {
     white-space: normal;
-}
+} */
 
 
 
 .personal-info{
     line-height: normal;
     white-space: nowrap;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
 }
 .personal-info img{
-    max-width: 12%;
-    /* height: auto; */
+    max-width: 100px;
+    height: 100px;
+    object-fit: cover;
     border-radius: 50%;
 }
 
@@ -173,7 +203,9 @@ color: #000000;
 
 
 img.headshot {
-    width: 60px;
+    width: 50px;
+    object-fit: cover;
+    height: 50px;
     border-radius: 30px;
 }
 .success-icon.iconify, .failed-icon.iconify{
@@ -196,23 +228,133 @@ img.headshot {
     color: #FB9129;
 
 }
-
+@media screen and (max-width: 1024px) {
+    .statistic-card {
+        flex: 0 0 160px;
+    }
+    .profile-stat-card .statistic-card {
+        width: 150px;
+        height: fit-content;
+        flex: 0 0;
+        margin: 5px 0;
+      }
+}
+@media screen and (max-width: 800px) {
+    .statistic-card {
+        flex: 0 0 180px;
+    }
+}
+@media screen and (max-width: 769px) {
+    
+}
+@media screen and (max-width: 600px) {
+    .statistic-card {
+        flex: 0 0 160px;
+    }
+    .statistic-card span {
+        font-size: 18px;
+    }
+    .tab-header .tab-item {
+        font-size: 14px;
+        text-align: center;
+    }
+    .personal-info img {
+        max-width: 80px;
+        height: 80px;
+    }
+    .profile-stat-card .statistic-card {
+        width: auto;
+        height: fit-content;
+        flex: 0 0 160px;
+        margin: 0 5px;
+    }
+    .profile-stat-card .personal-info p {
+        margin-bottom: 0;
+      }
+}
+@media screen and (max-width: 426px) {
+    .statistic-card span {
+        font-size: 16px;
+    }
+    .statistic-card p {
+        font-size: 12px;
+    }
+    .statistic-card .toggle-icon .iconify {
+        font-size: 20px;
+    }
+    .statistic-card {
+        flex: 0 0 140px;
+    }
+    .css-1ex1afd-MuiTableCell-root.location-cell {
+        max-width: 150px;
+    }
+    img.headshot {
+        width: 40px;
+        height: 40px;
+    }
+    .tab-header .tab-item {
+        font-size: 12px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100px;
+        overflow: hidden;
+    }
+    .personal-info img {
+        max-width: 70px;
+        height: 70px;
+    }
+    .personal-info h4 {
+        font-size: 18px;
+    }
+    .users-personal-data {
+        flex-direction: column;
+    }
+    .users-personal-data .account-info {
+        margin-left: 0 !important;
+    }
+    
+}
 
 @media screen and (max-width: 376px) {
     .tab-header .tab-item {
-        font-size: 10px;
+        font-size: 12px;
+         line-height: normal;
+        text-align: center;
     }
 
-    .tab-header .tab-item {
-        width: auto;
-        line-height: normal;
-        text-align: center;
+    
+    .statistic-card p {
+        margin-bottom: 0;
+    }
+    .statistic-card span {
         font-size: 14px;
+    }
+    .statistic-card {
+        flex: 0 0 120px;
+    }
+    .sorting-button .search, .search input::placeholder {
+        width: 200px;
+    }
+    .personal-info img {
+        max-width: 50px;
+        height: 50px;
+    }
+    .profile-stat-card .statistic-card {
+        flex: 0 0 130px;
+    }
+    .personal-info p {
+        font-size: 14px;
+    }
+    .personal-info h4 {
+        font-size: 16px;
     }
 }
 
 @media screen and (max-width: 320px) {
     .tab-header .tab-item {
         font-size: 12px;
+    }
+    .profile-stat-card .statistic-card {
+        flex: 0 0 120px;
     }
 }

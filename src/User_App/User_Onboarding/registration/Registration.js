@@ -10,13 +10,17 @@ function Registration() {
         <div className="registration  px-5">
             <div className="reg-header py-4">
                 <div className="d-flex align-items-center justify-content-between">
-                    <a href="/" className="d-flex align-items-center mx-5" >
+                    <div>
+                       <a href="/" className="d-flex align-items-center" >
                         <Icon icon="material-symbols:arrow-back-rounded" style={{ fontSize: "20px", margin: "0 5px" }} />
                         Back to Homepage
-                    </a>
+                    </a> 
+                    </div>
+                    
 
                     <div className='text '>
-                        Don't have an account yet?
+                        <span>Don't have an account yet?</span>
+                        
                         <button className='mx-3' onClick={() => { navigate("/login"); }}>Login</button>
                     </div>
                 </div>

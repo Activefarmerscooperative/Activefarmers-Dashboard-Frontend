@@ -62,7 +62,7 @@ function AddSavings({ selectedCategory, wallet,closeModal }) {
   return (
     <div className='add-savings-modal p-4 my-4' id='AddSavings'>
       <div className="d-flex flex-column add-savings-div">
-        <p onClick={closeModal} className="d-flex align-items-center mx-5" >
+        <p onClick={closeModal} className="d-flex align-items-center" >
           <Icon icon="material-symbols:arrow-back-rounded" className="add-icon" />
           Add Savings
         </p>
@@ -86,7 +86,7 @@ function AddSavings({ selectedCategory, wallet,closeModal }) {
             }
 
           </form>
-          {isLoading && <center className="btn mt-5"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+          {isLoading && <center className="btn btn-modal mt-5"><RotatingLines width="25" strokeColor="#1B7B44" strokeWidth="3" /></center>}
           {!isLoading && <button onClick={addSavings} className="btn btn-modal mt-5">Next</button>}
 
 

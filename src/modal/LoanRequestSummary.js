@@ -4,6 +4,7 @@ import "./modal.css"
 
 function LoanRequestSummary({ closeModal, loanData }) {
     if (!loanData) {
+        console.log(loanData);
         return null; // Render nothing if loanData is not available
     }
 
@@ -19,7 +20,7 @@ function LoanRequestSummary({ closeModal, loanData }) {
                 </div>
 
                 <div className="d-flex flex-column align-items-center  mt-3">
-                    <ul className="loan-info d-flex flex-column">
+                    <ul className="ps-0 loan-info d-flex flex-column">
                         {loanData && (
                         <><li className='d-flex align-items-center  my-2'>
                                 <p>

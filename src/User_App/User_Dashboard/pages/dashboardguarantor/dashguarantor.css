@@ -68,7 +68,7 @@
 
 .guarantor-account-form .btn {
     width: 180px;
-    height: 50px;
+    /* height: 50px; */
     background: #FB9129;
     border-radius: 4px;
     font-weight: 500;
@@ -98,20 +98,22 @@
 
 .guarantor-account-form .btn.edit {
     width: 180px;
-    height: 50px;
+    /* height: 50px; */
     background-color: #FB9129;
     color: #fff;
     font-size: 20px;
     border: 2px solid #FB9129;
+    white-space: nowrap;
 }
 
 .guarantor-account-form .btn.discard {
     width: 180px;
-    height: 50px;
+    /* height: 50px; */
     background-color: #FFFFFF;
     color: #FB9129;
     font-size: 20px;
     border: 2px solid #FB9129;
+    white-space: nowrap;
 }
 
 .guarantor-account-form .btn.save:active {
@@ -178,4 +180,84 @@
 
 .guarantor-account .overlay-base_before-close {
     opacity: 0;
+}
+
+
+
+@media screen and (max-width: 1024px) {
+
+    .guarantor-account .form-group input,
+    .guarantor-account select {
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .guarantor-account {
+        margin-top: 40px !important;
+
+    }
+}
+
+@media screen and (max-width: 769px) {
+    .guarantor-account h1 {
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .guarantor-input {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .guarantor-account .form-group input,
+    .guarantor-account select {
+        width: 235px;
+    }
+
+    .guarantor-account .btn.profile-saved,
+    .guarantor-account .btn.discard,
+    .guarantor-account .btn.edit {
+/* width: 115px; */
+        font-size: 16px;
+    }
+
+    .guarantor-account h1 {
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .guarantor-input {
+        display: grid !important;
+        grid-template-columns: 1fr;
+    }
+
+    .guarantor-account .form-group input,
+    .guarantor-account select {
+        width: 290px;
+    }
+
+    .guarantor-account .btn.profile-saved,
+    .guarantor-account .btn.discard,
+    .guarantor-account .btn.edit {
+
+        font-size: 14px;
+    }
+
+    .guarantor-account h1 {
+        font-size: 18px;
+    }
+    .guarantor-account p {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 376px) {}
+
+@media screen and (max-width: 321px) {
+    .guarantor-account .form-group input, .guarantor-account select {
+        width: 230px;
+    }
 }

@@ -170,49 +170,46 @@ export default function Member() {
 
 
 
-// Get all input elements with the "asterisk-placeholder" class
-const inputElements = document.getElementsByClassName('asterisk-placeholder');
+    // Get all input elements with the "asterisk-placeholder" class
+    const inputElements = document.getElementsByClassName('asterisk-placeholder');
 
-// Iterate over the input elements
-Array.from(inputElements).forEach((input) => {
-  const placeholderText = input.getAttribute('placeholder');
+    // Iterate over the input elements
+    Array.from(inputElements).forEach((input) => {
+        const placeholderText = input.getAttribute('placeholder');
 
-  // Modify the placeholder by adding an asterisk and setting its color to red
-  input.setAttribute('placeholder', `${placeholderText} *`);
-  input.style.color = 'red';
-});
+        // Modify the placeholder by adding an asterisk and setting its color to red
+        input.setAttribute('placeholder', `${placeholderText} *`);
+        input.style.color = 'red';
+    });
 
 
 
 
 
     return (
-        <div className="member px-5 py-2">
-            <div className="d-flex flex-column align-items-center py-3 my-2">
+        <div className="member py-2 mb-4">
+            <div className="d-flex flex-column align-items-center py-2">
                 <h1>Register as a member</h1>
                 <span>Create an account to join our cooperative as a member</span>
-                <div className="d-flex flex-column align-items-center form mt-5 ">
+                <div className="d-flex flex-column align-items-center form my-4 ">
                     <p>Please complete this form to the best of your ability providing all relevant details. Please note that your application will go through confirmation prior to processing. </p>
-                    <form className=" d-flex align-items-start justify-content-center mb-4">
-                        <div>
+                    <form className="">
+
+
+                        <div className="d-flex  input-form-group">
                             <input type="text" name="surname" required value={member.surname} onChange={handleChange} placeholder="Surname" />
+                            <input required type="text" name="firstname" onChange={handleChange} value={member.firstname} placeholder="Firstname" />
+                        </div>
+                        <div className="d-flex input-form-group">
                             <input type="email" name="email" required value={member.email} onChange={handleChange} placeholder="Email Address" />
+                            <input required type="tel" name="phone" value={member.phone} onChange={handleChange} placeholder="Phone Number e.g:+2348123456789" />
+                        </div>
+                        <div className="d-flex input-form-group">
                             <select name="gender" value={member.gender} required onChange={handleChange}>
                                 <option value="">Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
-                            <select required name="membershipType" value={member.membershipType} onChange={handleChange}>
-                                <option value="">Membership category</option>
-                                <option value="Farmer">Farmer</option>
-                                <option value="Non-Farmer">Non-Farmer</option>
-                            </select>
-                            <input autocomplete="new-password" required type="password" name="password" onChange={handleChange} value={member.password} placeholder="Password" />
-                        </div>
-
-                        <div>
-                            <input required type="text" name="firstname" onChange={handleChange} value={member.firstname} placeholder="Firstname" />
-                            <input required type="tel" name="phone" value={member.phone} onChange={handleChange} placeholder="Phone Number e.g:+2348123456789" />
                             <select required name="location" value={member.location} onChange={handleChange} className="">
                                 <option value="">Location</option>
                                 {
@@ -220,8 +217,18 @@ Array.from(inputElements).forEach((input) => {
                                 }
 
                             </select>
-                            <input required type="text" name="address" onChange={handleChange} value={member.address} placeholder="Home Address" />
+                        </div>
+                        <div className="d-flex input-form-group">
 
+                            <input required type="text" name="address" onChange={handleChange} value={member.address} placeholder="Home Address" />
+                            <select required name="membershipType" value={member.membershipType} onChange={handleChange}>
+                                <option value="">Membership category</option>
+                                <option value="Farmer">Farmer</option>
+                                <option value="Non-Farmer">Non-Farmer</option>
+                            </select>
+                        </div>
+                        <div className="d-flex input-form-group">
+                            <input autocomplete="new-password" required type="password" name="password" onChange={handleChange} value={member.password} placeholder="Password" />
                             <div className="mx-0">
                                 <input required type="password" name="confirmpass" value={confirmPass} onChange={(e) => {
                                     setConfirmPass(e.target.value);
@@ -238,18 +245,19 @@ Array.from(inputElements).forEach((input) => {
                                     <p className="password-match">Password and Confirm Password do not match.</p>
                                 )}
                             </div>
-
-
-
                         </div>
+
+
+
                     </form>
-                    {isLoading && <center className="btn member-btn"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+                    {isLoading && <center className="btn member-btn mx-auto mt-3"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
                     {!isLoading && <button onClick={handleSubmit} disabled={isLoading} className="btn member-btn mx-auto mt-3">Create Account</button>}
 
 
                 </div>
                 <Modal
                     isOpen={modalIsOpen}
+                    closeModal={closeModal}
                     // onAfterOpen={afterOpenModal}
                     onRequestClose={closeModal}
                     contentLabel="Enter OTP"
@@ -267,7 +275,7 @@ Array.from(inputElements).forEach((input) => {
                     closeTimeoutMS={2000}
                 >
                     <OtpModal
-                        message={message} />
+                        message={message} closeModal={closeModal} />
                     {/* <OtpInputModal message={message} /> */}
                 </Modal>
             </div>

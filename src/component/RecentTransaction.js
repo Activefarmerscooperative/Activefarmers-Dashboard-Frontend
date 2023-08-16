@@ -129,7 +129,7 @@ function RecentTransaction() {
                                         <TableCell component="th" scope="row">
                                             {row.type}
                                         </TableCell>
-                                        <TableCell >
+                                        <TableCell  className="table-date">
                                             {new Date(row.createdAt).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                                         </TableCell>
                                         <TableCell >{row.amount}</TableCell>

@@ -36,7 +36,7 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="admin-profile-page my-5 py-5">
+    <div className="admin-profile-page mt-5 pt-5">
       <h1>Admin 1 Account</h1>
       Set your account settings below
       <div className="tabs mt-3">
@@ -109,7 +109,7 @@ export default function ProfilePage() {
             </button>
           </form>
         ) : (
-          <div className="d-flex flex-column profile-info ">
+          <div className="d-flex flex-column profile-info  ">
             {/* <div className="profile-picture d-flex flex-column align-items-end "> */}
               <div className="edit-icon ms-auto" onClick={handleEdit}>
                 <Icon icon="ant-design:edit-filled" />
@@ -120,7 +120,7 @@ export default function ProfilePage() {
 
 
             {/* </div> */}
-            <div>
+            <div className="admin-profile-data">
               <div className="d-flex info">
                 <div className="field">
                   <span className="label">Full Name</span> {name}
