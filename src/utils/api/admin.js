@@ -184,6 +184,15 @@ export const AutoTransactions = async () => {
   }
 };
 
+export const GetNotifications = async () => {
+  try {
+    const { data } = await api.get(`/api/admins/notifications`,);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
 export const UpdateAdminInfo = async (item) => {
   try {
     const { data } = await api.put(`/api/admins/admin-profile-info`, item);

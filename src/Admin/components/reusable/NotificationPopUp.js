@@ -1,13 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import Modal from 'react-modal';
 import { Icon } from '@iconify/react';
+import { GetNotifications } from '../../../utils/api/admin';
+import { toast } from 'react-toastify';
+import { useQuery } from 'react-query';
+import moment  from 'moment/moment';
 
+const fetchNotificationData = async () => {
+  try {
+    const res = await GetNotifications()
+    return res
+  } catch (error) {
+    toast.error(error)
+  }
+}
 Modal.setAppElement('#root'); // Set the root element for react-modal
 
-const NotificationPopUp = ({ notifications, setNotifications, markAllAsRead, onClose }) => {
+const NotificationPopUp = ({ markAllAsRead, onClose }) => {
   const navigate = useNavigate();
-  const [deleteIconVisible, setDeleteIconVisible] = useState(Array(notifications.length).fill(false));
+  const [notifications, setNotifications] = useState([])
+  const [deleteIconVisible, setDeleteIconVisible] = useState(Array(notifications?.length).fill(false));
 
   const handleDelete = (id) => {
     const updatedNotifications = notifications.filter(notification => notification.id !== id);
@@ -25,15 +38,20 @@ const NotificationPopUp = ({ notifications, setNotifications, markAllAsRead, onC
     updatedDeleteIconVisible[index] = false;
     setDeleteIconVisible(updatedDeleteIconVisible);
   };
+  // React query fetch data
+  const { data, status } = useQuery(['fetchNotificationData'], fetchNotificationData)
+
+  useEffect(() => {
+    if (!data) return
+    setNotifications(data)
+  }, [data])
 
 
-
-  const displayedNotifications = notifications.slice(0, 5);
-  
+  const displayedNotifications = notifications?.slice(0, 5);
   return (
     <Modal isOpen={true} onRequestClose={onClose} contentLabel="notification pop-up">
       <div className="notification-header px-4 py-2">
-        <button className="mark-all-btn" disabled={!notifications.some(notification => !notification.read)} onClick={markAllAsRead}>
+        <button className="mark-all-btn" disabled={!notifications?.some(notification => !notification.read)} onClick={markAllAsRead}>
           Mark all as read
         </button>
         <button className="close-btn" onClick={onClose}>
@@ -45,9 +63,11 @@ const NotificationPopUp = ({ notifications, setNotifications, markAllAsRead, onC
         {displayedNotifications.map((notification, index) => (
           <div key={notification.id} className={`notification ${notification.read ? 'read' : 'unread'}`}>
 
-            <div className="notification-content" onClick={() =>  {navigate("/admin/dashboard/notifications"); onClose();}}>
-              <div className="notification-title">{notification.message}</div>
-              <div className="notification-message">{notification.date}</div>
+            <div className="notification-content">
+              <div className="notification-title">{notification.type === "Registration" ? "New user just signed up with Active Farmers Cooperative" :
+                notification.type === "Withdrawal" ? `New savings withdrawal request from ${notification?.user?.firstname} ${notification?.user?.surname}` :
+                  notification.type === "Loan" ? `New loan request from ${notification?.user?.firstname} ${notification?.user?.surname}` : ""}</div>
+              <div className="notification-message">{moment(notification?.createdAt).fromNow()}</div>
             </div>
             {/* <div className="notification-dot" onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={() => handleMouseLeave(index)}>
@@ -75,7 +95,7 @@ const NotificationPopUp = ({ notifications, setNotifications, markAllAsRead, onC
       </div>
       <hr />
       <div className="footer">
-        <div onClick={() => { navigate("/admin/dashboard/notifications"); onClose(); }}> See all notifications ({notifications.length})</div>
+        <div onClick={() => { navigate("/admin/dashboard/notifications",{state:notifications}); onClose(); }}> See all notifications ({notifications.length})</div>
 
 
       </div>

@@ -40,6 +40,7 @@ function LoanTable({ userId }) {
     const { data, status } = useQuery(['userLoanHistory', userId], userLoanHistory);
 
     useEffect(() => {
+      
         if (!data) return
 
         setTransactions(data.userLoans)
