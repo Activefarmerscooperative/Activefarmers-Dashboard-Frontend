@@ -45,6 +45,7 @@ export default function DashboardHome({ user, setToken }) {
   useEffect(() => {
 
     if (!data) return
+    console.log(data)
     setMyLoan(data.myLoan)
 
   }, [data, newUser])
