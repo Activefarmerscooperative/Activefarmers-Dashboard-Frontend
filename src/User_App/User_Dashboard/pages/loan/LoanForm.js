@@ -86,7 +86,6 @@ export default function LoanForm({user}) {
                 NB: This loan is granted at the rate of 15% and subject to ability to repay within maximum of 12 months. Loan deduction will commence a month after loan approval
                 </p>
 
-                <p onClick={openModal}>modal</p>
 
                 <button onClick={nextPage} className='btn next-btn mt-5'>
                     Next

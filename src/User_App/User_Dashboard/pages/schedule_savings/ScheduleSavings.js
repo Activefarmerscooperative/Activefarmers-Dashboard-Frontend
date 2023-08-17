@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import savingsPlansData from "./SavingsPlanData";
 import { Table, TableHead, TableBody, TableRow, TableCell, TableContainer, Paper, Box, TablePagination } from '@mui/material';
 import { Icon } from '@iconify/react';
 import Modal from 'react-modal';
@@ -157,31 +156,31 @@ export default function ScheduleSavings({ wallet }) {
                         </div>
                         <div className="savings-edit-links">
                         <div className="edit-savings savings-plan-link mt-3" onClick={() => openModal('addSavingsPlans')}>
-                            <h5 className="edit-savings">
+                            <p className="edit-savings">
                                 Add Savings
                                 <Icon icon="fluent:ios-arrow-24-filled" />
-                            </h5>
+                            </p>
                             <p>Add a new scheduled savings with date, amount and your wallet category</p>
                         </div>
                         <div className="edit-savings savings-plan-link mt-3" onClick={() => openModal('edit')}>
-                            <h5 className="edit-savings">
+                            <p className="edit-savings">
                                 Edit Savings
                                 <Icon icon="fluent:ios-arrow-24-filled" />
-                            </h5>
+                            </p>
                             <p>Change your scheduled savings date and amount</p>
                         </div>
                         <div className="change-savings-card savings-plan-link mt-3" onClick={() => getScheduledSavingsCard(activeWallet?._id)}>
-                            <h5 className="edit-savings">
+                            <p className="edit-savings">
                                 Change savings card
                                 <Icon icon="fluent:ios-arrow-24-filled" />
-                            </h5>
+                            </p>
                             <p>Change the card your scheduled savings will be deducted from</p>
                         </div>
                         <div className="cancel-savings savings-plan-link mt-3" onClick={() => openModal('cancelPlan')}>
-                            <h5 className="edit-savings">
+                            <p className="edit-savings">
                                 Cancel savings
                                 <Icon icon="fluent:ios-arrow-24-filled" />
-                            </h5>
+                            </p>
                             <p>Cancel your scheduled savings</p>
                         </div>
                         </div>

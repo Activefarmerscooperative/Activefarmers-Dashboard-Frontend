@@ -80,7 +80,7 @@
     border: 1px solid #dbe7ff;
 }
 
-.savings-plan-link h5 {
+.savings-plan-link p.edit-savings {
     font-size: 18px;
     font-weight: 600;
     line-height: normal;
