@@ -182,7 +182,7 @@ const Tab = ({ tabs, defaultTab }) => {
                                 {/* {tableData.map((row) => ( */}
                                 {tableData?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((row, i) => (
-                                        <TableRow key={row.id} onClick={(e) => navigate('/admin/dashboard/userprofile', { state: data[i] })} >
+                                        <TableRow key={row.id} style={{ cursor: "pointer" }} onClick={(e) => navigate('/admin/dashboard/userprofile', { state: { data: data[i], tab: tabName } })} >
                                             {Object.values(row).map((cellValue, index) => (
                                                 <TableCell key={index}>{cellValue}</TableCell>
                                             ))}

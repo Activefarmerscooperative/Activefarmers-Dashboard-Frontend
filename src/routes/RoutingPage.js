@@ -32,7 +32,7 @@ import UserProfile from "../Admin/pages/profilepage/user/UserProfile";
 import NotificationsPage from "../Admin/pages/notification/NotificationsPage";
 
 
-import notificationData from '../Admin/components/data/notificationsData.json'
+import notificationData from '../Admin/components/data/notificationsData'
 import ProfilePage from "../Admin/pages/profilepage/user/admin/AdminProfile";
 const notifications = notificationData;
 

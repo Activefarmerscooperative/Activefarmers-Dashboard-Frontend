@@ -6,14 +6,14 @@ import './dashboard.css';
 import '../notification/notifications.css'
 import NotificationPopUp from '../../components/reusable/NotificationPopUp';
 // import NotificationsPage from './NotificationsPage';
-import notificationsData from '../../components/data/notificationsData.json';
+import notificationsData from '../../components/data/notificationsData';
 
 export default function Dashboard() {
     const navigate = useNavigate();
 
     const [notifications, setNotifications] = useState(notificationsData.notifications);
     const [showNotificationPopUp, setShowNotificationPopUp] = useState(false);
-    const [deleteIconVisible, setDeleteIconVisible] = useState(Array(notifications.length).fill(false));
+    const [deleteIconVisible, setDeleteIconVisible] = useState(Array(notifications?.length).fill(false));
 
 
     const markAllAsRead = () => {

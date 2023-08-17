@@ -10,9 +10,12 @@ import { useLocation } from "react-router-dom";
 
 export default function UserProfile() {
   const location = useLocation()
-  const [selectedComponent, setSelectedComponent] = useState('profile');
-  const data = location.state
 
+  const { data, tab } = location.state
+
+  const [selectedComponent, setSelectedComponent] = useState(
+    tab === "Loan Requests"||tab === "Borrowers" ? "loan" : tab === "Savings Withdrawal Request" ? "withdrawal" : 'profile'
+  );
   const handleComponentClick = (component) => {
     setSelectedComponent(component);
   };

@@ -34,8 +34,17 @@ function SavingsWithdrawals(userData) {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [selectedTransaction, setSelectedTransaction] = useState(null);
     const [userInfo, setData] = useState()
-    const id = userInfo?.userData?._id
+
     const [stat, setSTat] = useState([])
+    const [id, setUserId] = useState("")
+    useEffect(() => {
+
+        if (userData.userData.user) {
+            setUserId(userData.userData.user._id)
+        } else {
+            setUserId(userData.userData._id)
+        }
+    }, [userData])
     // React query fetch data
     const { data: withdrawals, status } = useQuery(['withDrawal', id], withDrawal);
 

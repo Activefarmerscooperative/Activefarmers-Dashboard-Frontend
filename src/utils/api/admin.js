@@ -183,3 +183,12 @@ export const AutoTransactions = async () => {
     throw error.response.data;
   }
 };
+
+export const GetNotifications = async () => {
+  try {
+    const { data } = await api.get(`/api/admins/notifications`,);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
