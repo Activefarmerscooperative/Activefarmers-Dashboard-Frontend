@@ -9,10 +9,20 @@ import loanData from "../../../../components/data/LoanTransaction.json";
 const LoanPage = (userData) => {
     const [activeTab, setActiveTab] = useState(0);
     const [activeStatusCount, setActiveStatusCount] = useState(0);
-    const userid = userData.userData._id;
+    const [userId, setUserId] = useState("")
     const handleTabClick = (index) => {
         setActiveTab(index);
     };
+
+    useEffect(() => {
+      console.log(userData)
+      if(userData.userData.user){
+        setUserId(userData.userData.user._id)
+      }else{
+        setUserId(userData.userData._id)
+      }
+    }, [userData])
+    
     useEffect(() => {
         // setTransactions(loanData);
         const countActiveStatus = loanData.filter((item) => item.item?.status === 'Active').length;
@@ -41,12 +51,12 @@ const LoanPage = (userData) => {
                 <div className="tab-content">
                     {activeTab === 0 && (
                         <div className='p-2'>
-                            <ActiveLoanDetails Id={userid} />
+                            <ActiveLoanDetails Id={userId} />
                         </div>
                     )}
                     {activeTab === 1 && (
                         <div>
-                            <div className="p-2"><LoanTable userId={userid} /></div>
+                            <div className="p-2"><LoanTable userId={userId} /></div>
                         </div>
                     )}
                 </div>
