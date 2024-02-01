@@ -144,7 +144,7 @@ export default function Member() {
             // localStorage.setItem("AFCS-token", data.afcsToken)
             localStorage.setItem("termii_pinId", data.pinId)
             dispatch(setToken(data?.afcsToken))
-            setMessage(data.message)
+            setMessage(`${data.message}. May take up to a minute.`)
             openModal()
             setMember({
                 surname: "",

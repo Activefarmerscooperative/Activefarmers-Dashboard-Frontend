@@ -9,12 +9,23 @@ import React from 'react'
 import PaymentMethod from "./PaymentMethod";
 import { RotatingLines } from "react-loader-spinner";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
-function AddSavings({ selectedCategory, wallet,closeModal }) {
+function AddSavings({ selectedCategory, wallet, closeModal }) {
+  const { token } = useSelector((state) => state.auth);
   const [savingCat, setSavingCat] = useState([])
   const [savingsData, setSavingsData] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const [showCustom, setShowCustom] = useState(false)
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [authorization_url, set_auth_url] = useState(null)
+
+  function openModal() {
+    setIsOpen(true);
+  }
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   useEffect(() => {
     setSavingCat(wallet.map(item => item.category))
@@ -49,6 +60,8 @@ function AddSavings({ selectedCategory, wallet,closeModal }) {
 
       const { data, message } = await AddSaving(savingsData);
       toast.success(`${message} Opening payment window, do not close the page.`)
+
+      localStorage.setItem("AFCS-t", token)
       window.location.replace(data.authorization_url);
     } catch (error) {
       if (error) {
@@ -62,7 +75,7 @@ function AddSavings({ selectedCategory, wallet,closeModal }) {
   return (
     <div className='add-savings-modal p-4 my-4' id='AddSavings'>
       <div className="d-flex flex-column add-savings-div">
-        <p onClick={closeModal} className="d-flex align-items-center mx-5" >
+        <p onClick={closeModal} className="d-flex align-items-center mx-5" style={{ cursor: "pointer" }} >
           <Icon icon="material-symbols:arrow-back-rounded" className="add-icon" />
           Add Savings
         </p>
@@ -89,10 +102,10 @@ function AddSavings({ selectedCategory, wallet,closeModal }) {
           {isLoading && <center className="btn mt-5"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
           {!isLoading && <button onClick={addSavings} className="btn btn-modal mt-5">Next</button>}
 
-
         </div>
 
       </div>
+
 
     </div>
   )

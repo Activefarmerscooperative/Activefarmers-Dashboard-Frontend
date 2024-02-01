@@ -19,16 +19,18 @@ import AccountGuarantor from "./pages/dashboardguarantor/AccountGuarantor";
 import TransactionHistory from "./pages/TransactionHistory";
 import { toast } from "react-toastify";
 import ScheduleSavings from "./pages/schedule_savings/ScheduleSavings";
-
+import { useDispatch } from 'react-redux'
+import { setToken } from '../../redux/reducers/jwtReducer'
 
 function Dashboard() {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const location = useLocation();
   const [user, setUser] = useState({})
   const [open, setOpen] = useState(false)
   const [urlParams, setSearchParams] = useSearchParams();
   const [paymentRef, setPaymentRef] = useState("")
-  const [token, setToken] = useState(false)
+  const [token, setToke] = useState(false)
   const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
@@ -46,15 +48,23 @@ function Dashboard() {
     const signal = abortController.signal;
 
     async function confirmToken() {
+      const reference = urlParams.get("reference");
+
+      if (reference) {
+        dispatch(setToken(localStorage.getItem("AFCS-t")));
+      }
+      localStorage.removeItem("AFCS-t")
       try {
+
         const data = await confirmTokenIsValid(signal)
+
         setUser(data.user)
         if (data.user.regCompletePercent < 70) {
           toast.success("Please provide the following information to complete your registration.")
           navigate("/register/guarantor", { replace: true })
         }
         setOpen(true)
-        const reference = urlParams.get("reference");
+
         if (!reference) {
           return;
         }
@@ -85,13 +95,13 @@ function Dashboard() {
             />
             <div className="content" style={{ marginLeft: "250px", width: "-webkit-fill-available" }}>
               <Routes>
-                <Route path="" element={<DashboardHome user={user} />} />
-                <Route path="home" element={<DashboardHome user={user} />} />
+                <Route path="" element={<DashboardHome user={user} setToke={setToke} />} />
+                <Route path="home" element={<DashboardHome user={user} setToke={setToke} />} />
                 <Route path="witdrawal" element={<WitdrawalForm user={user} />} />
                 <Route path="loan" element={<LoanForm user={user} />} />
-                <Route path="profile" element={<ProfileUpdate setToken={setToken} />} />
+                <Route path="profile" element={<ProfileUpdate setToke={setToke} />} />
                 <Route path="support" element={<Support />} />
-                <Route path="guarantor" element={<AccountGuarantor setToken={setToken} />} />
+                <Route path="guarantor" element={<AccountGuarantor setToke={setToke} />} />{/*setToke is not a mistake*/}
                 <Route path="transactions" element={<TransactionHistory />} />
                 <Route path="schedule-savings" element={<ScheduleSavings />} />
 
@@ -121,6 +131,7 @@ function Dashboard() {
           >
             <TransactionSuccessful
               reference={paymentRef}
+              closeModal={closeModal}
             />
           </Modal>
         </>

@@ -7,35 +7,38 @@ import { MyLoan } from '../../../../utils/api/member';
 import RecentTransaction from "../../../../component/RecentTransaction";
 import SavingsWallet from "../../../../component/SavingsWallet";
 import {
-  useLocation
+  useLocation,
+  useNavigate
 } from "react-router-dom";
 import profile from '../../../../assets/profile.jpg';
 import { UpdateProfilePhoto } from "../../../../utils/api/member"
+import { useDispatch } from 'react-redux'
+import { setToken } from '../../../../redux/reducers/jwtReducer'
 
 
-const fetchLoan = async (key) => {
 
-  try {
-
-    const res = await MyLoan()
-    return res
-
-  } catch (error) {
-    console.log(error)
-    toast.error(error?.error);
-  }
-};
-
-export default function DashboardHome({ user, setToken }) {
+export default function DashboardHome({ user, setToke }) {
+  const navigate = useNavigate();
   const [modalIsOpen, setIsOpen] = useState(false);
   const [loanInputType, setLoanInputType] = useState("false");
   const [myLoan, setMyLoan] = useState({});
   const [loanIcon, setLoanIcon] = useState("mdi:eye-off");
   const location = useLocation();
   const [image, setImage] = useState(user.image || null);
+  const dispatch = useDispatch()
 
+  const fetchLoan = async (key) => {
 
+    try {
 
+      const res = await MyLoan()
+      return res
+
+    } catch (error) {
+      toast.error(error?.error);
+      navigate("/login", { replace: true })
+    }
+  };
 
 
   // React query fecth data
@@ -45,7 +48,6 @@ export default function DashboardHome({ user, setToken }) {
   useEffect(() => {
 
     if (!data) return
-    console.log(data)
     setMyLoan(data.myLoan)
 
   }, [data, newUser])
@@ -70,8 +72,9 @@ export default function DashboardHome({ user, setToken }) {
       data.append("uploaded_file", selectedImage);
       try {
         const result = await UpdateProfilePhoto(data)
-        localStorage.setItem("AFCS-token", result.token)
-        setToken(result.token)
+        // localStorage.setItem("AFCS-token", result.token)
+        dispatch(setToken(result?.token))
+        setToke(result.token)
         toast.success(result?.message)
       } catch (error) {
         console.log(error)
@@ -109,8 +112,6 @@ export default function DashboardHome({ user, setToken }) {
               <p>Your profile is {user?.regCompletePercent}% completed. Visit the account settings tab to complete your profile </p>
             </div>
           )}
-
-
 
         <div className="savings my-4">
           <div className="d-flex align-items-center user-dashboard-header">

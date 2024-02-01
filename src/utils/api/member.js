@@ -34,7 +34,7 @@ export const ResendOTP = async () => {
   }
 };
 
-export const confirmTokenIsValid = async (token, signal) => {
+export const confirmTokenIsValid = async (signal) => {
   try {
     const { data } = await api.get(`/api/users/token`, signal,);
     return data;

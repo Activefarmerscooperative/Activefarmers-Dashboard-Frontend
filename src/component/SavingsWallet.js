@@ -60,9 +60,9 @@ function SavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavingsCatego
     }));
   };
 
-  
 
-  
+
+
 
 
   return (
@@ -127,8 +127,8 @@ function SavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavingsCatego
           afterOpen: 'overlay-base_after-open',
           beforeClose: 'overlay-base_before-close'
         }}
-        shouldCloseOnOverlayClick={true}
-        closeTimeoutMS={2000}
+      // shouldCloseOnOverlayClick={true}
+      // closeTimeoutMS={2000}
       >
         <AddSavings
           closeModal={closeModal}

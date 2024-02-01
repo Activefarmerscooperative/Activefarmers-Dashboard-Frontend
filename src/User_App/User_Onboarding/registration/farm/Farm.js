@@ -4,9 +4,12 @@ import "./farm.css"
 import { confirmTokenIsValid, AddFarm } from "../../../../utils/api/member"
 import { toast } from "react-toastify";
 import { RotatingLines } from "react-loader-spinner";
+import { useDispatch } from 'react-redux'
+import { setToken } from '../../../../redux/reducers/jwtReducer'
 
 export default function Farm() {
     const navigate = useNavigate();
+    const dispatch = useDispatch()
     const [isLoading, setIsLoading] = useState(false)
     const [farm, setFarm] = useState({
         farmingExperience: "",
@@ -82,8 +85,8 @@ export default function Farm() {
             const data = await AddFarm(farm);
 
             toast.success(data.message)
-            localStorage.setItem("AFCS-token", data.token)
-
+            // localStorage.setItem("AFCS-token", data.token)
+            dispatch(setToken(data?.token))
             setIsLoading(false);
             navigate("/register/guarantor", { replace: true })
 
