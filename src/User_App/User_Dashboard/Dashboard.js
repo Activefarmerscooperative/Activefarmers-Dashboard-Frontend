@@ -20,6 +20,7 @@ import TransactionHistory from "./pages/TransactionHistory";
 import { toast } from "react-toastify";
 import ScheduleSavings from "./pages/schedule_savings/ScheduleSavings";
 
+
 function Dashboard() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -82,7 +83,7 @@ function Dashboard() {
               setToken={setToken}
               user={user}
             />
-            <div className="content" style={{marginLeft: "250px", width:"-webkit-fill-available"}}>
+            <div className="content" style={{ marginLeft: "250px", width: "-webkit-fill-available" }}>
               <Routes>
                 <Route path="" element={<DashboardHome user={user} />} />
                 <Route path="home" element={<DashboardHome user={user} />} />

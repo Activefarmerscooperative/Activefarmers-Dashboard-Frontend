@@ -25,9 +25,18 @@ export const VerifyOTP = async (token) => {
   }
 };
 
-export const confirmTokenIsValid = async (signal) => {
+export const ResendOTP = async () => {
   try {
-    const { data } = await api.get(`/api/users/token`, signal);
+    const { data } = await api.post(`/api/users/resend-verification?type=signup`);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const confirmTokenIsValid = async (token, signal) => {
+  try {
+    const { data } = await api.get(`/api/users/token`, signal,);
     return data;
   } catch (error) {
     throw error.response.data;

@@ -6,10 +6,12 @@ import { LoginMember } from "../../../../utils/api/member";
 import { toast } from "react-toastify";
 import { RotatingLines } from "react-loader-spinner";
 import { Icon } from '@iconify/react';
-
+import { useDispatch } from 'react-redux'
+import { setToken } from '../../../../redux/reducers/jwtReducer'
 
 export default function Login() {
     const navigate = useNavigate();
+    const dispatch = useDispatch()
     const [isLoading, setIsLoading] = useState(false);
 
 
@@ -86,7 +88,8 @@ export default function Login() {
         }
         try {
             const data = await LoginMember({ phone, password });
-            localStorage.setItem("AFCS-token", data.token)
+            // localStorage.setItem("AFCS-token", data.token)
+            dispatch(setToken(data?.token))
             toast.success(data.message);
 
             setIsLoading(false);
@@ -106,7 +109,7 @@ export default function Login() {
                     <h1>Log In to Dashboard</h1>
                     Log in to your existing account
                     <form className='d-flex flex-column my-4 '>
-                    <input type="tel" name="phone" className="email-input" placeholder='Enter phone number e.g: 08012345678'  value={user.phone} onChange={handleChange} autocomplete="on" required />
+                        <input type="tel" name="phone" className="email-input" placeholder='Enter phone number e.g: 08012345678' value={user.phone} onChange={handleChange} autocomplete="on" required />
 
 
                         <div className="d-flex align-items-center justify-content-between password mt-3">

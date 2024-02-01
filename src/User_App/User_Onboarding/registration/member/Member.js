@@ -7,7 +7,11 @@ import { fetchAllStates } from "../../../../utils/api/general"
 import { RegisterMember } from "../../../../utils/api/member"
 import { RotatingLines } from "react-loader-spinner";
 import { toast } from "react-toastify";
+import { useDispatch } from 'react-redux'
+import { setToken } from '../../../../redux/reducers/jwtReducer'
+
 export default function Member() {
+    const dispatch = useDispatch()
     const [modalIsOpen, setIsOpen] = useState(false);
     const [message, setMessage] = useState("")
     const [confirmPass, setConfirmPass] = useState("")
@@ -137,9 +141,9 @@ export default function Member() {
         setIsLoading(true)
         try {
             const data = await RegisterMember(member);
-            console.log(data)
-            localStorage.setItem("AFCS-token", data.afcsToken)
+            // localStorage.setItem("AFCS-token", data.afcsToken)
             localStorage.setItem("termii_pinId", data.pinId)
+            dispatch(setToken(data?.afcsToken))
             setMessage(data.message)
             openModal()
             setMember({
@@ -170,17 +174,17 @@ export default function Member() {
 
 
 
-// Get all input elements with the "asterisk-placeholder" class
-const inputElements = document.getElementsByClassName('asterisk-placeholder');
+    // Get all input elements with the "asterisk-placeholder" class
+    const inputElements = document.getElementsByClassName('asterisk-placeholder');
 
-// Iterate over the input elements
-Array.from(inputElements).forEach((input) => {
-  const placeholderText = input.getAttribute('placeholder');
+    // Iterate over the input elements
+    Array.from(inputElements).forEach((input) => {
+        const placeholderText = input.getAttribute('placeholder');
 
-  // Modify the placeholder by adding an asterisk and setting its color to red
-  input.setAttribute('placeholder', `${placeholderText} *`);
-  input.style.color = 'red';
-});
+        // Modify the placeholder by adding an asterisk and setting its color to red
+        input.setAttribute('placeholder', `${placeholderText} *`);
+        input.style.color = 'red';
+    });
 
 
 

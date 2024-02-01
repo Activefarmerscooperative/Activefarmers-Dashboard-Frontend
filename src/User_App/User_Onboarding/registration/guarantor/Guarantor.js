@@ -6,9 +6,12 @@ import "./guarantor.css";
 import { confirmTokenIsValid, AddGuarantor } from "../../../../utils/api/member"
 import { toast } from "react-toastify";
 import { RotatingLines } from "react-loader-spinner";
+import { useDispatch } from 'react-redux'
+import { setToken } from '../../../../redux/reducers/jwtReducer'
 
 export default function Guarantor() {
     const navigate = useNavigate();
+    const dispatch = useDispatch()
     const [modalIsOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
 
@@ -37,7 +40,7 @@ export default function Guarantor() {
         async function confirmToken() {
             try {
                 const { user } = await confirmTokenIsValid(signal)
-                console.log(user)
+
                 if (user.membershipType === "Farmer" && user.regCompletePercent < 60) {
                     navigate("/register/farm", { replace: true })
                 }
@@ -119,8 +122,8 @@ export default function Guarantor() {
             const data = await AddGuarantor(guarantor);
             toast.success(data.message)
             openModal()
-            localStorage.setItem("AFCS-token", data.token)
-
+            // localStorage.setItem("AFCS-token", data.token)
+            dispatch(setToken(data?.token))
             setIsLoading(false);
             navigate("/register/guarantor", { replace: true })
 
