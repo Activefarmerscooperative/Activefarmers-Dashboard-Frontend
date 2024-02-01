@@ -7,6 +7,8 @@ import { RotatingLines } from "react-loader-spinner";
 import Modal from 'react-modal';
 import ProfileUpdateModal from "../../../../modal/ProfileUpdateModal";
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
+import { setToken } from '../../../../redux/reducers/jwtReducer'
 
 const fetchData = async (key) => {
 
@@ -21,7 +23,8 @@ const fetchData = async (key) => {
     toast.error(error.error);
   }
 };
-const AccountGuarantor = ({ setToken }) => {
+const AccountGuarantor = ({ setToke }) => {
+  const dispatch = useDispatch()
   const [editAccount, setEditAccount] = useState(false)
   const [editGuarantor, setEditGuarantor] = useState(false)
   const [bankDetails, setBankDetails] = useState({})
@@ -100,8 +103,10 @@ const AccountGuarantor = ({ setToken }) => {
       const data = await UpdateBankDetails({ ...bankDetails, accountNumber: `${bankDetails.accountNumber}` })
       toast.success(data.message)
       closeModal()
-      localStorage.setItem("AFCS-token", data.token)
-      setToken(data.token)
+      // localStorage.setItem("AFCS-token", data.token)
+      console.log("bank: ", data)
+      dispatch(setToken(data?.token))
+      setToke(data.token)
     } catch (error) {
       toast.error(error)
       toast.error(error?.error)

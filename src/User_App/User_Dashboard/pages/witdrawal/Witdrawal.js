@@ -29,9 +29,9 @@ export default function WitdrawalForm({ user }) {
     };
 
     async function handleSubmit() {
-   
+
         if (!withdrawalData.amount || !withdrawalData.category || !withdrawalData.paymentMethod || withdrawalData.paymentMethod === "") return toast.error("Please enter all values.")
-        if(!window.confirm("Are yousure you want to submit withdrawal request?")) return
+        if (!window.confirm("Are you sure you want to submit withdrawal request?")) return
         setIsLoading(true)
         try {
             const { message } = await WithdrawalRequest(withdrawalData);
@@ -54,12 +54,12 @@ export default function WitdrawalForm({ user }) {
         <div className="my-4 px-4 withdrawal-form">
             <h1>Savings Withdrawal Form</h1>
             <div className="savings-wallet-category">
-              
-              <SavingsWallet
-                setSavingsCategory={setSavingsCategory}
-            />
+
+                <SavingsWallet
+                    setSavingsCategory={setSavingsCategory}
+                />
             </div>
-            
+
 
             <p className="note my-4">Withdrawal amount can not be more than savings balance. </p>
             <div className="withdrawal-input-form mt-5">
@@ -86,7 +86,7 @@ export default function WitdrawalForm({ user }) {
             </div>
 
             <p className="note mt-5 ">
-                Lorem ipsum dolor sit amet consectetur. Turpis posuere donec ipsum lectus cursus. Pellentesque tellus ornare id neque. Rutrum fringilla molestie lao
+                {/* Lorem ipsum dolor sit amet consectetur. Turpis posuere donec ipsum lectus cursus. Pellentesque tellus ornare id neque. Rutrum fringilla molestie lao */}
             </p>
 
             {isLoading && <center className="btn next-btn mt-5"><RotatingLines width="20px" strokeColor="#1B7B44" strokeWidth="3" /></center>}

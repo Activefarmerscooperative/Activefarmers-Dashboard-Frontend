@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 import { RotatingLines } from "react-loader-spinner";
 import Modal from 'react-modal';
 import ProfileUpdateModal from "../../../../modal/ProfileUpdateModal";
+import { useDispatch } from 'react-redux'
+import { setToken } from '../../../../redux/reducers/jwtReducer'
 
 const fetchData = async (key) => {
 
@@ -22,7 +24,8 @@ const fetchData = async (key) => {
     }
 };
 
-const ProfileUpdate = ({ setToken }) => {
+const ProfileUpdate = ({ setToke }) => {
+    const dispatch = useDispatch()
     //settoken comes from Dashboard page
     const [editUser, setEditUser] = useState(false)
     const [editOccupation, setEditOccupation] = useState(false)
@@ -117,8 +120,9 @@ const ProfileUpdate = ({ setToken }) => {
             const data = await UpdateOccupationDetails(occupationData)
             toast.success(data.message)
             closeModal()
-            localStorage.setItem("AFCS-token", data.token)
-            setToken(data.token)
+            // localStorage.setItem("AFCS-token", data.token)
+            dispatch(setToken(data?.token))
+            setToke(data.token)
         } catch (error) {
             toast.error(error)
         } finally {
@@ -135,8 +139,9 @@ const ProfileUpdate = ({ setToken }) => {
             const data = await UpdateNextOfKinDetails(nextKinData)
             toast.success(data.message)
             closeModal()
-            localStorage.setItem("AFCS-token", data.token)
-            setToken(data.token)
+            // localStorage.setItem("AFCS-token", data.token)
+            dispatch(setToken(data?.token))
+            setToke(data.token)
         } catch (error) {
             toast.error(error)
         } finally {
