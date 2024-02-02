@@ -31,7 +31,7 @@ export default function PersonalInfoCard({ userData }) {
     useEffect(() => {
         if (!userData.user) {
             setData(userData)
-        }else{
+        } else {
             setData(userData.user)
         }
     }, [userData])
@@ -52,8 +52,8 @@ export default function PersonalInfoCard({ userData }) {
                     <p><span>Age:</span> {Math.floor(Math.abs(new Date() - new Date(userInfo?.DOB)) / (1000 * 60 * 60 * 24 * 365.25))} Years</p>
                 </div>
                 <div className="d-flex mx-3">
-                    <StatisticCard title="Total Savings" number={stat[0]} />
-                    <StatisticCard title="Loan Amount" number={stat[1]} />
+                    <StatisticCard title="Total Savings" number={stat[0]} member={true} />
+                    <StatisticCard title="Loan Amount" number={stat[1]} member={true} />
                 </div>
             </div>
         </div>
