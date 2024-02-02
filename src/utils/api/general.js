@@ -6,7 +6,7 @@ import api from "../axios";
  */
 export const fetchAllStates = async (signal) => {
     try {
-        const { data } = await api.get(`/api/location/states`,signal);
+        const { data } = await api.get(`/api/location/states`, signal);
         return data;
     } catch (error) {
         if (error.name === 'AbortError') {
@@ -17,9 +17,10 @@ export const fetchAllStates = async (signal) => {
 
     }
 };
-export const fetchAllLga = async (signal) => {
+export const fetchAllLga = async (state, signal) => {
+    console.log(state)
     try {
-        const { data } = await api.get(`/api/location/lga/630500d3c9ae75a1ce111f0f`,signal);
+        const { data } = await api.get(`/api/location/lga/${state}`, signal);
         return data;
     } catch (error) {
         if (error.name === 'AbortError') {
@@ -37,7 +38,7 @@ export const fetchAllLga = async (signal) => {
  */
 export const FetchSavingsCategory = async (signal) => {
     try {
-        const { data } = await api.get(`/api/users/savings-category`,signal);
+        const { data } = await api.get(`/api/users/savings-category`, signal);
         return data;
     } catch (error) {
         if (error.name === 'AbortError') {

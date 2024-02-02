@@ -4,7 +4,9 @@ import { store } from '../../redux/store';
 
 const api = axios.create({
     // baseURL: 'http://127.0.0.1:3000',
-    baseURL: 'https://afcs-app.onrender.com',
+    baseURL: 'linear-eleonora-activefarmers-124470e8.koyeb.app',
+
+    // baseURL: 'https://afcs-app.onrender.com',
     headers: {
         'Content-Type': 'application/json',
     },
@@ -16,6 +18,7 @@ api.interceptors.request.use(
     config => {
         // let auth_token = localStorage.getItem('AFCS-token')
         const auth_token = selectToken(store.getState());
+        console.log(auth_token)
 
         if (auth_token) {
             config.headers['Authorization'] = `Bearer ${auth_token}`
