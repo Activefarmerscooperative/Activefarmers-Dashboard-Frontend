@@ -4,7 +4,7 @@ import { store } from '../../redux/store';
 
 const api = axios.create({
     // baseURL: 'http://127.0.0.1:3000',
-    baseURL: 'linear-eleonora-activefarmers-124470e8.koyeb.app',
+    baseURL: 'https://linear-eleonora-activefarmers-124470e8.koyeb.app',
 
     // baseURL: 'https://afcs-app.onrender.com',
     headers: {
