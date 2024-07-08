@@ -1,7 +1,8 @@
-import React, { useEffect,useState } from 'react';
-import { Link} from 'react-router-dom'; // Assuming you're using React Router
+
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'; // Assuming you're using React Router
 import './notifications.css'
-import moment  from 'moment/moment';
+import moment from 'moment/moment';
 import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
 import { GetNotifications } from '../../../utils/api/admin';
@@ -27,7 +28,14 @@ const NotificationsPage = ({ markAllAsRead, handleDelete, handleMouseEnter, hand
 
   return (
     <div className="notifications-page mt-5 pt-5 ">
-      <h1>All Notifications</h1>
+      <div className="align-items-center justify-content-between d-flex">
+        <h1>All Notifications</h1>
+        <Link to="/admin/dashboard" className='backto-admin my-3'>Go back</Link>
+
+      </div>
+
+
+
       {/* {notifications && notifications.length > 0 ? (
       <ul>
         {notifications.map(notification => (
@@ -40,6 +48,9 @@ const NotificationsPage = ({ markAllAsRead, handleDelete, handleMouseEnter, hand
     ) : (
       <p>No notifications found.</p>
     )} */}
+
+
+      <hr />
       <ul>
         {notifications?.map(notification => (
           <li key={notification.id} className={`my-3 notification.read ? 'read' : 'unread' `}>
@@ -51,8 +62,7 @@ const NotificationsPage = ({ markAllAsRead, handleDelete, handleMouseEnter, hand
 
         ))}
       </ul>
-      <hr />
-      <Link to="/admin/dashboard" className='backto-admin my-3'>Go back</Link>
+
     </div>
   );
 };

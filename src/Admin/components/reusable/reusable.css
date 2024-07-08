@@ -1,7 +1,5 @@
-
-.loan-summary-modal {
-    width: 700px;
-    height: 500px;
+/* .loan-summary-modal {
+    width: fit-content;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,9 +19,6 @@
     color: #2F9909;
 }
 
-.loan-summary-modal .loan-summary-div {
-    width: 750px;
-}
 
 .loan-summary-modal a.back-to {
     font-weight: 500;
@@ -41,21 +36,7 @@
     border-radius: 50px;
 }
 
-
-.loan-summary-modal .btn,
-.loan-summary-modal .btn:focus {
-    width: 200px;
-    /* height: 50px; */
-    background: #FB9129;
-    border-radius: 4px;
-    font-weight: 500;
-    font-size: 16px;
-    color: #FFFFFF;
-    white-space: nowrap;
-    padding: 10px 0;
-}
-
-.loan-summary-modal h2{
+.loan-summary-modal h2 {
     color: #0D9068;
 }
 
@@ -66,6 +47,7 @@
     margin-bottom: 0;
 
 }
+
 .loan-summary-modal hr {
     width: 100px;
     border: 1px solid #0D9068;
@@ -78,22 +60,25 @@
     color: #000000;
     margin: 0 15px;
 }
-.loan-summary-modal span.status{
+
+.loan-summary-modal span.status {
     width: 100px;
     padding: 5px;
     text-align: center;
-border: 1px solid #0D9068;
-border-radius: 33px;
-font-weight: 500;
-font-size: 14px;
+    border: 1px solid #0D9068;
+    border-radius: 33px;
+    font-weight: 500;
+    font-size: 14px;
 
-color: #0D9068;
+    color: #0D9068;
 
 }
-.autotrans-status{
-   margin-left: 60px; 
+
+.autotrans-status {
+    margin-left: 60px;
 }
-.loan-summary-modal a:nth-child(1) .btn{
+
+.loan-summary-modal a:nth-child(1) .btn {
     background-color: #FFFFFF;
     color: #FB9129;
     border: 2px solid #FB9129;
@@ -111,9 +96,141 @@ p.agree a {
 }
 
 
-.loan-summary-modal span.status.failed-icon{
-   
-border: 1px solid #ff0000;
-color: #ff0000;
+.loan-summary-modal span.status.failed-icon {
+
+    border: 1px solid #ff0000;
+    color: #ff0000;
 
 }
+
+
+
+
+@media (min-width: 992px) and (max-width: 1199.98px) {}
+
+
+@media (max-width: 800px) {
+
+    .loan-summary-modal{
+        width: 500px;
+    }
+}
+
+
+
+@media (min-width: 577px) and (max-width: 768.98px) {}
+
+@media (max-width: 576.98px) {
+
+    .loan-summary-modal hr {
+        width: auto;
+    }
+
+   
+    .loan-summary-modal .btn:focus {
+        width: 100px;
+    }
+
+    
+
+    .loan-summary-modal {
+        width: 400px;
+        margin-top: 0 !important;
+    }
+
+    .loan-summary-modal hr {
+        width: auto;
+    }
+    .transaction-success-modal .btn{
+        width: fit-content;
+    padding: 10px;
+
+    }
+}
+
+@media (max-width: 426.98px) {
+
+    .loan-summary-modal, .profile-update-modal{
+        width: 380px;
+    }
+
+    .add-savings-modal input,
+    .add-savings-modal select {
+        width: 300px;
+    }
+
+    .add-savings-modal p,
+    .transaction-success-modal p,
+    .loan-success-modal p {
+        width: 80%;
+    }
+
+    .add-savings-modal .btn {
+        font-size: 18px;
+    }
+
+    .add-savings-modal .add-savings-div {
+        width: 750px;
+    }
+    .icon {
+        width: 50px;
+        height: 50px;
+        color: #2F9909;
+    }
+
+}
+
+@media (max-width: 376px) {
+    .loan-summary-modal, .profile-update-modal{
+        width: 330px;
+    }
+
+    .add-savings-modal input,
+    .add-savings-modal select {
+        width: 250px;
+    }
+
+    .add-savings-modal p,
+    .transaction-success-modal p,
+    .loan-success-modal p {
+
+        font-size: 16px;
+    }
+
+    .add-savings-modal.p-5 {
+        padding: 2rem 1rem !important;
+    }
+    .loan-summary-modal span {
+        text-wrap: nowrap;
+        margin: 0;
+    }
+
+}
+
+@media (max-width: 321px) {
+
+    .add-savings-modal input,
+    .add-savings-modal select {
+        width: 200px;
+    }
+
+    .loan-summary-modal, .profile-update-modal{
+        width: 290px;
+    }
+
+    .add-savings-modal .btn {
+        font-size: 16px;
+    }
+
+    .loan-info li{
+        flex-direction: column;
+    }
+    .loan-info{
+        display: grid;
+    grid-template-columns: 1fr 1fr;
+    }
+    .loan-summary-modal p {
+        text-align: center;
+    }
+
+} */

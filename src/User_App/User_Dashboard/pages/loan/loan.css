@@ -1,7 +1,7 @@
 
 
 .loan-form h1 {
-    font-weight: 700;
+    /* font-weight: 700; */
     font-size: 36px;
     margin-bottom: 20px;
     color: #0D9068;
@@ -51,7 +51,6 @@
 .loan-form .eye-icon {
     width: 25px;
     height: 25px;
-    margin-right: 50px;
 }
 
 .loan-form .card p:last-child {
@@ -62,7 +61,7 @@
 }
 
 .loan-form p.note {
-    width: 90%;
+    /* width: 90%; */
     font-weight: 400;
     font-size: 13px;
     color: #444444;
@@ -72,15 +71,16 @@
 .loan-input-form input,
 .loan-input-form select,
 .loan-input-form input:hover {
-    height: 60px;
-    width: 365px;
-    border: 1px solid #909090;
-    border-radius: 6px;
-    margin: 15px;
+    max-width: 100%;
+    height: 45px;
+    width: 380px;
+    border: 0.3px solid #909090;
+    border-radius: 4px;
+    margin: 15px 0;
     padding: 10px;
     color: #444444;
-    font-size: 14px;
     font-weight: 400;
+    font-size: 14px;
     opacity: 0.7;
 }
 
@@ -109,7 +109,7 @@
 
 
 }
-.loan-form .next-btn {
+.loan-form .submit-btn {
     width: 180px;
     height: 45px;
     background: #FB9129;
@@ -141,31 +141,90 @@
 
 
 
-.loan-form .modal-base_after-open {
-    opacity: 1;
-    transform: scale(1);
+@media screen and (max-width: 800px) {
+    .loan-form {
+    margin: 70px 0 0 0;
+    }
 }
 
-.loan-form .modal-base_before-close {
-    transform: scale(.2);
-    opacity: 0;
+
+
+@media (min-width: 579px) and (max-width: 600px) {
+    .loan-form h1 {
+        font-size: 30px;
+    }
+
+    .loan-form .submit-btn {
+        width: 100px;
+    }
+
 }
 
-.loan-form .overlay-base {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(19, 18, 18, 0.75);
-    opacity: 0;
-    transition: all 0.3s ease-out;
+@media (max-width: 578.98px) {
+    .loan-form h1 {
+        font-size: 30px;
+    }
+    .loan-form .submit-btn {
+        width: 100px;
+    }
 }
 
-.loan-form .overlay-base_after-open {
-    opacity: 1;
+@media (min-width: 450px) and (max-width: 577.98px) {
+    .loan-form h1 {
+        font-size: 28px;
+    }
+
+    .loan-form .submit-btn {
+        width: 100px;
+    }
 }
 
-.loan-form .overlay-base_before-close {
-    opacity: 0;
+@media (max-width: 426.98px) {
+    .loan-form h1 {
+        font-size: 26px;
+    }
+    .loan-form .card {
+        margin: 0 10px 0 0;
+    }
+    .loan-form .savings-wallet-category .card, .schedule-savings-page .card {
+        flex: 0 0 200px;
+
+    }
+    .loan-form p.note {
+        text-align: justify;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .content {
+        /* padding: 10px 0; */
+    }
+
+    .loan-form h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .guarantor-account-form p {
+        font-size: 18px;
+        margin: 10px;
+    }
+
+    .loan-form .submit-btn {
+        width: 100px;
+        font-size: 18px;
+    }
+
+
+}
+
+@media screen and (max-width: 321px) {
+    .loan-form h1 {
+        font-size: 20px;
+    }
+
+    .loan-form .submit-btn {
+
+        font-size: 16px;
+    }
 }

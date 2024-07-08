@@ -7,6 +7,7 @@ import profile from '../../../assets/profile.jpg'
 import { useNavigate } from "react-router-dom";
 import { UpdateProfilePhoto } from "../../../utils/api/member"
 import { toast } from 'react-toastify';
+import pdFile from './terms-and-condition.pdf'
 
 
 
@@ -157,10 +158,14 @@ function Sidebar({ user, setToken }) {
                     </li>
 
                     <li onClick={() => closeDropdown()}>
-                        <NavLink className="link ps-3 " to="/dashboard/terms">
+                        {/* <NavLink className="link ps-3 " to="/dashboard/terms">
                             <Icon icon="bi:info-circle" className='sidebar-icon' />
                             Terms & Conditions
-                        </NavLink>
+                        </NavLink> */}
+                        <a className="link ps-3" href={pdFile} target="_blank" rel="noopener noreferrer">
+                            <Icon icon="bi:info-circle" className='sidebar-icon' />
+                            Terms & Conditions
+                        </a>
                     </li>
 
                     <li>
@@ -171,9 +176,9 @@ function Sidebar({ user, setToken }) {
                     </li>
                 </ul>
 
-                <div className="admin hamburger-icon" onClick={handleClick}>
+                <div className=" hamburger-icon" onClick={handleClick}>
                     <Icon
-                        icon={clicked ? "jam:close" : "ci:menu-alt-02"}
+                        icon={clicked ? "jam:close" : "ci:menu-alt-03"}
                         className={clicked ? "close" : "bar"}
                     />
                 </div>
@@ -220,9 +225,10 @@ function Sidebar({ user, setToken }) {
                             </NavLink>
                         </li>
                         <li onClick={closeSidebar}>
-                            <NavLink className="link  " to="/dashboard/terms">
-                                Terms & Conditions
-                            </NavLink>
+                        <a className="link ps-3" href={pdFile} target="_blank" rel="noopener noreferrer">
+                            
+                            Terms & Conditions
+                        </a>
                         </li>
                         <li onClick={closeSidebar}>
                             <div className="logout " onClick={logOut}>

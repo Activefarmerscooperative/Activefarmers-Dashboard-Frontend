@@ -23,9 +23,10 @@
 
 .hamburger-icon {
   display: none;
-  z-index: 800;
+  z-index: 990;
   color: #f99c39;
-  font-size: 18px;
+  font-size: 35px;
+  
 }
 
 .sidebar-user .profile-img {
@@ -37,7 +38,7 @@
 
 }
 
-.profile-img-container .btn.camera {
+.sidebar-user .btn.camera {
   position: absolute;
   left: 85px;
   top: 70px;
@@ -48,12 +49,12 @@
   display: flex;
 }
 
-.camera .camera-icon {
+.sidebar-user .camera .camera-icon {
   height: 16px;
   width: 16px;
 }
 
-.profile-info {
+.sidebar-user .profile-info {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -153,16 +154,30 @@
   }
 
   .sidebar-user-menu.mobile {
-    display: block;
-    margin-top: 50px;
+    /* display: block;
+    margin-top: 50px; */
+    display: flex;
+    flex-direction: column;
+    /* margin-top: 50px; */
+    height: 100vh;
+    justify-content: center;
 
   }
 
   .hamburger-icon {
-    display: block;
+    /* display: block;
     position: absolute;
-    left: 30px;
-    transform: scaleX(-1);
+    left: 20px;
+    transform: scaleX(-1); */
+    display: block;
+    position: fixed;
+    transform: scaleX(1);
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0 10px;
+    width: 100%;
+    background-color: #fff;
   }
 
   .sidebar-user {
@@ -191,6 +206,15 @@
   }
 }
 
+@media (min-width: 426px) and (max-width: 575.98px) {
+  .content {
+      padding: 17px;
+  }
+  .hamburger-icon {
+    left: 17px;
+    padding: 0 10px;
+}
+}
 
 @media screen and (max-width: 769px) {
  
@@ -198,7 +222,11 @@
 
 @media screen and (max-width: 600px) {}
 
-@media screen and (max-width: 426px) {}
+@media screen and (max-width: 426px) {
+  .hamburger-icon {
+    padding: 0 10px;
+}
+}
 
 @media screen and (max-width: 376px) {}
 

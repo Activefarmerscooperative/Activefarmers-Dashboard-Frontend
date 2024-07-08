@@ -6,8 +6,8 @@ import { Table, TableHead, TableBody, TableRow, TableCell, TableContainer, Paper
 import { Members, Borrowers, LoanRequests, WithdrawalRequest, AutoTransactions } from "../../utils/api/admin"
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import AutoTransaction from '../components/data/AutoTransaction';
-import WithdrawalDetails from '../components/reusable/WithdrawalDetails';
+// import AutoTransaction from '../components/data/AutoTransaction';
+// import WithdrawalDetails from '../components/reusable/WithdrawalDetails';
 import Modal from 'react-modal';
 import AutoTransactionModal from '../components/reusable/AutoTransactionModal';
 import DatePicker from "react-datepicker";
@@ -182,13 +182,28 @@ const Tab = ({ tabs, defaultTab }) => {
                                 {/* {tableData.map((row) => ( */}
                                 {tableData?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((row, i) => (
+                                        // <TableRow key={row.id} style={{ cursor: "pointer" }} onClick={(e) => navigate('/admin/dashboard/userprofile', { state: { data: data[i], tab: tabName } })} >
+                                        //     {Object.values(row).map((cellValue, index) => (
+                                        //         <TableCell key={index}>{cellValue}</TableCell>
+                                        //     ))}
+                                        // </TableRow>
                                         <TableRow key={row.id} style={{ cursor: "pointer" }} onClick={(e) => navigate('/admin/dashboard/userprofile', { state: { data: data[i], tab: tabName } })} >
-                                            {Object.values(row).map((cellValue, index) => (
-                                                <TableCell key={index}>{cellValue}</TableCell>
-                                            ))}
+                                            {Object.entries(row).map(([key, cellValue], index) => {
+                                                if (key === 'location') {
+                                                    return (
+                                                        <TableCell key={index} style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '300px' }}>{cellValue}</TableCell>
+                                                    );
+                                                } else {
+                                                    return (
+                                                        <TableCell key={index}>{cellValue}</TableCell>
+                                                    );
+                                                }
+                                            })}
                                         </TableRow>
                                     ))}
                             </TableBody>
+
+                            
                         }
 
                         {tabName === "Auto Transactions" &&
@@ -198,8 +213,8 @@ const Tab = ({ tabs, defaultTab }) => {
                                     .map((transactions, index) => (
                                         <TableRow key={index.id} >
                                             <TableCell>{index + 1}</TableCell>
-                                            <TableCell>{transactions.type}</TableCell>
-                                            <TableCell>{transactions.user.firstname} {transactions.user.surname}</TableCell>
+                                            <TableCell>{transactions?.type}</TableCell>
+                                            <TableCell>{transactions?.user.firstname} {transactions?.user.surname}</TableCell>
                                             <TableCell>{transactions?.user.phone}</TableCell>
                                             <TableCell>{transactions?.amount}</TableCell>
                                             <TableCell>{new Date(transactions?.createdAt).toDateString()}</TableCell>
@@ -285,14 +300,14 @@ const Tab = ({ tabs, defaultTab }) => {
                 {
                     activeTab !== "Auto Transactions" ?
                         <div className='d-flex sorting-button'>
-                            <button className="btn d-flex align-items-center search">
+                            {/* <button className="btn d-flex align-items-center search">
                                 <Icon icon="eva:search-outline" />
                                 <input type="search" placeholder='Search' />
                             </button>
                             <button className="btn d-flex align-items-center filter">
                                 <Icon icon="clarity:filter-line" color="#0d9068" />
                                 Filter Members
-                            </button>
+                            </button> */}
                         </div> :
                         <div className='d-flex sorting-button'>
                             <select className="btn d-flex align-items-center filter" value={filter} onChange={(e) => setFilter(e.target.value)}>
@@ -347,16 +362,7 @@ const Tab = ({ tabs, defaultTab }) => {
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 contentLabel="Example Modal"
-                className={{
-                    base: 'modal-base',
-                    afterOpen: 'modal-base_after-open',
-                    beforeClose: 'modal-base_before-close'
-                }}
-                overlayClassName={{
-                    base: 'overlay-base',
-                    afterOpen: 'overlay-base_after-open',
-                    beforeClose: 'overlay-base_before-close'
-                }}
+
                 shouldCloseOnOverlayClick={true}
                 closeTimeoutMS={2000}>
 

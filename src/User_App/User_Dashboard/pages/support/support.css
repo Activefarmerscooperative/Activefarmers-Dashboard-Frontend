@@ -5,6 +5,10 @@
     border-radius: 12px;
 }
 
+.content {
+    /* padding: 0 !important; */
+}
+
 .support h1 {
     font-weight: 700;
     font-size: 36px;
@@ -25,7 +29,7 @@
     color: #000000;
 }
 
-.support-tab .tab-item:hover{
+.support-tab .tab-item:hover {
     cursor: pointer;
 }
 
@@ -34,8 +38,43 @@
     border-bottom: 4px solid #FB9129;
     border-radius: 3px 3px 0px 0px;
 } */
-.support-tab .tab-item.active{
+.support-tab .tab-item.active {
     font-weight: 500;
     border-bottom: 3px solid #FB9129;
-    border-radius: 3px 3px 0px 0px;   
-  }
+    border-radius: 3px 3px 0px 0px;
+}
+
+@media screen and (max-width: 769px) {
+    .support h1 {
+    font-size: 30px;
+    margin-bottom: 0px;
+}
+}
+
+@media screen and (max-width: 600px) {
+    .support-tab.my-5 {
+        margin-top: 1.5rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+
+}
+
+@media screen and (max-width: 577px) {}
+@media screen and (max-width: 426px) {
+    .support-tab .tab-item {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .support h1 {
+        font-size: 25px;
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 321px) {
+    .support-tab .tab-item {
+        font-size: 14px;
+    }
+}

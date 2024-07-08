@@ -1,10 +1,14 @@
 .login-form-page {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('/src/assets/bg.png');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url('/src/assets/bg.png');
     background-repeat: no-repeat;
     height: 100vh;
     background-position: center;
     background-size: cover;
-    /* margin: 0 0 20px 0; */
+
+}
+
+.login-page.mt-3 {
+    margin-top: 2rem !important;
 }
 
 a {
@@ -16,27 +20,35 @@ a {
     font-size: 16px;
     text-align: center;
     color: #0D9068;
+    text-wrap: nowrap;
+    line-height: 0;
 }
-
-.login-form-page .login-button, .register-link-btn, .register-link-btn:hover {
+.login-button, .register-link-btn, .register-link-btn:hover {
     width: 160px;
-    height: 45px;
+    padding: 10px;
     background-color: transparent;
     border: 1.3px solid #FFFFFF;
     border-radius: 55px;
     font-weight: 400;
     font-size: 20px;
-    line-height: 24px;
-
+    line-height: normal;
+text-wrap: nowrap;
     color: #FFFFFF;
 }
+.admin-form{}
 
-.login-page .text {
+
+
+.login-form-page .reg-header .text {
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
-
+    text-wrap: nowrap;
     color: #FFFFFF;
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
 }
 
 .login-page .form {
@@ -49,8 +61,7 @@ a {
 }
 
 .login-page h1 {
-    font-weight: 600;
-    font-size: 40px;
+    font-size: 30px;
     color: #000000;
 }
 
@@ -59,6 +70,10 @@ a {
     font-size: 15px;
     color: #444444;
     white-space: nowrap;
+    
+}
+.login-page .password-match{
+    color: red;
 }
 
 .login-page input.email-input {
@@ -80,6 +95,7 @@ a {
 .password input,
 .password input:hover,
 .password input:focus {
+    flex: 1;
     outline: none;
     border: none;
     background-color: transparent;
@@ -131,15 +147,15 @@ input.email-input:focus {
     background: #0D9068;
     color: #FFFFFF;
 }
-
+.login-page .otp-input{
+    text-wrap: nowrap;
+}
 .login-page .otp-input input {
     width: 50px;
     height: 50px;
     background: #EFEFEF;
-    border: 1px solid #A19E9E;
     border-radius: 10px;
     border: 0.5px solid #ADADAD;
-    border-radius: 4px;
     font-size: 18px;
     text-align: center;
     line-height: normal;
@@ -172,4 +188,256 @@ p.create {
     font-size: 16px;
     color: #FFFFFF;
     margin: 0 10px;
+}
+
+@media (min-width: 769px) and (max-width: 900px) {
+    .login-form-page.px-5 {
+        padding-right: 1rem !important;
+        padding-left: 1rem !important;
+    }
+
+    .reg-header a.mx-5 {
+        margin-right: 2rem !important;
+        margin-left: 2rem !important;
+    }
+
+}
+
+
+/* CSS for screens between 576px and 767.98px */
+@media (min-width: 600px) and (max-width: 768.98px) {
+    .login-form-page.px-5 {
+        padding-right: 1rem !important;
+        padding-left: 1rem !important;
+    }
+    .reg-header-content {
+        align-items: center !important;
+    }
+    .reg-header a.mx-5 {
+        margin-right: 1rem !important;
+        margin-left: 1rem !important;
+    }
+    .register-link-btn {
+        width: 135px;
+    }
+    .login-page h1{
+        text-align: center;
+    }
+}
+
+/* CSS for screens up to 575.98px */
+@media (min-width: 576px) and (max-width: 599.98px) {
+    .register-link-btn {
+        width: fit-content;
+        font-size: 16px;
+        padding: 5px 10px;
+        margin-top: 5px;
+    }
+    .login-page h1{
+        text-align: center;
+    }
+    .login-page .form {
+        padding: 20px !important;
+    }
+    .login-form-page.px-5 {
+        padding-right: 1rem !important;
+        padding-left: 1rem !important;
+    }
+    
+}
+
+/* Small Devices (Phones) */
+@media (min-width: 426px) and (max-width: 575.98px) {
+    .login-page.px-5 {
+        padding-right: 1rem !important;
+        padding-left: 1rem !important;
+    }
+    .login-form-page.px-5 {
+        padding-right: 1rem !important;
+        padding-left: 1rem !important;
+    }
+    .reg-header a.mx-5 {
+        margin-right: 0rem !important;
+        margin-left: 0rem !important;
+    }
+    .reg-header-content{
+        align-items: center !important;
+    }
+    .register-link-btn {
+        width: fit-content;
+        font-size: 16px;
+        padding: 5px 10px;
+        margin-top: 5px;
+    }
+    .login-page h1{
+        text-align: center;
+    }
+    .login-page .form {
+        padding: 20px !important;
+    }
+    .login-page .otp-input input {
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
+        margin: 0.3rem
+    }
+    .login-button, .login-button:hover {
+        width: 140px;
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 376px) and (max-width: 426.98px) {
+    .reg-header-content{
+        /* margin: auto 26px !important; */
+    }
+    .login-page.px-5 {
+        padding-right: 1rem !important;
+        padding-left: 1rem !important;
+    }
+    .login-form-page.px-5 {
+        padding-right: 1rem !important;
+        padding-left: 1rem !important;
+    }
+    .reg-header a.mx-5 {
+        margin-right: 0rem !important;
+        margin-left: 0rem !important;
+    }
+    
+    .register-link-btn {
+        width: fit-content;
+        font-size: 14px;
+        padding: 5px 10px;
+        margin-top: 5px;
+    }
+    .login-page .form {
+        width: 350px;
+        margin: 0 auto;
+    }
+    .login-page h1 {
+        font-size: 25px;
+    }
+    .form{
+        text-align: center;
+    }
+    .login-page .otp-input input {
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
+        margin: 0.3rem
+    }
+    .login-page .form {
+        padding: 20px !important;
+    }
+    .login-form-page .reg-header .text {
+        flex-direction: column;
+        align-items: center;
+    }
+    .login-page p {
+        white-space: wrap;
+    }
+    .login-button, .login-button:hover {
+        width: 130px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 375.98px) {
+    .login-form-page.px-5 {
+        padding-right: 1rem !important;
+        padding-left: 1rem !important;
+    }
+   .login-page .reg-header a.mx-5 {
+        margin-right: 0rem !important;
+        margin-left: 0rem !important;
+    }
+    .login-page.px-5 {
+        padding-right: 1rem !important;
+        padding-left: 1rem !important;
+    }
+    .reg-header-content{
+        align-items: flex-start !important;
+        
+    }
+    .login-page p {
+        white-space: wrap;
+    }
+    .register-link-btn {
+        width: fit-content;
+        font-size: 14px;
+        padding: 5px 10px;
+        margin-top: 5px;
+    }
+    .login-form-page .reg-header a, .login-form-page  .reg-header .text {
+        font-size: 14px;
+    }
+  
+    .login-form-page .reg-header .text {
+        flex-direction: column;
+        align-items: center;
+        /* text-wrap: wrap; */
+        text-align: center;
+    }
+    .login-form-page .reg-header-content{
+        justify-content: space-between !important;
+        margin: auto 0px !important;
+    }
+    .login-page .form {
+        width: 320px;
+        margin: 0 auto;
+        padding: 20px !important;
+    }
+    .login-page h1 {
+        font-size: 25px;
+    }
+    .form{
+        text-align: center;
+    }
+    .login-page .otp-input input {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+        margin: 0.3rem
+    }
+    .login-button, .login-button:hover {
+        width: 130px;
+        font-size: 16px;
+    }
+    
+}
+
+@media (max-width: 321px) {
+    .login-page .form {
+        width: fit-content;
+        padding: 20px !important;
+        
+    }
+
+    .login-page.otp-page .form {
+        width: 280px;
+    }
+    .login-page .otp-input input {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+        margin: 0.3rem
+    }
+    
+    .form{
+        font-size: 14px;
+    }
+    .login-page h1 {
+        font-size: 20px;
+    }
+    
+    .reg-header-content{
+        margin: auto !important;
+    }
+   
+    .login-form-page .reg-header a, .login-form-page  .reg-header .text {
+        font-size: 12px;
+    }
+    .login-form-page .reg-header .text {
+        width: 130px;
+    }
 }

@@ -7,23 +7,6 @@ import { VerifyOTP } from "../utils/api/member"
 import { toast } from "react-toastify";
 import { RotatingLines } from "react-loader-spinner";
 
-// function OtpInputModal() {
-
-//     const [otp, setOtp] = useState(["", "", "", "", "", ""]);
-//     const handleChange = (e, index) => {
-//         const value = e.target.value;
-//         setOtp([...otp.slice(0, index), value, ...otp.slice(index + 1)]);
-//         if (e.target.nextSibling) {
-//             e.target.nextSibling.focus();
-//         }
-//     };
-//     const handlePaste = (e) => {
-//         e.preventDefault();
-//         const value = e.clipboardData.getData("Text");
-//         const otpArray = value.split("").slice(0, 6);
-//         setOtp([...otpArray, ...otp.slice(otpArray.length)]);
-//     };
-// }
 
 export default function OtpModal({ message }) {
     const [modalIsOpen, setIsOpen] = useState(false);
@@ -126,7 +109,7 @@ export default function OtpModal({ message }) {
                 </div>
 
 
-                {isLoading && <center className="btn member-btn"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+                {isLoading && <center className="btn member-btn mt-5"><RotatingLines width="15" strokeColor="#1B7B44" strokeWidth="3" /></center>}
                 {!isLoading && <button onClick={handleSubmit} className="btn btn-modal mt-5">Submit</button>}
                 <p className="mt-3">
                             Yet to receive OTP?
@@ -151,16 +134,8 @@ export default function OtpModal({ message }) {
                 isOpen={modalIsOpen}
                 // onRequestClose={closeModal}
                 contentLabel="Example Modal"
-                className={{
-                    base: 'modal-base',
-                    afterOpen: 'modal-base_after-open',
-                    beforeClose: 'modal-base_before-close'
-                }}
-                overlayClassName={{
-                    base: 'overlay-base',
-                    afterOpen: 'overlay-base_after-open',
-                    beforeClose: 'overlay-base_before-close'
-                }}
+                className="custom-modal"
+                overlayClassName="custom-overlay"
                 shouldCloseOnOverlayClick={false}
                 closeTimeoutMS={2000}
             >

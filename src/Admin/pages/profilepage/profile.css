@@ -1,6 +1,10 @@
 .user-profile {
-  display: flex;
+  /* display: flex; */
   /* height: 100vh; */
+}
+
+.go-back.mobile {
+  display: none;
 }
 
 .sidebar {
@@ -15,7 +19,8 @@
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0px 4px 15px 0px #0000000D;
-  border: 1px solid #44444440
+  border: 1px solid #44444440;
+  z-index: 800;
 }
 
 .sidebar p {
@@ -40,11 +45,12 @@
   background: #0d906949;
 }
 
-.content {
+.admin-site .content {
   width: auto;
   margin-left: 200px;
-  padding: 20px;
+  padding: 20px 10px !important;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .profile h4.go-back {
@@ -56,8 +62,7 @@
 }
 
 .back-icon {
-  width: 25px;
-  height: 25px;
+  font-size: 25px;
   background-color: #0D9068;
   color: #ffffff;
   border-radius: 20px;
@@ -74,15 +79,26 @@
 
 .profile p.h6,
 .loan p.h6 {
-  font-size: 22px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 600;
   color: #0D9068;
 
 }
 
-.personalinfo-user {
-  flex-wrap: wrap;
+.personalinfo-user .fw-bold{
+  text-align: left;
+  text-wrap: nowrap;
 }
+
+.personalinfo-user {
+  /* flex-wrap: wrap; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.g-account .personalinfo-user {
+  gap: 0 20px;
+} 
 
 .loan .css-1ygcj2i-MuiTableCell-root,
 .loan .css-1ex1afd-MuiTableCell-root {
@@ -113,7 +129,21 @@
   font-size: 14px;
   font-weight: 500;
   color: #000000;
+  white-space: nowrap;
 
+}
+
+.g-account.profile p.info {
+  white-space: normal;
+}
+
+.profile p.info span {
+  font-weight: 700;
+
+}
+.active-loan-info{
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 /* .profile span,
@@ -156,47 +186,51 @@
 
 
 .paid-icon {
-  color: #0D9068;
+  color: green;
   width: 20px;
   height: 20px;
   border-left: 1px solid #fff;
+  cursor: pointer;
 }
 
 .active-icon {
-  color: #FB9129;
+  color: blue;
   width: 20px;
   height: 20px;
   border-left: 1px solid #fff;
+  cursor: pointer;
 }
 
 .pending-icon {
-  color: #FB9129;
+  color: #e67e22;
   width: 20px;
   height: 20px;
   border-left: 1px solid #fff;
+  cursor: pointer;
 }
 .rejected-icon {
   color: red;
   width: 20px;
   height: 20px;
   border-left: 1px solid #fff;
+  cursor: pointer;
 }
 .pending-status {
-  color: #FB9129;
+  color: #e67e22;
 
   white-space: nowrap;
   margin: 0 2px;
 }
 
 .paid-status {
-  color: #0D9068;
+  color: green;
 
   white-space: nowrap;
   margin: 0 2px;
 }
 
 .active-status {
-  color: #FB9129;
+  color: blue;
 
   white-space: nowrap;
   margin: 0 2px;
@@ -209,7 +243,7 @@
   margin: 0 2px;
 }
 
-.modal {
+/* .modal {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -235,22 +269,171 @@
 
 .modal-content button {
   margin-right: 10px;
-}
+} */
 
 
 
-@media (max-width: 768px) {
-  .user-profile {
+@media screen and (max-width: 1024px) {
+  .profile-stat-card {
     flex-direction: column;
   }
 
+}
+
+@media screen and (max-width: 992px) {}
+
+@media screen and (max-width: 800px) {
+  .user-profile {
+    display: flex;
+    flex-direction: column;
+    /* height: 100vh; */
+
+  }
+
   .sidebar {
-    width: 100%;
+    position: relative;
+    width: auto;
+    height: auto;
+    max-height: auto;
+    padding: 10px 20px;
+    display: flex;
+    margin: 30px 14px 0 14px !important;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: none;
+    border: none;
+    z-index: 0;
+  }
+
+  .go-back.desktop {
+    display: none;
+  }
+
+  .go-back.mobile {
+    display: block;
+  }
+
+  .sidebar p.active,
+  .sidebar p:hover {
+    width: auto;
+  }
+
+  .g-account.profile p.info {
+    /* white-space: nowrap; */
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+  .personal-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .profile-stat-card {
+    flex-direction: row;
+    margin: 0 !important
+  }
+
+  .g-account .personalinfo-user {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 522px) {
+  .users-personal-info {
+    flex-direction: column;
+
+  }
+
+  .users-personal-data {
+    margin-top: 10px;
+  }
+
+  .users-personal-data .names {
+    margin-left: 0 !important;
+  }
+
+  .personalinfo-user {
+    grid-template-columns: 1fr 1fr;
+
+  }
+
+  .profile p.info {
+    white-space: normal;
+  }
+
+  .g-account.profile p.info span {
+    white-space: nowrap;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .sidebar {
+    padding: 10px;
+    margin: 5px 0 0 0 !important;
+    justify-content: space-around;
+  }
+
+  .go-back.mobile {
+    font-size: 20px;
   }
 
   .sidebar p {
-    width: 100%;
-    max-width: 200px;
+    font-size: 14px;
+    padding: 5px 10px;
+    margin: 0;
   }
+
+  .personalinfo-user {
+    gap: 0 20px;
+  }
+
+  .profile p.info span {
+    white-space: nowrap;
+  }
+
+  .profile p.h6,
+  .loan p.h6 {
+    font-size: 18px;
+  }
+
+  .g-account .personalinfo-user {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 376px) {
+  .profile p.info span {
+    white-space: normal;
+  }
+
+  .profile p.h6,
+  .loan p.h6 {
+    font-size: 16px;
+  }
+
+  .admin-site .content {
+    padding: 20px 0px !important;
+  }
+}
+
+@media screen and (max-width: 321px) {
+
+  .sidebar p.active,
+  .sidebar p:hover {
+    font-weight: 700;
+    width: auto;
+    background: transparent;
+  }
+
+  .sidebar p {
+    padding: 5px;
+  }
+  .g-account .personalinfo-user {
+    grid-template-columns: 1fr;
+}
 }

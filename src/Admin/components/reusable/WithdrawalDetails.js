@@ -11,6 +11,8 @@ function WithdrawalDetails({ closeModal, withdrawalData }) {
     const [step, setStep] = useState(1)
 
     async function declineWithdrawalRequest(withdrawalId) {
+
+        console.log("Withdrawal Data:", withdrawalData);
         setIsLoading(true)
         try {
             const { message } = await declineWithdrawal(withdrawalId, { rejectionReason })
@@ -44,7 +46,7 @@ function WithdrawalDetails({ closeModal, withdrawalData }) {
     }
 
     return (
-        <div className='loan-summary-modal p-4 my-4'>
+        <div className='loan-summary-modal p-4 '>
             {
                 step === 1 &&
                 <div className="d-flex flex-column align-items-center loan-summary-div">
@@ -86,6 +88,15 @@ function WithdrawalDetails({ closeModal, withdrawalData }) {
                                     </span>
 
                                 </li>
+                                {
+    withdrawalData.status === "Rejected" && withdrawalData.item && 
+    <li className='d-flex align-items-center my-4'>
+        <p>Reason: </p>
+        <span className="">
+            {withdrawalData.item.rejectionReason}
+        </span>
+    </li>
+}
                             </>
                         </ul>
 
@@ -97,9 +108,9 @@ function WithdrawalDetails({ closeModal, withdrawalData }) {
                                         <button onClick={() => closeModal()} className="btn btn-modal mx-3">Back to List</button>
                                     </> :
                                     <>
-                                        {isLoading && <button className='login-btn mt-5'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
+                                        {isLoading && <button className='btn btn-modal mx-3'><RotatingLines width="15" strokeColor="#FFF" strokeWidth="3" /></button>}
                                         {!isLoading && <>
-                                            <button onClick={() => setStep(2)} className="btn btn-modal mx-3">Decline Withdrawal</button>
+                                            <button onClick={() => setStep(2)} className="btn btn-modal edit mx-3">Decline Withdrawal</button>
                                             <button onClick={() => approveWithdrawalRequest(withdrawalData._id)} className="btn btn-modal mx-3">Approve Withdrawal</button>
                                         </>}</>
                             }
@@ -117,11 +128,11 @@ function WithdrawalDetails({ closeModal, withdrawalData }) {
                         <h2 className="mb-0">Enter Rejection Reason</h2>
 
                     </div>
-                    <textarea id="myTextArea" rows="5" cols="50" onChange={(e) => setRejectionReason(e.target.value)}></textarea>
-                    <div className="d-flex align-items-center justify-content-even">
-                        {isLoading && <button className='login-btn mt-5'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
+                    <textarea id="myTextArea" rows="5" cols="50" onChange={(e) => setRejectionReason(e.target.value)} className="mt-2 p-2"></textarea>
+                    <div className="d-flex align-items-center justify-content-even mt-4">
+                        {isLoading && <button className='btn btn-modal mx-3'><RotatingLines width="15" strokeColor="#FFF" strokeWidth="3" /></button>}
                         {!isLoading && <>
-                            <button onClick={() => setStep(1)} className="btn btn-modal mx-3">Go Back</button>
+                            <button onClick={() => setStep(1)} className="btn btn-modal edit mx-3">Go Back</button>
                             <button onClick={() => declineWithdrawalRequest(withdrawalData._id)} className="btn btn-modal mx-3">Submit</button>
                         </>}
 

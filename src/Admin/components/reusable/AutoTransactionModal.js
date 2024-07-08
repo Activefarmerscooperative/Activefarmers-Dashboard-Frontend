@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import "./reusable.css";
 import { RotatingLines } from "react-loader-spinner";
-import AutoTransaction from '../data/AutoTransaction';
+// import AutoTransaction from '../data/AutoTransaction';
 
 function AutoTransactionModal({ closeModal, autoTransactionData }) {
     // const [isLoading, setIsLoading] = useState(false)

@@ -147,18 +147,22 @@ const AccountGuarantor = ({ setToken }) => {
 
 
   return (
-    <div className="my-5 px-4 guarantor-account">
+    <div className="px-4 guarantor-account">
       <h1>Account & Guarantor</h1>
-      <div className="px-4 py-3 card guarantor-account-form">
-        <div>
-          <form action="" className="d-flex flex-column align-items-center">
+      <div className="px-4 py-2  guarantor-account-form">
+
+        <form action="" >
+          <div>
             <p>Account Details</p>
-            <div className="d-flex">
-              <div className="form-group">
-                <label htmlFor="">Account Name</label>
-                <input type="text" name="accountName" onChange={handleAccountChange} value={bankDetails?.accountName} disabled={!editAccount} placeholder="Enter account name" />
+            <div className="row">
+              <div className="col-md-4 col-sm-6">
+                <div className="form-group d-flex flex-column mx-3">
+                  <label htmlFor="">Account Name</label>
+                  <input type="text" name="accountName" onChange={handleAccountChange} value={bankDetails?.accountName} disabled={!editAccount} placeholder="Enter account name" />
+                </div>
               </div>
-              <div className="form-group ">
+
+              <div className="col-md-4 col-sm-6"><div className="form-group d-flex flex-column mx-3 ">
                 <label htmlFor="">Bank Name</label>
                 {/* Note this is because the bank list is passed as object */}
                 <select name="" onChange={(e) => {
@@ -179,103 +183,117 @@ const AccountGuarantor = ({ setToken }) => {
                   }
 
                 </select>
-              </div>
-              <div className="form-group">
+              </div></div>
+
+
+              <div className="col-md-4 col-sm-6"><div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Account Number</label>
                 <input type="text" name="accountNumber" value={bankDetails?.accountNumber} onChange={handleAccountChange} disabled={!editAccount} placeholder="0123456" />
-              </div>
+              </div></div>
+
             </div>
-          </form>
-          <div className="d-flex">
-            {
-              !editAccount &&
-              <button onClick={() => setEditAccount(true)} className="btn edit mx-4 my-5">
-                Edit
-              </button>
-            }
-
-            {editAccount && (
-              <div>
-                <>
-                  {isLoading && <button className="btn mx-4 my-5"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></button>}
-                  {!isLoading &&
-                    <>
-                      {!isLoading && <button onClick={
-                        // () => setEditAccount(false)
-                        // openModal
-                        () => openModal('discard')
-                      } disabled={isLoading} className="btn discard mx-4 my-5">Discard Changes</button>}
-                      <button onClick={() => confirmUpdate("Account")} disabled={isLoading} className="btn mx-4 my-5 ">Save</button>
-                    </>}
-
-                </>
-
-              </div>
-            )}
-          </div>
-        </div>
-        <div className="mt-5">
-          <form action="" className="d-flex flex-column align-items-center">
-            <p>Guarantor's Details</p>
             <div className="d-flex">
-              <div className="form-group d-flex flex-column mx-3">
+              {
+                !editAccount &&
+                <button onClick={() => setEditAccount(true)} className="btn edit mx-3 my-4">
+                  Edit
+                </button>
+              }
+
+              {editAccount && (
+                <div>
+                  <>
+                    {isLoading && <button className="btn mx-3 my-4"><RotatingLines width="15" strokeColor="#1B7B44" strokeWidth="3" /></button>}
+                    {!isLoading &&
+                      <>
+                        {!isLoading && <button onClick={
+                          // () => setEditAccount(false)
+                          // openModal
+                          () => openModal('discard')
+                        } disabled={isLoading} className="btn discard mx-3 my-4">Discard Changes</button>}
+                        <button onClick={() => confirmUpdate("Account")} disabled={isLoading} className="btn mx-3 my-4 ">Save</button>
+                      </>}
+
+                  </>
+
+                </div>
+              )}
+            </div>
+          </div>
+
+
+
+          <div className="mt-5">
+
+            <p>Guarantor's Details</p>
+            <div className="row">
+              <div className="col-md-4 col-sm-6"><div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Guarantor's Full Name</label>
                 <input type="text" name="full_name" onChange={handleGuarantorChange} disabled={!editGuarantor} value={guarantorDetails?.full_name} placeholder="E.g. John Deo" />
-              </div>
-              <div className="form-group d-flex flex-column mx-3">
+              </div></div>
+
+
+              <div className="col-md-4 col-sm-6"><div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Guarantor's Phone Number</label>
                 <input type="tel" name="phone" value={guarantorDetails?.phone} onChange={handleGuarantorChange} disabled={!editGuarantor} placeholder="E.g. +2340123456789" />
-              </div>
-              <div className="form-group d-flex flex-column mx-3">
+              </div></div>
+
+
+              <div className="col-md-4 col-sm-6"><div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Guarantor's Email Address</label>
                 <input type="email" name="email" value={guarantorDetails?.email} onChange={handleGuarantorChange} disabled={!editGuarantor} placeholder="E.g johndeo@yahoo.com" />
-              </div>
-            </div>
-            <div className="d-flex mt-4">
-              <div className="form-group d-flex flex-column mx-3">
+              </div></div>
+
+              <div className="col-md-4 col-sm-6"><div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Guarantor's Residential Address</label>
                 <input type="text" name="address" value={guarantorDetails?.address} onChange={handleGuarantorChange} disabled={!editGuarantor} placeholder="E.g Tafawal Balewal Street, Abuja" />
-              </div>
-              <div className="form-group d-flex flex-column mx-3">
+              </div></div>
+
+              <div className="col-md-4 col-sm-6"><div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Guarantor's Occupation</label>
                 <input type="text" name="occupation" onChange={handleGuarantorChange} value={guarantorDetails?.occupation} disabled={!editGuarantor} placeholder="E.g. Entrepreneurs" />
-              </div>
-              <div className="form-group d-flex flex-column mx-3">
+              </div></div>
+
+              <div className="col-md-4 col-sm-6"><div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Gender</label>
                 <select name="gender" value={guarantorDetails?.gender} onChange={handleGuarantorChange} disabled={!editGuarantor}>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
               </div>
-            </div>
-          </form>
-          <div className="d-flex">
-            {
-              !editGuarantor &&
-              <button onClick={() => setEditGuarantor(true)} className="btn edit mx-4 my-5">
-                Edit
-              </button>
-            }
-
-            {editGuarantor && (
-              <div>
-                <>
-                  {!guarantorLoading &&
-                    <>
-                      {!isLoading && <button onClick={
-                        // () => setEditGuarantor(false)
-                        () => openModal('discard')
-                      } disabled={isLoading} className="btn mx-4 discard my-5">Discard Changes</button>}
-                      <button onClick={() => confirmUpdate("Guarantor")} disabled={isLoading} className="btn mx-4 my-5 save">Save</button>
-                    </>}
-
-                </>
-
               </div>
-            )}
-          </div>
 
-        </div>
+            </div>
+            <div className="d-flex">
+              {
+                !editGuarantor &&
+                <button onClick={() => setEditGuarantor(true)} className="btn edit mx-3 my-4">
+                  Edit
+                </button>
+              }
+
+              {editGuarantor && (
+                <div>
+                  <>
+                    {!guarantorLoading &&
+                      <>
+                        {!isLoading && <button onClick={
+                          // () => setEditGuarantor(false)
+                          () => openModal('discard')
+                        } disabled={isLoading} className="btn mx-3 discard my-4">Discard Changes</button>}
+                        <button onClick={() => confirmUpdate("Guarantor")} disabled={isLoading} className="btn mx-3 my-4 save">Save</button>
+                      </>}
+
+                  </>
+
+                </div>
+              )}
+            </div>
+
+          </div>
+        </form>
+
+
       </div>
       <Modal
         isOpen={modalIsOpen}
@@ -283,17 +301,9 @@ const AccountGuarantor = ({ setToken }) => {
         onRequestClose={closeModal}
 
         contentLabel="Example Modal"
-        className={{
-          base: 'modal-base',
-          afterOpen: 'modal-base_after-open',
-          beforeClose: 'modal-base_before-close'
-        }}
-        overlayClassName={{
-          base: 'profile-overlay-base',
-          afterOpen: 'overlay-base_after-open',
-          beforeClose: 'overlay-base_before-close'
-        }}
-        shouldCloseOnOverlayClick={false}
+        className="custom-modal"
+        overlayClassName="custom-overlay"
+    shouldCloseOnOverlayClick={true}
       >
         <ProfileUpdateModal
           closeModal={closeModal}

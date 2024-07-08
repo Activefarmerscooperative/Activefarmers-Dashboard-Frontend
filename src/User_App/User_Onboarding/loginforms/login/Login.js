@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../login.css';
@@ -100,37 +99,36 @@ export default function Login() {
 
     }
     return (
-        <div className="login-page pt-3 px-5 users-form">
-            <div>
-                <div className="form mt-3 px-5 py-3">
-                    <h1>Log In to Dashboard</h1>
-                    Log in to your existing account
-                    <form className='d-flex flex-column my-4 '>
-                    <input type="tel" name="phone" className="email-input" placeholder='Enter phone number e.g: 08012345678'  value={user.phone} onChange={handleChange} autocomplete="on" required />
+        <div className="login-page mt-2 d-flex justify-content-center">
+
+            <div className="d-flex align-items-center flex-column form">
+                <h1 className="text-nowrap text-center">Log In to Dashboard</h1>
+                Log in to your existing account
+                <form className='d-flex flex-column my-4 '>
+                    <input type="tel" name="phone" className="email-input" placeholder='Enter phone number e.g: 08012345678' value={user.phone} onChange={handleChange} autocomplete="on" required />
 
 
-                        <div className="d-flex align-items-center justify-content-between password mt-3">
-                            <input type={!inputType ? "text" : "password"} name="password" placeholder='password' required value={user.password} onChange={handleChange} className="my-2" />
+                    <div className="d-flex align-items-center  password mt-2">
+                        <input type={!inputType ? "text" : "password"} name="password" placeholder='password' required value={user.password} onChange={handleChange} className="my-2" />
 
-                            <div onClick={toggleSavingsVisiblity}>
-                                <Icon icon={savingsIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
-                            </div>
-
+                        <div onClick={toggleSavingsVisiblity} className="float-right">
+                            <Icon icon={savingsIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
                         </div>
 
-
-                        <div className='d-flex align-items-center mt-2'>
-                            <input type="checkbox" name="" id="" className='mx-2' />
-                            Remember Me
-                        </div>
-                        {isLoading && <button className='login-button mt-5'><RotatingLines width="15" strokeColor="#FFF" strokeWidth="3" /></button>}
-                        {!isLoading && <button className='login-button mt-5' onClick={handleSubmit}>Log In</button>}
+                    </div>
 
 
+                    <div className='d-flex align-items-center mt-2'>
+                        <input type="checkbox" name="" id="" className='mx-2' />
+                        Remember Me
+                    </div>
+                    {isLoading && <button className='login-button mt-4'><RotatingLines width="15" strokeColor="#FFF" strokeWidth="3" /></button>}
+                    {!isLoading && <button className='login-button mt-4' onClick={handleSubmit}>Log In</button>}
 
-                    </form>
-                    <p>Forgotten Password? <a href="/login/forgotpassword" style={{ color: "#FB9129", fontWeight: "600" }}> Reset Here </a></p>
-                </div>
+
+
+                </form>
+                <p>Forgotten Password? <a href="/login/forgotpassword" style={{ color: "#FB9129", fontWeight: "600" }}> Reset Here </a></p>
             </div>
 
         </div>

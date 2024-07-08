@@ -1,12 +1,12 @@
-.registration{
+.registration {
     background-color: #ffffff;
-    /* height: auto; */
     height: 100vh;
 }
 
-/* a {
-    
-} */
+
+.reg-header{
+    padding: 30px 50px;
+}
 
 .registration .reg-header a {
     font-weight: 500;
@@ -14,18 +14,166 @@
     text-align: center;
     color: #0D9068;
     text-decoration: none;
+    text-wrap: nowrap;
 }
-
+.registration .reg-header .text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .registration .reg-header button {
     width: 160px;
-    height: 45px;
+    padding: 10px;
     background-color: transparent;
     border: 1.3px solid #E98923;
     border-radius: 55px;
     font-weight: 400;
     font-size: 20px;
-    line-height: 24px;
-
+    line-height: normal;
+    text-wrap: nowrap;
     color: #E98923;
 }
 
+
+
+
+
+/* CSS for screens between 992px and 1199.98px */
+@media (min-width: 992px) and (max-width: 1199.98px) {}
+
+/* CSS for screens between 768px and 991.98px */
+@media (min-width: 769px) and (max-width: 900px) {
+    .registration.px-5 {
+        padding-right: 1rem !important;
+        padding-left: 1rem !important;
+    }
+    .reg-header{
+        padding: 30px 10px;
+    }
+    .reg-header a.mx-5 {
+        margin-right: 2rem !important;
+        margin-left: 2rem !important;
+    }
+
+}
+
+
+/* CSS for screens between 576px and 767.98px */
+@media (min-width: 577px) and (max-width: 768.98px) {
+    .registration.px-5 {
+        padding-right: 1rem !important;
+        padding-left: 1rem !important;
+    }
+    .reg-header{
+        padding: 30px 10px;
+    }
+    .reg-header a.mx-5 {
+        margin-right: 1rem !important;
+        margin-left: 1rem !important;
+    }
+    .registration .reg-header button {
+        width: fit-content;
+        font-size: 16px;
+        padding: 5px 10px;
+        margin-top: 5px;
+    }
+
+    .reg-header{
+        padding: 30px 10px;
+    }
+}
+
+/* CSS for screens up to 575.98px */
+@media (min-width: 427px) and (max-width: 576.98px) {
+    .registration .reg-header button {
+        width: fit-content;
+        font-size: 14px;
+        padding: 5px 10px;
+        margin-top: 5px;
+    }
+    .registration .reg-header .text {
+       
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .reg-header{
+        padding: 30px 0;
+    }
+}
+
+/* Small Devices (Phones) */
+@media (min-width: 376px) and (max-width: 426.98px) {
+    .registration.px-5 {
+        padding-right: 1rem !important;
+        padding-left: 1rem !important;
+    }
+    .registration .reg-header a.mx-5 {
+        margin-right: 0rem !important;
+        margin-left: 0rem !important;
+    }
+    .reg-header{
+        padding: 30px 0;
+    }
+    .reg-header-content{
+        align-items: flex-start !important;
+    }
+    .registration .reg-header button {
+        width: fit-content;
+        font-size: 16px;
+        padding: 5px 10px;
+        margin-top: 5px;
+    }
+    .registration .reg-header .text {
+       
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 375.98px) {
+    .registration.px-5 {
+        padding-right: 1rem !important;
+        padding-left: 1rem !important;
+    }
+    .registration .reg-header a.mx-5 {
+        margin-right: 0rem !important;
+        margin-left: 0rem !important;
+    }
+    .reg-header{
+        padding: 30px 0;
+    }
+    .registration .reg-header-content{
+        align-items: flex-start !important;
+        
+    }
+    .registration .reg-header button {
+        width: fit-content;
+        font-size: 14px;
+        padding: 5px 10px;
+        margin-top: 5px;
+    }
+    .registration .reg-header a, .reg-header .text {
+        font-size: 14px;
+    }
+    .registration .reg-header .text {
+       
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+}
+
+@media (max-width: 321px) {
+    .reg-header-content{
+        /* align-items: center !important; */
+        /* flex-direction: column; */
+        
+    }
+   
+    .registration .reg-header a, .reg-header .text {
+        font-size: 12px;
+    }
+}

@@ -81,9 +81,14 @@ export default function DashboardHome({ user, setToken }) {
 
 
   return (
-    <div className='my-5 px-4 user-dashboard-home'>
+    <div className='px-3 py-2 user-dashboard-home'>
       <div className=''>
-        <div className='px-4 profile-info mb-3 mobile '>
+
+        <div className="user-info-summary d-flex">
+          <h1>Dashboard</h1>
+
+
+        <div className='px-2 profile-info mobile profile-info'>
           <label htmlFor="image-upload" className="profile-img-container">
             <img
               src={image || user.image || profile}
@@ -96,10 +101,13 @@ export default function DashboardHome({ user, setToken }) {
             </button>
             <input type="file" id="image-upload" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
           </label>
-          <p>{user?.surname} {user?.firstname}</p>
-          <p>ID: {user.reference}</p>
+          <div className="user-info-summary-text d-flex"><p>{user?.surname} {user?.firstname} </p> {" "}<p> ID: {user.reference}</p></div>
+          
         </div>
-        <h1>Dashboard</h1>
+        </div>
+
+        
+
 
         {
           user?.regCompletePercent < 100 && (
@@ -114,7 +122,8 @@ export default function DashboardHome({ user, setToken }) {
         <div className="savings my-4">
           <div className="d-flex align-items-center user-dashboard-header">
             <div className="savings-wallet-category">
-              <div className="px-3 card loan">
+
+              <div className="px-3 card">
                 <div className="d-flex align-items-center justify-content-between">
                   <p className='savings-title'>My Loan</p>
                   <p>(0) </p>
@@ -128,7 +137,7 @@ export default function DashboardHome({ user, setToken }) {
                   )}
                   <div onClick={toggleLoanVisibility}>
                     <Icon
-                      icon={loanIcon ? "mdi:eye" : "mdi:eye-off"}
+                      icon={loanIcon ? "mdi:eye-off" : "mdi:eye"}
                       className="eye-icon"
                     />
                   </div>

@@ -1,3 +1,15 @@
+.dropdown-toggle::after {
+  display: none;
+}
+.dropdown-toggle.btn {
+  border: none;
+  outline: none;
+  width: auto !important;
+}
+
+.dropdown-menu li{
+  cursor: pointer;
+}
 .header-buttons .iconify{
     width: 35px;
 height: 35px;
@@ -10,9 +22,22 @@ padding: 5px;
 .summary-section p{
     white-space: nowrap;
 }
+
+.statistics {
+  justify-content: space-around;
+}
+
+.cards-section::-webkit-scrollbar {
+  display: none;
+}
+
 .cards-section {
-    max-height: 1000px; /* Set an initial maximum height */
-    transition: max-height 0.3s ease; /* Add a smooth transition */
+  justify-content: space-around;
+  margin: 0 50px;
+  max-height: 1000px;
+  /* Set an initial maximum height */
+  transition: max-height 0.3s ease;
+  /* Add a smooth transition */
   }
   
   .cards-section.collapsed {
@@ -30,4 +55,121 @@ padding: 5px;
 }
 .dashboard .css-11xur9t-MuiPaper-root-MuiTableContainer-root {
  width: 100% !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 1024px) {
+
+  .fold-up .iconify {
+    width: 40px;
+    height: 40px;
+  }
+
+  .statistics {
+    justify-content: space-evenly;
+  }
+
+  .cards-section {
+    margin: 0 80px 0 50px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .cards-section {
+    display: flex;
+    white-space: nowrap;
+    overflow-x: scroll !important;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    cursor: pointer;
+    width: 650px;
+    margin: 0;
+    justify-content: start;
+    box-shadow: rgb(204, 219, 232) -3px 0px 6px 1px inset, rgba(255, 255, 255, 0.5) 3px 0px 6px 0px inset;
+
+  }
+
+  .statistics {
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .header-buttons .iconify {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .dashboard-body {
+    margin: 3rem 0 0 0 !important;
+  }
+
+  .cards-section {
+    width: 500px;
+  }
+
+  .fold-up .iconify {
+    width: 35px;
+    height: 35px;
+  }
+
+  .statistics {
+    justify-content: space-around;
+  }
+
+  .header-buttons .iconify {
+    margin: 0 0.5rem !important;
+  }
+
+  .summary-section p {
+    white-space: normal;
+  }
+}
+
+@media screen and (max-width: 522px) {
+  .cards-section {
+    width: 430px;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .header-buttons .iconify {
+    width: 25px;
+    height: 25px;
+}
+.summary-section p {
+  font-size: 14px;
+}
+.cards-section {
+  width: 320px;
+}
+}
+@media screen and (max-width: 376px) {
+  .cards-section {
+  width: 280px;
+}
+.fold-up .iconify {
+  width: 30px;
+  height: 30px;
+}
+.sorting-button .btn {
+  padding: 5px 10px;
+}
+}
+
+@media screen and (max-width: 321px) {
+  .cards-section {
+  width: 250px;
+}
 }

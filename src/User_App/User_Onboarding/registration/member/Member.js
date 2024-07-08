@@ -13,6 +13,10 @@ export default function Member() {
     const [confirmPass, setConfirmPass] = useState("")
     const [location, setLocation] = useState([])
     const [isLoading, setIsLoading] = useState(false)
+
+    const [selectedValue, setSelectedValue] = useState("");
+
+
     const [member, setMember] = useState({
         surname: "",
         firstname: "",
@@ -61,6 +65,7 @@ export default function Member() {
 
         const { name, value } = e.target;
         setMember({ ...member, [name]: value });
+        setSelectedValue(e.target.value);
     };
 
     const validateForm = () => {
@@ -170,58 +175,75 @@ export default function Member() {
 
 
 
-// Get all input elements with the "asterisk-placeholder" class
-const inputElements = document.getElementsByClassName('asterisk-placeholder');
+    // Get all input elements with the "asterisk-placeholder" class
+    const inputElements = document.getElementsByClassName('asterisk-placeholder');
 
-// Iterate over the input elements
-Array.from(inputElements).forEach((input) => {
-  const placeholderText = input.getAttribute('placeholder');
+    // Iterate over the input elements
+    Array.from(inputElements).forEach((input) => {
+        const placeholderText = input.getAttribute('placeholder');
 
-  // Modify the placeholder by adding an asterisk and setting its color to red
-  input.setAttribute('placeholder', `${placeholderText} *`);
-  input.style.color = 'red';
-});
+        // Modify the placeholder by adding an asterisk and setting its color to red
+        input.setAttribute('placeholder', `${placeholderText} *`);
+        input.style.color = 'red';
+    });
 
 
 
 
 
     return (
-        <div className="member px-5 py-2">
-            <div className="d-flex flex-column align-items-center py-3 my-2">
+        <div className="member px-5 py-2 d-flex">
+            <div className="member-content d-flex flex-column align-items-center py-3">
                 <h1>Register as a member</h1>
-                <span>Create an account to join our cooperative as a member</span>
-                <div className="d-flex flex-column align-items-center form mt-5 ">
+                <span>Create an account to receive  join our cooperative as a member</span>
+                <div className="d-flex flex-column align-items-center mt-5 ">
+
                     <p>Please complete this form to the best of your ability providing all relevant details. Please note that your application will go through confirmation prior to processing. </p>
-                    <form className=" d-flex align-items-start justify-content-center mb-4">
-                        <div>
+                    <form className=" row custom-gutter text-center">
+
+                        <div className="col-md-6">
                             <input type="text" name="surname" required value={member.surname} onChange={handleChange} placeholder="Surname" />
+                        </div>
+                        <div className="col-md-6">
+                            <input required type="text" name="firstname" onChange={handleChange} value={member.firstname} placeholder="Firstname" />
+                        </div>
+                        <div className="col-md-6">
                             <input type="email" name="email" required value={member.email} onChange={handleChange} placeholder="Email Address" />
-                            <select name="gender" value={member.gender} required onChange={handleChange}>
+                        </div>
+                        <div className="col-md-6">
+                            <input required type="tel" name="phone" value={member.phone} onChange={handleChange} placeholder="Phone Number e.g:+2348123456789" />
+                        </div>
+                        <div className="col-md-6">
+                            <select name="gender" value={member.gender} required onChange={handleChange} className={selectedValue ? "selected" : ""}>
                                 <option value="">Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
-                            <select required name="membershipType" value={member.membershipType} onChange={handleChange}>
-                                <option value="">Membership category</option>
-                                <option value="Farmer">Farmer</option>
-                                <option value="Non-Farmer">Non-Farmer</option>
-                            </select>
-                            <input autocomplete="new-password" required type="password" name="password" onChange={handleChange} value={member.password} placeholder="Password" />
                         </div>
-
-                        <div>
-                            <input required type="text" name="firstname" onChange={handleChange} value={member.firstname} placeholder="Firstname" />
-                            <input required type="tel" name="phone" value={member.phone} onChange={handleChange} placeholder="Phone Number e.g:+2348123456789" />
-                            <select required name="location" value={member.location} onChange={handleChange} className="">
+                        <div className="col-md-6">
+                            <select required name="location" value={member.location} onChange={handleChange} className={selectedValue ? "selected" : ""}>
                                 <option value="">Location</option>
                                 {
                                     location.map(item => <option key={item._id} value={item._id}>{item.name}</option>)
                                 }
 
                             </select>
+                        </div>
+                        <div className="col-md-6">
                             <input required type="text" name="address" onChange={handleChange} value={member.address} placeholder="Home Address" />
+                        </div>
+                        <div className="col-md-6">
+                            <select required name="membershipType" value={member.membershipType} onChange={handleChange} className={selectedValue ? "selected" : ""}>
+                                <option value="">Membership category</option>
+                                <option value="Farmer">Farmer</option>
+                                <option value="Non-Farmer">Non-Farmer</option>
+                            </select>
+                        </div>
 
+                        <div className="col-md-6">
+                            <input autocomplete="new-password" required type="password" name="password" onChange={handleChange} value={member.password} placeholder="Password" />
+                        </div>
+                        <div className="col-md-6">
                             <div className="mx-0">
                                 <input required type="password" name="confirmpass" value={confirmPass} onChange={(e) => {
                                     setConfirmPass(e.target.value);
@@ -238,33 +260,24 @@ Array.from(inputElements).forEach((input) => {
                                     <p className="password-match">Password and Confirm Password do not match.</p>
                                 )}
                             </div>
-
-
-
                         </div>
-                    </form>
-                    {isLoading && <center className="btn member-btn"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
-                    {!isLoading && <button onClick={handleSubmit} disabled={isLoading} className="btn member-btn mx-auto mt-3">Create Account</button>}
 
+                    </form>
+                    <div className="d-flex justify-content-center">
+                        {isLoading && <center className="btn member-btn mx-auto mt-3"><RotatingLines width="15" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+                        {!isLoading && <button onClick={handleSubmit} disabled={isLoading} className="btn member-btn mx-auto mt-3">Create Account</button>}
+                    </div>
 
                 </div>
                 <Modal
                     isOpen={modalIsOpen}
                     // onAfterOpen={afterOpenModal}
                     onRequestClose={closeModal}
-                    contentLabel="Enter OTP"
-                    className={{
-                        base: 'modal-base',
-                        afterOpen: 'modal-base_after-open',
-                        beforeClose: 'modal-base_before-close'
-                    }}
-                    overlayClassName={{
-                        base: 'overlay-base',
-                        afterOpen: 'overlay-base_after-open',
-                        beforeClose: 'overlay-base_before-close'
-                    }}
-                    shouldCloseOnOverlayClick={false}
-                    closeTimeoutMS={2000}
+                    className="custom-modal"
+                    overlayClassName="custom-overlay"
+                    contentLabel="Example Modal"
+                    shouldCloseOnOverlayClick={true}
+                    // closeTimeoutMS={2000}
                 >
                     <OtpModal
                         message={message} />
