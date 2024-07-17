@@ -79,6 +79,28 @@ form.row {
 .member select::placeholder {
   color: #444444;
 }
+.member .password {
+  /* max-width: 80%; */
+  /* border: 1px solid #444444;
+  width: 350px;
+  padding: 0; */
+  border: 1px solid #444444;
+    width: 375px;
+    padding: 0;
+    margin: 0 auto;
+    border-radius: 4px;
+}
+.member .password .icon-div {
+  flex: 1;
+}
+.member .password .eye-icon {
+  cursor: pointer;
+}
+.member .password input {
+  flex:5;
+  outline: none;
+  border: none;
+}
 
 /* .member input::placeholder::after {
   content: '*';
@@ -105,6 +127,7 @@ form.row {
 .member input:focus,
 .member select:focus {
   outline: none;
+  border-color: #FB9129;
   
 }
 .member select.selected::placeholder {
@@ -137,6 +160,7 @@ form.row {
 }
 
 .member p.password-match {
+  float: right;
   color: red;
   width: auto;
   margin: 0;
@@ -151,7 +175,11 @@ form.row {
 
 
 
-
+@media (max-width: 1025px) {
+  .member .password {
+    width: 280px;
+  }
+}
 
 
 
@@ -159,6 +187,16 @@ form.row {
 @media (min-width: 769px) and (max-width: 900px) {
   .custom-gutter {
     margin: 0rem;
+  }
+}
+@media (max-width: 601px) {
+  .member .password {
+    width: 375px;
+  }
+}
+@media (max-width: 568px) {
+  .member .password {
+    width: 320px;
   }
 }
 
@@ -186,6 +224,7 @@ form.row {
     height: 50px;
     padding: 5px;
   }
+  
 }
 
 /* Small Devices (Phones) */
@@ -196,6 +235,9 @@ form.row {
 
   .member span {
     font-size: 16px;
+  }
+  .member .password {
+    width: 280px;
   }
 
   .custom-gutter {
@@ -244,6 +286,9 @@ form.row {
     font-size: 18px;
     padding: 5px;
   }
+  .member .password {
+    width: 280px;
+  }
 
 }
 
@@ -252,5 +297,8 @@ form.row {
   .member input,
   .member select {
     width: 320px;
+  }
+  .member .password {
+    width: 255px;
   }
 }

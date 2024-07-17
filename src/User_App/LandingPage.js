@@ -1,14 +1,26 @@
 import { useNavigate } from "react-router-dom";
 import { Icon } from '@iconify/react';
 import React from "react";
-import './landingpage.css'
+import './landingpage.css';
+import { useQuery } from "react-query";
+import { wakeServer } from "../utils/api/general";
+import { toast } from "react-toastify";
+
+const wakeTheServer = async () => {
+    try {
+      const res = await wakeServer()
+      return res
+    } catch (error) {
+      toast.error(error)
+    }
+  }
 
 export default function LandingPage() {
     const navigate = useNavigate();
-    // function handleClick() {
-    //     navigate("/verifyemail");
-    // }
-
+ 
+  // React query fetch data
+  const { data, status } = useQuery(['wake server'], wakeTheServer)
+  console.log("hello data", data)
     return (
         <div className="landing-page" id="root">
             <div className="">

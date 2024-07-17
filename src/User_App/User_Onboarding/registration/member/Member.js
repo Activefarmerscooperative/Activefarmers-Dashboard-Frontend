@@ -7,6 +7,8 @@ import { fetchAllStates } from "../../../../utils/api/general"
 import { RegisterMember } from "../../../../utils/api/member"
 import { RotatingLines } from "react-loader-spinner";
 import { toast } from "react-toastify";
+import { Icon } from '@iconify/react';
+
 export default function Member() {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [message, setMessage] = useState("")
@@ -16,6 +18,24 @@ export default function Member() {
 
     const [selectedValue, setSelectedValue] = useState("");
 
+    const [inputType, setInputType] = useState("true");
+    const [confirmInputType, setConfirmInputType] = useState("true");
+    const [passwordIcon, setPasswordIcon] = useState("mdi:eye-off");
+    const [confirmPasswordIcon, setConfirmPasswordIcon] = useState("mdi:eye-off");
+
+    const [emailError, setEmailError] = useState("");
+    const [phoneError, setPhoneError] = useState("");
+
+    const togglePasswordVisiblity = () => {
+        setInputType(inputType ? false : true);
+        setPasswordIcon(!passwordIcon);
+    };
+
+
+    const toggleConfirmPasswordVisiblity = () => {
+        setConfirmInputType(confirmInputType ? false : true);
+        setConfirmPasswordIcon(!confirmPasswordIcon);
+    };
 
     const [member, setMember] = useState({
         surname: "",
@@ -66,6 +86,48 @@ export default function Member() {
         const { name, value } = e.target;
         setMember({ ...member, [name]: value });
         setSelectedValue(e.target.value);
+
+        // if (name === "email") {
+        //     if (!isValidEmail(value)) {
+        //         setEmailError("Invalid email format");
+        //     } else {
+        //         setEmailError("");
+        //     }
+        // }
+
+        // if (name === "phone") {
+        //     if (!isValidPhoneNumber(value)) {
+        //         setPhoneError("Invalid phone number format");
+        //     } else {
+        //         setPhoneError("");
+        //     }
+        // }
+        if (name === "email" && !emailError) {
+            setEmailError("");
+        }
+
+        if (name === "phone" && !phoneError) {
+            setPhoneError("");
+        }
+    };
+    const handleBlur = (e) => {
+        const { name, value } = e.target;
+
+        if (name === "email") {
+            if (!isValidEmail(value)) {
+                setEmailError("Invalid email format");
+            } else {
+                setEmailError("");
+            }
+        }
+
+        if (name === "phone") {
+            if (!isValidPhoneNumber(value)) {
+                setPhoneError("Invalid phone number format");
+            } else {
+                setPhoneError("");
+            }
+        }
     };
 
     const validateForm = () => {
@@ -121,7 +183,9 @@ export default function Member() {
 
     const isValidPhoneNumber = (phone) => {
         // Regular expression for phone number validation
-        const phoneRegex = /^\+\d+$/;
+        const phoneRegex = /^\+234\d{10}$/;
+        // const phoneRegex = /^(?:\+?234)?(?:[789][01]\d{8}|[789][01]\d{7})$/;
+        // const phoneRegex = /^(?:\+234|0)?[789]\d{9}$/;
 
         return phoneRegex.test(phone);
     };
@@ -202,16 +266,24 @@ export default function Member() {
                     <form className=" row custom-gutter text-center">
 
                         <div className="col-md-6">
-                            <input type="text" name="surname" required value={member.surname} onChange={handleChange} placeholder="Surname" />
+                            <input type="text" name="surname" required value={member.surname} onChange={handleChange} placeholder="Type Surname..." />
                         </div>
                         <div className="col-md-6">
-                            <input required type="text" name="firstname" onChange={handleChange} value={member.firstname} placeholder="Firstname" />
+                            <input required type="text" name="firstname" onChange={handleChange} value={member.firstname} placeholder="Type Firstname..." />
                         </div>
                         <div className="col-md-6">
-                            <input type="email" name="email" required value={member.email} onChange={handleChange} placeholder="Email Address" />
+                            <input type="email" name="email" required value={member.email} onChange={handleChange} onBlur={handleBlur} placeholder="Type Email..." className={isValidEmail(member.email) ? "valid" : "invalid"} />
+                            
                         </div>
                         <div className="col-md-6">
-                            <input required type="tel" name="phone" value={member.phone} onChange={handleChange} placeholder="Phone Number e.g:+2348123456789" />
+                            <input required type="tel" name="phone" value={member.phone} onChange={handleChange} onBlur={handleBlur} placeholder="Type Phone with +234..." className={isValidPhoneNumber(member.phone) ? "valid" : "invalid"} />
+                            
+                        </div>
+                        <div className="col-md-6 my-0 py-0">
+{emailError && <p className="validation-error my-0 float-start ms-5 text-danger">{emailError}</p>}
+                        </div>
+                        <div className="col-md-6 my-0">
+                            {phoneError && <p className="validation-error my-0 me-5 text-danger float-end">{phoneError}</p>}
                         </div>
                         <div className="col-md-6">
                             <select name="gender" value={member.gender} required onChange={handleChange} className={selectedValue ? "selected" : ""}>
@@ -230,7 +302,7 @@ export default function Member() {
                             </select>
                         </div>
                         <div className="col-md-6">
-                            <input required type="text" name="address" onChange={handleChange} value={member.address} placeholder="Home Address" />
+                            <input required type="text" name="address" onChange={handleChange} value={member.address} placeholder="Type Address..." />
                         </div>
                         <div className="col-md-6">
                             <select required name="membershipType" value={member.membershipType} onChange={handleChange} className={selectedValue ? "selected" : ""}>
@@ -240,26 +312,59 @@ export default function Member() {
                             </select>
                         </div>
 
-                        <div className="col-md-6">
+                        {/* <div className="col-md-6">
                             <input autocomplete="new-password" required type="password" name="password" onChange={handleChange} value={member.password} placeholder="Password" />
-                        </div>
-                        <div className="col-md-6">
-                            <div className="mx-0">
-                                <input required type="password" name="confirmpass" value={confirmPass} onChange={(e) => {
-                                    setConfirmPass(e.target.value);
-                                    if (member.password.startsWith(e.target.value)) {
-                                        // Password and Confirm Password match
-                                        // You can clear any previous error message if needed
-                                    } else {
-                                        // Password and Confirm Password don't match
-                                        // Display error message and set text color to red
-                                    }
-                                }}
-                                    placeholder="Confirm Password" />
-                                {confirmPass !== '' && !member.password.startsWith(confirmPass) && (
-                                    <p className="password-match">Password and Confirm Password do not match.</p>
-                                )}
+                        </div> */}
+
+                        <div className="col-md-6 ">
+                            <div className="d-flex align-items-center  password">
+                                <input
+                                    type={!inputType ? "text" : "password"}
+                                    name="password"
+                                    placeholder='Type password here...'
+                                    required value={member.password} onChange={handleChange} />
+
+                                <div onClick={togglePasswordVisiblity} className="icon-div">
+                                    <Icon icon={passwordIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
+                                </div>
+
                             </div>
+
+                        </div>
+
+
+
+                        <div className="col-md-6 ">
+                            <div className="password d-flex align-items-center">
+                                <input
+                                    required
+                                    // type="password" 
+                                    type={!confirmInputType ? "text" : "password"}
+                                    name="confirmpass"
+                                    value={confirmPass}
+                                    onChange={(e) => {
+                                        setConfirmPass(e.target.value);
+                                        // if (member.password.startsWith(e.target.value)) {
+                                        //     // Password and Confirm Password match
+                                        //     // You can clear any previous error message if needed
+                                        // } else {
+                                        //     // Password and Confirm Password don't match
+                                        //     // Display error message and set text color to red
+                                        // }
+                                    }}
+                                    placeholder="Type Confirm Password"
+                                />
+                                <div onClick={toggleConfirmPasswordVisiblity} className="icon-div">
+                                    <Icon icon={confirmPasswordIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div className="">
+                            {confirmPass !== '' && !member.password.startsWith(confirmPass) && (
+                                <p className="password-match">Password and Confirm Password do not match.</p>
+                            )}
                         </div>
 
                     </form>
@@ -276,8 +381,8 @@ export default function Member() {
                     className="custom-modal"
                     overlayClassName="custom-overlay"
                     contentLabel="Example Modal"
-                    shouldCloseOnOverlayClick={true}
-                    // closeTimeoutMS={2000}
+                    // shouldCloseOnOverlayClick={true}
+                // closeTimeoutMS={2000}
                 >
                     <OtpModal
                         message={message} />

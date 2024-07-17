@@ -66,6 +66,7 @@
     -ms-overflow-style: none;
     cursor: pointer;
     align-self: normal;
+    flex: 1;
 }
 
 .savings-wallet-category::-webkit-scrollbar {

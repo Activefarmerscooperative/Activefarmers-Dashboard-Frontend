@@ -118,7 +118,7 @@ input:-webkit-autofill:active{
 }
 
 .login-page input.email-input:hover,
-input.email-input:focus {
+input.email-input:focus,.login-page .password:focus-within {
     outline: 1px solid #FB9129;
     border: 1px solid #FB9129;
 }

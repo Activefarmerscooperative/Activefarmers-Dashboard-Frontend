@@ -19,7 +19,7 @@ export default function LoginOtpVerify() {
         if (countdown > 0) {
             timer = setTimeout(() => {
                 setCountdown((prevCountdown) => prevCountdown - 1);
-            }, 1000);
+            }, 2000);
         }
         return () => {
             clearTimeout(timer);
@@ -27,8 +27,8 @@ export default function LoginOtpVerify() {
     }, [countdown]);
 
     const handleResendOTP = () => {
-        setCountdown(94); // Set the initial countdown time (e.g., 01:34)
-        setShowSnackbar(false); // Assuming you want to hide the snackbar when resending OTP
+        setCountdown(60); 
+        setShowSnackbar(false); 
     };
 
     const [otp, setOtp] = useState(["", "", "", "", "", ""]);

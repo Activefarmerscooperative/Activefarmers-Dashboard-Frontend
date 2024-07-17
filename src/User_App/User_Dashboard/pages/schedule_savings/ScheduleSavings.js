@@ -87,7 +87,7 @@ export default function ScheduleSavings({ wallet }) {
                     <center style={{ height: '100', overflow: 'hidden' }} className=""><RotatingLines width="15" /></center>
                 </div> :
                     savingsData.length === 0 ?
-                        <div className="empty-schedule-savings">
+                        (<div className="empty-schedule-savings">
                             <div className='d-flex flex-column align-items-center justify-content-center'>
                                 <Icon icon="fluent:savings-20-filled" hFlip={true} className='savings-icon' />
                                 <p>No Scheduled Savings</p>
@@ -96,13 +96,12 @@ export default function ScheduleSavings({ wallet }) {
                                     Schedule Savings
                                 </button>
                             </div>
-                        </div> :
-                        <div className="savings-wallet-category my-4">
+                        </div>) :
+                        (<>
+                         <div className="savings-wallet-category my-4">
                             <ScheduleSavingsWallet setActiveWallet={setActiveWallet} savingsPlansData={savingsData} />
                         </div>
-            }
-
-            <div className="schedule-savings-list">
+                        <div className="schedule-savings-list">
                 {
 
                     activeWallet &&
@@ -194,6 +193,11 @@ export default function ScheduleSavings({ wallet }) {
 
                 </div>
             </div>
+                        </>)
+                       
+            }
+
+            
 
             <Modal
                 isOpen={modalIsOpen}

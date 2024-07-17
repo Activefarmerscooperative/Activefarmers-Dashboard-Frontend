@@ -5,12 +5,15 @@ import { LoginMember } from "../../../../utils/api/member";
 import { toast } from "react-toastify";
 import { RotatingLines } from "react-loader-spinner";
 import { Icon } from '@iconify/react';
+import Modal from 'react-modal';
+import OtpModal from "../../../../modal/OTP";
 
 
 export default function Login() {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
-
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const [inputType, setInputType] = useState("true");
     const [savingsIcon, setSavingsIcon] = useState("mdi:eye-off");
@@ -89,14 +92,31 @@ export default function Login() {
             toast.success(data.message);
 
             setIsLoading(false);
+            console.log("login data", data)
+
             navigate("/dashboard", { replace: true })
             // return data;
         } catch (error) {
             setIsLoading(false);
             toast.error(error)
             toast.error(error?.error);
+
+            const errorMessage = error.message;
+            console.log("login error message:", errorMessage);
+            if (
+                errorMessage ===
+                `Enter the verification code sent to ${phone} in order to verify your account`
+            ) {
+                setErrorMessage(errorMessage)
+                localStorage.setItem("AFCS-token", error.afcsToken)
+                setModalIsOpen(true);
+            }
+
         }
 
+    }
+    function closeModal() {
+        setModalIsOpen(false);
     }
     return (
         <div className="login-page mt-2 d-flex justify-content-center">
@@ -130,7 +150,15 @@ export default function Login() {
                 </form>
                 <p>Forgotten Password? <a href="/login/forgotpassword" style={{ color: "#FB9129", fontWeight: "600" }}> Reset Here </a></p>
             </div>
-
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                className="custom-modal"
+                overlayClassName="custom-overlay"
+                contentLabel="Example Modal"
+            >
+                <OtpModal message={errorMessage} />
+            </Modal>
         </div>
     )
 }

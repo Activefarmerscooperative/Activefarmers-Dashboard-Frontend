@@ -23,10 +23,11 @@ export default function Farm() {
         async function confirmToken() {
             try {
                 const data = await confirmTokenIsValid(signal)
-                if (data.user.membershipType !== "Farmer") navigate("/register/guarantor", { replace: true });
+                if (data.user.membershipType !== "Farmer") navigate("/dashboard", { replace: true });
             } catch (error) {
                 toast.error("Un-Authorized");
-                navigate("/register/guarantor", { replace: true })
+                // navigate("/register/guarantor", { replace: true })
+                navigate("/dashboard", { replace: true })
             }
         }
         confirmToken()
@@ -85,7 +86,8 @@ export default function Farm() {
             localStorage.setItem("AFCS-token", data.token)
 
             setIsLoading(false);
-            navigate("/register/guarantor", { replace: true })
+            // navigate("/register/guarantor", { replace: true })
+            navigate("/dashboard", { replace: true })
 
         } catch (error) {
 
@@ -129,3 +131,7 @@ export default function Farm() {
         </div>
     )
 }
+
+
+
+      

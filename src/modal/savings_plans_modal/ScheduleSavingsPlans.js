@@ -80,7 +80,7 @@ function ScheduleSavingsPlans({ openModal, closeModal }) {
     return (
         <>
             {step === 1 &&
-                <div className='add-savings-modal py-4 px-2 ' onRequestClose={closeModal}>
+                <div className='add-savings-modal py-4 px-3 ' onRequestClose={closeModal}>
                     <div className="d-flex flex-column add-savings-div">
                         <p onClick={closeModal} className="d-flex align-items-center mx-3" >
                             <Icon icon="material-symbols:arrow-back-rounded" className="add-icon" />
