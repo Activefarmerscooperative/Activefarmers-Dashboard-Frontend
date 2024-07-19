@@ -18,7 +18,6 @@ api.interceptors.request.use(
     config => {
         // let auth_token = localStorage.getItem('AFCS-token')
         const auth_token = selectToken(store.getState());
-        console.log(auth_token)
 
         if (auth_token) {
             config.headers['Authorization'] = `Bearer ${auth_token}`
