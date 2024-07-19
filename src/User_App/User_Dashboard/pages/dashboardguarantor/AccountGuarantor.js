@@ -44,7 +44,7 @@ const AccountGuarantor = ({ setToken }) => {
   }
 
   function closeModal() {
-    setIsOpen(false);
+    // setIsOpen(false);
     setEditAccount(false);
     setEditGuarantor(false)
     
