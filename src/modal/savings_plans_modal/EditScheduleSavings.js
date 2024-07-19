@@ -54,14 +54,14 @@ function EditScheduleSavings({ closeModal, activeSavings }) {
     }
   };
   return (
-    <div className='add-savings-modal p-4 my-4' >
+    <div className='add-savings-modal px-2 py-3 my-4' >
       <div className="d-flex flex-column add-savings-div">
         <p onClick={closeModal} className="d-flex align-items-center mx-5" >
           <Icon icon="material-symbols:arrow-back-rounded" className="add-icon" />
           Edit Scheduled Savings
         </p>
         <div className="d-flex flex-column align-items-center mt-4">
-          <p>
+          <p className="text-wrap">
             Schedule monthly savings into your cooperative account
           </p>
           <span>You can cancel scheduled savings at anytime</span>
@@ -78,9 +78,9 @@ function EditScheduleSavings({ closeModal, activeSavings }) {
             </select>
           </form>
           <div className='d-flex align-items-start justify-content-around'>
-            {isLoading && <center className="btn btn-modal mt-4"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
-            {!isLoading && <button className="btn btn-modal mt-4" onClick={closeModal}>Cancel</button>}
-            {!isLoading && <button className="btn btn-modal mt-4" onClick={editScheduledSavings} >Update</button>}
+            {isLoading && <center className="btn btn-modal mt-4 mx-2"><RotatingLines width="15" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+            {!isLoading && <button className="btn btn-modal mt-4 mx-2" onClick={closeModal}>Cancel</button>}
+            {!isLoading && <button className="btn btn-modal mt-4 mx-2" onClick={editScheduledSavings} >Update</button>}
           </div>
 
         </div>
@@ -91,16 +91,8 @@ function EditScheduleSavings({ closeModal, activeSavings }) {
         // onAfterOpen={afterOpenModal}
         onRequestClose={onCloseModal}
         contentLabel="Modal"
-        className={{
-          base: 'modal-base',
-          afterOpen: 'modal-base_after-open',
-          beforeClose: 'modal-base_before-close'
-        }}
-        overlayClassName={{
-          base: 'overlay-base',
-          afterOpen: 'overlay-base_after-open',
-          beforeClose: 'overlay-base_before-close'
-        }}
+        className="custom-modal"
+        overlayClassName="custom-overlay"
         shouldCloseOnOverlayClick={false}
         closeTimeoutMS={2000}
       >

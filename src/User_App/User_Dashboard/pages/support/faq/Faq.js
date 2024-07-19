@@ -15,11 +15,13 @@ function Accordion(props) {
         <div>
             <div className="accordion">
                 <div className="accordion-header" onClick={handleToggle}>
-                    <p>
+                    <div><p>
                         {props.title}
-                    </p>
+                    </p></div>
+                    <div><Icon icon={!isExpanded ? "material-symbols:expand-circle-down-outline-rounded" : "material-symbols:expand-circle-up-outline-rounded"} className='faq-icons' /></div>
+                    
 
-                    <Icon icon={!isExpanded ? "material-symbols:expand-circle-down-outline-rounded" : "material-symbols:expand-circle-up-outline-rounded"} className='faq-icons' />
+                    
                 </div>
                 {isExpanded && (
                     <div className="accordion-content">
@@ -70,7 +72,7 @@ function Fag() {
     return (
         <div className="faq ">
             <div className="my-3">
-                <p>
+                <p className='faq-p'>
                     Certainly! Here are six frequently asked questions (FAQs) for a loans and savings website, along with their answers:
                 </p>
 

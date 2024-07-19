@@ -8,16 +8,16 @@ function Registration() {
     const navigate = useNavigate();
     return (
         <div className="registration  px-5">
-            <div className="reg-header py-4">
-                <div className="d-flex align-items-center justify-content-between">
-                    <a href="/" className="d-flex align-items-center mx-5" >
+            <div className="reg-header">
+                <div className="d-flex align-items-center justify-content-between reg-header-content">
+                    <a href="/" className="d-flex align-items-center " >
                         <Icon icon="material-symbols:arrow-back-rounded" style={{ fontSize: "20px", margin: "0 5px" }} />
                         Back to Homepage
                     </a>
 
                     <div className='text '>
-                        Don't have an account yet?
-                        <button className='mx-3' onClick={() => { navigate("/login"); }}>Login</button>
+                        have an account?
+                        <button className='mx-1' onClick={() => { navigate("/login"); }}>Login</button>
                     </div>
                 </div>
             </div>

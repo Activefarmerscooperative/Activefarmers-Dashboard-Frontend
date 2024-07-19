@@ -7,7 +7,7 @@ import { CancelLoan, ValidateCard, ValidateSavedCard } from "../utils/api/member
 import { RotatingLines } from "react-loader-spinner";
 import { toast } from "react-toastify";
 
-function AddCardRequest({ message }) {
+function AddCardRequest({ message, handleClose }) {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
 
@@ -61,31 +61,31 @@ function AddCardRequest({ message }) {
     }
 
     return (
-        <div className='loan-success-modal p-4 my-4'>
+        <div className='loan-success-modal p-3'>
             <div className="d-flex flex-column align-items-center add-savings-div">
-                <Icon icon="material-symbols:credit-card" color="#0d9068" className="icon" />
+                <Icon icon="material-symbols:credit-card" onClick={handleClose} color="#0d9068" className="icon" />
 
                 <div className="d-flex flex-column align-items-center mt-4">
                     {
                         !message &&
                         <>
-                            <p>
+                            <p className="fw-bold fs-4">
                                 Add Card to request for a loan
                             </p>
                             <p style={{ fontSize: "13px", width: "400px", fontWeight: "400" }}>
                                 To send a loan request, you need to add details of your valid debit card, your card needs to meet this criteria:
                             </p>
 
-                            <ul className='addcard-info'>
+                            <ul className='addcard-info '>
                                 <li>Ensure your card's expiry date is not within the next 12 months (1year)</li>
                                 <li>Ensure you are adding either your salary card or an active card with previous transaction history to qualify for a loan</li>
                                 <li>We will deduct 50 naira to confirm your card's validity and credit back to your savings account with us</li>
                             </ul>
 
                             <div className='d-flex align-items-start justify-content-around'>
-                                {isLoading && <center className="btn btn-modal mt-4"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
-                                {!isLoading && <button className="btn btn-modal mt-4" onClick={handleCancelLoan}>Cancel Loan</button>}
-                                {!isLoading && <button className="btn btn-modal mt-4" onClick={handleValidateCard}>Continue</button>}
+                                {isLoading && <center className="btn btn-modal my-3 mx-2"><RotatingLines width="15" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+                                {!isLoading && <button className="btn btn-modal my-3 mx-2" onClick={handleCancelLoan}>Cancel Loan</button>}
+                                {!isLoading && <button className="btn btn-modal my-3 mx-2" onClick={handleValidateCard}>Continue</button>}
                             </div>
                         </>
 
@@ -104,7 +104,7 @@ function AddCardRequest({ message }) {
                             <div className='d-flex align-items-start justify-content-around'>
                                 <button className="btn btn-modal mt-4" onClick={handleCancelLoan} disabled={isLoading}>Cancel Loan</button>
 
-                                {isLoading && <center className="btn btn-modal mt-4 ml-2"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+                                {isLoading && <center className="btn btn-modal mt-4 ml-2"><RotatingLines width="15" strokeColor="#1B7B44" strokeWidth="3" /></center>}
                                 {!isLoading && <button className="btn btn-modal mt-4 ml-2" onClick={handleValidateSavedCard}>Continue</button>}
                                 <button className="btn btn-modal mt-4 ml-2" onClick={handleValidateCard} disabled={isLoading}>Add another Card</button>
                             </div>
@@ -124,18 +124,9 @@ function AddCardRequest({ message }) {
                 // onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
                 contentLabel="Example Modal"
-                className={{
-                    base: 'modal-base',
-                    afterOpen: 'modal-base_after-open',
-                    beforeClose: 'modal-base_before-close'
-                }}
-                overlayClassName={{
-                    base: 'overlay-base',
-                    afterOpen: 'overlay-base_after-open',
-                    beforeClose: 'overlay-base_before-close'
-                }}
+                className="custom-modal"
+                overlayClassName="custom-overlay"
                 shouldCloseOnOverlayClick={true}
-                closeTimeoutMS={2000}
             >
                 <LoanSuccessful />
             </Modal>

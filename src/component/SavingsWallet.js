@@ -97,7 +97,7 @@ function SavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavingsCatego
 
             <div onClick={() => toggleSavingsVisibility(item._id)}>
               <Icon
-                icon={savingsVisibility[item._id] ? "mdi:eye" : "mdi:eye-off"}
+                icon={savingsVisibility[item._id] ? "mdi:eye-off" : "mdi:eye"}
                 className="eye-icon"
               />
               {/* <Icon icon={savingsIcon[item._id] ? "mdi:eye-off" : "mdi:eye"} className='eye-icon' /> */}
@@ -117,16 +117,8 @@ function SavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavingsCatego
         // onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         contentLabel="Example Modal"
-        className={{
-          base: 'modal-base',
-          afterOpen: 'modal-base_after-open',
-          beforeClose: 'modal-base_before-close'
-        }}
-        overlayClassName={{
-          base: 'overlay-base',
-          afterOpen: 'overlay-base_after-open',
-          beforeClose: 'overlay-base_before-close'
-        }}
+        className="custom-modal"
+        overlayClassName="custom-overlay"
         shouldCloseOnOverlayClick={true}
         closeTimeoutMS={2000}
       >

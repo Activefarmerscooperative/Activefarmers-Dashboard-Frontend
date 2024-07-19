@@ -1,29 +1,52 @@
 .guarantor {
-  width: fit-content;
+  /* width: fit-content;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 75px rgba(0, 0, 0, 0.09);
+  border-radius: 10px;
+  margin: auto; */
   background: #FFFFFF;
   box-shadow: 0px 4px 75px rgba(0, 0, 0, 0.09);
   border-radius: 10px;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .guarantor h1 {
-  font-weight: 700;
+  /* font-weight: 700; */
   font-size: 36px;
   color: #000000;
 }
 
 .guarantor p {
-  width: 666px;
   font-weight: 400;
   font-size: 14px;
   text-align: center;
   color: #000000;
 }
 
+form.row {
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  --bs-gutter-x: 0;
+}
+
+.custom-gutter {
+  margin: 0 4rem;
+
+}
+
+.custom-gutter [class^='col-'] {
+  margin: 15px 0;
+}
 
 .guarantor input,
 .guarantor select {
-  width: 350px;
+  max-width: 80%;
+  width: 400px;
   height: 50px;
   margin: 10px auto;
   padding: 8px;
@@ -58,6 +81,11 @@
   outline: none;
 }
 
+.guarantor select.selected {
+  color: #000;
+  /* Change color to black */
+}
+
 .guarantor input::-webkit-outer-spin-button,
 .guarantor input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -66,11 +94,6 @@
 
 
 
-
-.guarantor form div {
-  width: min-content;
-  margin: 0 30px;
-}
 
 .guarantor-btn,
 .guarantor-btn.prev:hover {
@@ -96,53 +119,106 @@
   border: 2px solid #0D9068;
 }
 
-.guarantor-content .modal {
-  z-index: 999;
-}
 
-.guarantor-content .modal-base {
-  top: 15%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* margin: auto;
-  width: 800px;
-  height: 350px;
-  border-radius: 22px; */
-  opacity: 0;
-  /* -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-  transform: scale(0.8); */
+
+
+
+/* CSS for screens between 768px and 900px */
+@media (min-width: 769px) and (max-width: 900px) {
+  .custom-gutter {
+    margin: 0rem;
+  }
 }
 
 
+/* CSS for screens between 576px and 767.98px */
+@media (min-width: 577px) and (max-width: 768.98px) {
+  .guarantor h1 {
+    font-size: 30px;
+  }
 
-.guarantor-content .modal-base_after-open {
-  opacity: 1;
-  transform: scale(1);
+  .custom-gutter {
+    margin: 0rem;
+  }
+
+  .guarantor-btn {
+    width: 250px;
+    height: 50px;
+  }
 }
 
-.guarantor-content .modal-base_before-close {
-  transform: scale(.2);
-  opacity: 0;
+/* CSS for screens up to 575.98px */
+@media (min-width: 427px) and (max-width: 576.98px) {
+  .guarantor-btn {
+    width: 250px;
+    height: 50px;
+    padding: 5px;
+  }
 }
 
-.guarantor-content .overlay-base {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(19, 18, 18, 0.75);
-  opacity: 0;
-  transition: all 0.3s ease-out;
+/* Small Devices (Phones) */
+@media (min-width: 376px) and (max-width: 426.98px) {
+  .guarantor h1 {
+    font-size: 26px;
+  }
+
+  .guarantor span {
+    font-size: 16px;
+  }
+
+  .custom-gutter {
+    margin: 0rem;
+  }
+
+  .guarantor input,
+  .guarantor select {
+    width: 350px;
+  }
+
+  .guarantor-btn {
+    width: 200px;
+    height: auto;
+    font-size: 20px;
+    padding: 5px;
+  }
 }
 
-.guarantor-content .overlay-base_after-open {
-  opacity: 1;
+@media (max-width: 375.98px) {
+  .guarantor h1 {
+    font-size: 24px;
+  }
+
+  .guarantor span {
+    font-size: 14px;
+    width: 75%;
+  }
+
+  .guarantor p {
+    width: 75%;
+  }
+
+  .custom-gutter {
+    margin: 0rem;
+  }
+
+  .guarantor input,
+  .guarantor select {
+    width: 350px;
+  }
+
+  .guarantor-btn {
+    width: 200px;
+    height: auto;
+    font-size: 18px;
+    padding: 5px;
+  }
+
 }
 
-.guarantor-content .overlay-base_before-close {
-  opacity: 0;
+@media (max-width: 321px) {
+
+  .guarantor input,
+  .guarantor select {
+    width: 320px;
+  }
 }

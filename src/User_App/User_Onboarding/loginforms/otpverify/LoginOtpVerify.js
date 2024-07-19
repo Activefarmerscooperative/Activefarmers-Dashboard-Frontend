@@ -19,7 +19,7 @@ export default function LoginOtpVerify() {
         if (countdown > 0) {
             timer = setTimeout(() => {
                 setCountdown((prevCountdown) => prevCountdown - 1);
-            }, 1000);
+            }, 2000);
         }
         return () => {
             clearTimeout(timer);
@@ -27,8 +27,8 @@ export default function LoginOtpVerify() {
     }, [countdown]);
 
     const handleResendOTP = () => {
-        setCountdown(94); // Set the initial countdown time (e.g., 01:34)
-        setShowSnackbar(false); // Assuming you want to hide the snackbar when resending OTP
+        setCountdown(60); 
+        setShowSnackbar(false); 
     };
 
     const [otp, setOtp] = useState(["", "", "", "", "", ""]);
@@ -79,11 +79,11 @@ export default function LoginOtpVerify() {
     }
 
     return (
-        <div className="login-page pt-3 px-5">
-            <div className=''>
+        <div className="login-page otp-page mt-3 d-flex justify-content-center">
+            {/* <div className=''> */}
 
-                <div className="form d-flex flex-column align-items-center mt-5 px-5 pt-3">
-                    <h1>OTP Verification</h1>
+                <div className="form d-flex flex-column align-items-center">
+                    <h1 className="text-nowrap text-center">OTP Verification</h1>
                     A One Time Pin (OTP) has been sent to your registered phone number, kindly input the pin below
                     <form className='d-flex flex-column my-5'>
                         <div className="otp-input">
@@ -100,8 +100,8 @@ export default function LoginOtpVerify() {
                         </div>
 
 
-                        {isLoading && <button className='login-btn'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
-                        {!isLoading && <button className='login-btn mt-4 mx-auto' onClick={handleClick}>Verify OTP</button>}
+                        {isLoading && <button className='login-button mt-4 mx-auto'><RotatingLines width="15" strokeColor="#FFF" strokeWidth="3" /></button>}
+                        {!isLoading && <button className='login-button mt-4 mx-auto' onClick={handleClick}>Verify OTP</button>}
 
 
                     </form>
@@ -131,7 +131,7 @@ export default function LoginOtpVerify() {
                     }
 
                 </div>
-            </div>
+            {/* </div> */}
         </div>
     )
 }

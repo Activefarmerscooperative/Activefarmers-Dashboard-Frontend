@@ -1,4 +1,4 @@
-@import url('https://fonts.cdnfonts.com/css/lato');
+/* @import url('https://fonts.cdnfonts.com/css/lato'); */
 
 @font-face {
   font-family: "MillikFont";
@@ -6,19 +6,71 @@
     url("./fonts/Millik.ttf") format("truetype");
 }
 
+:root {
+  --paragraph-font-family: 'Poppins', sans-serif;
+  --headings-font-family: MillikFont;
+}
 
-
-*, body, html {
+*,
+body,
+html {
   margin: 0;
   padding: 0;
   /* min-height: 1000px; */
   box-sizing: border-box;
-  font-family: 'Lato', sans-serif;
+  /* font-family: 'Lato', sans-serif; */
 }
-body, html {
+
+body,
+html {
   overflow-x: hidden;
+  font-family: var(--paragraph-font-family);
+  background-color: #ffffff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--headings-font-family);
 }
 
 .Toastify__toast-container {
-width: 400px !important;
+  width: 400px !important;
+}
+
+.custom-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* padding: 20px; */
+  border-radius: 22px;
+  z-index: 2000;
+}
+
+.ReactModal__Overlay.custom-overlay {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9) !important;
+  /* transition: all .3s ease-out; */
+  z-index: 999;
+  border: none;
+}
+
+.modal-base_after-open {
+  width: fit-content;
+  background-color: rgba(0, 0, 0, 0.98) !important;
+  opacity: 0.8;
+  border: none;
 }

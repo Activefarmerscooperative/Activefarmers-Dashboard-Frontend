@@ -126,19 +126,21 @@ export default function ActiveLoanDetails(userData) {
 
     return (
         <div>
-            <div className="loan">
+            <div className="loan d-flex flex-column active-loan">
 
-                <div className="d-flex justify-content-between mt-3 personalinfo-user">
+                <div className=" mt-3 personalinfo-user">
                     {
-                        !loanDetails && <h6>No Active Loan</h6>
+                        !loanDetails && <p className='fw-bold '>No Active Loan</p>
                     }
                     {
                         loanDetails && <>
                             {activeLoan.map((item, index) => (
-                                <p className='d-flex flex-column info  me-5 mt-3' key={index}>
-                                    <span>{item.label}</span>
-                                    {item.value}
-                                </p>
+                               <div className='active-loan-info'>
+                               <p className='d-flex flex-column info  me-5 mt-3' key={index}>
+                                   <span>{item.label}</span>
+                                   {item.value}
+                               </p>
+                           </div>
                             ))}
                         </>
                     }
@@ -146,7 +148,8 @@ export default function ActiveLoanDetails(userData) {
                 </div>
                 <div className="mt-5">
                     <p className="h6">Repayment Breakdown</p>
-                    <Table className='mt-3'>
+                    <TableContainer component={Paper} >
+                        <Table aria-label="simple table mt-3">
                         <TableHead>
                             <TableRow>
                                 <TableCell>Action</TableCell>
@@ -169,6 +172,8 @@ export default function ActiveLoanDetails(userData) {
                                 ))}
                         </TableBody>
                     </Table>
+                    </TableContainer>
+                    
                 </div>
             </div>
 

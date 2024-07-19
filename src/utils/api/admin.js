@@ -192,3 +192,23 @@ export const GetNotifications = async () => {
     throw error.response.data;
   }
 };
+
+
+export const UpdateAdminInfo = async (item) => {
+  try {
+    const { data } = await api.put(`/api/admins/admin-profile-info`, item);
+
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const UpdateAdminProfilePhoto = async (item) => {
+  try {
+    const { data } = await api.post(`/api/admins/update-admin-photo`, item);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+}

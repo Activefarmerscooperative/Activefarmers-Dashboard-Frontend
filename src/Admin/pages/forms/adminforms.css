@@ -1,0 +1,247 @@
+
+
+.admin-form{
+    height: 100vh;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.admin-form .member{
+    margin: 0;
+    margin: 300px 0px 0px 0px
+}
+.header-section {
+    box-shadow: 0px 4px 15px 0px #0000000D;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 900;
+    background-color: #FFFFFF;
+}
+
+.header-components {
+    padding: 10px 50px;
+}
+
+.header-components img {
+    width: 50px;
+}
+
+.header-components h1 {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0 5px;
+}
+
+.header-components .header-buttons span {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0 8px;
+}
+
+
+.register-link-btn,
+.register-link-btn:hover {
+    background-color: #0D9068;
+    border: none;
+}
+
+.admin-form .text {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    text-wrap: nowrap;
+    color: #000;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-form .login-form h1 {
+    font-size: 30px;
+    color: #FFFFFF;
+}
+
+
+.admin-form .login-form {
+    width: 500px;
+    margin: 0 auto;
+    border-radius: 15px;
+    background: #0D9068;
+    color: #FFFFFF;
+    padding: 20px;
+}
+
+.admin-form .login-button, .admin-form .login-button:hover {
+    background-color: #FB9129;
+    border: none;
+
+}
+
+.admin-form .login-form,
+.admin-form .login-form .password input,
+.admin-form .reset-password,
+.admin-form .login-form input.email-input::placeholder,
+.admin-form .login-form .password input::placeholder {
+    color: #FFFFFF;
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.admin-form input:-internal-autofill-selected {
+    background-color: transparent !important;
+}
+
+.admin-form input:-webkit-autofill,
+.admin-form input:-webkit-autofill:hover,
+.admin-form input:-webkit-autofill:focus,
+.admin-form input:-webkit-autofill:active {
+    -webkit-transition-delay: 9999s;
+    transition-delay: 9999s;
+    background-color: transparent;
+}
+
+.admin-form .login-form input.email-input,
+.admin-form .login-form .password {
+    background-color: transparent;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+}
+
+p.reset-password a {
+    color: #FB9129;
+    text-decoration: none;
+    font-weight: 500;
+
+}
+
+
+@media screen and (max-width: 1024px) {
+   
+    .admin-form .member {
+        margin: 50px 0px 0px 0px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .header-components {
+        padding: 10px;
+    }
+
+    .admin-form .login-form h1,
+    h1.register-form-h1 {
+        font-size: 34px;
+    }
+    .admin-form .member {
+        margin: 50px 0px 0px 0px;
+    }
+}
+
+@media screen and (max-width: 769px) {
+    .admin-form .login-form h1 {
+        font-size: 24px;
+
+    }
+
+    .header-buttons .btn {
+        width: 115px;
+        font-size: 16px;
+    }
+    .admin-form .member {
+        /* margin: 100px 0px 0px 0px; */
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .header-components h1 {
+        font-size: 18px;
+    }
+
+    .header-components img {
+        width: 40px;
+    }
+
+    .admin-form .login-form {
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .admin-span {
+        display: none;
+    }
+
+    .admin-form .login-form h1,
+    h1.register-form-h1 {
+        font-size: 28px;
+    }
+    .admin-form .member {
+        margin: 500px 0px 0px 0px;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .header-components h1 {
+        font-size: 14px;
+        width: 100px;
+    }
+
+    .admin-form .login-form {
+        font-size: 14px;
+        white-space: normal;
+
+    }
+
+    .admin-form.login-page h1,
+    h1.register-form-h1 {
+        font-size: 20px;
+    }
+
+    .admin-form .login-form input.email-input {
+        width: 250px;
+    }
+
+    .header-buttons .btn {
+        width: 100px;
+        font-size: 14px;
+        padding: 8px 0;
+    }
+    .admin-form .text {
+        flex-direction: column;
+        align-items: center;
+        font-size: 14px;
+    }
+    .admin-form .member {
+        margin: 500px 0px 0px 0px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+
+    .admin-form.login-page h1,
+    h1.register-form-h1 {
+        font-size: 18px;
+    }
+    .admin-form .text {
+        flex-direction: column;
+        align-items: center;
+        font-size: 14px;
+    }
+    .admin-form .member {
+        margin: 500px 0px 0px 0px;
+    }
+}
+
+@media screen and (max-width: 321px) {
+    .admin-form .text {
+        font-size: 12px;
+    }
+}

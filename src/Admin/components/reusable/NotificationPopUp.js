@@ -49,13 +49,13 @@ const NotificationPopUp = ({ markAllAsRead, onClose }) => {
 
   const displayedNotifications = notifications?.slice(0, 5);
   return (
-    <Modal isOpen={true} onRequestClose={onClose} contentLabel="notification pop-up">
+    <Modal isOpen={true} onRequestClose={onClose} contentLabel="notification pop-up" overlayClassName="notification-overlay">
       <div className="notification-header px-4 py-2">
         <button className="mark-all-btn" disabled={!notifications?.some(notification => !notification.read)} onClick={markAllAsRead}>
           Mark all as read
         </button>
         <button className="close-btn" onClick={onClose}>
-          <Icon icon="iconoir:cancel" className='mx-3' />
+          <Icon icon="iconoir:cancel" />
         </button>
       </div>
       <div className="notifications-container p-3">
@@ -77,7 +77,7 @@ const NotificationPopUp = ({ markAllAsRead, onClose }) => {
                 </button>
               )}
             </div> */}
-            <div className="notification-dot">
+            <div className={`notification-dot ${markAllAsRead ? "read" : "unread"}`}>
               <div
                 className=""
                 onMouseEnter={() => handleMouseEnter(index)}

@@ -1,14 +1,21 @@
-
-.farm{
-    width: fit-content;
+.farm {
+    /* width: fit-content;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 75px rgba(0, 0, 0, 0.09);
+    border-radius: 10px;
+    margin: auto; */
     background: #FFFFFF;
     box-shadow: 0px 4px 75px rgba(0, 0, 0, 0.09);
     border-radius: 10px;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 
-.farm h1{
+.farm h1 {
     font-weight: 700;
     font-size: 36px;
     color: #000000;
@@ -17,17 +24,33 @@
 
 
 
-.farm p{
-    width: 666px;
+.farm p {
     font-weight: 400;
     font-size: 14px;
     text-align: center;
     color: #000000;
 }
 
+form.row {
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    --bs-gutter-x: 0;
+}
+
+.custom-gutter {
+    margin: 0 4rem;
+
+}
+
+.custom-gutter [class^='col-'] {
+    margin: 15px 0;
+}
+
 
 .farm input {
-  width: 350px;
+    max-width: 80%;
+  width: 400px;
   height: 50px;
   margin: 10px auto;
   padding: 8px;
@@ -38,26 +61,26 @@
 }
 
 
-.farm input::placeholder{
-  font-weight: 400;
-  font-size: 14px;
+.farm input::placeholder {
+    font-weight: 400;
+    font-size: 14px;
 }
 
 
 
-.farm input:focus{
-  outline: none;
+.farm input:focus {
+    outline: none;
 }
 
 .farm input::-webkit-outer-spin-button,
 .farm input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 
 
-.farm form div{
+.farm form div {
     width: min-content;
     margin: 0 30px;
 }
@@ -74,14 +97,14 @@
     color: #FFFFFF;
 }
 
-.farm-btn:hover{
+.farm-btn:hover {
     background-color: #ffffff;
     color: #0D9068;
     border: 2px solid #0D9068;
 }
 
 
-.farm .modal {
+/* .farm .modal {
     z-index: 999;
 }
 
@@ -131,4 +154,103 @@
 
 .farm .overlay-base_before-close {
     opacity: 0;
+} */
+
+
+
+/* CSS for screens between 768px and 900px */
+@media (min-width: 769px) and (max-width: 900px) {
+    .custom-gutter {
+        margin: 0rem;
+    }
+}
+
+
+/* CSS for screens between 576px and 767.98px */
+@media (min-width: 577px) and (max-width: 768.98px) {
+    .farm h1 {
+        font-size: 30px;
+    }
+
+    .custom-gutter {
+        margin: 0rem;
+    }
+
+    .farm-btn {
+        width: 250px;
+        height: 50px;
+    }
+}
+
+/* CSS for screens up to 575.98px */
+@media (min-width: 427px) and (max-width: 576.98px) {
+    .farm-btn {
+        width: 250px;
+        height: 50px;
+        padding: 5px;
+    }
+}
+
+/* Small Devices (Phones) */
+@media (min-width: 376px) and (max-width: 426.98px) {
+    .farm h1 {
+        font-size: 26px;
+    }
+
+    .farm span {
+        font-size: 16px;
+    }
+
+    .custom-gutter {
+        margin: 0rem;
+    }
+
+    .farm input {
+        width: 350px;
+    }
+
+    .farm-btn {
+        width: 200px;
+        height: auto;
+        font-size: 20px;
+        padding: 5px;
+    }
+}
+
+@media (max-width: 375.98px) {
+    .farm h1 {
+        font-size: 24px;
+    }
+
+    .farm span {
+        font-size: 14px;
+        width: 75%;
+    }
+
+    .farm p {
+        width: 75%;
+    }
+
+    .custom-gutter {
+        margin: 0rem;
+    }
+
+    .farm input {
+        width: 350px;
+    }
+
+    .farm-btn {
+        width: 200px;
+        height: auto;
+        font-size: 18px;
+        padding: 5px;
+    }
+
+}
+
+@media (max-width: 321px) {
+
+    .farm input {
+        width: 320px;
+    }
 }

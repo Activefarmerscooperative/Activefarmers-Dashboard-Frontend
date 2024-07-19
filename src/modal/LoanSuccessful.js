@@ -9,7 +9,7 @@ import React from 'react'
 function LoanSuccessful() {
 
     return (
-        <div className='loan-success-modal p-4 my-4'>
+        <div className='loan-success-modal p-4'>
             <div className="d-flex flex-column align-items-center add-savings-div">
                 <Icon icon="ep:success-filled" className="icon" />
                 <div className="d-flex flex-column align-items-center mt-4">

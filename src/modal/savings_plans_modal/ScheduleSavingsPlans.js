@@ -80,9 +80,9 @@ function ScheduleSavingsPlans({ openModal, closeModal }) {
     return (
         <>
             {step === 1 &&
-                <div className='add-savings-modal p-4 my-4' onRequestClose={closeModal}>
+                <div className='add-savings-modal py-4 px-3 ' onRequestClose={closeModal}>
                     <div className="d-flex flex-column add-savings-div">
-                        <p onClick={closeModal} className="d-flex align-items-center mx-5" >
+                        <p onClick={closeModal} className="d-flex align-items-center mx-3" >
                             <Icon icon="material-symbols:arrow-back-rounded" className="add-icon" />
                             Scheduled Savings
                         </p>
@@ -92,29 +92,46 @@ function ScheduleSavingsPlans({ openModal, closeModal }) {
                             </p>
                             <span>You can cancel scheduled savings at anytime</span>
                             <form action="" className="d-flex flex-column align-items-center">
-                                <input type="number" value={savingsData?.amount} onChange={handleChange} name="amount" placeholder="Amount to save" min="0" required />
-                                <select name="category"
-                                    value={savingsData?.category} onChange={handleChange}
-                                    id="contained-button-file">
-                                    <option value="" required>Savings Category</option>
-                                    {
-                                        savingCat?.map((item, i) => <option key={i} value={item}>{item}</option>)
-                                    }
-                                    <option value="Custom" required>Add New Category</option>
-                                </select>
+
+                                <div className="row">
+                                    <div className="form-group col-md-12">
+                                        <input type="number" value={savingsData?.amount} onChange={handleChange} name="amount" placeholder="Amount to save" min="0" required />
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="form-group col-md-12">
+                                        <select name="category"
+                                            value={savingsData?.category} onChange={handleChange}
+                                            id="contained-button-file">
+                                            <option value="" required>Savings Category</option>
+                                            {
+                                                savingCat?.map((item, i) => <option key={i} value={item}>{item}</option>)
+                                            }
+                                            <option value="Custom" required>Add New Category</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="form-group col-md-12">
+                                        <select name="date" value={savingsData?.date} onChange={handleChange}>
+                                            <option value="">Select Day of month for deduction</option>
+                                            {Array.from({ length: 30 }, (_, index) => index + 1).map((day) => (
+                                                <option key={day} value={day}>{day}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                </div>
+
+
+
                                 {/* <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} /> */}
-                                <select name="date" value={savingsData?.date} onChange={handleChange}>
-                                    <option value="">Select Day of month for deduction</option>
-                                    {Array.from({ length: 30 }, (_, index) => index + 1).map((day) => (
-                                        <option key={day} value={day}>{day}</option>
-                                    ))}
-                                </select>
+
                                 {//Show this input when user selects custom category
                                     showCustom && <input type="text" value={savingsData?.newCategory} onChange={handleChange} name="newCategory" placeholder="Enter new savings category" />
                                 }
                             </form>
-                            {isLoading && <center className="btn mt-5"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
-                            {!isLoading && <button onClick={addScheduledSavings} className="btn btn-modal mt-5">Next</button>}
+                            {isLoading && <center className="btn mt-3"><RotatingLines width="15" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+                            {!isLoading && <button onClick={addScheduledSavings} className="btn btn-modal mt-3">Next</button>}
                         </div>
 
                     </div>
