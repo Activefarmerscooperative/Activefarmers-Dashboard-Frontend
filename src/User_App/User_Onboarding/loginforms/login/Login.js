@@ -5,12 +5,15 @@ import { LoginMember } from "../../../../utils/api/member";
 import { toast } from "react-toastify";
 import { RotatingLines } from "react-loader-spinner";
 import { Icon } from '@iconify/react';
+import { useDispatch } from 'react-redux'
+import { setToken } from '../../../../redux/reducers/jwtReducer'
 import Modal from 'react-modal';
 import OtpModal from "../../../../modal/OTP";
 
 
 export default function Login() {
     const navigate = useNavigate();
+    const dispatch = useDispatch()
     const [isLoading, setIsLoading] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -88,7 +91,8 @@ export default function Login() {
         }
         try {
             const data = await LoginMember({ phone, password });
-            localStorage.setItem("AFCS-token", data.token)
+            // localStorage.setItem("AFCS-token", data.token)
+            dispatch(setToken(data?.token))
             toast.success(data.message);
 
             setIsLoading(false);

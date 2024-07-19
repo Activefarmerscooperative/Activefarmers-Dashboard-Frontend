@@ -7,9 +7,12 @@ import { fetchAllStates } from "../../../../utils/api/general"
 import { RegisterMember } from "../../../../utils/api/member"
 import { RotatingLines } from "react-loader-spinner";
 import { toast } from "react-toastify";
+import { useDispatch } from 'react-redux'
+import { setToken } from '../../../../redux/reducers/jwtReducer'
 import { Icon } from '@iconify/react';
 
 export default function Member() {
+    const dispatch = useDispatch()
     const [modalIsOpen, setIsOpen] = useState(false);
     const [message, setMessage] = useState("")
     const [confirmPass, setConfirmPass] = useState("")
@@ -61,6 +64,7 @@ export default function Member() {
     const fetchState = async (signal) => {
         try {
             const data = await fetchAllStates(signal);
+            console.log(data)
             setLocation(data.states);
         } catch (error) {
             if (error) {
@@ -206,10 +210,10 @@ export default function Member() {
         setIsLoading(true)
         try {
             const data = await RegisterMember(member);
-            console.log(data)
-            localStorage.setItem("AFCS-token", data.afcsToken)
+            // localStorage.setItem("AFCS-token", data.afcsToken)
             localStorage.setItem("termii_pinId", data.pinId)
-            setMessage(data.message)
+            dispatch(setToken(data?.afcsToken))
+            setMessage(`${data.message}. May take up to a minute.`)
             openModal()
             setMember({
                 surname: "",
@@ -273,14 +277,14 @@ export default function Member() {
                         </div>
                         <div className="col-md-6">
                             <input type="email" name="email" required value={member.email} onChange={handleChange} onBlur={handleBlur} placeholder="Type Email..." className={isValidEmail(member.email) ? "valid" : "invalid"} />
-                            
+
                         </div>
                         <div className="col-md-6">
                             <input required type="tel" name="phone" value={member.phone} onChange={handleChange} onBlur={handleBlur} placeholder="Type Phone with +234..." className={isValidPhoneNumber(member.phone) ? "valid" : "invalid"} />
-                            
+
                         </div>
                         <div className="col-md-6 my-0 py-0">
-{emailError && <p className="validation-error my-0 float-start ms-5 text-danger">{emailError}</p>}
+                            {emailError && <p className="validation-error my-0 float-start ms-5 text-danger">{emailError}</p>}
                         </div>
                         <div className="col-md-6 my-0">
                             {phoneError && <p className="validation-error my-0 me-5 text-danger float-end">{phoneError}</p>}
@@ -381,7 +385,7 @@ export default function Member() {
                     className="custom-modal"
                     overlayClassName="custom-overlay"
                     contentLabel="Example Modal"
-                    // shouldCloseOnOverlayClick={true}
+                // shouldCloseOnOverlayClick={true}
                 // closeTimeoutMS={2000}
                 >
                     <OtpModal

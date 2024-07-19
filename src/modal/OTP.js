@@ -3,12 +3,15 @@ import Modal from 'react-modal';
 import Verify from "./Verified";
 import { Icon } from '@iconify/react';
 import "./modal.css";
-import { VerifyOTP } from "../utils/api/member"
+import { VerifyOTP, ResendOTP } from "../utils/api/member"
 import { toast } from "react-toastify";
 import { RotatingLines } from "react-loader-spinner";
+import { useDispatch } from 'react-redux'
+import { setToken } from '../redux/reducers/jwtReducer'
 
 
 export default function OtpModal({ message }) {
+    const dispatch = useDispatch()
     const [modalIsOpen, setIsOpen] = useState(false);
     const [otp, setOtp] = useState(["", "", "", "", "", ""]);
     const [isLoading, setIsLoading] = useState(false)
@@ -83,9 +86,20 @@ export default function OtpModal({ message }) {
         };
     }, [countdown]);
 
-    const handleResendOTP = () => {
-        setCountdown(94); // Set the initial countdown time (e.g., 01:34)
-        setShowSnackbar(false); // Assuming you want to hide the snackbar when resending OTP
+    const handleResendOTP = async () => {
+
+        try {
+            setCountdown(94); // Set the initial countdown time (e.g., 01:34)
+            setShowSnackbar(false); // Assuming you want to hide the snackbar when resending OTP
+            const data = await ResendOTP()
+            toast.success(data.message)
+            localStorage.setItem("termii_pinId", data.pinId)
+            // dispatch(setToken(data?.afcsToken))
+
+        } catch (error) {
+            console.log(error)
+        }
+
     };
 
     return (
@@ -112,22 +126,22 @@ export default function OtpModal({ message }) {
                 {isLoading && <center className="btn member-btn mt-5"><RotatingLines width="15" strokeColor="#1B7B44" strokeWidth="3" /></center>}
                 {!isLoading && <button onClick={handleSubmit} className="btn btn-modal mt-5">Submit</button>}
                 <p className="mt-3">
-                            Yet to receive OTP?
-                            {countdown > 0 ? (
-                              <span style={{ color: "#FB9129", fontWeight: "600" }}>
-                                {' '}
-                                Resend OTP ({Math.floor(countdown / 60)
-                                  .toString()
-                                  .padStart(2, '0')}:
-                                {Math.floor(countdown % 60).toString().padStart(2, '0')})
-                              </span>
-                            ) : (
-                              <a href="#" style={{ color: "#FB9129", fontWeight: "600" }} onClick={handleResendOTP}>
-                                {' '}
-                                Resend OTP
-                              </a>
-                            )}
-                          </p>
+                    Yet to receive OTP?
+                    {countdown > 0 ? (
+                        <span style={{ color: "#FB9129", fontWeight: "600" }}>
+                            {' '}
+                            Resend OTP ({Math.floor(countdown / 60)
+                                .toString()
+                                .padStart(2, '0')}:
+                            {Math.floor(countdown % 60).toString().padStart(2, '0')})
+                        </span>
+                    ) : (
+                        <a href="#" style={{ color: "#FB9129", fontWeight: "600" }} onClick={handleResendOTP}>
+                            {' '}
+                            Resend OTP
+                        </a>
+                    )}
+                </p>
 
             </div>
             <Modal

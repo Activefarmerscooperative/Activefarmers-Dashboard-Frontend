@@ -23,7 +23,6 @@ const fetchTransactions = async (key) => {
         return res
 
     } catch (error) {
-        console.log(error)
         // toast.error(error.error);
     }
 };

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Icon } from '@iconify/react';
 import "./modal.css"
 import { ValidatePayment } from "../utils/api/member";
 import { RotatingLines } from "react-loader-spinner";
 import { throttle } from 'lodash';
 
-function TransactionSuccessful({ reference }) {
+function TransactionSuccessful({ reference, closeModal }) {
     const navigate = useNavigate();
     const [message, setMessage] = useState()
     const [payment, setPayment] = useState({
@@ -17,11 +17,11 @@ function TransactionSuccessful({ reference }) {
     const [run, setRun] = useState(true)
 
     useEffect(() => {
-        
+
         async function validatePayment(ref) {
             if (!ref) return
-            console.log("Yeah")
-            try {       
+
+            try {
                 const data = await ValidatePayment({ reference })
                 if (data.status === "success") {
                     setPayment({
@@ -73,9 +73,9 @@ function TransactionSuccessful({ reference }) {
 
                             <p><span>{message}</span></p>
 
-                            <a href="/dashboard">
+                            <Link to={"/dashboard"} onClick={closeModal}>
                                 <button className="btn btn-modal mt-5">Back to Dashboard</button>
-                            </a>
+                            </Link>
 
                         </div>
                     </>
@@ -89,9 +89,9 @@ function TransactionSuccessful({ reference }) {
                             </p>
                             {/* <p style={{ fontSize: "13px" }}>Your added savings will reflect on your dashboard</p> */}
 
-                            <a href="/dashboard">
+                            <Link to="/dashboard" onClick={closeModal}>
                                 <button className="btn btn-modal mt-5">Back to Dashboard</button>
-                            </a>
+                            </Link>
 
                         </div>
                     </>

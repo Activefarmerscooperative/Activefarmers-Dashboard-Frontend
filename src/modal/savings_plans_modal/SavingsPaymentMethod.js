@@ -4,8 +4,10 @@ import React, { useState } from 'react';
 import { AddScheduledSavingCard, ValidateCardForScheduledSavings } from '../../utils/api/member';
 import { RotatingLines } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
+import { useSelector } from "react-redux";
 
 function SavingsPaymentMethod({ closeModal, data }) {
+    const { token } = useSelector((state) => state.auth);
     const [isLoading, setIsLoading] = useState(false);
     const [step, setStep] = useState(1)
 
@@ -30,11 +32,12 @@ function SavingsPaymentMethod({ closeModal, data }) {
     }
 
     async function handleValidateCard(type, id) {
-      
+
         try {
             setIsLoading(true)
             const { data, message } = await AddScheduledSavingCard(type, id)
             toast.success(`${message} Opening payment window, do not close the page.`)
+            localStorage.setItem("AFCS-t", token)
             window.location.replace(data.authorization_url);
         } catch (error) {
             setIsLoading(false)

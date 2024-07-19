@@ -6,9 +6,13 @@ import header from '../../assets/logol.png';
 import { LoginAdmin } from "../../../utils/api/admin";
 import { toast } from "react-toastify";
 import { RotatingLines } from "react-loader-spinner";
+import { useDispatch } from 'react-redux'
+import { setToken } from '../../../redux/reducers/jwtReducer'
+
 
 export default function Login() {
     const navigate = useNavigate();
+    const dispatch = useDispatch()
     let location = useLocation();
     const [isLoading, setIsLoading] = useState(false);
 
@@ -76,7 +80,8 @@ export default function Login() {
 
         try {
             const data = await LoginAdmin(admin);
-            localStorage.setItem("AFCS-token", data.token)
+            // localStorage.setItem("AFCS-token", data.token)
+            dispatch(setToken(data?.token))
             toast.success(data.message);
 
             setIsLoading(false);

@@ -28,6 +28,15 @@ export const LoginAdmin = async (admin) => {
   }
 };
 
+export const confirmAdminTokenIsValid = async (signal) => {
+  try {
+    const { data } = await api.get(`/api/admins/token`, signal,);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
 export const Members = async (signal) => {
   try {
     const { data } = await api.get(`/api/admins/members`, signal);
@@ -139,7 +148,7 @@ export const withdrawalHistory = async (userId, signal) => {
   }
 };
 
-export const approveWithdrawal= async (withdrawalId, signal) => {
+export const approveWithdrawal = async (withdrawalId, signal) => {
   try {
     const { data } = await api.put(`/api/admins/withdrawal/${withdrawalId}/approval`);
     return data;
@@ -148,16 +157,16 @@ export const approveWithdrawal= async (withdrawalId, signal) => {
   }
 };
 
-export const declineWithdrawal= async (withdrawalId, rejectionReason) => {
+export const declineWithdrawal = async (withdrawalId, rejectionReason) => {
   try {
-    const { data } = await api.put(`/api/admins/withdrawal/${withdrawalId}/rejection`,rejectionReason);
+    const { data } = await api.put(`/api/admins/withdrawal/${withdrawalId}/rejection`, rejectionReason);
     return data;
   } catch (error) {
     throw error.response.data;
   }
 };
 
-export const approveLoan= async (loanId, signal) => {
+export const approveLoan = async (loanId, signal) => {
   try {
     const { data } = await api.put(`/api/admins/loan/${loanId}/approval`);
     return data;
@@ -166,9 +175,9 @@ export const approveLoan= async (loanId, signal) => {
   }
 };
 
-export const declineLoan= async (loanId, rejectionReason) => {
+export const declineLoan = async (loanId, rejectionReason) => {
   try {
-    const { data } = await api.put(`/api/admins/loan/${loanId}/rejection`,rejectionReason);
+    const { data } = await api.put(`/api/admins/loan/${loanId}/rejection`, rejectionReason);
     return data;
   } catch (error) {
     throw error.response.data;

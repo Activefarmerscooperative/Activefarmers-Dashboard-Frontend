@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import './widgets.css'
 
-const StatisticCard = ({ title, number, showIcon }) => {
+const StatisticCard = ({ title, number, showIcon, member }) => {
     const [visible, setVisible] = useState(true);
 
     const toggleVisibility = () => {
@@ -22,7 +22,7 @@ const StatisticCard = ({ title, number, showIcon }) => {
                     </div>
                 )}
                 <div className="my-2">
-                    {visible ? <span>{formattedNumber} NGN</span> : <span>*****</span>}
+                    {visible ? <span>{formattedNumber} {(showIcon || member) && "NGN"}</span> : <span>*****</span>}
                 </div>
 
                 <p>{title}</p>

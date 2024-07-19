@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import { Icon } from '@iconify/react';
 import header from '../../assets/logol.png';
@@ -7,6 +7,7 @@ import '../notification/notifications.css'
 import NotificationPopUp from '../../components/reusable/NotificationPopUp';
 // import NotificationsPage from './NotificationsPage';
 import notificationsData from '../../components/data/notificationsData';
+import { confirmAdminTokenIsValid } from "../../../utils/api/admin";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export default function Dashboard() {
   const [notifications, setNotifications] = useState(notificationsData.notifications);
   const [showNotificationPopUp, setShowNotificationPopUp] = useState(false);
   const [deleteIconVisible, setDeleteIconVisible] = useState(Array(notifications?.length).fill(false));
-
+  const [open, setOpen] = useState(false)
 
   const markAllAsRead = () => {
     const updatedNotifications = notifications.map(notification => {
@@ -44,9 +45,31 @@ export default function Dashboard() {
   };
 
 
+  useEffect(() => {
 
+    // Check if user can access this page info on component mount.
+    const abortController = new AbortController();
+    const signal = abortController.signal;
 
+    async function confirmToken() {
 
+      try {
+
+        const data = await confirmAdminTokenIsValid(signal)
+        console.log(data)
+
+        setOpen(true)
+
+      } catch (error) {
+        navigate("/login", { replace: true })
+      }
+    }
+    confirmToken()
+
+    return () => {
+      abortController.abort(); // Cancel the request on component unmount
+    };
+  }, [])
 
 
   return (

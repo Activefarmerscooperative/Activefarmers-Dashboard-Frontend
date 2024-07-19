@@ -7,6 +7,8 @@ import { RotatingLines } from "react-loader-spinner";
 import Modal from 'react-modal';
 import ProfileUpdateModal from "../../../../modal/ProfileUpdateModal";
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
+import { setToken } from '../../../../redux/reducers/jwtReducer'
 
 const fetchData = async (key) => {
 
@@ -22,7 +24,8 @@ const fetchData = async (key) => {
     // toast.error(error);
   }
 };
-const AccountGuarantor = ({ setToken }) => {
+const AccountGuarantor = ({ setToke }) => {
+  const dispatch = useDispatch()
   const [editAccount, setEditAccount] = useState(false)
   const [editGuarantor, setEditGuarantor] = useState(false)
   const [bankDetails, setBankDetails] = useState({})
@@ -36,7 +39,7 @@ const AccountGuarantor = ({ setToken }) => {
   const location = useLocation();
   const state = location?.state;
   const navigate = useNavigate();
-  
+
 
   function openModal(actionType) {
     setIsOpen(true);
@@ -44,10 +47,10 @@ const AccountGuarantor = ({ setToken }) => {
   }
 
   function closeModal() {
-    // setIsOpen(false);
+    setIsOpen(false);
     setEditAccount(false);
     setEditGuarantor(false)
-    
+
   }
 
 
@@ -104,13 +107,12 @@ const AccountGuarantor = ({ setToken }) => {
     setIsLoading(true)
 
     try {
-      console.log("Updating account details:", bankDetails);
       const data = await UpdateBankDetails({ ...bankDetails, accountNumber: `${bankDetails.accountNumber}` })
       toast.success(data.message)
-
+      closeModal()
       // localStorage.setItem("AFCS-token", data.token)
-      // setToken(data.token);
-      closeModal();
+      dispatch(setToken(data?.token))
+      setToke(data.token)
     } catch (error) {
       toast.error(error)
       // toast.error(error?.error)
@@ -124,7 +126,7 @@ const AccountGuarantor = ({ setToken }) => {
     setIsLoading(true)
 
     try {
-      console.log("Updating guarantor details:", guarantorDetails); 
+      console.log("Updating guarantor details:", guarantorDetails);
       const data = await UpdateGuarantorDetails(guarantorDetails)
       toast.success(data.message);
       // localStorage.setItem("AFCS-token", data.token)
@@ -224,7 +226,10 @@ const AccountGuarantor = ({ setToken }) => {
                           // openModal
                           () => openModal('discard')
                         } disabled={isLoading} className="btn discard mx-3 my-4">Discard Changes</button>}
-                        <button onClick={() => confirmUpdate("Account")} disabled={isLoading} className="btn mx-3 my-4 ">Save</button>
+                        <button onClick={(e) => {
+                          e.preventDefault()
+                          confirmUpdate("Account")
+                        }} disabled={isLoading} className="btn mx-3 my-4 ">Save</button>
                       </>}
 
                   </>
@@ -295,7 +300,10 @@ const AccountGuarantor = ({ setToken }) => {
                           // () => setEditGuarantor(false)
                           () => openModal('discard')
                         } disabled={isLoading} className="btn mx-3 discard my-4">Discard Changes</button>}
-                        <button onClick={() => confirmUpdate("Guarantor")} disabled={isLoading} className="btn mx-3 my-4 save">Save</button>
+                        <button onClick={(e) => {
+                          e.preventDefault()
+                          confirmUpdate("Guarantor")
+                        }} disabled={isLoading} className="btn mx-3 my-4 save">Save</button>
                       </>}
 
                   </>
@@ -321,7 +329,7 @@ const AccountGuarantor = ({ setToken }) => {
       >
         <ProfileUpdateModal
           closeModal={closeModal}
-          // closeModaltwo={closeModal}
+          closeModaltwo={closeModal}
           actionType={modalActionType}
           updateAction={editAccount ? updateAccount : updateGuarantor}
           isLoading={isLoading}

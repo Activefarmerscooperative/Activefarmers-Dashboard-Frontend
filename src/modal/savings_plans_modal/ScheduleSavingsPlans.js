@@ -63,7 +63,6 @@ function ScheduleSavingsPlans({ openModal, closeModal }) {
         try {
 
             const { status, message, data } = await AddScheduledSaving(savingsData);
-            console.log(data)
             setIsLoading(false)
             setStep(2)
             setModalData({ status, message, data })

@@ -1,10 +1,12 @@
 import axios from 'axios';
-
+import { selectToken } from '../../redux/reducers/jwtReducer';
+import { store } from '../../redux/store';
 
 const api = axios.create({
-    // baseURL: 'http://127.0.0.1:3000',
-    baseURL: 'https://afcs-app.onrender.com',
+    baseURL: 'http://127.0.0.1:3001',
     // baseURL: 'https://linear-eleonora-activefarmers-124470e8.koyeb.app',
+
+    // baseURL: 'https://afcs-app.onrender.com',
     headers: {
         'Content-Type': 'application/json',
     },
@@ -14,7 +16,10 @@ const source = axios.CancelToken.source();
 api.interceptors.request.use(
 
     config => {
-        let auth_token = localStorage.getItem('AFCS-token')
+        // let auth_token = localStorage.getItem('AFCS-token')
+        const auth_token = selectToken(store.getState());
+        console.log(auth_token)
+
         if (auth_token) {
             config.headers['Authorization'] = `Bearer ${auth_token}`
         }

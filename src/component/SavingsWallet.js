@@ -60,9 +60,9 @@ function SavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavingsCatego
     }));
   };
 
-  
 
-  
+
+
 
 
   return (

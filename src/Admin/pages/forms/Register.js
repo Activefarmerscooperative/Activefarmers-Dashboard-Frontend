@@ -32,15 +32,16 @@ export default function Register() {
         try {
             const data = await fetchAllStates(signal);
             setLocation(data.states);
+
         } catch (error) {
             if (error) {
                 console.log(error)
             }
         }
     };
-    const fetchLga = async (signal) => {
+    const fetchLga = async (state) => {
         try {
-            const data = await fetchAllLga(signal);
+            const data = await fetchAllLga(state);
             setLga(data.lgas);
         } catch (error) {
             if (error) {
@@ -55,7 +56,6 @@ export default function Register() {
         const abortController = new AbortController();
         const signal = abortController.signal;
         fetchState({ signal })
-        fetchLga({ signal })
 
         return () => {
             abortController.abort(); // Cancel the request on component unmount
@@ -67,6 +67,9 @@ export default function Register() {
 
         const { name, value } = e.target;
         setMember({ ...member, [name]: value });
+        if (name === "location") {
+            fetchLga(value)
+        }
     };
 
     const validateForm = () => {
