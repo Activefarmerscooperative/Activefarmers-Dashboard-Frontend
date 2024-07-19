@@ -6,9 +6,9 @@ import api from "../axios";
  */
 export const wakeServer = async (signal) => {
     try {
-        const { data } = await api.get(`/`,signal);
+        const { data } = await api.get(`/`, signal);
         return data;
-        
+
     } catch (error) {
         if (error.name === 'AbortError') {
             console.log('Request aborted', error.message);
@@ -26,8 +26,9 @@ export const wakeServer = async (signal) => {
 export const fetchAllStates = async (signal) => {
     try {
         const { data } = await api.get(`/api/location/states`, signal);
+        console.log(data)
         return data;
-        
+
     } catch (error) {
         if (error.name === 'AbortError') {
             console.log('Request aborted', error.message);
