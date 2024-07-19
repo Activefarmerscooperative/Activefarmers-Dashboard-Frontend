@@ -69,26 +69,28 @@ export default function CreateNewPassword() {
 
     }
     return (
-        <div className="login-page pt-3 px-5">
-            <div className="form text-center mt-5 px-5 py-3">
-                <h1>Create New Password</h1>
+        <div className="login-page mt-3 d-flex justify-content-center">
+            <div className="form text-center d-flex align-items-center flex-column">
+                <h1 className="text-nowrap text-center">Create New Password</h1>
                 Create new password to use for logging into your active farmers account, do not share your new password with anyone
                 <form className='d-flex flex-column my-4 '>
 
-                    <div className="my-2">
-                        <input type="password" name="password" placeholder='password' required value={user.password} onChange={handleChange} />
-                        <p className="text-end my-0 create">Both passwords must match</p>
+
+                    <input type="password" name="password" placeholder='password' required value={user.password} onChange={handleChange} className="email-input" />
+
+
+                    <div className="d-flex flex-column my-2">
+                        <input type="password" name="password" placeholder='password' required value={confirmPass} onChange={(e) => setConfirmPass(e.target.value)} className="email-input" />
+                        {confirmPass !== '' && !user.password.startsWith(confirmPass) && (
+                            <p className="password-match">Password and Confirm Password do not match.</p>
+                        )}
                     </div>
-                    <div className="my-2">
-                        <input type="password" name="password" placeholder='password' required value={confirmPass} onChange={(e) => setConfirmPass(e.target.value)} />
-                        <p className="text-end my-0 create">Both passwords must match</p>
-                    </div>
 
 
 
-                    
-                    {isLoading && <button className='login-btn mt-3'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
-                    {!isLoading && <button className='login-btn mx-auto mt-3' onClick={handleSubmit}>Done</button>}
+
+                    {isLoading && <button className='login-button mt-4 mx-auto'><RotatingLines width="15" strokeColor="#FFF" strokeWidth="3" /></button>}
+                    {!isLoading && <button className='login-button mt-4 mx-auto' onClick={handleSubmit}>Done</button>}
 
 
 
@@ -98,25 +100,16 @@ export default function CreateNewPassword() {
                     isOpen={modalIsOpen}
                     // onAfterOpen={afterOpenModal}
                     onRequestClose={closeModal}
-                    contentLabel="Enter OTP"
-                    className={{
-                        base: 'modal-base',
-                        afterOpen: 'modal-base_after-open',
-                        beforeClose: 'modal-base_before-close'
-                    }}
-                    overlayClassName={{
-                        base: 'overlay-base',
-                        afterOpen: 'overlay-base_after-open',
-                        beforeClose: 'overlay-base_before-close'
-                    }}
+                    className="custom-modal"
+                    overlayClassName="custom-overlay"
+                    contentLabel="Example Modal"
                     shouldCloseOnOverlayClick={true}
-                    closeTimeoutMS={2000}
                 >
                     <CreatePasswordSuccess
                         message={message} />
-                        {/* <OtpInputModal message={message} /> */}
+                    {/* <OtpInputModal message={message} /> */}
                 </Modal>
-                
+
             </div>
         </div>
     )

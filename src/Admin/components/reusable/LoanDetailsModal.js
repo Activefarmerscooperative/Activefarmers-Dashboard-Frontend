@@ -128,9 +128,9 @@ function LoanDetails({ closeModal, loanData }) {
                                         <button onClick={() => closeModal()} className="btn btn-modal mx-3">Back to List</button>
                                     </> :
                                     <>
-                                        {isLoading && <button className='login-btn mt-5'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
+                                        {isLoading && <button className='btn btn-modal mx-3'><RotatingLines width="15" strokeColor="#FFF" strokeWidth="3" /></button>}
                                         {!isLoading && <>
-                                            <button onClick={() => setStep(2)} className="btn btn-modal mx-3">Decline Loan</button>
+                                            <button onClick={() => setStep(2)} className="btn btn-modal edit mx-3">Decline Loan</button>
                                             <button onClick={() => approveLoanRequest(loanData._id)} className="btn btn-modal mx-3">Approve Loan</button>
                                         </>}</>
                             }
@@ -153,7 +153,7 @@ function LoanDetails({ closeModal, loanData }) {
                     </div>
                     <textarea id="myTextArea" rows="5" cols="50" onChange={(e) => setRejectionReason(e.target.value)}></textarea>
                     <div className="d-flex align-items-center justify-content-even">
-                        {isLoading && <button className='login-btn mt-5'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
+                        {isLoading && <button className='btn btn-modal mx-3'><RotatingLines width="15" strokeColor="#FFF" strokeWidth="3" /></button>}
                         {!isLoading && <>
                             <button onClick={() => setStep(1)} className="btn btn-modal mx-3">Go Back</button>
                             <button onClick={() => declineLoanRequest(loanData._id)} className="btn btn-modal mx-3">Submit</button>

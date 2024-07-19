@@ -67,7 +67,7 @@ function LoanTable({ userId }) {
     }
 
     return (
-        <div className="transaction-history mt-5 px-4">
+        <div className="transaction-history mt-5">
 
             <div className="d-flex justify-content-center table mt-3">
 
@@ -86,19 +86,19 @@ function LoanTable({ userId }) {
                             {transactions.map((row) => {
                                 let statusIcon = null;
                                 let statusText = "";
-                                let statusClassName = "pending-status"; // Default class for pending status
+                                let statusClassName = ""; // Default class for pending status
 
                                 if (row.status === "Confirmed" && row.repaymentStatus === "Completed") {
                                     statusClassName = "paid-status";
-                                    statusIcon = <Icon icon="material-symbols:circle-outline" className={statusClassName} />;
+                                    statusIcon = <Icon icon="material-symbols:circle-outline" className="active-icon" />;
                                     statusText = "Paid";
                                 } else if (row.status === "Confirmed") {
                                     statusClassName = "active-status";
-                                    statusIcon = <Icon icon="fontisto:radio-btn-active" className={statusClassName} />;
+                                    statusIcon = <Icon icon="fontisto:radio-btn-active" className="active-icon" />;
                                     statusText = "Active";
                                 } else if (row.status === "Rejected") {
                                     statusClassName = "rejected-status";
-                                    statusIcon = <Icon icon="fontisto:radio-btn-active" className={statusClassName} />;
+                                    statusIcon = <Icon icon="fontisto:radio-btn-active" className="rejected-icon" />;
                                     statusText = "Declined";
                                 } else {
                                     statusIcon = <Icon icon="material-symbols:circle-outline" className={statusClassName} />;
@@ -127,8 +127,8 @@ function LoanTable({ userId }) {
                                             row.item?.status === "Paid"
                                                 ? "paid-icon"
                                                 : row.item?.status === "Active"
-                                                    ? "active-icon"
-                                                    : "pending-icon"
+                                                    ? "pending-icon"
+                                                    : "active-icon"
                                         } onClick={() => openModal(row)} /></TableCell>
                                     </TableRow>
                                 )
@@ -161,18 +161,10 @@ function LoanTable({ userId }) {
                 // onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
                 contentLabel="Example Modal"
-                className={{
-                    base: 'modal-base',
-                    afterOpen: 'modal-base_after-open',
-                    beforeClose: 'modal-base_before-close'
-                }}
-                overlayClassName={{
-                    base: 'overlay-base',
-                    afterOpen: 'overlay-base_after-open',
-                    beforeClose: 'overlay-base_before-close'
-                }}
+                className="custom-modal"
+                overlayClassName="custom-overlay"
                 shouldCloseOnOverlayClick={true}
-                closeTimeoutMS={2000}>
+                >
                 <LoanDetails
                     closeModal={closeModal}
                     loanData={selectedTransaction} />

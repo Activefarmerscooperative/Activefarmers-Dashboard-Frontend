@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import './forms.css';
+import './adminforms.css';
 import { fetchAllStates, fetchAllLga } from "../../../utils/api/general"
 import { RegisterAdmin } from "../../../utils/api/admin"
 import { RotatingLines } from "react-loader-spinner";
@@ -180,20 +180,28 @@ export default function Register() {
 
     return (
 
-        <div className="d-flex justify-content-center my-3 p-2 admin-form">
-            <div className="d-flex flex-column align-items-center register-form px-5 py-3">
+        <div className="d-flex px-5 py-2  member ">
+            <div className="member-content d-flex flex-column align-items-center p-3">
                 <h1>Register as an Admin</h1>
-                <p>Please complete this form to the best of your ability providing all relevant details. Please note that your application will go through confirmation prior to processing. </p>
 
-                <form action="" className="d-flex ">
-                    <div className="mx-3">
-                        <div className="form-group my-4">
+                <div className="d-flex flex-column align-items-center ">
+                    <p>Please complete this form to the best of your ability providing all relevant details. Please note that your application will go through confirmation prior to processing. </p>
+                    <form className=" row custom-gutter text-center">
+
+                        <div className="col-md-6">
                             <input type="text" name="surname" required value={member.surname} onChange={handleChange} placeholder="Surname" />
                         </div>
-                        <div className="form-group my-4">
+                        <div className="col-md-6">
+                            <input required type="text" name="firstname" onChange={handleChange} value={member.firstname} placeholder="Firstname" />
+                        </div>
+                        
+                        <div className="col-md-6">
                             <input type="email" name="email" required value={member.email} onChange={handleChange} placeholder="Email Address" />
                         </div>
-                        <div className="form-group my-4">
+                        <div className="col-md-6">
+                            <input required type="tel" name="phone" value={member.phone} onChange={handleChange} placeholder="Phone Number e.g:+2348123456789" />
+                        </div>
+                        <div className="col-md-6">
                             <select name="gender" value={member.gender} required onChange={handleChange}>
                                 <option value="">Gender</option>
                                 <option value="Male">Male</option>
@@ -201,43 +209,7 @@ export default function Register() {
                             </select>
 
                         </div>
-                        <div className="form-group my-4">
-                            <select required name="membershipType" value={member.membershipType} onChange={handleChange}>
-                                <option value="">Membership Category</option>
-                                <option value="admin">Admin</option>
-
-                            </select>
-                        </div>
-                        <div className="d-flex align-items-center justify-content-between form-group my-4">
-                            <input autocomplete="new-password" required type="password" name="password" onChange={handleChange} value={member.password} placeholder="Password" />
-                        </div>
-                        <div className="d-flex align-items-center justify-content-between form-group my-4">
-                            <input required type="password" name="confirmpass" value={confirmPass} onChange={(e) => {
-                                setConfirmPass(e.target.value);
-                                if (member.password.startsWith(e.target.value)) {
-                                    // Password and Confirm Password match
-                                    // You can clear any previous error message if needed
-                                } else {
-                                    // Password and Confirm Password don't match
-                                    // Display error message and set text color to red
-                                }
-                            }}
-                                placeholder="Confirm Password" />
-                            {confirmPass !== '' && !member.password.startsWith(confirmPass) && (
-                                <p className="password-match">Password and Confirm Password do not match.</p>
-                            )}
-                        </div>
-                    </div>
-
-                    <div className="mx-3">
-                        <div className="form-group my-4">
-                            <input required type="text" name="firstname" onChange={handleChange} value={member.firstname} placeholder="Firstname" />
-                        </div>
-                        <div className="form-group my-4">
-                            <input required type="tel" name="phone" value={member.phone} onChange={handleChange} placeholder="Phone Number e.g:+2348123456789" />
-                        </div>
-
-                        <div className="form-group my-4">
+                        <div className="col-md-6">
                             <select required name="location" value={member.location} onChange={handleChange} className="">
                                 <option value="">Location</option>
                                 {
@@ -245,7 +217,7 @@ export default function Register() {
                                 }
                             </select>
                         </div>
-                        <div className="form-group my-4">
+                        <div className="col-md-6">
                             <select required name="lga" value={member.lga} onChange={handleChange} className="">
                                 <option value="">Local Goverment</option>
                                 {
@@ -253,14 +225,48 @@ export default function Register() {
                                 }
                             </select>
                         </div>
-                        <div className="form-group my-4">
+                        <div className="col-md-6">
                             <input required type="text" name="address" onChange={handleChange} value={member.address} placeholder="Home Address" />
                         </div>
-                    </div>
-                </form>
+                        <div className="col-md-6">
+                            <select required name="membershipType" value={member.membershipType} onChange={handleChange}>
+                                <option value="">Membership Category</option>
+                                <option value="admin">Admin</option>
 
+                            </select>
+                        </div>
+                        <div className="col-md-6">
+                            <input autocomplete="new-password" required type="password" name="password" onChange={handleChange} value={member.password} placeholder="Password" />
+                        </div>
+                        <div className="col-md-6">
+                            <div className="mx-0">
+                                <input required type="password" name="confirmpass" value={confirmPass} onChange={(e) => {
+                                    setConfirmPass(e.target.value);
+                                    if (member.password.startsWith(e.target.value)) {
+                                        // Password and Confirm Password match
+                                        // You can clear any previous error message if needed
+                                    } else {
+                                        // Password and Confirm Password don't match
+                                        // Display error message and set text color to red
+                                    }
+                                }}
+                                    placeholder="Confirm Password" />
+                                {confirmPass !== '' && !member.password.startsWith(confirmPass) && (
+                                    <p className="password-match">Password and Confirm Password do not match.</p>
+                                )}
+                            </div>
+                        </div>
+
+
+                       
+
+                        
+
+                    </form>
+
+                </div>
                 <div className="">
-                    {isLoading && <center className="btn member-btn"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+                    {isLoading && <center className="btn member-btn mx-auto mt-3"><RotatingLines width="15" strokeColor="#1B7B44" strokeWidth="3" /></center>}
                     {!isLoading && <button onClick={handleSubmit} disabled={isLoading} className="btn member-btn mx-auto mt-3">Create Account</button>}
 
                 </div>

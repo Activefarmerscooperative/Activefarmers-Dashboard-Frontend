@@ -34,13 +34,13 @@ const LoanPage = (userData) => {
             <div className="mx-3">
                 <div className="d-flex align-items-center justify-content-around tab-headers">
                     <div
-                        className={`tab-header ${activeTab === 0 ? 'active' : ''}`}
+                        className={`tab-header text-nowrap ${activeTab === 0 ? 'active' : ''}`}
                         onClick={() => handleTabClick(0)}
                     >
                         Active Loan Details
                     </div>
                     <div
-                        className={`px-2 tab-header ${activeTab === 1 ? 'active' : ''}`}
+                        className={`px-2 tab-header text-nowrap ${activeTab === 1 ? 'active' : ''}`}
                         onClick={() => handleTabClick(1)}
                     >
                         Loan Tab

@@ -47,7 +47,7 @@ function TransactionSuccessful({ reference, closeModal }) {
 
 
     return (
-        <div className='transaction-success-modal p-4 my-4'>
+        <div className='transaction-success-modal p-4'>
             <div className="d-flex flex-column align-items-center add-savings-div">
 
                 {

@@ -1,7 +1,5 @@
-
-  
-  /* NotificationPopUp.css */
-  /* .notification.pop-up {
+/* NotificationPopUp.css */
+/* .notification.pop-up {
     position: fixed;
     top: 80%;
     left: 50%;
@@ -17,7 +15,9 @@
   }
    */
 
-   .ReactModal__Overlay{
+  
+
+   .ReactModal__Overlay.notification-overlay {
     width: 500px;
     padding: 20px;
     top: 5% !important;
@@ -27,7 +27,8 @@
     inset: 0px;
     background-color: transparent !important;
     z-index: 999;
-}
+  }
+  
   .notification-header {
     display: flex;
     justify-content: space-between;
@@ -35,7 +36,6 @@
     background-color: transparent;
     box-shadow: 0px 3px 15px 0px #00000012;
     border-radius: 12px 12px 0px 0px
-    
   }
   
   .mark-all-btn {
@@ -43,19 +43,20 @@
     outline: none;
     border: none;
     cursor: pointer;
-font-size: 16px;
-font-weight: 500;
-color: #444444;
-
-
+    font-size: 16px;
+    font-weight: 500;
+    color: #444444;
+  
+  
   }
   
   .mark-all-btn:disabled {
-  color: #ccc;
+    color: #ccc;
     cursor: not-allowed;
   }
   
-  .close-btn, .notification-dot .delete-icon {
+  .close-btn,
+  .notification-dot .delete-icon {
     outline: none;
     border: none;
     cursor: pointer;
@@ -63,11 +64,11 @@ color: #444444;
     font-size: 24px;
     height: auto !important;
     width: auto !important;
-color: #0D9068;
-background-color: transparent !important;
-text-align: center;
-
-
+    color: #0D9068;
+    background-color: transparent !important;
+    text-align: center;
+  
+  
   }
   
   
@@ -76,7 +77,7 @@ text-align: center;
     display: flex;
     align-items: center;
     flex-direction: row;
-    padding: 10px;
+    padding: 10px 0;
     cursor: pointer;
   }
   
@@ -85,9 +86,15 @@ text-align: center;
     width: 10px;
     height: 10px;
     border-radius: 50%;
+    margin-right: 10px;
+  }
+  .notification-dot.unread {
     background-color: #FB9129;
     ;
-    margin-right: 10px;
+  }
+  .notification-dot.read {
+    background-color: #4f4f4e;
+    ;
   }
   
   
@@ -97,17 +104,18 @@ text-align: center;
   }
   
   .notifications-title {
-font-size: 14px;
-font-weight: 400;white-space: nowrap;
+    font-size: 14px;
+    font-weight: 400;
+    white-space: nowrap;
   }
   
   .notifications-message {
-font-size: 12px;
-font-weight: 400;
-
+    font-size: 12px;
+    font-weight: 400;
+  
   }
-
-  .ReactModal__Content{
+  
+  .ReactModal__Content {
     height: fit-content !important;
     padding: 0 !important;
     overflow-y: auto;
@@ -118,6 +126,8 @@ font-weight: 400;
     margin: 10px 0;
     font-size: 14px;
     cursor: pointer;
+    color: #0D9068;
+    font-weight: 600;
   }
   
   /* NotificationsPage.css */
@@ -138,32 +148,105 @@ font-weight: 400;
   
   .notifications-page li {
     margin-bottom: 10px;
-    padding: 10px;
+    padding: 10px 0;
     border-radius: 3px;
     list-style: none;
-
+  
   }
   
-
   
- .notification-title {
-font-size: 14px;
-font-weight: 400;
-
+  
+  .notification-title {
+    font-size: 14px;
+    font-weight: 400;
+  
   }
   
- .notification-message {
-  font-size: 12px;
-  font-weight: 400;
-  color: #444444;
-
+  .notification-message {
+    font-size: 12px;
+    font-weight: 400;
+    color: #444444;
+    text-align: right;
+  }
+  .notifications-container .notification-message{
+    text-align: left;
   }
   
-  .backto-admin,  .backto-admin:hover{
+  .backto-admin,
+  .backto-admin:hover {
     text-decoration: none;
     background-color: #FB9129;
     padding: 10px 30px;
     border-radius: 20px;
     color: #ffffff;
-
+  
   }
+  
+  @media screen and (max-width: 1024px) {
+    .ReactModal__Overlay {
+      padding: 20px;
+      top: 5% !important;
+      left: 527px !important;
+      margin-left: 0 !important;
+      position: fixed;
+      inset: 0px;
+    }
+  }
+  @media screen and (max-width: 992px) {
+    .ReactModal__Overlay {
+    left: 490px !important;
+    }
+  }
+  @media screen and (max-width: 800px) {
+    .ReactModal__Overlay {
+      left: 290px !important;
+      }
+      .notifications-page h1 {
+        font-size: 32px;
+    }
+  }
+  
+  @media screen and (max-width: 769px) {
+    .notifications-page h1 {
+      font-size: 28px;
+  }
+    .ReactModal__Overlay {
+      left: 250px !important;
+      }
+  }
+  
+  @media screen and (max-width: 600px) {
+    .ReactModal__Overlay {
+      left: 100px !important;
+  }
+  .notifications-page h1 {
+    font-size: 24px;
+  }
+  }
+  @media screen and (max-width: 522px) {
+    .ReactModal__Overlay {
+      left: 10px !important;
+      top: 0 !important;
+      background-color: rgba(0, 0, 0, 0.9) !important;
+  }
+  }
+  @media screen and (max-width: 426px) {
+    .ReactModal__Overlay {
+      width: auto;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      left: 0 !important;
+  }
+  .notifications-page h1 {
+    font-size: 20px;
+  }
+  }
+  
+  @media screen and (max-width: 376px) {
+    .notifications-page h1 {
+      font-size: 18px;
+  }
+  }
+  
+  

@@ -21,6 +21,7 @@ const fetchData = async (key) => {
 
   } catch (error) {
     toast.error(error.error);
+    // toast.error(error);
   }
 };
 const AccountGuarantor = ({ setToke }) => {
@@ -33,10 +34,12 @@ const AccountGuarantor = ({ setToke }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [guarantorLoading, setGuarantorLoading] = useState(false)
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalActionType, setModalActionType] = useState('');
+
   const location = useLocation();
   const state = location?.state;
   const navigate = useNavigate();
-  const [modalActionType, setModalActionType] = useState('');
+
 
   function openModal(actionType) {
     setIsOpen(true);
@@ -44,9 +47,10 @@ const AccountGuarantor = ({ setToke }) => {
   }
 
   function closeModal() {
+    // setIsOpen(false);
     setEditAccount(false);
     setEditGuarantor(false)
-    setIsOpen(false);
+
   }
 
 
@@ -54,8 +58,9 @@ const AccountGuarantor = ({ setToke }) => {
   const { data, status } = useQuery(['fetchData'], fetchData)
 
   useEffect(() => {
-    if (!data) return
-    setBankDetails(data[0]?.bank_details || {})
+    if (!data) return;
+    console.log("Fetched data:", data);
+    setBankDetails(data[0]?.bank_details || {});
     setGuarantorDetails(data[1]?.guarantor_details?.guarantor)
     setBanks(data[2]?.banks)
   }, [data])
@@ -78,6 +83,7 @@ const AccountGuarantor = ({ setToke }) => {
     const { name, value } = e.target;
     if (name === "accountNumber") {
       if (numberPattern.test(value)) {
+        console.log("Account number input:", value);
         return setBankDetails({ ...bankDetails, [name]: value });
 
       } else {
@@ -90,6 +96,7 @@ const AccountGuarantor = ({ setToke }) => {
   const handleGuarantorChange = (e) => {
 
     const { name, value } = e.target;
+    console.log("Guarantor details input:", { [name]: value });
     setGuarantorDetails({ ...guarantorDetails, [name]: value });
   }
 
@@ -100,6 +107,7 @@ const AccountGuarantor = ({ setToke }) => {
     setIsLoading(true)
 
     try {
+      console.log("Updating account details:", bankDetails);
       const data = await UpdateBankDetails({ ...bankDetails, accountNumber: `${bankDetails.accountNumber}` })
       toast.success(data.message)
       closeModal()
@@ -109,7 +117,7 @@ const AccountGuarantor = ({ setToke }) => {
       setToke(data.token)
     } catch (error) {
       toast.error(error)
-      toast.error(error?.error)
+      // toast.error(error?.error)
     } finally {
       setIsLoading(false)
     }
@@ -120,9 +128,12 @@ const AccountGuarantor = ({ setToke }) => {
     setIsLoading(true)
 
     try {
+      console.log("Updating guarantor details:", guarantorDetails);
       const data = await UpdateGuarantorDetails(guarantorDetails)
-      toast.success(data.message)
-      closeModal()
+      toast.success(data.message);
+      // localStorage.setItem("AFCS-token", data.token)
+      // setToken(data.token);
+      closeModal();
     } catch (error) {
       toast.error(error)
     } finally {
@@ -152,18 +163,22 @@ const AccountGuarantor = ({ setToke }) => {
 
 
   return (
-    <div className="my-5 px-4 guarantor-account">
+    <div className="px-4 guarantor-account">
       <h1>Account & Guarantor</h1>
-      <div className="px-4 py-3 card guarantor-account-form">
-        <div>
-          <form action="" className="d-flex flex-column align-items-center">
+      <div className="px-4 py-2  guarantor-account-form">
+
+        <form action="" >
+          <div>
             <p>Account Details</p>
-            <div className="d-flex">
-              <div className="form-group">
-                <label htmlFor="">Account Name</label>
-                <input type="text" name="accountName" onChange={handleAccountChange} value={bankDetails?.accountName} disabled={!editAccount} placeholder="Enter account name" />
+            <div className="row">
+              <div className="col-md-4 col-sm-6">
+                <div className="form-group d-flex flex-column mx-3">
+                  <label htmlFor="">Account Name</label>
+                  <input type="text" name="accountName" onChange={handleAccountChange} value={bankDetails?.accountName} disabled={!editAccount} placeholder="Type Account Name..." />
+                </div>
               </div>
-              <div className="form-group ">
+
+              <div className="col-md-4 col-sm-6"><div className="form-group d-flex flex-column mx-3 ">
                 <label htmlFor="">Bank Name</label>
                 {/* Note this is because the bank list is passed as object */}
                 <select name="" onChange={(e) => {
@@ -178,109 +193,125 @@ const AccountGuarantor = ({ setToke }) => {
                 }}
                   // value={console.log(banks?.filter(bank=>bank.code===bankDetails?.bankCode)[0]) } 
                   disabled={!editAccount}>
+
                   <option>{bankDetails?.bankName}</option>
                   {
                     banks?.map(item => <option key={item.id} value={JSON.stringify(item)}>{item.name}</option>)
                   }
 
                 </select>
-              </div>
-              <div className="form-group">
+              </div></div>
+
+
+              <div className="col-md-4 col-sm-6"><div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Account Number</label>
-                <input type="text" name="accountNumber" value={bankDetails?.accountNumber} onChange={handleAccountChange} disabled={!editAccount} placeholder="0123456" />
-              </div>
+                <input type="text" name="accountNumber" value={bankDetails?.accountNumber} onChange={handleAccountChange} disabled={!editAccount} placeholder="Type account Number..." />
+              </div></div>
+
             </div>
-          </form>
-          <div className="d-flex">
-            {
-              !editAccount &&
-              <button onClick={() => setEditAccount(true)} className="btn edit mx-4 my-5">
-                Edit
-              </button>
-            }
-
-            {editAccount && (
-              <div>
-                <>
-                  {isLoading && <button className="btn mx-4 my-5"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></button>}
-                  {!isLoading &&
-                    <>
-                      {!isLoading && <button onClick={
-                        // () => setEditAccount(false)
-                        // openModal
-                        () => openModal('discard')
-                      } disabled={isLoading} className="btn discard mx-4 my-5">Discard Changes</button>}
-                      <button onClick={() => confirmUpdate("Account")} disabled={isLoading} className="btn mx-4 my-5 ">Save</button>
-                    </>}
-
-                </>
-
-              </div>
-            )}
-          </div>
-        </div>
-        <div className="mt-5">
-          <form action="" className="d-flex flex-column align-items-center">
-            <p>Guarantor's Details</p>
             <div className="d-flex">
-              <div className="form-group d-flex flex-column mx-3">
-                <label htmlFor="">Guarantor's Full Name</label>
-                <input type="text" name="full_name" onChange={handleGuarantorChange} disabled={!editGuarantor} value={guarantorDetails?.full_name} placeholder="E.g. John Deo" />
-              </div>
-              <div className="form-group d-flex flex-column mx-3">
-                <label htmlFor="">Guarantor's Phone Number</label>
-                <input type="tel" name="phone" value={guarantorDetails?.phone} onChange={handleGuarantorChange} disabled={!editGuarantor} placeholder="E.g. +2340123456789" />
-              </div>
-              <div className="form-group d-flex flex-column mx-3">
-                <label htmlFor="">Guarantor's Email Address</label>
-                <input type="email" name="email" value={guarantorDetails?.email} onChange={handleGuarantorChange} disabled={!editGuarantor} placeholder="E.g johndeo@yahoo.com" />
-              </div>
+              {
+                !editAccount &&
+                <button onClick={() => setEditAccount(true)} className="btn edit mx-3 my-4">
+                  Edit
+                </button>
+              }
+
+              {editAccount && (
+                <div>
+                  <>
+                    {isLoading && <button className="btn mx-3 my-4"><RotatingLines width="15" strokeColor="#1B7B44" strokeWidth="3" /></button>}
+                    {!isLoading &&
+                      <>
+                        {!isLoading && <button onClick={
+                          // () => setEditAccount(false)
+                          // openModal
+                          () => openModal('discard')
+                        } disabled={isLoading} className="btn discard mx-3 my-4">Discard Changes</button>}
+                        <button onClick={() => confirmUpdate("Account")} disabled={isLoading} className="btn mx-3 my-4 ">Save</button>
+                      </>}
+
+                  </>
+
+                </div>
+              )}
             </div>
-            <div className="d-flex mt-4">
-              <div className="form-group d-flex flex-column mx-3">
+          </div>
+
+
+
+          <div className="mt-5">
+
+            <p>Guarantor's Details</p>
+            <div className="row">
+              <div className="col-md-4 col-sm-6"><div className="form-group d-flex flex-column mx-3">
+                <label htmlFor="">Guarantor's Full Name</label>
+                <input type="text" name="full_name" onChange={handleGuarantorChange} disabled={!editGuarantor} value={guarantorDetails?.full_name} placeholder="Type Full Name.." />
+              </div></div>
+
+
+              <div className="col-md-4 col-sm-6"><div className="form-group d-flex flex-column mx-3">
+                <label htmlFor="">Guarantor's Phone Number</label>
+                <input type="tel" name="phone" value={guarantorDetails?.phone} onChange={handleGuarantorChange} disabled={!editGuarantor} placeholder="Type Phone..." />
+              </div></div>
+
+
+              <div className="col-md-4 col-sm-6"><div className="form-group d-flex flex-column mx-3">
+                <label htmlFor="">Guarantor's Email Address</label>
+                <input type="email" name="email" value={guarantorDetails?.email} onChange={handleGuarantorChange} disabled={!editGuarantor} placeholder="Type  Email..." />
+              </div></div>
+
+              <div className="col-md-4 col-sm-6"><div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Guarantor's Residential Address</label>
-                <input type="text" name="address" value={guarantorDetails?.address} onChange={handleGuarantorChange} disabled={!editGuarantor} placeholder="E.g Tafawal Balewal Street, Abuja" />
-              </div>
-              <div className="form-group d-flex flex-column mx-3">
+                <input type="text" name="address" value={guarantorDetails?.address} onChange={handleGuarantorChange} disabled={!editGuarantor} placeholder="Type Address..." />
+              </div></div>
+
+              <div className="col-md-4 col-sm-6"><div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Guarantor's Occupation</label>
-                <input type="text" name="occupation" onChange={handleGuarantorChange} value={guarantorDetails?.occupation} disabled={!editGuarantor} placeholder="E.g. Entrepreneurs" />
-              </div>
-              <div className="form-group d-flex flex-column mx-3">
+                <input type="text" name="occupation" onChange={handleGuarantorChange} value={guarantorDetails?.occupation} disabled={!editGuarantor} placeholder="Type Occupation..." />
+              </div></div>
+
+              <div className="col-md-4 col-sm-6"><div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Gender</label>
                 <select name="gender" value={guarantorDetails?.gender} onChange={handleGuarantorChange} disabled={!editGuarantor}>
+                  <option value="">Select gender</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
               </div>
-            </div>
-          </form>
-          <div className="d-flex">
-            {
-              !editGuarantor &&
-              <button onClick={() => setEditGuarantor(true)} className="btn edit mx-4 my-5">
-                Edit
-              </button>
-            }
-
-            {editGuarantor && (
-              <div>
-                <>
-                  {!guarantorLoading &&
-                    <>
-                      {!isLoading && <button onClick={
-                        // () => setEditGuarantor(false)
-                        () => openModal('discard')
-                      } disabled={isLoading} className="btn mx-4 discard my-5">Discard Changes</button>}
-                      <button onClick={() => confirmUpdate("Guarantor")} disabled={isLoading} className="btn mx-4 my-5 save">Save</button>
-                    </>}
-
-                </>
-
               </div>
-            )}
-          </div>
 
-        </div>
+            </div>
+            <div className="d-flex">
+              {
+                !editGuarantor &&
+                <button onClick={() => setEditGuarantor(true)} className="btn edit mx-3 my-4">
+                  Edit
+                </button>
+              }
+
+              {editGuarantor && (
+                <div>
+                  <>
+                    {!guarantorLoading &&
+                      <>
+                        {!isLoading && <button onClick={
+                          // () => setEditGuarantor(false)
+                          () => openModal('discard')
+                        } disabled={isLoading} className="btn mx-3 discard my-4">Discard Changes</button>}
+                        <button onClick={() => confirmUpdate("Guarantor")} disabled={isLoading} className="btn mx-3 my-4 save">Save</button>
+                      </>}
+
+                  </>
+
+                </div>
+              )}
+            </div>
+
+          </div>
+        </form>
+
+
       </div>
       <Modal
         isOpen={modalIsOpen}
@@ -288,21 +319,13 @@ const AccountGuarantor = ({ setToke }) => {
         onRequestClose={closeModal}
 
         contentLabel="Example Modal"
-        className={{
-          base: 'modal-base',
-          afterOpen: 'modal-base_after-open',
-          beforeClose: 'modal-base_before-close'
-        }}
-        overlayClassName={{
-          base: 'profile-overlay-base',
-          afterOpen: 'overlay-base_after-open',
-          beforeClose: 'overlay-base_before-close'
-        }}
-        shouldCloseOnOverlayClick={false}
+        className="custom-modal"
+        overlayClassName="custom-overlay"
+        shouldCloseOnOverlayClick={true}
       >
         <ProfileUpdateModal
           closeModal={closeModal}
-          closeModaltwo={closeModal}
+          // closeModaltwo={closeModal}
           actionType={modalActionType}
           updateAction={editAccount ? updateAccount : updateGuarantor}
           isLoading={isLoading}

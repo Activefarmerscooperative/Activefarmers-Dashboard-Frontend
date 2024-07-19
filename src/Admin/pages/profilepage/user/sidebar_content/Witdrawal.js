@@ -176,18 +176,10 @@ function SavingsWithdrawals(userData) {
                 // onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
                 contentLabel="Example Modal"
-                className={{
-                    base: 'modal-base',
-                    afterOpen: 'modal-base_after-open',
-                    beforeClose: 'modal-base_before-close'
-                }}
-                overlayClassName={{
-                    base: 'overlay-base',
-                    afterOpen: 'overlay-base_after-open',
-                    beforeClose: 'overlay-base_before-close'
-                }}
+                className="custom-modal"
+                overlayClassName="custom-overlay"
                 shouldCloseOnOverlayClick={true}
-                closeTimeoutMS={2000}>
+                >
 
                 <WithdrawalDetails
                     closeModal={closeModal}

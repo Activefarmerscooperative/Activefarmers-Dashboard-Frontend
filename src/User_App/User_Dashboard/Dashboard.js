@@ -61,7 +61,8 @@ function Dashboard() {
         setUser(data.user)
         if (data.user.regCompletePercent < 70) {
           toast.success("Please provide the following information to complete your registration.")
-          navigate("/register/guarantor", { replace: true })
+          // navigate("/register/guarantor", { replace: true })
+          navigate("/dashboard", { replace: true })
         }
         setOpen(true)
 

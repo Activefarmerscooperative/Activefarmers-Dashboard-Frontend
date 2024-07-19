@@ -25,8 +25,9 @@ export default function UserProfile() {
   };
 
   return (
-    <div className="user-profile mt-5 pt-3">
+    <div className="user-profile admin-site mt-5 pt-3">
       <div className="sidebar m-3 ">
+      < Icon icon="material-symbols:arrow-back-rounded" className="back-icon go-back mobile" onClick={goBack} />
         <p className={selectedComponent === 'profile' ? 'active' : ''}
           onClick={() => handleComponentClick('profile')}>Profile</p>
 
@@ -41,7 +42,7 @@ export default function UserProfile() {
       </div>
       <div className="content px-3">
         <div className='mx-3'>
-          <h4 className='go-back' onClick={goBack}>< Icon icon="material-symbols:arrow-back-rounded" className="back-icon" /> Back To Dashboard</h4>
+          <h4 className='go-back desktop' onClick={goBack}>< Icon icon="material-symbols:arrow-back-rounded" className="back-icon" /> Back To Dashboard</h4>
           <div className='user-info-section py-3 my-3'>
             <PersonalInfoCard
               userData={data}

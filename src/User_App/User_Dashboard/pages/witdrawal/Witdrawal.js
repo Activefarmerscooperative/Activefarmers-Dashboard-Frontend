@@ -51,47 +51,51 @@ export default function WitdrawalForm({ user }) {
     }
 
     return (
-        <div className="my-4 px-4 withdrawal-form">
-            <h1>Savings Withdrawal Form</h1>
-            <div className="savings-wallet-category">
+        <div className="px-4 py-2 withdrawal-form">
+            <div className="">
+                <h1 >Savings Withdrawal Form</h1>
+                <div className="savings-wallet-category">
 
-                <SavingsWallet
-                    setSavingsCategory={setSavingsCategory}
-                />
-            </div>
+                    <SavingsWallet
+                        setSavingsCategory={setSavingsCategory}
+                    />
+                </div>
 
 
-            <p className="note my-4">Withdrawal amount can not be more than savings balance. </p>
-            <div className="withdrawal-input-form mt-5">
-                <form action="">
-                    <div className="d-flex flex-column ">
-                        <div className='d-flex '>
-                            <input type="number" value={withdrawalData?.amount} onChange={handleChange} name="amount" placeholder='Withdrawal Amount' min="0" required />
+                <p className="note mt-5">Withdrawal amount can not be more than savings balance. </p>
+                <div className="withdrawal-input-form my-3">
+                    <form action="">
+                        <div className="row">
+                            <div className='col-md-6 col-sm-6'>
+                                <input type="number" value={withdrawalData?.amount} onChange={handleChange} name="amount" placeholder='Withdrawal Amount' min="0" required />
+                            </div>
+                            <div className='col-md-6 col-sm-6'>
+                                <SelectSavingscat
+                                    value={withdrawalData?.category}
+                                    handleChange={handleChange}
+                                    savingsCategory={savingsCategory}
+                                />
+                            </div>
+                            <div className='col-md-6 col-sm-6'>
+                                <PaymentAccount
+                                    withdrawalData={withdrawalData}
+                                    setWithdrawalData={setWithdrawalData}
+                                />
+                            </div>
 
-                            <SelectSavingscat
-                                value={withdrawalData?.category}
-                                handleChange={handleChange}
-                                savingsCategory={savingsCategory}
-                            />
                         </div>
-                        <div className=''>
-                            <PaymentAccount
-                                withdrawalData={withdrawalData}
-                                setWithdrawalData={setWithdrawalData}
-                            />
-                        </div>
+                    </form>
+                </div>
 
-                    </div>
-                </form>
-            </div>
+                <p className="note mt-5 ">
+                    {/* Lorem ipsum dolor sit amet consectetur. Turpis posuere donec ipsum lectus cursus. Pellentesque tellus ornare id neque. Rutrum fringilla molestie lao */}
+                </p>
 
-            <p className="note mt-5 ">
-                {/* Lorem ipsum dolor sit amet consectetur. Turpis posuere donec ipsum lectus cursus. Pellentesque tellus ornare id neque. Rutrum fringilla molestie lao */}
-            </p>
+                {isLoading && <center className="btn submit-btn my-3"><RotatingLines width="15" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+                {!isLoading && <button onClick={handleSubmit} className="btn submit-btn my-3">Submit</button>}
 
-            {isLoading && <center className="btn next-btn mt-5"><RotatingLines width="20px" strokeColor="#1B7B44" strokeWidth="3" /></center>}
-            {!isLoading && <button onClick={handleSubmit} className="btn next-btn mt-5">Submit</button>}
+            </div >
 
-        </div>
+        </div >
     )
 }

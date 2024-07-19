@@ -1,13 +1,27 @@
+.content {
+    /* padding: 20px !important; */
+}
+.user-dashboard-home{
+    margin: 70px 0 0 0; 
+}
 .rotatinglines {
     width: 10%;
     stroke: #1B7B44;
     stroke-width: 2
 }
-.user-dashboard-home .profile-info.mobile{
+
+.user-dashboard-home .profile-info.mobile {
     display: none;
 }
+
+.user-info-summary{
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .user-dashboard-home h1 {
-    font-weight: 700;
+    /* font-weight: 700; */
     font-size: 36px;
     margin-bottom: 20px;
     color: #0D9068;
@@ -15,12 +29,13 @@
 }
 
 
-.card.my-savings.active{
+.card.my-savings.active {
     background-color: #016b4b;
-   
+
 }
+
 .user-home-welcome {
-    width: 930px;
+    width: fit-content;
     background: #FB9129;
     border-radius: 12px;
     display: flex;
@@ -50,17 +65,21 @@
     scrollbar-width: none;
     -ms-overflow-style: none;
     cursor: pointer;
+    align-self: normal;
+    flex: 1;
 }
 
 .savings-wallet-category::-webkit-scrollbar {
     display: none;
 }
 
-.savings-wallet-category .card, .schedule-savings-page .card {
+.savings-wallet-category .card,
+.schedule-savings-page .card {
     flex: 0 0 200px;
     margin-right: 10px;
     background: rgba(13, 144, 104, 0.25);
     border-radius: 12px;
+    position: static;
 }
 
 .savings-value,
@@ -114,7 +133,7 @@
     text-align: center;
     color: #FFFFFF;
     white-space: nowrap;
-    margin: 0 8px;
+    margin: 10px 8px;
 }
 
 .btn.addsaving-btn .add-icon {
@@ -134,6 +153,9 @@
     color: #ffffff;
     margin: 0 5px;
     border-radius: 50px;
+}
+.top-nav-btn{
+    align-items: center;
 }
 
 .top-nav p {
@@ -254,6 +276,7 @@
     height: 42px;
     background: rgba(186, 190, 200, 0.25);
     border-radius: 50px;
+    cursor: pointer;
 }
 
 .download-icon .icon {
@@ -302,8 +325,8 @@ input[type=checkbox]:focus {
 
 .css-11xur9t-MuiPaper-root-MuiTableContainer-root {
     display: flex;
-    justify-content: center;
-    width: 1000px !important;
+    /* justify-content: center; */
+    /* width: 1000px !important; */
     background-color: #F6F9FF !important;
     border-radius: 20px 20px 0px 0px !important;
     box-shadow: none !important;
@@ -311,101 +334,234 @@ input[type=checkbox]:focus {
 
 p.MuiTablePagination-selectLabel,
 p.MuiTablePagination-displayedRows {
-    margin: 0;
+    margin: 5px;
 }
 
 .MuiBox-root {
     background-color: #F6F9FF
 }
 
-.user-dashboard-home .modal {
-    z-index: 999;
-}
-
-.user-dashboard-home .modal-base {
-    top: 15%;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    opacity: 0;
-}
-
-
-
-.user-dashboard-home .modal-base_after-open {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.user-dashboard-home .modal-base_before-close {
-    transform: scale(.2);
-    opacity: 0;
-}
-
-.user-dashboard-home .overlay-base {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgb(0, 0, 0);
-    transition: all 0.3s ease-out;
-    z-index: 900;
-}
-
-.user-dashboard-home .overlay-base_after-open {
-    opacity: 1;
-}
-
-.user-dashboard-home .overlay-base_before-close {
-    opacity: 0;
-}
 
 
 
 
-@media screen and (max-width: 800px) {
-    .user-dashboard-home .profile-info{
+
+@media (max-width: 800px) {
+   
+
+    .user-dashboard-home .profile-info.mobile {
         display: flex;
+        flex-direction: column;
+        align-items: flex-end;
     }
+
+    .user-dashboard-home .profile-img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+        cursor: pointer;
+      
+      }
+      .user-dashboard-home .btn.camera {
+        margin-top: -20px;
+        margin-left: 31px;
+        display: flex;
+        padding: 0;
+      }
+
+      .user-dashboard-home .camera .camera-icon {
+        /* height: 16px; */
+        /* width: 16px; */
+        font-size: 20px;
+        background-color: #fff;
+        background: #FFFFFF;
+        border: 1px solid rgba(68, 68, 68, 0.16);
+        border-radius: 50%;
+        padding: 2px;
+    }
+     
+      
+      .profile-info p {
+        font-weight: 400;
+        font-size: 16px;
+        text-align: center;
+        color: #000000;
+        margin: 0;
+        overflow-y: hidden;
+      }
 }
 
 
 
-@media screen and (max-width: 769px) {
-    .savings-value, .hidden-input {
+@media (max-width: 769px) {
+
+    .savings-value,
+    .hidden-input {
         font-size: 20px;
-      }
-      .user-dashboard-home .eye-icon {
+    }
+
+    .user-dashboard-home .eye-icon {
         width: 20px;
         height: 20px;
     }
+
     .user-dashboard-home .card p {
-      font-size: 18px;
+        font-size: 18px;
     }
+
     .user-dashboard-home h1 {
-      font-size: 30px;
-      margin-bottom: 0px;
+        font-size: 30px;
+        margin-bottom: 0px;
     }
-}
-@media screen and (max-width: 600px) {
     .user-dashboard-header{
         flex-direction: column;
-        
     align-items: flex-end !important;
     }
+    .btn.addsaving-btn {
+        width: auto;
+        padding: 10px;
+        margin: 8px 0 0 auto;
+    }
 }
-@media screen and (max-width: 426px) {}
-@media screen and (max-width: 376px) {}
-@media screen and (max-width: 321px) {}
+
+@media (min-width: 579px) and (max-width: 600px) {
+    
+    .user-dashboard-header {
+        flex-direction: column;
+
+        align-items: flex-end !important;
+    }
+    .transaction-history h1 {
+        font-size: 26px
+    }
+    
+}
+
+@media (max-width: 578.98px) {
+   
 
 
 
-/* @media screen and (max-width: 1024px) {}
+    .css-1ex1afd-MuiTableCell-root {
+        padding: 15px 12px !important;
+    }
+    .transaction-history h1 {
+        font-size: 26px
+    }
+}
+@media (min-width: 450px) and (max-width: 577.98px) {
+    
+  
+    .savings-wallet-category .card{
+        flex: 0 0 150px;
+    }
+    .top-nav{
+        flex-direction: column;
+    align-items: flex-start !important;
+    }
+    .top-nav .sort.mx-2 {
+        margin: 0 !important;
+    }
+    .transaction-history h1 {
+        font-size: 26px
+    }
+    .transaction-history.px-3 {
+        padding-right: 0rem !important;
+        padding-left: 0rem !important;
+    }
+
+}
+
+@media  (max-width: 426.98px) {
+    .top-nav-btn {
+        margin-top: 1.5rem !important;
+    }
+   
+    .savings-wallet-category .card{
+        flex: 0 0 150px;
+    }
+    .top-nav{
+        flex-direction: column;
+    align-items: flex-start !important;
+    }
+    .top-nav .sort.mx-2 {
+        margin: 0 !important;
+    }
+    .transaction-history h1 {
+        font-size: 24px
+    }
+    .download-icon {
+        width: 36px;
+        height: 36px;
+    }
+    .download-icon .icon {
+        width: 25px;
+        height: 25px;
+    }
+    .transaction-history.px-3 {
+        padding-right: 0rem !important;
+        padding-left: 0rem !important;
+    }
+    .user-info-summary-text{
+        flex-direction: column;
+    align-items: flex-end;
+    }
+}
+
+@media (max-width: 376px) {
+    .user-dashboard-home h1 {
+        font-size: 25px;
+        margin-bottom: 10px;
+    }
+    /* .btn.addsaving-btn {
+        width: auto;
+    } */
+    .top-nav .sort select {
+        width: 100px;
+    }
+    .download-icon .icon {
+        width: 25px;
+    }
+    .download-icon {
+        width: 36px;
+        height: 36px;
+    }
+    .btn.view-all-btn {
+        width: auto;
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+    .transaction-history h1 {
+        font-size: 20px;
+    }
+    .download-icon .icon {
+        width: 20px;
+        height: 20px;
+    }
+    .profile-info p {
+        font-size: 14px;
+
+    }
+}
+
+@media (max-width: 321px) {}
+
+
+
+/* @media screen and (max-width: 1024px) {
+    .help .contact a {
+    color: #0D9068;
+}
+}
 @media screen and (max-width: 991px) {}
-@media screen and (max-width: 769px) {}
+@media screen and (max-width: 769px) {
+    
+}
 @media screen and (max-width: 600px) {}
-@media screen and (max-width: 426px) {}
+@media screen and (max-width: 577px) {
+    .user-dashboard-home{
+    }
+}
 @media screen and (max-width: 376px) {}
 @media screen and (max-width: 321px) {} */

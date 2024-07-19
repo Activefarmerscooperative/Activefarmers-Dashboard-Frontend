@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import './forms.css';
+import './adminforms.css';
 import { Icon } from '@iconify/react';
 import header from '../../assets/logol.png';
 import { LoginAdmin } from "../../../utils/api/admin";
@@ -96,59 +96,36 @@ export default function Login() {
     }
 
     return (
-        <div >
-            {location.pathname === "/login"
-                ? <div className="header-section admin-form">
-                    <div className="d-flex align-items-center justify-content-between header-components">
-                        <div className='d-flex align-items-center'>
-                            <img src={header} alt="" />
-                            <h1>AFC Admin Dashboard</h1>
-                        </div>
+      
+            
+            <div className=" login-page mt-4 d-flex justify-content-center px-5">
+                <div className="d-flex flex-column  align-items-center login-form">
+                    <h1 className="text-nowrap text-center">Admin Login</h1>
+                    Login with your admin credentials
 
-                        <div className="d-flex align-items-center header-buttons">
-                            <p className="mx-2 mb-0">
-
-                                Already have an account?
-                            </p>
+                    <form action="" className="d-flex flex-column my-4">
+                        <input type="email" name="email" placeholder="Email address" required value={admin.email} onChange={handleChange} autoComplete="new-email" className="email-input" />
 
 
-                            <div className="">
-                                <button className='btn signup-btn' >login</button>
-                            </div>
-
-                        </div>
-                    </div> </div> : null
-            }
-            <center className=" my-3 p-2">
-                <div className="d-flex flex-column  align-items-center login-form p-3">
-                    <h1>Admin Login</h1>
-                    <p> Login with your admin credentials</p>
-
-                    <form action="">
-                        <div className="form-group my-4">
-                            <input type="email" name="email" placeholder="Email address" required value={admin.email} onChange={handleChange} autoComplete="off" aria-autocomplete="none" />
-                        </div>
-
-                        <div className="d-flex align-items-center justify-content-between form-group my-4">
-                            <input type={!inputType ? "text" : "password"} name="password" placeholder='password' required value={admin.password} onChange={handleChange} className="my-2" />
-                            <div onClick={toggleSavingsVisibility}>
-                                <Icon icon={savingsIcon ? "mdi:eye-off" : "mdi:eye"} className='eye-icon' />
+                        <div className="d-flex align-items-center justify-content-between password mt-2">
+                            <input type={!inputType ? "text" : "password"} name="password" placeholder='password' required value={admin.password} onChange={handleChange} autoComplete="new-password" className="my-2" />
+                            <div onClick={toggleSavingsVisibility} className="float-right">
+                                <Icon icon={savingsIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
                             </div>
                         </div>
-                    </form>
-
-                    <div className="">
-
-                        {isLoading && <button className='login-btn mt-5'><RotatingLines width="30" strokeColor="#FFF" strokeWidth="3" /></button>}
-                        {!isLoading && <button className='login-btn mt-5' onClick={handleSubmit}>Log In</button>}
 
 
-                    </div>
 
-                    <p className="reset-password">Forgotten Password? <a href="">Reset Here</a></p>
+                        {isLoading && <button className='login-button mt-4 mx-auto'><RotatingLines width="15" strokeColor="#FFF" strokeWidth="3" /></button>}
+                        {!isLoading && <button className='login-button mt-4 mx-auto' onClick={handleSubmit}>Log In</button>}
+
+
+                    </form>             
+
+                    <p className="reset-password">Forgotten Password? <a href="" >Reset Here</a></p>
                 </div>
-            </center>
+            </div>
 
-        </div>
+        
     );
 }

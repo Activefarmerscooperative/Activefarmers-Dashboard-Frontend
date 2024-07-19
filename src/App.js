@@ -6,7 +6,7 @@ import { ToastContainer } from "react-toastify";
 function App() {
   return (
     <div className="App">
-      <ToastContainer limit={3} />
+      <ToastContainer limit={2} />
       <RoutingPage />
     </div>
   );

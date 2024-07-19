@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../login.css';
@@ -8,12 +7,16 @@ import { RotatingLines } from "react-loader-spinner";
 import { Icon } from '@iconify/react';
 import { useDispatch } from 'react-redux'
 import { setToken } from '../../../../redux/reducers/jwtReducer'
+import Modal from 'react-modal';
+import OtpModal from "../../../../modal/OTP";
+
 
 export default function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const [isLoading, setIsLoading] = useState(false);
-
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const [inputType, setInputType] = useState("true");
     const [savingsIcon, setSavingsIcon] = useState("mdi:eye-off");
@@ -93,49 +96,73 @@ export default function Login() {
             toast.success(data.message);
 
             setIsLoading(false);
+            console.log("login data", data)
+
             navigate("/dashboard", { replace: true })
             // return data;
         } catch (error) {
             setIsLoading(false);
             toast.error(error)
             toast.error(error?.error);
+
+            const errorMessage = error.message;
+            console.log("login error message:", errorMessage);
+            if (
+                errorMessage ===
+                `Enter the verification code sent to ${phone} in order to verify your account`
+            ) {
+                setErrorMessage(errorMessage)
+                localStorage.setItem("AFCS-token", error.afcsToken)
+                setModalIsOpen(true);
+            }
+
         }
 
     }
+    function closeModal() {
+        setModalIsOpen(false);
+    }
     return (
-        <div className="login-page pt-3 px-5 users-form">
-            <div>
-                <div className="form mt-3 px-5 py-3">
-                    <h1>Log In to Dashboard</h1>
-                    Log in to your existing account
-                    <form className='d-flex flex-column my-4 '>
-                        <input type="tel" name="phone" className="email-input" placeholder='Enter phone number e.g: 08012345678' value={user.phone} onChange={handleChange} autocomplete="on" required />
+        <div className="login-page mt-2 d-flex justify-content-center">
+
+            <div className="d-flex align-items-center flex-column form">
+                <h1 className="text-nowrap text-center">Log In to Dashboard</h1>
+                Log in to your existing account
+                <form className='d-flex flex-column my-4 '>
+                    <input type="tel" name="phone" className="email-input" placeholder='Enter phone number e.g: 08012345678' value={user.phone} onChange={handleChange} autocomplete="on" required />
 
 
-                        <div className="d-flex align-items-center justify-content-between password mt-3">
-                            <input type={!inputType ? "text" : "password"} name="password" placeholder='password' required value={user.password} onChange={handleChange} className="my-2" />
+                    <div className="d-flex align-items-center  password mt-2">
+                        <input type={!inputType ? "text" : "password"} name="password" placeholder='password' required value={user.password} onChange={handleChange} className="my-2" />
 
-                            <div onClick={toggleSavingsVisiblity}>
-                                <Icon icon={savingsIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
-                            </div>
-
+                        <div onClick={toggleSavingsVisiblity} className="float-right">
+                            <Icon icon={savingsIcon ? "mdi:eye" : "mdi:eye-off"} className='eye-icon' />
                         </div>
 
-
-                        <div className='d-flex align-items-center mt-2'>
-                            <input type="checkbox" name="" id="" className='mx-2' />
-                            Remember Me
-                        </div>
-                        {isLoading && <button className='login-button mt-5'><RotatingLines width="15" strokeColor="#FFF" strokeWidth="3" /></button>}
-                        {!isLoading && <button className='login-button mt-5' onClick={handleSubmit}>Log In</button>}
+                    </div>
 
 
+                    <div className='d-flex align-items-center mt-2'>
+                        <input type="checkbox" name="" id="" className='mx-2' />
+                        Remember Me
+                    </div>
+                    {isLoading && <button className='login-button mt-4'><RotatingLines width="15" strokeColor="#FFF" strokeWidth="3" /></button>}
+                    {!isLoading && <button className='login-button mt-4' onClick={handleSubmit}>Log In</button>}
 
-                    </form>
-                    <p>Forgotten Password? <a href="/login/forgotpassword" style={{ color: "#FB9129", fontWeight: "600" }}> Reset Here </a></p>
-                </div>
+
+
+                </form>
+                <p>Forgotten Password? <a href="/login/forgotpassword" style={{ color: "#FB9129", fontWeight: "600" }}> Reset Here </a></p>
             </div>
-
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                className="custom-modal"
+                overlayClassName="custom-overlay"
+                contentLabel="Example Modal"
+            >
+                <OtpModal message={errorMessage} />
+            </Modal>
         </div>
     )
 }

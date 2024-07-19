@@ -1,5 +1,5 @@
 .faq .accordion-header {
-    width: 900px;
+    width: auto;
     display: flex;
     align-items: center;
     padding: 10px 0;
@@ -23,10 +23,25 @@
 }
 
 .faq .accordion-content p {
-    width: 800px;
+    width: auto;
     font-size: 14px;
     text-align: justify;
     margin: 5px 0;
     color: #444444;
 
+}
+
+@media screen and (max-width: 427px) {
+    .faq-list.mt-5 {
+        margin-top: 2rem !important;
+    }
+    .faq-p{
+        text-align: justify;
+    }
+}
+@media screen and (max-width: 376px) {}
+@media screen and (max-width: 321px) {
+    .faq-p{
+        font-size: 14px;
+    }
 }

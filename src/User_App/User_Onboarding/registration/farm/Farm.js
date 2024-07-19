@@ -26,10 +26,11 @@ export default function Farm() {
         async function confirmToken() {
             try {
                 const data = await confirmTokenIsValid(signal)
-                if (data.user.membershipType !== "Farmer") navigate("/register/guarantor", { replace: true });
+                if (data.user.membershipType !== "Farmer") navigate("/dashboard", { replace: true });
             } catch (error) {
                 toast.error("Un-Authorized");
-                navigate("/register/guarantor", { replace: true })
+                // navigate("/register/guarantor", { replace: true })
+                navigate("/dashboard", { replace: true })
             }
         }
         confirmToken()
@@ -88,7 +89,8 @@ export default function Farm() {
             // localStorage.setItem("AFCS-token", data.token)
             dispatch(setToken(data?.token))
             setIsLoading(false);
-            navigate("/register/guarantor", { replace: true })
+            // navigate("/register/guarantor", { replace: true })
+            navigate("/dashboard", { replace: true })
 
         } catch (error) {
 
@@ -100,28 +102,39 @@ export default function Farm() {
 
     return (
         <div className="farm px-5 py-2">
-            <div className="d-flex flex-column align-items-center py-3 my-2">
+            <div className="d-flex flex-column align-items-center py-3">
                 <h1>Farm Details</h1>
                 <p>Please complete this form to the best of your ability providing all correct and relevant details about your farming experience and farm details</p>
 
-                <div className="d-flex flex-column align-items-center form ">
+                <div className="d-flex flex-column align-items-center mt-5 ">
 
-                    <form className=" d-flex align-items-center justify-content-center my-5">
-                        <div>
+                    <form className=" row text-center custom-gutter">
+                        <div className="col-md-6">
                             <input type="number" name="farmingExperience" value={farm.farmingExperience} onChange={handleChange} placeholder="Years of Experience" min="0" />
-
+                        </div>
+                        <div className="col-md-6">
+                            <input type="number" name="farmSize" value={farm.farmSize} placeholder="Farm Size (Hectares)" onChange={handleChange} min="0" />
+                        </div>
+                        <div className="col-md-6">
                             <input type="text" name="cropTypes" value={farm.cropTypes} placeholder="Crop Type(s)" onChange={handleChange} />
                         </div>
-                        <div>
-                            <input type="number" name="farmSize" value={farm.farmSize} placeholder="Farm Size (Hectares)" onChange={handleChange} min="0" />
+                        <div className="col-md-6">
                             <input type="text" name="farmAddress" value={farm.farmAddress} onChange={handleChange} placeholder="Farm Address" />
                         </div>
                     </form>
-                    {isLoading && <center className="btn member-btn"><RotatingLines width="30" strokeColor="#1B7B44" strokeWidth="3" /></center>}
-                    {!isLoading && <button onClick={handleSubmit} disabled={isLoading} className="btn member-btn">Submit</button>}
+
+                    <div className="d-flex justify-content-center my-3">
+                        {isLoading && <center className="btn member-btn"><RotatingLines width="15" strokeColor="#1B7B44" strokeWidth="3" /></center>}
+                        {!isLoading && <button onClick={handleSubmit} disabled={isLoading} className="btn member-btn">Submit</button>}
+                    </div>
+
 
                 </div>
             </div>
         </div>
     )
 }
+
+
+
+      

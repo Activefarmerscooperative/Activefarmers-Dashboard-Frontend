@@ -72,34 +72,40 @@ export default function Dashboard() {
   }, [])
 
 
-
   return (
     <div className="">
-      {
-        open &&
-        <div className=" d-flex flex-column dashboard">
-          <div className="header-section container-fluid">
-            <div className="d-flex align-items-center justify-content-between header-components">
-              <div className='d-flex align-items-center'>
-                <img src={header} alt="" onClick={() => { navigate("/admin/dashboard"); }} />
-                <h1>AFC Admin Dashboard</h1>
+      <div className=" d-flex flex-column dashboard">
+        <div className="header-section container-fluid">
+          <div className="d-flex align-items-center justify-content-between header-components">
+            <div className='d-flex align-items-center'>
+              <img src={header} alt="" onClick={() => { navigate("/admin/dashboard"); }} />
+              <h1>AFC Admin Dashboard</h1>
+            </div>
+
+            <div className="d-flex align-items-center justify-content-around header-buttons">
+              <Icon icon="clarity:notification-line" className='mx-3' onClick={() => setShowNotificationPopUp(true)} />
+              {/* <Icon onClick={() => { navigate("/admin/dashboard/profile"); }} icon="solar:user-outline" className='mx-3' /> */}
+
+              <div className="dropdown">
+                <button className="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                  <Icon icon="solar:user-outline" className='mx-3' />
+                </button>
+                <ul className="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
+                  <li onClick={() => navigate("/admin/dashboard/profile")} className="dropdown-item">View Profile</li>
+                  <li onClick={() => navigate("/admin")} className="dropdown-item">Logout</li>
+                </ul>
               </div>
 
-              <div className="d-flex align-items-center justify-content-around header-buttons">
-                <Icon icon="clarity:notification-line" className='mx-3' onClick={() => setShowNotificationPopUp(true)} />
-                <Icon onClick={() => { navigate("/admin/dashboard/profile"); }} icon="solar:user-outline" className='mx-3' />
-              </div>
+
             </div>
           </div>
-
-          <div>
-            <Outlet notifications={notifications} markAllAsRead={markAllAsRead} handleDelete={handleDelete} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} />
-          </div>
         </div>
-      }
 
+        <div>
+          <Outlet notifications={notifications} markAllAsRead={markAllAsRead} handleDelete={handleDelete} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} />
+        </div>
+      </div>
       {showNotificationPopUp && (
-
         <NotificationPopUp
           notifications={notifications}
           setNotifications={setNotifications}
