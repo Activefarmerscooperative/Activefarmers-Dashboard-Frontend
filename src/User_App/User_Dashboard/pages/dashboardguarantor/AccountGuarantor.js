@@ -44,7 +44,7 @@ const AccountGuarantor = ({ setToken }) => {
   }
 
   function closeModal() {
-    // setIsOpen(false);
+    setIsOpen(false);
     setEditAccount(false);
     setEditGuarantor(false)
     
@@ -107,13 +107,13 @@ const AccountGuarantor = ({ setToken }) => {
       console.log("Updating account details:", bankDetails);
       const data = await UpdateBankDetails({ ...bankDetails, accountNumber: `${bankDetails.accountNumber}` })
       toast.success(data.message)
-
-      // localStorage.setItem("AFCS-token", data.token)
-      // setToken(data.token);
-      closeModal();
+closeModal();
+      localStorage.setItem("AFCS-token", data.token)
+      setToken(data.token);
+      
     } catch (error) {
-      toast.error(error)
-      // toast.error(error?.error)
+      // toast.error(error)
+      toast.error(error?.error)
     } finally {
       setIsLoading(false)
     }
@@ -127,10 +127,12 @@ const AccountGuarantor = ({ setToken }) => {
       console.log("Updating guarantor details:", guarantorDetails); 
       const data = await UpdateGuarantorDetails(guarantorDetails)
       toast.success(data.message);
-      // localStorage.setItem("AFCS-token", data.token)
-      // setToken(data.token);
       closeModal();
+      localStorage.setItem("AFCS-token", data.token)
+      setToken(data.token);
+      
     } catch (error) {
+      // toast.error(error)
       toast.error(error)
     } finally {
       setIsLoading(false)
@@ -224,7 +226,10 @@ const AccountGuarantor = ({ setToken }) => {
                           // openModal
                           () => openModal('discard')
                         } disabled={isLoading} className="btn discard mx-3 my-4">Discard Changes</button>}
-                        <button onClick={() => confirmUpdate("Account")} disabled={isLoading} className="btn mx-3 my-4 ">Save</button>
+                        <button onClick={(e) =>{
+                          e.preventDefault();
+                          confirmUpdate("Account")
+                        } } disabled={isLoading} className="btn mx-3 my-4 ">Save</button>
                       </>}
 
                   </>
@@ -295,7 +300,10 @@ const AccountGuarantor = ({ setToken }) => {
                           // () => setEditGuarantor(false)
                           () => openModal('discard')
                         } disabled={isLoading} className="btn mx-3 discard my-4">Discard Changes</button>}
-                        <button onClick={() => confirmUpdate("Guarantor")} disabled={isLoading} className="btn mx-3 my-4 save">Save</button>
+                        <button onClick={(e) => {
+                          e.preventDefault();
+                          confirmUpdate("Guarantor")
+                        } } disabled={isLoading} className="btn mx-3 my-4 save">Save</button>
                       </>}
 
                   </>
@@ -321,7 +329,7 @@ const AccountGuarantor = ({ setToken }) => {
       >
         <ProfileUpdateModal
           closeModal={closeModal}
-          // closeModaltwo={closeModal}
+          closeModaltwo={closeModal}
           actionType={modalActionType}
           updateAction={editAccount ? updateAccount : updateGuarantor}
           isLoading={isLoading}

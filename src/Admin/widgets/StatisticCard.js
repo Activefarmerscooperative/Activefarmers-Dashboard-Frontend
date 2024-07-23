@@ -14,11 +14,11 @@ const StatisticCard = ({ title, number, showIcon }) => {
     });
 
     return (
-        <div className="d-flex flex-column justify-content-center statistic-card py-2 ">
+        <div className="d-flex flex-column justify-content-center statistic-card px-3 py-1 ">
             <div className="card-content">
                 {showIcon && (
                     <div className="toggle-icon" onClick={toggleVisibility}>
-                        <Icon icon={visible ? "mdi:eye" : "mdi:eye-off"} />
+                        <Icon icon={visible ? "mdi:eye-off" : "mdi:eye"} />
                     </div>
                 )}
                 <div className="my-2">

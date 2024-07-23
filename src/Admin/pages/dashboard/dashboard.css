@@ -1,30 +1,34 @@
 .dropdown-toggle::after {
   display: none;
 }
+
 .dropdown-toggle.btn {
   border: none;
   outline: none;
   width: auto !important;
 }
 
-.dropdown-menu li{
+.dropdown-menu li {
   cursor: pointer;
 }
-.header-buttons .iconify{
-    width: 35px;
-height: 35px;
-background-color: #0D9068;
-color: #ffffff;
-border-radius: 50%;
-padding: 5px;
+
+.header-buttons .iconify {
+  width: 35px;
+  height: 35px;
+  
+  background-color: #0D9068;
+  color: #ffffff;
+  border-radius: 50%;
+  padding: 5px;
 
 }
-.summary-section p{
-    white-space: nowrap;
+
+.summary-section p {
+  white-space: nowrap;
 }
 
 .statistics {
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .cards-section::-webkit-scrollbar {
@@ -33,28 +37,32 @@ padding: 5px;
 
 .cards-section {
   justify-content: space-around;
-  margin: 0 50px;
+  /* margin: 0 50px; */
   max-height: 1000px;
   /* Set an initial maximum height */
   transition: max-height 0.3s ease;
   /* Add a smooth transition */
-  }
-  
-  .cards-section.collapsed {
-    max-height: 0; /* Set maximum height to 0 to hide the content */
-    overflow: hidden; /* Hide any overflowing content */
-  }
-.fold-up .iconify{
-    width: 50px;
-    height: 50px;
-    background-color: #0D9068;
-    color: #ffffff;
-    border-radius: 50%;
-    padding: 5px; 
-    font-weight: 700;
 }
+
+.cards-section.collapsed {
+  max-height: 0;
+  /* Set maximum height to 0 to hide the content */
+  overflow: hidden;
+  /* Hide any overflowing content */
+}
+
+.fold-up .iconify {
+  width: 50px;
+  height: 50px;
+  background-color: #0D9068;
+  color: #ffffff;
+  border-radius: 50%;
+  padding: 5px;
+  font-weight: 700;
+}
+
 .dashboard .css-11xur9t-MuiPaper-root-MuiTableContainer-root {
- width: 100% !important;
+  width: 100% !important;
 }
 
 
@@ -147,29 +155,34 @@ padding: 5px;
   .header-buttons .iconify {
     width: 25px;
     height: 25px;
+  }
+
+  .summary-section p {
+    font-size: 14px;
+  }
+
+  .cards-section {
+    width: 320px;
+  }
 }
-.summary-section p {
-  font-size: 14px;
-}
-.cards-section {
-  width: 320px;
-}
-}
+
 @media screen and (max-width: 376px) {
   .cards-section {
-  width: 280px;
-}
-.fold-up .iconify {
-  width: 30px;
-  height: 30px;
-}
-.sorting-button .btn {
-  padding: 5px 10px;
-}
+    width: 280px;
+  }
+
+  .fold-up .iconify {
+    width: 30px;
+    height: 30px;
+  }
+
+  .sorting-button .btn {
+    padding: 5px 10px;
+  }
 }
 
 @media screen and (max-width: 321px) {
   .cards-section {
-  width: 250px;
-}
+    width: 250px;
+  }
 }
