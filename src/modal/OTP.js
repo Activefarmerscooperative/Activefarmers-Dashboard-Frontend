@@ -6,12 +6,15 @@ import "./modal.css";
 import { VerifyOTP } from "../utils/api/member"
 import { toast } from "react-toastify";
 import { RotatingLines } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
 
 
 export default function OtpModal({ message }) {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [otp, setOtp] = useState(["", "", "", "", "", ""]);
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
+
+    const navigate = useNavigate();
 
     const handleChange = (e, index) => {
         const value = e.target.value;
@@ -88,11 +91,30 @@ export default function OtpModal({ message }) {
         setShowSnackbar(false); // Assuming you want to hide the snackbar when resending OTP
     };
 
+    const handleOkButtonClick = () => {
+        closeModal(); // Close the modal
+        navigate("/"); // Navigate to the "/dashboard" route
+    };
+
     return (
         <div className='otp-modal p-4 my-4'>
             <div className="d-flex flex-column align-items-center">
-                <Icon icon="ph:password-light" className="icon" />
-                <p>
+                {/* <Icon icon="ph:password-light" className="icon" /> */}
+                <Icon icon="pepicons-pencil:handshake-circle" className="icon" />
+                <div className="text-center my-4">
+                    <h2>
+                        Thank you for registering!
+                    </h2>
+                    <p>
+
+
+                        Your account is currently under review by our team. Please allow up to 24 hrs for verification.
+                    </p>
+                    <p>We'll notify you once your account is verified.</p>
+
+                    <button onClick={handleOkButtonClick} className="btn btn-modal thank-btn mt-4">ok</button>
+                </div>
+                {/* <p>
                     {message}
                 </p>
                 <div className="otp-input">
@@ -112,22 +134,22 @@ export default function OtpModal({ message }) {
                 {isLoading && <center className="btn member-btn mt-5"><RotatingLines width="15" strokeColor="#1B7B44" strokeWidth="3" /></center>}
                 {!isLoading && <button onClick={handleSubmit} className="btn btn-modal mt-5">Submit</button>}
                 <p className="mt-3">
-                            Yet to receive OTP?
-                            {countdown > 0 ? (
-                              <span style={{ color: "#FB9129", fontWeight: "600" }}>
-                                {' '}
-                                Resend OTP ({Math.floor(countdown / 60)
-                                  .toString()
-                                  .padStart(2, '0')}:
-                                {Math.floor(countdown % 60).toString().padStart(2, '0')})
-                              </span>
-                            ) : (
-                              <a href="#" style={{ color: "#FB9129", fontWeight: "600" }} onClick={handleResendOTP}>
-                                {' '}
-                                Resend OTP
-                              </a>
-                            )}
-                          </p>
+                    Yet to receive OTP?
+                    {countdown > 0 ? (
+                        <span style={{ color: "#FB9129", fontWeight: "600" }}>
+                            {' '}
+                            Resend OTP ({Math.floor(countdown / 60)
+                                .toString()
+                                .padStart(2, '0')}:
+                            {Math.floor(countdown % 60).toString().padStart(2, '0')})
+                        </span>
+                    ) : (
+                        <a href="#" style={{ color: "#FB9129", fontWeight: "600" }} onClick={handleResendOTP}>
+                            {' '}
+                            Resend OTP
+                        </a>
+                    )}
+                </p> */}
 
             </div>
             <Modal
