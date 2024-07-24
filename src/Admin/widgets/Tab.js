@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useQuery } from 'react-query'
+import { useQuery, useMutation } from 'react-query'
 import { Icon } from '@iconify/react';
 import './widgets.css';
 import { Table, TableHead, TableBody, TableRow, TableCell, TableContainer, Paper, Box, TablePagination } from '@mui/material';
-import { Members, NewMembers, Borrowers, LoanRequests, WithdrawalRequest, AutoTransactions } from "../../utils/api/admin"
+import { Members, NewMembers, Borrowers, LoanRequests, WithdrawalRequest, AutoTransactions, verifyMembers } from "../../utils/api/admin"
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 // import AutoTransaction from '../components/data/AutoTransaction';
@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import Modal from 'react-modal';
 import AutoTransactionModal from '../components/reusable/AutoTransactionModal';
 import DatePicker from "react-datepicker";
+import { RotatingLines } from "react-loader-spinner";
 
 const getData = async (key, tab) => {
     let res;
@@ -47,6 +48,7 @@ const Tab = ({ tabs, defaultTab }) => {
     const [autoTransaction, setAutoTransaction] = useState([])
     const [filter, setFilter] = useState("")
     const [startDate, setStartDate] = useState(new Date())
+    const [loading, setloading] = useState(false)
 
     function openModal(transactions) {
         // console.log(transaction);
@@ -83,6 +85,7 @@ const Tab = ({ tabs, defaultTab }) => {
 
         } else if (activeTab === "New Members") {
             for (let i = 0; i < data.length; i++) {
+                console.log(data[i]?.regCompletePercent)
                 dataArray = [...dataArray, {
                     SN: i + 1,
                     name: `${data[i].surname} ${data[i].firstname}`,
@@ -92,14 +95,37 @@ const Tab = ({ tabs, defaultTab }) => {
                     location: `${data[i].address} ${data[i].location.name}`,
                     gender: data[i].gender,
                     action: (
-                        <div className='new-member-btn '>
-                            <button className="btn accept-btn"
-                                onClick={() => handleAccept(data.id)}
-                            >
-                                Accept
-                            </button>
-                            <button className="btn reject-btn" >Reject</button>
-                        </div>
+                        <>
+                            {
+                                data[i]?.regCompletePercent === 50 && !data[i]?.isVerified ? <button className="btn"
+                                    onClick={(e) => {
+                                        e.stopPropagation()
+
+                                    }}
+                                >
+                                    Rejected
+                                </button> :
+                                    <div className='new-member-btn '>
+                                        <button className="btn accept-btn"
+                                            onClick={(e) => {
+                                                e.stopPropagation()
+                                                handleAccept("approved", data[i]._id)
+                                            }}
+                                            disabled={loading}
+                                        >
+                                            Accept
+                                        </button>
+                                        <button className="btn reject-btn"
+                                            onClick={(e) => {
+                                                e.stopPropagation()
+                                                handleAccept("rejected", data[i]._id)
+                                            }}
+                                            disabled={loading}>Reject</button>
+                                    </div>
+                            }
+                        </>
+
+
                     )
 
 
@@ -159,8 +185,38 @@ const Tab = ({ tabs, defaultTab }) => {
     const handleTabClick = (tab) => {
         setActiveTab(tab);
     };
-    const handleAccept = (itemId) => {
-        console.log(`Accepting item with ID ${itemId}`);
+
+    const handleAccept = async (action, itemId) => {
+
+        if (!window.confirm(`Are you sure you want this User ${action}`)) return
+        setloading(true)
+        // Show a loading toast
+        const toastId = toast.loading("Processing your request...");
+
+        try {
+            const res = await verifyMembers(action, itemId)
+            console.log(res)
+            toast.update(toastId, {
+                render: "User action successful!",
+                type: "success",
+                isLoading: false,
+                autoClose: 5000, // Auto close after 5 seconds
+            });
+            setloading(false)
+        } catch (error) {
+            console.log(error)
+            // Update the loading toast to error
+            toast.update(toastId, {
+                render: error.message || error.error || error,
+                type: "error",
+                isLoading: false,
+                autoClose: 5000, // Auto close after 5 seconds
+            });
+            setloading(false)
+        } finally {
+            setloading(false)
+        }
+
     };
 
     const handleChangePage = (event, newPage) => {
