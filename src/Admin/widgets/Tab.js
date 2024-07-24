@@ -3,7 +3,7 @@ import { useQuery } from 'react-query'
 import { Icon } from '@iconify/react';
 import './widgets.css';
 import { Table, TableHead, TableBody, TableRow, TableCell, TableContainer, Paper, Box, TablePagination } from '@mui/material';
-import { Members, Borrowers, LoanRequests, WithdrawalRequest, AutoTransactions } from "../../utils/api/admin"
+import { Members, NewMembers, Borrowers, LoanRequests, WithdrawalRequest, AutoTransactions } from "../../utils/api/admin"
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 // import AutoTransaction from '../components/data/AutoTransaction';
@@ -17,6 +17,8 @@ const getData = async (key, tab) => {
     try {
         if (tab === "Members") {
             res = await Members();
+        } else if (tab === "New Members") {
+            res = await NewMembers();
         } else if (tab === "Borrowers") {
             res = await Borrowers();
         } else if (tab === "Loan Requests") {
@@ -79,7 +81,37 @@ const Tab = ({ tabs, defaultTab }) => {
 
             setShowData(dataArray)
 
-        } else if (activeTab === "Borrowers") {
+        } else if (activeTab === "New Members") {
+            for (let i = 0; i < data.length; i++) {
+                dataArray = [...dataArray, {
+                    SN: i + 1,
+                    name: `${data[i].surname} ${data[i].firstname}`,
+                    email: data[i].email,
+                    phone: data[i].phone,
+                    category: data[i].membershipType,
+                    location: `${data[i].address} ${data[i].location.name}`,
+                    gender: data[i].gender,
+                    action: (
+                        <div className='new-member-btn '>
+                            <button className="btn accept-btn"
+                                onClick={() => handleAccept(data.id)}
+                            >
+                                Accept
+                            </button>
+                            <button className="btn reject-btn" >Reject</button>
+                        </div>
+                    )
+
+
+                }]
+
+            }
+
+            setShowData(dataArray)
+
+        }
+
+        else if (activeTab === "Borrowers") {
 
             for (let i = 0; i < data.length; i++) {
                 dataArray = [...dataArray, {
@@ -98,10 +130,12 @@ const Tab = ({ tabs, defaultTab }) => {
             }
 
             setShowData(dataArray)
-        } else if (activeTab === "Auto Transactions") {
+        }
+        else if (activeTab === "Auto Transactions") {
             setAutoTransaction(data?.results)
 
-        } else {
+        }
+        else {
 
             for (let i = 0; i < data.length; i++) {
                 dataArray = [...dataArray, {
@@ -125,7 +159,9 @@ const Tab = ({ tabs, defaultTab }) => {
     const handleTabClick = (tab) => {
         setActiveTab(tab);
     };
-
+    const handleAccept = (itemId) => {
+        console.log(`Accepting item with ID ${itemId}`);
+    };
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -160,6 +196,10 @@ const Tab = ({ tabs, defaultTab }) => {
                 tableHeaders = ['S/N', 'Action', 'User', 'Number', 'Amount', 'Date', 'Time', 'Status', 'View'];
                 tableData = showData
                 break;
+            case 'New Members':
+                tableHeaders = ['S/N', 'Name', 'Email Address', 'Phone Number', 'Category', 'Location', 'Gender', 'Action',];
+                tableData = showData
+                break;
             default:
                 return null;
         }
@@ -182,11 +222,7 @@ const Tab = ({ tabs, defaultTab }) => {
                                 {/* {tableData.map((row) => ( */}
                                 {tableData?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((row, i) => (
-                                        // <TableRow key={row.id} style={{ cursor: "pointer" }} onClick={(e) => navigate('/admin/dashboard/userprofile', { state: { data: data[i], tab: tabName } })} >
-                                        //     {Object.values(row).map((cellValue, index) => (
-                                        //         <TableCell key={index}>{cellValue}</TableCell>
-                                        //     ))}
-                                        // </TableRow>
+
                                         <TableRow key={row.id} style={{ cursor: "pointer" }} onClick={(e) => navigate('/admin/dashboard/userprofile', { state: { data: data[i], tab: tabName } })} >
                                             {Object.entries(row).map(([key, cellValue], index) => {
                                                 if (key === 'location') {
@@ -200,10 +236,11 @@ const Tab = ({ tabs, defaultTab }) => {
                                                 }
                                             })}
                                         </TableRow>
+
                                     ))}
                             </TableBody>
 
-                            
+
                         }
 
                         {tabName === "Auto Transactions" &&
@@ -234,7 +271,9 @@ const Tab = ({ tabs, defaultTab }) => {
                                             <TableCell><Icon icon="mdi:open-in-new" className="pending-icon" onClick={() => openModal(transactions)} /></TableCell>
                                         </TableRow>
                                     ))}
-                            </TableBody>}
+                            </TableBody>
+                        }
+
                     </Table>
 
                 </TableContainer>

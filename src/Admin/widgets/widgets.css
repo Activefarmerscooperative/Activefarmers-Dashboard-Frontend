@@ -52,6 +52,27 @@
 
 }
 
+.new-member-btn{
+    display: flex;
+    flex-direction: column;
+}
+
+.new-member-btn .btn{
+    outline: none;
+    font-size: 14px;
+    margin: 5px 0;
+    color: #fff;
+    padding: 0 5px;
+}
+
+.new-member-btn .btn.accept-btn{
+ background-color: #0D9068;
+}
+.new-member-btn .btn.reject-btn{
+    background-color: #ff0000;
+   }
+
+
 .sorting-button select,
 .sorting-button .filter {
     width: max-content;

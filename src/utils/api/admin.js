@@ -36,6 +36,14 @@ export const Members = async (signal) => {
     throw error.response.data;
   }
 };
+export const NewMembers = async (signal) => {
+  try {
+    const { data } = await api.get(`/api/admins/members`, signal);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
 
 export const Borrowers = async (signal) => {
   try {

@@ -61,6 +61,9 @@ export default function Home() {
         {
             name: 'Auto Transactions',
         },
+        {
+            name: 'New Members',
+        },
     ];
 
     return (

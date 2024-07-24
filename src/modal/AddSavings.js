@@ -17,7 +17,7 @@ function AddSavings({ selectedCategory, wallet,closeModal }) {
   const [showCustom, setShowCustom] = useState(false)
 
   useEffect(() => {
-    setSavingCat(wallet.map(item => item.category))
+    setSavingCat(wallet?.map(item => item?.category))
   }, [wallet])
 
   useEffect(() => {
