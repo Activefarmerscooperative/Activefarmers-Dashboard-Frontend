@@ -28,7 +28,7 @@ function AddSavings({ selectedCategory, wallet, closeModal }) {
   }
 
   useEffect(() => {
-    setSavingCat(wallet.map(item => item.category))
+    setSavingCat(wallet?.map(item => item?.category))
   }, [wallet])
 
   useEffect(() => {
