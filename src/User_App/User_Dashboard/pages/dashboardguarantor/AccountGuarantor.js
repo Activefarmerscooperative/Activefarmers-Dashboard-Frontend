@@ -109,10 +109,10 @@ const AccountGuarantor = ({ setToke }) => {
     try {
       const data = await UpdateBankDetails({ ...bankDetails, accountNumber: `${bankDetails.accountNumber}` })
       toast.success(data.message)
-closeModal();
-      localStorage.setItem("AFCS-token", data.token)
-      setToken(data.token);
-      
+      closeModal()
+      // localStorage.setItem("AFCS-token", data.token)
+      dispatch(setToken(data?.token))
+      setToke(data.token)
     } catch (error) {
       // toast.error(error)
       toast.error(error?.error)
@@ -132,7 +132,7 @@ closeModal();
       closeModal();
       localStorage.setItem("AFCS-token", data.token)
       setToken(data.token);
-      
+
     } catch (error) {
       // toast.error(error)
       toast.error(error)
@@ -220,7 +220,7 @@ closeModal();
               {editAccount && (
                 <div>
                   <>
-                    {isLoading && <button className="btn mx-3 my-4"><RotatingLines width="15" strokeColor="#1B7B44" strokeWidth="3" /></button>}
+                  {isLoading && <button className="btn mx-3 my-4"><RotatingLines width="15" strokeColor="#1B7B44" strokeWidth="3" /></button>}
                     {!isLoading &&
                       <>
                         {!isLoading && <button onClick={
@@ -228,17 +228,10 @@ closeModal();
                           // openModal
                           () => openModal('discard')
                         } disabled={isLoading} className="btn discard mx-3 my-4">Discard Changes</button>}
-<<<<<<< HEAD
                         <button onClick={(e) => {
                           e.preventDefault()
                           confirmUpdate("Account")
                         }} disabled={isLoading} className="btn mx-3 my-4 ">Save</button>
-=======
-                        <button onClick={(e) =>{
-                          e.preventDefault();
-                          confirmUpdate("Account")
-                        } } disabled={isLoading} className="btn mx-3 my-4 ">Save</button>
->>>>>>> version-one-2024
                       </>}
 
                   </>
@@ -302,7 +295,7 @@ closeModal();
 
               {editGuarantor && (
                 <div>
-                  <>
+                   <>
                     {!guarantorLoading &&
                       <>
                         {!isLoading && <button onClick={
@@ -310,15 +303,9 @@ closeModal();
                           () => openModal('discard')
                         } disabled={isLoading} className="btn mx-3 discard my-4">Discard Changes</button>}
                         <button onClick={(e) => {
-<<<<<<< HEAD
-                          e.preventDefault()
-                          confirmUpdate("Guarantor")
-                        }} disabled={isLoading} className="btn mx-3 my-4 save">Save</button>
-=======
                           e.preventDefault();
                           confirmUpdate("Guarantor")
-                        } } disabled={isLoading} className="btn mx-3 my-4 save">Save</button>
->>>>>>> version-one-2024
+                        }} disabled={isLoading} className="btn mx-3 my-4 save">Save</button>
                       </>}
 
                   </>

@@ -26,7 +26,7 @@ export const wakeServer = async (signal) => {
 export const fetchAllStates = async (signal) => {
     try {
         const { data } = await api.get(`/api/location/states`, signal);
-        console.log(data)
+
         return data;
 
     } catch (error) {
