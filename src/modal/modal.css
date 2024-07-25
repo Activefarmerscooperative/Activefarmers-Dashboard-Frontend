@@ -68,6 +68,13 @@
     font-size: 24px;
     color: #FFFFFF;
 }
+.btn-modal.thank-btn {
+    width: 100px;
+    height: auto;
+    padding: 0;
+    background: #FB9129;
+    border-radius: 50px;
+}
 
 .password-changed-modal .btn {
     width: 210px;

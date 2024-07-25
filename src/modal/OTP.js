@@ -8,13 +8,16 @@ import { toast } from "react-toastify";
 import { RotatingLines } from "react-loader-spinner";
 import { useDispatch } from 'react-redux'
 import { setToken } from '../redux/reducers/jwtReducer'
+import { useNavigate } from "react-router-dom";
 
 
 export default function OtpModal({ message }) {
     const dispatch = useDispatch()
     const [modalIsOpen, setIsOpen] = useState(false);
     const [otp, setOtp] = useState(["", "", "", "", "", ""]);
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
+
+    const navigate = useNavigate();
 
     const handleChange = (e, index) => {
         const value = e.target.value;
@@ -102,11 +105,30 @@ export default function OtpModal({ message }) {
 
     };
 
+    const handleOkButtonClick = () => {
+        closeModal(); // Close the modal
+        navigate("/"); // Navigate to the "/dashboard" route
+    };
+
     return (
         <div className='otp-modal p-4 my-4'>
             <div className="d-flex flex-column align-items-center">
-                <Icon icon="ph:password-light" className="icon" />
-                <p>
+                {/* <Icon icon="ph:password-light" className="icon" /> */}
+                <Icon icon="pepicons-pencil:handshake-circle" className="icon" />
+                <div className="text-center my-4">
+                    <h2>
+                        Thank you for registering!
+                    </h2>
+                    <p>
+
+
+                        Your account is currently under review by our team. Please allow up to 24 hrs for verification.
+                    </p>
+                    <p>We'll notify you once your account is verified.</p>
+
+                    <button onClick={handleOkButtonClick} className="btn btn-modal thank-btn mt-4">ok</button>
+                </div>
+                {/* <p>
                     {message}
                 </p>
                 <div className="otp-input">
@@ -142,6 +164,7 @@ export default function OtpModal({ message }) {
                         </a>
                     )}
                 </p>
+                </p> */}
 
             </div>
             <Modal

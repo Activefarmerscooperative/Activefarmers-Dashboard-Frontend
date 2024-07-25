@@ -45,6 +45,23 @@ export const Members = async (signal) => {
     throw error.response.data;
   }
 };
+export const NewMembers = async (signal) => {
+  try {
+    const { data } = await api.get(`/api/admins/unverified-members`, signal);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const verifyMembers = async (action, userId) => {
+  try {
+    const { data } = await api.put(`/api/admins/verify/${userId}?action=${action}`);
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
 
 export const Borrowers = async (signal) => {
   try {

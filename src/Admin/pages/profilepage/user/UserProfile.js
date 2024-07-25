@@ -14,7 +14,7 @@ export default function UserProfile() {
   const { data, tab } = location.state
 
   const [selectedComponent, setSelectedComponent] = useState(
-    tab === "Loan Requests"||tab === "Borrowers" ? "loan" : tab === "Savings Withdrawal Request" ? "withdrawal" : 'profile'
+    tab === "Loan Requests" || tab === "Borrowers" ? "loan" : tab === "Savings Withdrawal Request" ? "withdrawal" : 'profile'
   );
   const handleComponentClick = (component) => {
     setSelectedComponent(component);
@@ -27,7 +27,7 @@ export default function UserProfile() {
   return (
     <div className="user-profile admin-site mt-5 pt-3">
       <div className="sidebar m-3 ">
-      < Icon icon="material-symbols:arrow-back-rounded" className="back-icon go-back mobile" onClick={goBack} />
+        < Icon icon="material-symbols:arrow-back-rounded" className="back-icon go-back mobile" onClick={goBack} />
         <p className={selectedComponent === 'profile' ? 'active' : ''}
           onClick={() => handleComponentClick('profile')}>Profile</p>
 
@@ -47,7 +47,8 @@ export default function UserProfile() {
             <PersonalInfoCard
               userData={data}
             />
-            <hr />
+
+
             <div>
               {selectedComponent === 'profile' && <Profile userData={data} />}
               {selectedComponent === 'guarantor' && <Guarantor userData={data} />}
