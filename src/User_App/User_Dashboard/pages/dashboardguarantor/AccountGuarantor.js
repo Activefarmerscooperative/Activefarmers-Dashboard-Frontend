@@ -213,7 +213,7 @@ const AccountGuarantor = ({ setToke }) => {
               {editAccount && (
                 <div>
                   <>
-                    {isLoading && <button className="btn mx-3 my-4"><RotatingLines width="15" strokeColor="#1B7B44" strokeWidth="3" /></button>}
+                  {isLoading && <button className="btn mx-3 my-4"><RotatingLines width="15" strokeColor="#1B7B44" strokeWidth="3" /></button>}
                     {!isLoading &&
                       <>
                         {!isLoading && <button onClick={
@@ -287,7 +287,7 @@ const AccountGuarantor = ({ setToke }) => {
 
               {editGuarantor && (
                 <div>
-                  <>
+                   <>
                     {!guarantorLoading &&
                       <>
                         {!isLoading && <button onClick={
