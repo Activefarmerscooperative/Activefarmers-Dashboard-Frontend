@@ -21,15 +21,15 @@ const userStat = async (key, user) => {
 export default function PersonalInfoCard({ userData }) {
     const [userInfo, setData] = useState();
     const [stat, setSTat] = useState([]);
-    const [showAcceptButton, setShowAcceptButton] = useState(false);
+    // const [showAcceptButton, setShowAcceptButton] = useState(false);
 
-    useEffect(() => {
-        if (userData && userData.regCompletePercent && parseFloat(userData.regCompletePercent) < 150) {
-            setShowAcceptButton(true);
-        } else {
-            setShowAcceptButton(false);
-        }
-    }, [userData]);
+    // useEffect(() => {
+    //     if (userData && userData.regCompletePercent && parseFloat(userData.regCompletePercent) < 150) {
+    //         setShowAcceptButton(true);
+    //     } else {
+    //         setShowAcceptButton(false);
+    //     }
+    // }, [userData]);
 
 
     // React query fetch data
@@ -73,10 +73,10 @@ export default function PersonalInfoCard({ userData }) {
                     <StatisticCard title="Loan Amount" number={stat[1]} member={true} />
                 </div>
             </div>
-            <div className='accept-btn'>
+            {/* <div className='accept-btn'>
                 {showAcceptButton && <button className='btn'>Accept</button>}
-                {/* Other components */}
-            </div>
+                
+            </div> */}
 
             <hr />
         </div>

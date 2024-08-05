@@ -283,7 +283,7 @@ const Tab = ({ tabs, defaultTab }) => {
                                             {Object.entries(row).map(([key, cellValue], index) => {
                                                 if (key === 'location') {
                                                     return (
-                                                        <TableCell key={index} style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '300px' }}>{cellValue}</TableCell>
+                                                        <TableCell key={index} style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '200px' }}>{cellValue}</TableCell>
                                                     );
                                                 } else {
                                                     return (
