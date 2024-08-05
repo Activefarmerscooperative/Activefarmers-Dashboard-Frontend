@@ -74,3 +74,64 @@ h6 {
   opacity: 0.8;
   border: none;
 }
+
+
+/* Basic modal styles */
+.pwa-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.pwa-modal-content {
+  width: auto;
+  background: white;
+  padding: 20px 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.pwa-modal-content h2 {
+  margin-top: 0;
+  text-wrap: nowrap;
+}
+
+.pwa-modal-content button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pwa-modal-content button:first-of-type {
+  background-color: #FB9129;
+  color: white;
+}
+
+.pwa-modal-content button:last-of-type {
+  background-color: #555555;
+  color: white;
+}
+
+@media (max-width: 575.98px) {
+  .pwa-modal-content h2 {
+    font-size: 25px;
+  }
+  .pwa-modal-content {
+    width: 80%;
+  }
+}
+
+@media (max-width: 320.98px) {
+  .pwa-modal-content h2 {
+    font-size: 20px;
+  }
+}

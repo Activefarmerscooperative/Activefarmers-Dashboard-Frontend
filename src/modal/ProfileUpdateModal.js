@@ -28,13 +28,19 @@ function ProfileUpdateModal({ closeModal, closeModaltwo, actionType, updateActio
 
 
                     <div className='d-flex'>
-                        {isLoading && <button className="btn mx-3 mt-5"><RotatingLines width="15" strokeColor="#1B7B44" strokeWidth="3" /></button>}
-                        {
-                            !isLoading && <>
-                                <button onClick={isDiscardAction ? closeModal : updateAction} className="btn btn-modal mx-3 mt-5">{isDiscardAction ? "Yes, discard" : "Yes, save"}</button>
-                                <button onClick={closeModaltwo} className="btn btn-modal mx-3 mt-5">{isDiscardAction ? "No, go back" : "Cancel"}</button>
+                        {isLoading ? (
+                            <button className="btn mx-3 mt-5">
+                                <RotatingLines width="15" strokeColor="#1B7B44" strokeWidth="3" />
+                            </button>) : (
+                           <>
+                                <button onClick={isDiscardAction ? closeModal : updateAction} className="btn btn-modal mx-3 mt-5">
+                                    {isDiscardAction ? "Yes, discard" : "Yes, save"}
+                                </button>
+                                <button onClick={closeModaltwo} className="btn btn-modal mx-3 mt-5">
+                                    {isDiscardAction ? "No, go back" : "Cancel"}
+                                </button>
                             </>
-                        }
+                        )}
 
                     </div>
 

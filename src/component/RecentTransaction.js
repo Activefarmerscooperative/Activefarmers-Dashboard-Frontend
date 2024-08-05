@@ -9,7 +9,7 @@ import {
     TableRow,
     TableHead, TableContainer, Paper
 } from "@mui/material";
-import { saveAs } from 'file-saver'; 
+import { saveAs } from 'file-saver';
 import { Icon } from '@iconify/react';
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -32,7 +32,7 @@ function RecentTransaction() {
     const location = useLocation();
     const navigate = useNavigate();
 
-   
+
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -97,6 +97,7 @@ function RecentTransaction() {
         <>
             <div className="d-flex align-items-center justify-content-between top-nav">
                 <p>Recent Transaction</p>
+
                 <div className="d-flex top-nav-btn">
                     <div className='d-flex align-items-center justify-content-between sort px-2 mx-2'>
                         <label htmlFor="contained-button-file" className='d-flex align-items-center'>
@@ -118,9 +119,9 @@ function RecentTransaction() {
                     {/* <button onClick={() => { navigate("/dashboard/transactions"); }} className='btn view-all-btn'>
                         View All
                     </button> */}
-                    { !(location.pathname === "/dashboard/transactions") ? <button onClick={() => navigate("/dashboard/transactions")} className='btn view-all-btn'>
-                            View All
-                        </button> : ""}
+                    {!(location.pathname === "/dashboard/transactions") ? <button onClick={() => navigate("/dashboard/transactions")} className='btn view-all-btn'>
+                        View All
+                    </button> : ""}
 
                 </div>
             </div>
@@ -139,7 +140,14 @@ function RecentTransaction() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {transactions?.map((row) => {
+
+                        {transactions.length === 0 ? (
+                                <TableRow>
+                                    <TableCell colSpan={6} rowSpan={6} align="center" className="my-5">No Transaction {<br />}
+                                    Your completed transactions will be displayed here</TableCell>
+                                </TableRow>
+                            ) :
+                            (transactions?.map((row) => {
                                 let color = (row.item?.status === "Pending") ? "#FB9129" :
                                     (row.item?.status === "Rejected") ? "#FF0000" : "#0D9068";
                                 return (
@@ -168,7 +176,7 @@ function RecentTransaction() {
                                         </TableCell>
                                     </TableRow>
                                 )
-                            })}
+                            }))}
                         </TableBody>
                     </Table>
                 </TableContainer>

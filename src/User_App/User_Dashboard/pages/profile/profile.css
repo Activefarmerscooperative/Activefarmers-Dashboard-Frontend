@@ -8,8 +8,18 @@
     margin-bottom: 20px;
     color: #0D9068;
 }
+.sticky-edit-button {
+    position: sticky;
+    top: 0; /* Adjust as needed */
+    right: 0; /* Position it on the right side */
+  
+   
+}
+
+
 
 .profile-form {
+    position: relative;
     width: auto;
     height: auto;
     background: #FFFFFF;
@@ -24,6 +34,9 @@
     color: #444444;
     margin: 10px 15px;
     text-align: left;
+}
+.profile-form form {
+    position: relative;
 }
 
 .profile-form .form-group label {

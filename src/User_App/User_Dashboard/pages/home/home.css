@@ -40,6 +40,7 @@
     border-radius: 12px;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .user-home-welcome h4 {
@@ -347,7 +348,9 @@ p.MuiTablePagination-displayedRows {
 
 
 @media (max-width: 800px) {
-   
+    .user-dashboard-home {
+        margin: 90px 0 0 0;
+    }
 
     .user-dashboard-home .profile-info.mobile {
         display: flex;

@@ -7,6 +7,7 @@ import { MyLoan } from '../../../../utils/api/member';
 import RecentTransaction from "../../../../component/RecentTransaction";
 import SavingsWallet from "../../../../component/SavingsWallet";
 import {
+  NavLink,
   useLocation,
   useNavigate
 } from "react-router-dom";
@@ -84,6 +85,8 @@ export default function DashboardHome({ user, setToke }) {
   };
 
 
+
+
   return (
     <div className='px-3 py-2 user-dashboard-home'>
       <div className=''>
@@ -92,33 +95,41 @@ export default function DashboardHome({ user, setToke }) {
           <h1>Dashboard</h1>
 
 
-        <div className='px-2 profile-info mobile profile-info'>
-          <label htmlFor="image-upload" className="profile-img-container">
-            <img
-              src={image || user.image || profile}
-              alt=""
-              className="profile-img mb-2"
+          <div className='px-2 profile-info mobile profile-info'>
+            <label htmlFor="image-upload" className="profile-img-container">
+              <img
+                src={image || user.image || profile}
+                alt=""
+                className="profile-img mb-2"
 
-            />
-            <button className="btn camera" onClick={() => document.getElementById('image-upload').click()}>
-              <Icon icon="heroicons-solid:camera" className='camera-icon' />
-            </button>
-            <input type="file" id="image-upload" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
-          </label>
-          <div className="user-info-summary-text d-flex"><p>{user?.surname} {user?.firstname} </p> {" "}<p> ID: {user.reference}</p></div>
-          
-        </div>
+              />
+              <button className="btn camera" onClick={() => document.getElementById('image-upload').click()}>
+                <Icon icon="heroicons-solid:camera" className='camera-icon' />
+              </button>
+              <input type="file" id="image-upload" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
+            </label>
+            <div className="user-info-summary-text d-flex"><p>{user?.surname} {user?.firstname} </p> {" "}<p> ID: {user.reference}</p></div>
+
+          </div>
         </div>
 
-        
+
 
 
         {
           user?.regCompletePercent < 100 && (
-            <div className="user-home-welcome py-3 px-4">
-              {newUser && <h4>Welcome to your dashboard !</h4>}
-              <p>Your profile is {user?.regCompletePercent}% completed. Visit the account settings tab to complete your profile </p>
-            </div>
+            <NavLink to="/dashboard/profile">
+              <div className="user-home-welcome py-3 px-4 "
+                // onClick={() => {
+                //   console.log("Navigating to profile");
+                //   navigate("/dashboard/profile");
+                // }}
+              >
+                {newUser && <h4>Welcome to your dashboard !</h4>}
+                <p>Your profile is {user?.regCompletePercent}% completed. Visit the account settings tab to complete your profile </p>
+              </div>
+            </NavLink>
+
           )}
 
         <div className="savings my-4">

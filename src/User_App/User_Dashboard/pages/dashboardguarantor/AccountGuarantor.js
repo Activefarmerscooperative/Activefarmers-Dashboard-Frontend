@@ -21,7 +21,6 @@ const fetchData = async (key) => {
 
   } catch (error) {
     toast.error(error.error);
-    // toast.error(error);
   }
 };
 const AccountGuarantor = ({ setToke }) => {
@@ -71,7 +70,6 @@ const AccountGuarantor = ({ setToke }) => {
     if (!data) return
     if (state) {
       if (data[0]?.bank_details) {
-        // console.log(data[0]?.bank_details)
         navigate("/dashboard/profile", { replace: true })
       }
     }
@@ -101,20 +99,15 @@ const AccountGuarantor = ({ setToke }) => {
   }
 
   async function updateAccount() {
-
-    // if (!window.confirm("Are you sure you want to update your bank details?")) return
-    // if (!updateData) return
     setIsLoading(true)
 
     try {
       const data = await UpdateBankDetails({ ...bankDetails, accountNumber: `${bankDetails.accountNumber}` })
       toast.success(data.message)
-      closeModal()
-      // localStorage.setItem("AFCS-token", data.token)
+      closeModal();
       dispatch(setToken(data?.token))
       setToke(data.token)
     } catch (error) {
-      // toast.error(error)
       toast.error(error?.error)
     } finally {
       setIsLoading(false)
@@ -191,7 +184,7 @@ const AccountGuarantor = ({ setToke }) => {
                   })
 
                 }}
-                  // value={console.log(banks?.filter(bank=>bank.code===bankDetails?.bankCode)[0]) } 
+               
                   disabled={!editAccount}>
 
                   <option>{bankDetails?.bankName}</option>
@@ -205,7 +198,7 @@ const AccountGuarantor = ({ setToke }) => {
 
               <div className="col-md-4 col-sm-6"><div className="form-group d-flex flex-column mx-3">
                 <label htmlFor="">Account Number</label>
-                <input type="text" name="accountNumber" value={bankDetails?.accountNumber} onChange={handleAccountChange} disabled={!editAccount} placeholder="Type account Number..." />
+                <input type="number" name="accountNumber" value={bankDetails?.accountNumber} onChange={handleAccountChange} disabled={!editAccount} placeholder="Type account Number..." />
               </div></div>
 
             </div>
@@ -220,12 +213,11 @@ const AccountGuarantor = ({ setToke }) => {
               {editAccount && (
                 <div>
                   <>
-                    {isLoading && <button className="btn mx-3 my-4"><RotatingLines width="15" strokeColor="#1B7B44" strokeWidth="3" /></button>}
+                  {isLoading && <button className="btn mx-3 my-4"><RotatingLines width="15" strokeColor="#1B7B44" strokeWidth="3" /></button>}
                     {!isLoading &&
                       <>
                         {!isLoading && <button onClick={
-                          // () => setEditAccount(false)
-                          // openModal
+                       
                           () => openModal('discard')
                         } disabled={isLoading} className="btn discard mx-3 my-4">Discard Changes</button>}
                         <button onClick={(e) => {
@@ -295,11 +287,10 @@ const AccountGuarantor = ({ setToke }) => {
 
               {editGuarantor && (
                 <div>
-                  <>
+                   <>
                     {!guarantorLoading &&
                       <>
                         {!isLoading && <button onClick={
-                          // () => setEditGuarantor(false)
                           () => openModal('discard')
                         } disabled={isLoading} className="btn mx-3 discard my-4">Discard Changes</button>}
                         <button onClick={(e) => {
@@ -321,7 +312,6 @@ const AccountGuarantor = ({ setToke }) => {
       </div>
       <Modal
         isOpen={modalIsOpen}
-        // onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
 
         contentLabel="Example Modal"
@@ -335,7 +325,6 @@ const AccountGuarantor = ({ setToke }) => {
           actionType={modalActionType}
           updateAction={editAccount ? updateAccount : updateGuarantor}
           isLoading={isLoading}
-        // loanData={loanData}
         />
       </Modal>
     </div>
