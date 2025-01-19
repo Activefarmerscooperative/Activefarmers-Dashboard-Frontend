@@ -60,7 +60,7 @@ export default function Login() {
     // };
     const isValidPhoneNumber = (phone) => {
         // Regular expression for phone number validation
-        const phoneRegex = /^\+\d+$/;
+        const phoneRegex = /^0\d{10}$/;
         return phoneRegex.test(phone);
     };
 
@@ -82,12 +82,7 @@ export default function Login() {
         let phone = user.phone;
         let password = user.password;
         if (!isValidPhoneNumber(phone)) {
-            const firstCharacter = phone.charAt(0);
-
-            if (firstCharacter === "0") {
-                phone = "+234" + phone.substring(1);
-            }
-            // errors.email = 'Invalid email format';
+            errors.phone = 'Enter a valid phone number e.g 08012345678!';
         }
         try {
             const data = await LoginMember({ phone, password });
@@ -96,7 +91,6 @@ export default function Login() {
             toast.success(data.message);
 
             setIsLoading(false);
-            console.log("login data", data)
 
             navigate("/dashboard", { replace: true })
             // return data;
@@ -106,7 +100,7 @@ export default function Login() {
             toast.error(error?.error);
 
             const errorMessage = error.message;
-            console.log("login error message:", errorMessage);
+            // console.log("login error message:", errorMessage);
             if (
                 errorMessage ===
                 `Enter the verification code sent to ${phone} in order to verify your account`

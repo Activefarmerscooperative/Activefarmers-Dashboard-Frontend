@@ -154,11 +154,11 @@ export default function Member() {
         if (!member.phone) {
             errors.phone = 'Phone Number is required';
         } else if (!isValidPhoneNumber(member.phone)) {
-            const firstCharacter = member.phone.charAt(0);
-            if (firstCharacter === "0") {
-                member.phone = "+234" + member.phone.substring(1);
-            }
-            // errors.phone = 'Invalid phone number format';
+            // const firstCharacter = member.phone.charAt(0);
+            // if (firstCharacter === "0") {
+            //     member.phone = "+234" + member.phone.substring(1);
+            // }
+            errors.phone = 'Invalid phone number format';
         }
 
         if (!member.location) {
@@ -187,9 +187,7 @@ export default function Member() {
 
     const isValidPhoneNumber = (phone) => {
         // Regular expression for phone number validation
-        const phoneRegex = /^\+234\d{10}$/;
-        // const phoneRegex = /^(?:\+?234)?(?:[789][01]\d{8}|[789][01]\d{7})$/;
-        // const phoneRegex = /^(?:\+234|0)?[789]\d{9}$/;
+        const phoneRegex = /^0\d{10}$/;
 
         return phoneRegex.test(phone);
     };
@@ -280,7 +278,7 @@ export default function Member() {
 
                         </div>
                         <div className="col-md-6">
-                            <input required type="tel" name="phone" value={member.phone} onChange={handleChange} onBlur={handleBlur} placeholder="Type Phone with +234..." className={isValidPhoneNumber(member.phone) ? "valid" : "invalid"} />
+                            <input required type="tel" name="phone" value={member.phone} onChange={handleChange} onBlur={handleBlur} placeholder="Enter phone number e.g 08012345678" className={isValidPhoneNumber(member.phone) ? "valid" : "invalid"} />
 
                         </div>
                         <div className="col-md-6 my-0 py-0">

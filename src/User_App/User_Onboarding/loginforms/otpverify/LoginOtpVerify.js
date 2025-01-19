@@ -27,8 +27,8 @@ export default function LoginOtpVerify() {
     }, [countdown]);
 
     const handleResendOTP = () => {
-        setCountdown(60); 
-        setShowSnackbar(false); 
+        setCountdown(60);
+        setShowSnackbar(false);
     };
 
     const [otp, setOtp] = useState(["", "", "", "", "", ""]);
@@ -52,7 +52,6 @@ export default function LoginOtpVerify() {
 
         if (token[0] === " ") return console.log("Please enter a valid token")
         const AFCStoken = localStorage.getItem("AFCS-token")
-
         if (AFCStoken === "null") return console.log("Please enter a valid token")
 
         try {
@@ -82,55 +81,55 @@ export default function LoginOtpVerify() {
         <div className="login-page otp-page mt-3 d-flex justify-content-center">
             {/* <div className=''> */}
 
-                <div className="form d-flex flex-column align-items-center">
-                    <h1 className="text-nowrap text-center">OTP Verification</h1>
-                    A One Time Pin (OTP) has been sent to your registered phone number, kindly input the pin below
-                    <form className='d-flex flex-column my-5'>
-                        <div className="otp-input">
-                            {otp.map((digit, index) => (
-                                <input
-                                    type="number"
-                                    key={index}
-                                    value={digit}
-                                    onChange={(e) => handleChange(e, index)}
-                                    onPaste={handlePaste}
-                                    maxLength={1}
-                                />
-                            ))}
-                        </div>
+            <div className="form d-flex flex-column align-items-center">
+                <h1 className="text-nowrap text-center">OTP Verification</h1>
+                A One Time Pin (OTP) has been sent to your registered email address, kindly input the pin below
+                <form className='d-flex flex-column my-5'>
+                    <div className="otp-input">
+                        {otp.map((digit, index) => (
+                            <input
+                                type="number"
+                                key={index}
+                                value={digit}
+                                onChange={(e) => handleChange(e, index)}
+                                onPaste={handlePaste}
+                                maxLength={1}
+                            />
+                        ))}
+                    </div>
 
 
-                        {isLoading && <button className='login-button mt-4 mx-auto'><RotatingLines width="15" strokeColor="#FFF" strokeWidth="3" /></button>}
-                        {!isLoading && <button className='login-button mt-4 mx-auto' onClick={handleClick}>Verify OTP</button>}
+                    {isLoading && <button className='login-button mt-4 mx-auto'><RotatingLines width="15" strokeColor="#FFF" strokeWidth="3" /></button>}
+                    {!isLoading && <button className='login-button mt-4 mx-auto' onClick={handleClick}>Verify OTP</button>}
 
 
-                    </form>
-                    {showSnackbar ? (<button className=' d-flex align-items-center btn mx-4 profile-saved' >
-                        <p>Verification Successful</p><Icon icon="clarity:success-standard-line" className='btn-icon' />
-                    </button>)
-                        : (
-                            <p>
-                                Yet to receive OTP?
-                                {countdown > 0 ? (
-                                    <span style={{ color: "#FB9129", fontWeight: "600" }}>
-                                        {' '}
-                                        Resend OTP ({Math.floor(countdown / 60)
-                                            .toString()
-                                            .padStart(2, '0')}:
-                                        {Math.floor(countdown % 60).toString().padStart(2, '0')})
-                                    </span>
-                                ) : (
-                                    <a href="#" style={{ color: "#FB9129", fontWeight: "600" }} onClick={handleResendOTP}>
-                                        {' '}
-                                        Resend OTP
-                                    </a>
-                                )}
-                            </p>
-                            // <p>Yet to receive OTP?<a href="" style={{ color: "#FB9129", fontWeight: "600" }} onClick={handleResendOTP}> {' '} Resend OTP ({countdown.toString().padStart(2, '0')})</a></p>
-                        )
-                    }
+                </form>
+                {showSnackbar ? (<button className=' d-flex align-items-center btn mx-4 profile-saved' >
+                    <p>Verification Successful</p><Icon icon="clarity:success-standard-line" className='btn-icon' />
+                </button>)
+                    : (
+                        <p>
+                            Yet to receive OTP?
+                            {countdown > 0 ? (
+                                <span style={{ color: "#FB9129", fontWeight: "600" }}>
+                                    {' '}
+                                    Resend OTP ({Math.floor(countdown / 60)
+                                        .toString()
+                                        .padStart(2, '0')}:
+                                    {Math.floor(countdown % 60).toString().padStart(2, '0')})
+                                </span>
+                            ) : (
+                                <a href="#" style={{ color: "#FB9129", fontWeight: "600" }} onClick={handleResendOTP}>
+                                    {' '}
+                                    Resend OTP
+                                </a>
+                            )}
+                        </p>
+                        // <p>Yet to receive OTP?<a href="" style={{ color: "#FB9129", fontWeight: "600" }} onClick={handleResendOTP}> {' '} Resend OTP ({countdown.toString().padStart(2, '0')})</a></p>
+                    )
+                }
 
-                </div>
+            </div>
             {/* </div> */}
         </div>
     )

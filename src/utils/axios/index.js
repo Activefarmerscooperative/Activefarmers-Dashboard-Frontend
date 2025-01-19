@@ -4,9 +4,9 @@ import { store } from '../../redux/store';
 
 const api = axios.create({
     // baseURL: 'http://127.0.0.1:3001',
-    // baseURL: 'https://linear-eleonora-activefarmers-124470e8.koyeb.app',
 
-    baseURL: 'https://afcs-app.onrender.com',
+    // baseURL: 'https://afcs-app.onrender.com',
+    baseURL: "https://conceptual-beret-lorea-e79395be.koyeb.app",
     headers: {
         'Content-Type': 'application/json',
     },

@@ -27,7 +27,7 @@ function SavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavingsCatego
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [modalIsOpen, setIsOpen] = useState(false);
   // React query fecth data
-  const { data, status } = useQuery(['fetchData'], fetchData)
+  const { data, status } = useQuery(['fetchData-wallet'], fetchData)
 
   useEffect(() => {
     if (openSavingsModal) {
