@@ -45,7 +45,7 @@ export default function LoanForm({ user }) {
 
                 <SavingsWallet />
             </div>
-            <p className="note mt-4">Please note that Loan request can not exceed five times (5X)  your savings, you’re eligible for a maximum loan of up to 450,000 NGN </p>
+            <p className="note mt-4">Please note that Loan request can not exceed five times (5X) your savings. </p>
             <div className="loan-input-form my-3">
                 <form>
                     <div className="row">

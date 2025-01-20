@@ -60,11 +60,6 @@ function SavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavingsCatego
     }));
   };
 
-
-
-
-
-
   return (
     <div className="list-of-wallets  d-flex align-items-center">
       {
