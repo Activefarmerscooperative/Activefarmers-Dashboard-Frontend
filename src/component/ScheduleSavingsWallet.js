@@ -28,7 +28,7 @@ function ScheduleSavingsWallet({ openSavingsModal, setOpenSavingsModal, setSavin
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [modalIsOpen, setIsOpen] = useState(false);
   // React query fecth data
-  const { data, status } = useQuery(['fetchData'], fetchData)
+  const { data, status } = useQuery(['fetchData-scheduled'], fetchData)
 
   useEffect(() => {
     if (openSavingsModal) {

@@ -33,7 +33,7 @@ export default function Home() {
     };
 
     // React query fetch data
-    const { data, status } = useQuery(['fetchData'], fetchData)
+    const { data, status } = useQuery(['fetchData-home'], fetchData)
 
     useEffect(() => {
     if(!data) return

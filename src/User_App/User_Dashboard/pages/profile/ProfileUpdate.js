@@ -51,10 +51,14 @@ const ProfileUpdate = ({ setToke }) => {
     }
 
     // React query fecth data
-    const { data, status } = useQuery(['fetchData'], fetchData)
+    const { data, status } = useQuery(['fetchData-profile'], fetchData)
+
+    console.log(data,"user Data")
 
     useEffect(() => {
         if (!data) return
+
+        console.log("yeahh")
 
         setUserData(data[0])
         setOccupationData(data[0]?.occupation)

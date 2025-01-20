@@ -19,8 +19,8 @@ export default function LandingPage() {
   const navigate = useNavigate();
 
   // React query fetch data
-  const { data, status } = useQuery(['wake server'], wakeTheServer)
-  console.log("hello data", data)
+  // const { data, status } = useQuery(['wake server'], wakeTheServer)
+  // console.log("hello data", data)
   return (
     <div className="landing-page" id="root">
       <div className="">

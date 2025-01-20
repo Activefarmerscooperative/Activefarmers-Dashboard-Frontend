@@ -92,11 +92,11 @@ export default function Register() {
         if (!member.phone) {
             errors.phone = 'Phone Number is required';
         } else if (!isValidPhoneNumber(member.phone)) {
-            const firstCharacter = member.phone.charAt(0);
-            if (firstCharacter === "0") {
-                member.phone = "+234" + member.phone.substring(1);
-            }
-            // errors.phone = 'Invalid phone number format';
+            // const firstCharacter = member.phone.charAt(0);
+            // if (firstCharacter === "0") {
+            //     member.phone = "+234" + member.phone.substring(1);
+            // }
+            errors.phone = 'Enter a valid phone number e.g 08012345678.';
         }
 
         if (!member.location) {
@@ -129,7 +129,7 @@ export default function Register() {
 
     const isValidPhoneNumber = (phone) => {
         // Regular expression for phone number validation
-        const phoneRegex = /^\+\d+$/;
+        const phoneRegex = /^0\d{10}$/;
 
         return phoneRegex.test(phone);
     };
@@ -199,7 +199,7 @@ export default function Register() {
                             <input type="email" name="email" required value={member.email} onChange={handleChange} placeholder="Email Address" />
                         </div>
                         <div className="col-md-6">
-                            <input required type="tel" name="phone" value={member.phone} onChange={handleChange} placeholder="Phone Number e.g:+2348123456789" />
+                            <input required type="tel" name="phone" value={member.phone} onChange={handleChange} placeholder="Phone Number e.g:08123456789" />
                         </div>
                         <div className="col-md-6">
                             <select name="gender" value={member.gender} required onChange={handleChange}>

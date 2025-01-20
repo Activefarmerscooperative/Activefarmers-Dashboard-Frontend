@@ -86,7 +86,11 @@ export const ForgotPassword = async (user) => {
 
 export const LoginVerifyOTP = async (token) => {
   try {
-    const { data } = await api.post(`/api/users/verify-token`, token);
+    const { data } = await api.post(`/api/users/verify-token`, token, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem("AFCS-token")}`
+      }
+    });
     return data;
   } catch (error) {
     throw error.response.data;
@@ -95,7 +99,11 @@ export const LoginVerifyOTP = async (token) => {
 
 export const ResetPassword = async (user) => {
   try {
-    const { data } = await api.put(`/api/users/reset-pw`, user);
+    const { data } = await api.put(`/api/users/reset-pw`, user, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem("AFCS-token")}`
+      }
+    });
     return data;
   } catch (error) {
     throw error.response.data;

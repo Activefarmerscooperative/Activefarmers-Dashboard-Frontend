@@ -54,7 +54,7 @@ const AccountGuarantor = ({ setToke }) => {
 
 
   // React query fetch data
-  const { data, status } = useQuery(['fetchData'], fetchData)
+  const { data, status } = useQuery(['fetchData-guarantor'], fetchData)
 
   useEffect(() => {
     if (!data) return;
